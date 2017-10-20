@@ -24,8 +24,8 @@
             android:layout_alignParentTop="true"
             android:gravity="center"
             android:paddingLeft="1dp"
-            android:paddingTop="20dp"
-            android:text="Καλωσήρθατε στο DiscountFinder βρες και εσύ τις καλύτερες εκπτώσης!!"
+            android:paddingTop="30dp"
+            android:text="Καλωσήρθες στο DiscountFinder βρες και εσύ τις καλύτερες εκπτώσης!!"
             android:textColor="@android:color/white" />
 
         <EditText
