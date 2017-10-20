@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ui_background"
+    tools:context="eu.jnksoftware.discountfinderandroid.registerActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingTop="70dp"
+        android:paddingLeft="5dp"
+        android:text="Καλωσήρθες στο DiscountFinder κανε και εσύ τώρα εγγραφή και βρες τις καλύτερες εκπτώσης τώρα!,μην χάνεις άλλο χρόνο!!"
+        android:gravity="center"
+        android:textColor="@android:color/white" />
+
+    <EditText
+
+
+
+        android:id="@+id/registerLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="16dp"
+        android:hint="Put your Last Name"
+        android:backgroundTint="@android:color/white"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:layout_marginBottom="67dp"
+        android:layout_alignBottom="@+id/registerFirstName"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+
+        android:id="@+id/registerFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:drawablePadding="16dp"
+        android:hint="Put your First Name"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:layout_above="@+id/registerEmail"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+
+        android:id="@+id/registerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="16dp"
+        android:hint="Put your Email"
+        android:backgroundTint="@android:color/white"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:layout_above="@+id/registerPassword"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="11dp" />
+
+
+    <EditText
+
+        android:id="@+id/registerPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="16dp"
+        android:hint="Put your password"
+        android:backgroundTint="@android:color/white"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:layout_marginBottom="90dp"
+        android:layout_alignBottom="@+id/registerBtn"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginBottom="73dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingBottom="50dp"
+        android:paddingLeft="47dp"
+        android:text="Δημιούργησες λογαριασμό;Συνδέσου τώρα!"
+        android:gravity="center"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>
+</RelativeLayout>
