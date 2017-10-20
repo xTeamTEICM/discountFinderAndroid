@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ui_background"
+    tools:context="eu.jnksoftware.discountfinderandroid.loginActivity">
+
+    <RelativeLayout
+        android:layout_width="368dp"
+        android:layout_height="551dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:paddingLeft="1dp"
+            android:paddingTop="20dp"
+            android:text="Καλωσήρθατε στο DiscountFinder βρες και εσύ τις καλύτερες εκπτώσης!!"
+            android:textColor="@android:color/white" />
+
+        <EditText
+            android:id="@+id/emailLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/user"
+            android:drawablePadding="16dp"
+            android:padding="10dp"
+            android:layout_marginBottom="22dp"
+            android:layout_above="@+id/passwordLogin"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:id="@+id/passwordLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:hint="Password"
+            android:padding="10dp"
+            android:drawableLeft="@drawable/lock"
+            android:drawablePadding="16dp"
+            android:layout_marginBottom="174dp"
+            android:layout_above="@+id/login_btn"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="100dp"
+            android:text="Login" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <TextView
+            android:id="@+id/registerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingBottom="110dp"
+            android:paddingLeft="50dp"
+            android:text="Δεν έχεις Λογαριασμό; Δημιούργησε τώρα"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
