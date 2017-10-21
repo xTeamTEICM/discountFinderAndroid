@@ -31,7 +31,7 @@ public class Menu extends AppCompatActivity {
     private View.OnClickListener aboutClick = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
-            // ToDo : Create About Intent and Start It
+            // ToDo : Create Menu Intent and Start It
         }
     };
 
