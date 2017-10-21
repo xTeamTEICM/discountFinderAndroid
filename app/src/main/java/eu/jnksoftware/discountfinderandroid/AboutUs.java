@@ -20,10 +20,12 @@ public class AboutUs extends AppCompatActivity {
         View aboutUs = new AboutPage(this)
                 .isRTL(false)
                 .setImage(R.drawable.icon)
-                .setDescription("This is a demo version \n Thank you for downloading our App \n "+"Currnet Version :"+BuildConfig.VERSION_NAME)
+                .setDescription("This is a demo version \n Thank you for downloading our App \n "+"Currnet Version : "+BuildConfig.VERSION_NAME)
                 .addGitHub("xTeamTEICM")
-                .addFacebook("x-Team")
-                .addPlayStore("Discount Finder")
+                .addFacebook("xTeamTEICM")
+                .addPlayStore(BuildConfig.APPLICATION_ID)
+                .addEmail("xteamteicm@gmail.com")
+                .addGroup("Third Party Libraries")
                 .addItem(createCopyright())
                 .create();
         setContentView(aboutUs);
@@ -32,7 +34,7 @@ public class AboutUs extends AppCompatActivity {
     private Element createCopyright() {
         Element copyright = new Element();
         final String copyrightString = "Copyright 2017 by x-Team";
-        copyright.setIcon(R.mipmap.ic_launcher);
+        copyright.setIcon(R.drawable.icon2);
         copyright.setGravity(Gravity.CENTER);
         copyright.setOnClickListener(new View.OnClickListener() {
             @Override
