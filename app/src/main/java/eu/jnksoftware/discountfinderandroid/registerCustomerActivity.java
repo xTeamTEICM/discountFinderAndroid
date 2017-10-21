@@ -17,23 +17,14 @@ public class registerCustomerActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register_customer);
 
-        Button register =(Button) findViewById(R.id.registerBtn);
+        Button register = (Button) findViewById(R.id.registerBtn);
         register.setOnClickListener(registerClick);
 
-        TextView loginText=(TextView)findViewById(R.id.loginTextView);
-        loginText.setOnClickListener(loginTextClick);
     }
-    private View.OnClickListener loginTextClick=new View.OnClickListener(){
-        @Override
-        public void onClick(final View logView) {
-            //ToDo:Go to Login Page
-
-        }
-    };
     private View.OnClickListener registerClick=new View.OnClickListener(){
         @Override
         public  void onClick(final View reg) {
-          
+
             //ToDo:DO Register
         }
         };

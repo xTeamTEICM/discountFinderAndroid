@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ui_background"
+    android:background="@drawable/ui_register_customer_background"
     tools:context="eu.jnksoftware.discountfinderandroid.registerCustomerActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
@@ -147,21 +147,5 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/loginTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="7dp"
-        android:gravity="center"
-        android:paddingBottom="50dp"
-        android:paddingLeft="47dp"
-        android:text="Δημιούργησες λογαριασμό;Συνδέσου τώρα!"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerBtn"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+
 </android.support.constraint.ConstraintLayout>
