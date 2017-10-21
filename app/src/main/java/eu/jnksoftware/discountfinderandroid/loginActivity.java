@@ -21,12 +21,19 @@ public class loginActivity extends Activity {
         login.setOnClickListener(loginClick);
 
         TextView registerView=(TextView) findViewById(R.id.registerTextView);
-        registerView.setMovementMethod(LinkMovementMethod.getInstance());
+        registerView.setOnClickListener(registerViewClick);
     }
     private View.OnClickListener loginClick=new View.OnClickListener(){
         @Override
-        public void onClick(final View loginview) {
+        public void onClick(final View loginView) {
             //ToDo:Login to main page
+
+        }
+    };
+    private View.OnClickListener registerViewClick=new View.OnClickListener(){
+        @Override
+        public void onClick(final View registerView) {
+            //ToDo:Open a register form and select if you are Customer or Seller
 
         }
     };

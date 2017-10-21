@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">Discount Finder</string>
-    <string name="register_textview"><a href="">Δεν έχεις Λογαριασμό; Δημιούργησε τώρα</a></string>
 </resources>
