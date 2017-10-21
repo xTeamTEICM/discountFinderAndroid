@@ -156,7 +156,7 @@
         android:gravity="center"
         android:paddingBottom="50dp"
         android:paddingLeft="47dp"
-        android:text="@string/goToLogin"
+        android:text="Δημιούργησες λογαριασμό;Συνδέσου τώρα!"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
