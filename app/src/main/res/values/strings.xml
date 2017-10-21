@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Discount Finder</string>
+    <string name="goToLogin"><a href="">Δημιούργησες λογαριασμό;Συνδέσου τώρα!</a></string>
 </resources>
