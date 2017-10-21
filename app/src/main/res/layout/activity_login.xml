@@ -100,7 +100,7 @@
             android:id="@+id/registerTextView"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
-            android:text="Δεν έχεις Λογαριασμό; Δημιούργησε τώρα"
+            android:text="@string/register_textview"
             android:textColor="@android:color/white"
             tools:layout_constraintRight_creator="1"
             tools:layout_constraintBottom_creator="1"
