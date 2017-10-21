@@ -109,7 +109,7 @@
         app:layout_constraintHorizontal_bias="0.0" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/etBrand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
@@ -137,6 +137,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/etBrand"
         app:layout_constraintHorizontal_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
