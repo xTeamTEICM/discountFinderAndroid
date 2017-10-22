@@ -1,24 +1,22 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.ui;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static java.util.Arrays.asList;
+import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.algorithms.ShopSort;
+import eu.jnksoftware.discountfinderandroid.models.Shop;
 
-public class ShopsList extends AppCompatActivity {
+public class Shops extends AppCompatActivity {
 
     private ArrayList<Shop> shopsListArray;
-    private ShopFactory shopFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +31,12 @@ public class ShopsList extends AppCompatActivity {
             shopsListArray = (ArrayList<Shop>)getIntent().getSerializableExtra("shopsList");
         } else {
             //initialize shopsListArray with a fake list of shops
-            shopFactory=new ShopFactory();
-            shopFactory.sortShopList();
-            shopsListArray = (ArrayList<Shop>) shopFactory.getSortedShopList();
+            ShopSort shopSort = new ShopSort();
+            shopSort.sortShopList();
+            shopsListArray = (ArrayList<Shop>) shopSort.getSortedShopList();
         }
 
-        ArrayAdapter<Shop> arrayAdapter = new ArrayAdapter<Shop>(this, android.R.layout.simple_list_item_1, shopsListArray);
+        ArrayAdapter<Shop> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, shopsListArray);
 
         shopsList.setAdapter(arrayAdapter);
         shopsList.setOnItemClickListener(shopsItemClick());

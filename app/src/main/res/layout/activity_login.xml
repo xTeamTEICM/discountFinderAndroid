@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ui_background"
-    tools:context="eu.jnksoftware.discountfinderandroid.loginActivity"
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.Login"
     tools:layout_editor_absoluteY="25dp"
     tools:layout_editor_absoluteX="0dp">
 

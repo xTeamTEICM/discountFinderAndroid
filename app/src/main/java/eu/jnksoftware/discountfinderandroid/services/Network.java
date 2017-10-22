@@ -1,4 +1,6 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.services;
+
+import android.os.StrictMode;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -36,7 +38,11 @@ public class Network {
         this(argUrl, 10000);
     }
 
-    public Network(String argUrl, int argTimeout) throws Exception {
+    private Network(String argUrl, int argTimeout) throws Exception {
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         if (!isValidUrl(argUrl)) throw new Exception("Invalid URL");
 
         if (!argUrl.startsWith("https:")) throw new Exception("URL must have SSL (HTTPS)");

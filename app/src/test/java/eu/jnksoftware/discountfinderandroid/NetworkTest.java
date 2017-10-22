@@ -2,6 +2,8 @@ package eu.jnksoftware.discountfinderandroid;
 
 import org.junit.Test;
 
+import eu.jnksoftware.discountfinderandroid.services.Network;
+
 import static org.junit.Assert.assertTrue;
 
 /**

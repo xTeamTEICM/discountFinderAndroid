@@ -1,9 +1,11 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.models;
 
-    public class Position {
+import java.io.Serializable;
 
-    private double x;
-    private double y;
+public class Position implements Serializable {
+
+    private final double x;
+    private final double y;
 
     public Position(double x, double y) {
         this.x = x;

@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-public class RegisterRoleSelectorUI extends Activity {
+import eu.jnksoftware.discountfinderandroid.R;
+
+public class RegisterRoleSelector extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +24,17 @@ public class RegisterRoleSelectorUI extends Activity {
         shop_register.setOnClickListener(shopRegClick);
     }
 
-    private View.OnClickListener userRegClick = new View.OnClickListener() {
+    private final View.OnClickListener userRegClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //TODO: link with user register
+            RegisterRoleSelector.this.startActivity(new Intent(RegisterRoleSelector.this, RegisterCustomer.class));
         }
     };
 
-    private View.OnClickListener shopRegClick = new View.OnClickListener() {
+    private final View.OnClickListener shopRegClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //TODO:link with shop register
+            RegisterRoleSelector.this.startActivity(new Intent(RegisterRoleSelector.this, RegisterSeller.class));
         }
     };
 }

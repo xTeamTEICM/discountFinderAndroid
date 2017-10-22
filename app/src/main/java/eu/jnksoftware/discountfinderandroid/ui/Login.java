@@ -1,15 +1,16 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.ui;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class loginActivity extends Activity {
+import eu.jnksoftware.discountfinderandroid.R;
+
+public class Login extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +24,19 @@ public class loginActivity extends Activity {
         TextView registerView=(TextView) findViewById(R.id.registerTextView);
         registerView.setOnClickListener(registerViewClick);
     }
-    private View.OnClickListener loginClick=new View.OnClickListener(){
+
+    private final View.OnClickListener loginClick = new View.OnClickListener() {
         @Override
         public void onClick(final View loginView) {
-            //ToDo:Login to main page
+            Login.this.startActivity(new Intent(Login.this, Menu.class));
+            finish();
 
         }
     };
-    private View.OnClickListener registerViewClick=new View.OnClickListener(){
+    private final View.OnClickListener registerViewClick = new View.OnClickListener() {
         @Override
         public void onClick(final View registerView) {
-            //ToDo:Open a register form and select if you are Customer or Seller
-
+            Login.this.startActivity(new Intent(Login.this, RegisterRoleSelector.class));
         }
     };
 }

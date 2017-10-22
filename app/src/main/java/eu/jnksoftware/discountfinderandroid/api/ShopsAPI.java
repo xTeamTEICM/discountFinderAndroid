@@ -1,10 +1,14 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.api;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import eu.jnksoftware.discountfinderandroid.models.Position;
+import eu.jnksoftware.discountfinderandroid.models.Shop;
+import eu.jnksoftware.discountfinderandroid.services.Network;
 
 /**
  * Owner: JNK Software
