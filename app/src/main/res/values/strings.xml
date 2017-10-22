@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Discount Finder</string>
+    <string name="usrReg"> <u>Θέλω να εγγραφώ</u> </string>
+    <string name="shopReg"> <u>Θέλω να εγγράψω την επιχείρηση μου</u> </string>
 </resources>
