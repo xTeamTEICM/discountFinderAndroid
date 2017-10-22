@@ -58,6 +58,10 @@ public class ShopFactory {
         this.sortedShopList = new ArrayList<>();
     }
 
+    public List<Shop> getSortedShopList() {
+        return sortedShopList;
+    }
+
     public double calculateDistance(Position position){
         double distance;
         double subtractionX = Math.abs(position.getX() - myPosition.getX());
