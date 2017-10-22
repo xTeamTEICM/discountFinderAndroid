@@ -22,7 +22,7 @@ public class ShopsAPITest {
         ShopsAPI test = new ShopsAPI(APIConfig.APILinkTest + "/shop/");
         List<Shop> list = test.getList();
 
-        assertEquals("MammasPizza", list.get(0).shopName);
-        assertEquals("TEI CAFE", list.get(1).shopName);
+        assertEquals("MammasPizza", list.get(0).getShopName());
+        assertEquals("TEI CAFE", list.get(1).getShopName());
     }
 }
