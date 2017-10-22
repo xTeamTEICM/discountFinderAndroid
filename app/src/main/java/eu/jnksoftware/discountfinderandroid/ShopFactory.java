@@ -58,7 +58,7 @@ public class ShopFactory {
         this.sortedShopList = new ArrayList<>();
     }
 
-    private double calculateDistance(Position position){
+    public double calculateDistance(Position position){
         double distance;
         double subtractionX = Math.abs(position.getX() - myPosition.getX());
         double subtractionY = Math.abs(position.getY() - myPosition.getY());
@@ -66,7 +66,7 @@ public class ShopFactory {
         return distance;
     }
 
-    private void sortShopList() {
+    public void sortShopList() {
         List<Shop> tempShopList = shopList;
         Shop nearestShop;
             while (!(tempShopList.size() == 0))
@@ -75,7 +75,6 @@ public class ShopFactory {
             for (Shop shops : tempShopList) {
                 if (shops.distanceFromUser < nearestShop.distanceFromUser) {
                     nearestShop = shops;
-                    break;
                 }
             }
             sortedShopList.add(nearestShop);
