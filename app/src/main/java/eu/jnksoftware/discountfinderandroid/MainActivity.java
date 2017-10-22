@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/** the values of latitude and longitude are stores in double variables.
+ *  Data are collecting from class Gps_Service and it a service class.
+*/
 public class MainActivity extends AppCompatActivity {
 
     private double mylongitude, mylatitude;
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     if(params!=null){
                         mylongitude =params.getDouble("longitude");
                         mylatitude =params.getDouble("latitude");
-                        textView.setText("\nLatitude:"+ mylongitude +" Longitude"+ mylatitude);
+                        textView.setText("\nLatitude:"+ mylatitude+" Longitude:"+ mylongitude );
                     }
                     else
                         textView.setText("null object");
@@ -101,7 +104,10 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode== 100){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager
                     .PERMISSION_GRANTED ){
-
+                enable_button();
+            }
+            else{
+                runtime_permissions();
             }
         }
     }
