@@ -40,8 +40,12 @@ public class Network {
 
     private Network(String argUrl, int argTimeout) throws Exception {
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        } catch (Exception ignored) {
+
+        }
 
         if (!isValidUrl(argUrl)) throw new Exception("Invalid URL");
 
