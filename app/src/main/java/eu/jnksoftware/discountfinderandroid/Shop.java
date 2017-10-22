@@ -9,12 +9,6 @@ public class Shop extends AppCompatActivity {
     Position location;
     double distanceFromUser;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop);
-    }
-
     public Shop(String shopName, Position location,double distanceFromUser) {
         this.shopName = shopName;
         this.location = location;
