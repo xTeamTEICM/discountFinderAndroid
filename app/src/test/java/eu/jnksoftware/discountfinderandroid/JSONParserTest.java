@@ -3,6 +3,8 @@ package eu.jnksoftware.discountfinderandroid;
 import org.json.JSONArray;
 import org.junit.Test;
 
+import eu.jnksoftware.discountfinderandroid.api.JSONParser;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;

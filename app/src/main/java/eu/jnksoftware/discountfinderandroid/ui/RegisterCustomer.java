@@ -1,15 +1,15 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class registerCustomerActivity extends Activity {
+import eu.jnksoftware.discountfinderandroid.R;
+
+public class RegisterCustomer extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,12 @@ public class registerCustomerActivity extends Activity {
         register.setOnClickListener(registerClick);
 
     }
-    private View.OnClickListener registerClick=new View.OnClickListener(){
+
+    private final View.OnClickListener registerClick = new View.OnClickListener() {
         @Override
         public  void onClick(final View reg) {
-
-            //ToDo:DO Register
+            RegisterCustomer.this.startActivity(new Intent(RegisterCustomer.this, Menu.class));
+            finish();
         }
         };
     }

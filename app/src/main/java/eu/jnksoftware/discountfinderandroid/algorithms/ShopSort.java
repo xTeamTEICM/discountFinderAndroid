@@ -1,19 +1,22 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import eu.jnksoftware.discountfinderandroid.models.Position;
+import eu.jnksoftware.discountfinderandroid.models.Shop;
 
 /**
  * Created by dito on 10/21/2017.
  */
 
 
-public class ShopFactory {
-    private List<Shop> shopList;
-    private List<Shop> sortedShopList;
-    private Position myPosition;
+public class ShopSort {
+    private final List<Shop> shopList;
+    private final List<Shop> sortedShopList;
+    private final Position myPosition;
 
-    public ShopFactory() {
+    public ShopSort() {
 
         // Call real constructor
         this(new ArrayList<Shop>(), new Position(50.25,45.37));
@@ -52,7 +55,7 @@ public class ShopFactory {
 
     }
 
-    public ShopFactory(List<Shop> shopList, Position myPosition) {
+    public ShopSort(List<Shop> shopList, Position myPosition) {
         this.shopList = shopList;
         this.myPosition = myPosition;
         this.sortedShopList = new ArrayList<>();
@@ -62,7 +65,7 @@ public class ShopFactory {
         return sortedShopList;
     }
 
-    public double calculateDistance(Position position){
+    private double calculateDistance(Position position) {
         double distance;
         double subtractionX = Math.abs(position.getX() - myPosition.getX());
         double subtractionY = Math.abs(position.getY() - myPosition.getY());
@@ -77,7 +80,7 @@ public class ShopFactory {
             {
             nearestShop = tempShopList.get(0);
             for (Shop shops : tempShopList) {
-                if (shops.distanceFromUser < nearestShop.distanceFromUser) {
+                if (shops.getDistanceFromUser() < nearestShop.getDistanceFromUser()) {
                     nearestShop = shops;
                 }
             }

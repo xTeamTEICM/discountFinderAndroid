@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import java.util.List;
 
+import eu.jnksoftware.discountfinderandroid.api.APIConfig;
+import eu.jnksoftware.discountfinderandroid.api.ShopsAPI;
+import eu.jnksoftware.discountfinderandroid.models.Shop;
+
 import static org.junit.Assert.assertEquals;
 
 /**

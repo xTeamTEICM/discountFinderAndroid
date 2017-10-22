@@ -1,14 +1,14 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.ui;
 
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
-
-
+import eu.jnksoftware.discountfinderandroid.BuildConfig;
+import eu.jnksoftware.discountfinderandroid.R;
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 
@@ -20,7 +20,7 @@ public class AboutUs extends AppCompatActivity {
         View aboutUs = new AboutPage(this)
                 .isRTL(false)
                 .setImage(R.drawable.icon)
-                .setDescription("This is a demo version \n Thank you for downloading our App \n "+"Currnet Version : "+BuildConfig.VERSION_NAME)
+                .setDescription("This is a demo version \n Thank you for downloading our App \n " + "Currnet Version : " + BuildConfig.VERSION_NAME)
                 .addGitHub("xTeamTEICM")
                 .addFacebook("xTeamTEICM")
                 .addPlayStore(BuildConfig.APPLICATION_ID)

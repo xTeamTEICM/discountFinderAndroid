@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.api;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,15 +1,15 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.models;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-public class Shop extends AppCompatActivity {
+import java.io.Serializable;
 
-    String shopName;
-    Position location;
-    double distanceFromUser;
+public class Shop implements Serializable {
+
+    private final String shopName;
+    private final Position location;
+    private final double distanceFromUser;
 
     public Shop(String shopName, Position location,double distanceFromUser) {
         this.shopName = shopName;
@@ -27,8 +27,7 @@ public class Shop extends AppCompatActivity {
         intent.setData(Uri.parse("geo:<" + Latitude  + ">,<" + Longitude + ">?q=<" + Latitude  + ">,<" + Longitude + ">(" + labelLocation+ ")"));
 
         //if user has not the application googleMaps it will show him a dialog with Launch Maps
-        Intent chooser=Intent.createChooser(intent,"Launch Maps");
-        return chooser;
+        return Intent.createChooser(intent, "Launch Maps");
 
 
     }
@@ -38,4 +37,15 @@ public class Shop extends AppCompatActivity {
         return this.shopName;
     }
 
+    public String getShopName() {
+        return shopName;
+    }
+
+    public Position getLocation() {
+        return location;
+    }
+
+    public double getDistanceFromUser() {
+        return distanceFromUser;
+    }
 }
