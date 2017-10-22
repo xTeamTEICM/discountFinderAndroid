@@ -7,7 +7,7 @@ package eu.jnksoftware.discountfinderandroid.api;
  * License: Apache License 2.0
  */
 public class APIConfig {
-    public final static String APILinkReal = "http://ouranos.jnksoftware.eu/discountFinderBackend/API/";
+    public final static String APILinkReal = "https://ouranos.jnksoftware.eu/discountFinderBackend/API/";
     public final static String APILinkTest = "https://ouranos.jnksoftware.eu/testUncommited/API/";
 
 }

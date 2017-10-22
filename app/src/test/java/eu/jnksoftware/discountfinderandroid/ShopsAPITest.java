@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class ShopsAPITest {
     @Test
     public void simpleTest() throws Exception {
-        ShopsAPI test = new ShopsAPI(APIConfig.APILinkTest + "/shop/");
+        ShopsAPI test = new ShopsAPI(APIConfig.APILinkReal + "/shop/");
         List<Shop> list = test.getList();
 
         assertEquals("MammasPizza", list.get(0).getShopName());

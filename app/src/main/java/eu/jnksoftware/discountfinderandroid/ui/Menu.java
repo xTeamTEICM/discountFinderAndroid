@@ -53,7 +53,7 @@ public class Menu extends AppCompatActivity {
             if (geoLocationService.getLocation() != null) {
                 List<Shop> shops = new ArrayList<>();
                 try {
-                    ShopsAPI shopsAPI = new ShopsAPI(APIConfig.APILinkTest + "shop/");
+                    ShopsAPI shopsAPI = new ShopsAPI(APIConfig.APILinkReal + "shop/");
                     shops = shopsAPI.getList();
                     ShopSort shopSort = new ShopSort(
                             shops,
