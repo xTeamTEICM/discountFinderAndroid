@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+    <entry_points version="2.0">
+      <entry_point TYPE="field" FQNAME="eu.jnksoftware.discountfinderandroid.api.APIConfig APILinkTest" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.api.APIConfig" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.general.AboutUs" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.services.GeoLocation void stopUsingGPS()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.services.GeoLocation GeoLocation(android.content.Context context)" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.services.GeoLocation GeoLocation()" />
+      <entry_point TYPE="class" FQNAME="eu.jnksoftware.discountfinderandroid.services.GeoLocation" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Location void setLongitude(double longitude)" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Location void setLatitude(double latitude)" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Location Location(double latitude, double longitude)" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Location Location()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Location Location(android.location.Location location)" />
+      <entry_point TYPE="class" FQNAME="eu.jnksoftware.discountfinderandroid.models.Location" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.general.Login" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.general.Main" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void PropertyDeleteExist()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void PropertyDeleteNotExist()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void PropertyUpdateExist()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void PropertyUpdateNotExist()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void RequestWithProperties()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void RequestWithoutProperties()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void RequestNotSafeUrl()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest void RequestInvalidUrl()" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.NetworkTest" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.customer.RegisterCustomer" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.general.RegisterRoleSelector" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.seller.RegisterSeller" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shop void setDistanceFromUser(double distanceFromUser)" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shop eu.jnksoftware.discountfinderandroid.models.Location getLocation()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shop Shop(java.lang.String name, eu.jnksoftware.discountfinderandroid.models.Location location, eu.jnksoftware.discountfinderandroid.models.Location userLocation)" />
+      <entry_point TYPE="class" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shop" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shops eu.jnksoftware.discountfinderandroid.models.Shop getShop(java.lang.String name)" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shops Shops()" />
+      <entry_point TYPE="method" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shops Shops(java.util.ArrayList&lt;eu.jnksoftware.discountfinderandroid.models.Shop&gt; unsortedList)" />
+      <entry_point TYPE="class" FQNAME="eu.jnksoftware.discountfinderandroid.models.Shops" />
+      <entry_point TYPE="implicit.constructor" FQNAME="eu.jnksoftware.discountfinderandroid.ui.general.Shops" />
+    </entry_points>
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
@@ -37,7 +75,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

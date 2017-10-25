@@ -27,6 +27,7 @@ import javax.net.ssl.HttpsURLConnection;
  * Date: 20/10/2017
  * License: Apache License 2.0
  */
+@SuppressWarnings("SameParameterValue")
 public class Network {
     private String url;
     private String result;

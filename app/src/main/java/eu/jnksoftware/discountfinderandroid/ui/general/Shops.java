@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui;
+package eu.jnksoftware.discountfinderandroid.ui.general;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,15 +8,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.algorithms.ShopSort;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 
 public class Shops extends AppCompatActivity {
 
-    private ArrayList<Shop> shopsListArray;
+    private eu.jnksoftware.discountfinderandroid.models.Shops shops;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,29 +23,27 @@ public class Shops extends AppCompatActivity {
         ListView shopsList = (ListView) findViewById(R.id.shopsList);
 
         if (getIntent().hasExtra("shopsList")) {
-            // initialize shopsListArray with a param list of shops
-            //I am not sure if this works we need to check it when we have real data
-            shopsListArray = (ArrayList<Shop>)getIntent().getSerializableExtra("shopsList");
-        } else {
-            //initialize shopsListArray with a fake list of shops
-            ShopSort shopSort = new ShopSort();
-            shopSort.sortShopList();
-            shopsListArray = (ArrayList<Shop>) shopSort.getSortedShopList();
+            shops = (eu.jnksoftware.discountfinderandroid.models.Shops) getIntent().getSerializableExtra("shopsList");
+            ArrayAdapter<Shop> arrayAdapter = new ArrayAdapter<>(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    shops.getList()
+            );
+
+            shopsList.setAdapter(arrayAdapter);
+            shopsList.setOnItemClickListener(shopsItemClick());
         }
 
-        ArrayAdapter<Shop> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, shopsListArray);
 
-        shopsList.setAdapter(arrayAdapter);
-        shopsList.setOnItemClickListener(shopsItemClick());
     }
 
     private AdapterView.OnItemClickListener shopsItemClick() {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent= shopsListArray.get(position).openOnMaps();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(shops.getList().get(position).getMapsUri());
                 startActivity(intent);
-
             }
         };
     }

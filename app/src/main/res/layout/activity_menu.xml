@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/menu_background"
-    tools:context="eu.jnksoftware.discountfinderandroid.ui.Menu">
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer">
 
     <LinearLayout
         android:id="@+id/actionBar"
@@ -27,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Shops"
+            android:text="@string/shops"
             android:textAlignment="center" />
 
         <Button
@@ -36,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="About"
+            android:text="@string/about"
             android:textAlignment="center" />
     </LinearLayout>
 
