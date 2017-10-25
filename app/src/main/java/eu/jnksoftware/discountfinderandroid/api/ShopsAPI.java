@@ -1,14 +1,13 @@
 package eu.jnksoftware.discountfinderandroid.api;
 
+import android.location.Location;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.models.Position;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
-import eu.jnksoftware.discountfinderandroid.services.Network;
 
 /**
  * Owner: JNK Software
@@ -16,32 +15,48 @@ import eu.jnksoftware.discountfinderandroid.services.Network;
  * Date: 22/10/2017
  * License: Apache License 2.0
  */
-public class ShopsAPI {
-    private String jsonString;
-    private List<Shop> list;
+public class ShopsAPI implements IAPI {
 
-    public ShopsAPI(String URL) throws Exception {
-        Network network = new Network(URL);
-        network.call();
-        jsonString = network.getResult();
+    private ArrayList<Shop> list;
 
-        parseJson();
-    }
+    @Override
+    public boolean load(String json, Location currentLocation) {
 
-    private void parseJson() throws Exception {
-        list = new ArrayList<>();
-        JSONParser jsonParser = new JSONParser(jsonString);
+        boolean status = false;
 
-        JSONArray jsonArray = jsonParser.getArray("shops");
+        try {
+            list = new ArrayList<>();
+            JSONObject fullJSON = new JSONObject(json);
+            JSONArray shopArray = fullJSON.getJSONArray("shops");
 
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            list.add(new Shop(jsonObject.getString("brandName"), new Position(jsonObject.getDouble("logPos"), jsonObject.getDouble("latPos")), 0));
+            JSONObject shopRecord;
+            Location shopLocation;
+
+            for (int i = 0; i < shopArray.length(); i++) {
+                shopRecord = shopArray.getJSONObject(i);
+                shopLocation = new Location("");
+                shopLocation.setLatitude(shopRecord.getDouble("logPos"));
+                shopLocation.setLongitude(shopRecord.getDouble("latPos"));
+
+                list.add(
+                        new Shop(
+                                shopRecord.getString("brandName"),
+                                new eu.jnksoftware.discountfinderandroid.models.Location(shopLocation),
+                                new eu.jnksoftware.discountfinderandroid.models.Location(currentLocation)
+                        )
+                );
+
+                status = true;
+            }
+        } catch (Exception ex) {
+            status = false;
         }
 
+        return status;
     }
 
-    public List<Shop> getList() {
+    @Override
+    public ArrayList getList() {
         return list;
     }
 }
