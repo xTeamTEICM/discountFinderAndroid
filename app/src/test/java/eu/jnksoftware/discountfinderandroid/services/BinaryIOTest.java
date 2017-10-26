@@ -24,7 +24,7 @@ public class BinaryIOTest {
 
     @Test
     public void saveFile() throws Exception {
-        File file = new File("/home/iordkost/Desktop/file.dat");
+        File file = new File("file.dat");
         BinaryIO test = new BinaryIO();
         assertTrue(test.saveFile(new FileOutputStream(file), "SomeDataOfFile"));
         assertTrue(file.exists());
@@ -38,14 +38,14 @@ public class BinaryIOTest {
 
     @Test
     public void readFileExist() throws Exception {
-        File file = new File("/home/iordkost/Desktop/file.dat");
+        File file = new File("file.dat");
         BinaryIO test = new BinaryIO();
         assertEquals("SomeDataOfFile", test.readFile(new FileInputStream(file)));
     }
 
     @Test
     public void readFileNotExist() throws Exception {
-        File file = new File("/home/iordkost/Desktop/fileAAA.dat");
+        File file = new File("fileAAA.dat");
         BinaryIO test = new BinaryIO();
         assertNull(test.readFile(null));
     }
