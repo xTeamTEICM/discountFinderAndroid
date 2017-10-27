@@ -1,9 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
-
-import java.lang.reflect.GenericArrayType;
-import java.util.ArrayList;
-
 /**
  *
  * Created by poz on 27/10/2017.
@@ -13,21 +9,15 @@ import java.util.ArrayList;
 public class DiscountRequest {
     private int id;
     private String category;
-    private double price;
+    private double maxPrice;
     private String tags;
-    private Categories categ = new Categories();
 
-    public DiscountRequest(int id, String category, double price,String tags) throws Exception {
-
-            this.id = id;
-            this.category = category;
-            this.price = price;
-            this.tags = tags;
-
-        if(!categ.isValid(category)) throw new Exception("This item does not exist");
-
+    public DiscountRequest(int id, String category, double maxPrice,String tags) {
+        this.id = id;
+        this.category = category;
+        this.maxPrice = maxPrice;
+        this.tags = tags;
     }
-
 
 
     public int getId() {
@@ -42,12 +32,12 @@ public class DiscountRequest {
         this.category = category;
     }
 
-    public double getPrice() {
-        return price;
+    public double getMaxPrice() {
+        return maxPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setMaxPrice(double maxPrice) {
+        this.maxPrice = maxPrice;
     }
 
     public String getTags() {
@@ -56,17 +46,5 @@ public class DiscountRequest {
 
     public void setTags(String tags) {
         this.tags = tags;
-    }
-
-    public boolean isAvailable(String category){
-        boolean availableString=false;
-        ArrayList<String> availableList = categ.getList();
-        for(int i=0;i<availableList.size();i++)
-        {
-            if(availableList.contains(category)){
-                availableString = true;
-            }
-        }
-        return availableString;
     }
 }
