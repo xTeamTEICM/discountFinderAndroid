@@ -3,27 +3,31 @@ package eu.jnksoftware.discountfinderandroid.models;
 import android.widget.Toast;
 
 /**
- * Created by xNeo on 26/10/2017.
+ * Created by Sotiris on 26/10/2017.
  */
-//TODO testing
+
 public class Discount {
 
     private  int id;
     private String category;
     private String photoUrl;
-    private float originalPrice;
-    private float limitedPrice;
+    private double originalPrice;
+    private double limitedPrice;
 
 
-    //TODO message to user if  isValidPrice =false
-    public Discount(String category, float originalPrice, float limitedPrice,int id,String photoUrl) {
-        if (isValidPrice(originalPrice,limitedPrice)) {
-            this.category = category;
-            this.originalPrice = originalPrice;
-            this.limitedPrice = limitedPrice;
-            this.id = id;
-            this.photoUrl = photoUrl;
-        }
+    public Discount(String category, double originalPrice, double limitedPrice,int id,String photoUrl) throws Exception {
+         try {
+             this.category = category;
+             this.originalPrice = originalPrice;
+             this.limitedPrice = limitedPrice;
+             this.id = id;
+             this.photoUrl = photoUrl;
+         }catch (Exception ignored){
+
+         }
+        if (!isValidPrices(originalPrice,limitedPrice))throw new Exception("only positive prices accepted");
+        if(!isDiscountPriceLower())throw new Exception("Your discount price is bigger than original");
+
 
     }
 
@@ -39,11 +43,11 @@ public class Discount {
         return photoUrl;
     }
 
-    public float getOriginalPrice() {
+    public double getOriginalPrice() {
         return originalPrice;
     }
 
-    public float getLimitedPrice() {
+    public double getLimitedPrice() {
         return limitedPrice;
     }
 
@@ -53,20 +57,21 @@ public class Discount {
         this.photoUrl = photoUrl;
     }
 
-    public void setOriginalPrice(float originalPrice) {
+    public void setOriginalPrice(double originalPrice) {
         this.originalPrice = originalPrice;
     }
 
-    public void setLimitedPrice(float limitedPrice) {
+    public void setLimitedPrice(double limitedPrice) {
         this.limitedPrice = limitedPrice;
     }
 
 
 
-    private boolean isValidPrice(float originalPrice,float limitedPrice){
-        if(originalPrice>=0&&limitedPrice>=0)
-            return true;
-        else
-            return false;
+    public boolean isValidPrices(double originalPrice,double limitedPrice){
+        return originalPrice >= 0 && limitedPrice >= 0;
+    }
+
+    public boolean isDiscountPriceLower(){
+        return limitedPrice < originalPrice;
     }
 }
