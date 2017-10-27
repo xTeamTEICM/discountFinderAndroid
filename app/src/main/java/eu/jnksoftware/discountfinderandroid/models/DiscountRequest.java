@@ -1,6 +1,4 @@
-package eu.jnksoftware.discountfinderandroid;
-
-import java.util.List;
+package eu.jnksoftware.discountfinderandroid.models;
 
 /**
  *
@@ -12,17 +10,19 @@ public class DiscountRequest {
     private int id;
     private String category;
     private double maxPrice;
+    private String tags;
 
-    public DiscountRequest(int id, String category, double maxPrice) {
+    public DiscountRequest(int id, String category, double maxPrice,String tags) {
         this.id = id;
         this.category = category;
         this.maxPrice = maxPrice;
+        this.tags = tags;
     }
+
 
     public int getId() {
         return id;
     }
-
 
     public String getCategory() {
         return category;
@@ -38,5 +38,13 @@ public class DiscountRequest {
 
     public void setMaxPrice(double maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }
