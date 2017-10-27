@@ -10,10 +10,10 @@ import java.util.List;
 
 public class DiscountRequest {
     private int id;
-    private List<String> category;
+    private String category;
     private double maxPrice;
 
-    public DiscountRequest(int id, List<String> category, double maxPrice) {
+    public DiscountRequest(int id, String category, double maxPrice) {
         this.id = id;
         this.category = category;
         this.maxPrice = maxPrice;
@@ -24,11 +24,11 @@ public class DiscountRequest {
     }
 
 
-    public List<String> getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(List<String> category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
