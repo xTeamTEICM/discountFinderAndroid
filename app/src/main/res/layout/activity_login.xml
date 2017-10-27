@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/welcomeTxt"
-        android:layout_width="334dp"
+        android:layout_width="0dp"
         android:layout_height="47dp"
         android:layout_alignParentTop="true"
         android:gravity="center"
@@ -18,19 +18,29 @@
         android:textColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        tools:layout_constraintLeft_creator="1" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="160dp"
         app:layout_constraintBottom_toTopOf="@+id/loginBtn"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="160dp"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTxt"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:drawableStart="@drawable/user"
+                android:drawablePadding="5dp"
                 android:hint="@string/e_mail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
@@ -53,7 +64,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:drawableStart="@drawable/lock"
+                android:drawablePadding="5dp"
                 android:hint="@string/password"
+                android:padding="10dp"
                 android:inputType="textPassword"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
@@ -66,12 +79,12 @@
         android:layout_width="224dp"
         android:layout_height="48dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:text="@string/login"
         app:layout_constraintBottom_toTopOf="@+id/registerBtn"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
 
 
     <TextView
@@ -82,10 +95,24 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
+    <View
+        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:background="#ffffff"
+        app:layout_constraintTop_toTopOf="@+id/registerBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/registerBtn"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintRight_toRightOf="@+id/registerBtn"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/registerBtn"
+        />
+    
 
 
 </android.support.constraint.ConstraintLayout>

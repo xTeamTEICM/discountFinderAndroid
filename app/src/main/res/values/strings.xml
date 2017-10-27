@@ -2,7 +2,7 @@
     <string name="app_name">Προσφορές</string>
     <string name="shopReg">"<u>Θέλω να εγγράψω την επιχείρηση μου</u> "</string>
     <string name="usrReg">" <u>Θέλω να εγγραφώ ως πελάτης</u> "</string>
-    <string name="welcome">Καλωσήρθες στις προσφορες βρες και εσύ τις καλύτερες εκπτώσης!!</string>
+    <string name="welcome">Καλωσήρθες στις προσφορες βρες και εσύ τις καλύτερες εκπτώσεις!!</string>
     <string name="e_mail">e-Mail</string>
     <string name="password">Κωδικος Προσβασης</string>
     <string name="createAccount">Δεν έχεις Λογαριασμό; Δημιούργησε τώρα</string>
@@ -10,7 +10,7 @@
     <string name="selectRoleRegister">Για να συνεχίσεις με την εγγραφή σου πρέπει να επιλέξεις ένα από τα παρακάτω</string>
     <string name="firstName">Ονομα</string>
     <string name="lastName">Επωνυμο</string>
-    <string name="registerCustomerMsg">Καλωσήρθες στο DiscountFinder κανε και εσύ τώρα εγγραφή και βρες τις καλύτερες εκπτώσης τώρα!,μην χάνεις άλλο χρόνο!!</string>
+    <string name="registerCustomerMsg">Καλωσήρθες στο DiscountFinder κανε και εσύ τώρα εγγραφή και βρες τις καλύτερες εκπτώσεις τώρα!,μην χάνεις άλλο χρόνο!!</string>
     <string name="register">Εγγραφη</string>
     <string name="registerSellerMsg">Για να εγγράψεις το κατάστημα σου συμπλήρωσε την παρακάτω φόρμα</string>
     <string name="brand">Επωνυμία</string>
