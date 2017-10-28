@@ -12,7 +12,7 @@ import eu.jnksoftware.discountfinderandroid.api.APIConfig;
 import eu.jnksoftware.discountfinderandroid.api.IAPI;
 import eu.jnksoftware.discountfinderandroid.api.ShopsAPI;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
-import eu.jnksoftware.discountfinderandroid.services.Network;
+import eu.jnksoftware.discountfinderandroid.services.POSTNetwork;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Shops;
 
@@ -49,13 +49,13 @@ public class MenuCustomer extends AppCompatActivity {
             if (geoLocation.getLocation() != null) {
                 try {
                     // Ask API for Shops
-                    Network network = new Network(APIConfig.APILinkReal + "shop/");
-                    network.call();
+                    POSTNetwork POSTNetwork = new POSTNetwork(APIConfig.APILinkReal + "shop/");
+                    POSTNetwork.call();
                     eu.jnksoftware.discountfinderandroid.models.Shops shops = new eu.jnksoftware.discountfinderandroid.models.Shops();
                     // Parse the result
 
                     IAPI shopsAPI = new ShopsAPI();
-                    if (shopsAPI.load(network.getResult(), geoLocation.getLocation())) {
+                    if (shopsAPI.load(POSTNetwork.getResult(), geoLocation.getLocation())) {
                         //noinspection unchecked
                         shops = new eu.jnksoftware.discountfinderandroid.models.Shops(shopsAPI.getList());
                     }
