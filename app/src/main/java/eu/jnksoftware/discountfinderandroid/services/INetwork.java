@@ -8,8 +8,13 @@ import java.io.IOException;
  * Date: 28/10/2017
  * License: Apache License 2.0
  */
-interface INetwork {
+public interface INetwork {
     String getResult();
+
+
+    String getURL();
+
+    void setURL(String url);
 
     boolean addProperty(String property, String value);
 

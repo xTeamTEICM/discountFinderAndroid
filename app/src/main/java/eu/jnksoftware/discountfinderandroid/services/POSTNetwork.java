@@ -71,6 +71,16 @@ public class POSTNetwork implements INetwork {
     }
 
     @Override
+    public String getURL() {
+        return url;
+    }
+
+    @Override
+    public void setURL(String url) {
+        this.url = url;
+    }
+
+    @Override
     public boolean addProperty(String property, String value) {
         properties.put(property, value);
         return properties.containsKey(property);
