@@ -1,8 +1,6 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.services;
 
 import org.junit.Test;
-
-import eu.jnksoftware.discountfinderandroid.services.POSTNetwork;
 
 import static org.junit.Assert.assertTrue;
 
