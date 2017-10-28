@@ -15,7 +15,7 @@ import eu.jnksoftware.discountfinderandroid.services.INetwork;
  * License: Apache License 2.0
  */
 public class CategoryAPI {
-    private static final String File = "/category/";
+    private static final String File = "category/";
     private INetwork network;
 
     public CategoryAPI(INetwork network) {
