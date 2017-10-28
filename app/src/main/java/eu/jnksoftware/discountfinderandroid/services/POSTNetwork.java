@@ -28,18 +28,18 @@ import javax.net.ssl.HttpsURLConnection;
  * License: Apache License 2.0
  */
 @SuppressWarnings("SameParameterValue")
-public class Network {
+public class POSTNetwork implements INetwork {
     private String url;
     private String result;
     private String userAgent;
     private HashMap<String, String> properties;
     private int timeout;
 
-    public Network(String argUrl) throws Exception {
+    public POSTNetwork(String argUrl) throws Exception {
         this(argUrl, 10000);
     }
 
-    private Network(String argUrl, int argTimeout) throws Exception {
+    private POSTNetwork(String argUrl, int argTimeout) throws Exception {
 
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -65,15 +65,18 @@ public class Network {
         return m.find();
     }
 
+    @Override
     public String getResult() {
         return result;
     }
 
+    @Override
     public boolean addProperty(String property, String value) {
         properties.put(property, value);
         return properties.containsKey(property);
     }
 
+    @Override
     public boolean removeProperty(String property) {
         if (properties.containsKey(property)) {
             properties.remove(property);
@@ -83,6 +86,7 @@ public class Network {
         }
     }
 
+    @Override
     public boolean updateProperty(String property, String value) {
         if (properties.containsKey(property)) {
             properties.put(property, value);
@@ -92,6 +96,7 @@ public class Network {
         }
     }
 
+    @Override
     public boolean call() throws IOException {
         HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
 

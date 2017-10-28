@@ -2,7 +2,7 @@ package eu.jnksoftware.discountfinderandroid;
 
 import org.junit.Test;
 
-import eu.jnksoftware.discountfinderandroid.services.Network;
+import eu.jnksoftware.discountfinderandroid.services.POSTNetwork;
 
 import static org.junit.Assert.assertTrue;
 
@@ -12,12 +12,12 @@ import static org.junit.Assert.assertTrue;
  * Date: 20/10/2017
  * License: Apache License 2.0
  */
-public class NetworkTest {
+public class POSTNetworkTest {
 
     @Test
     public void RequestInvalidUrl() throws Exception {
         try {
-            new Network("https://aVoidSiteSampleForTesting");
+            new POSTNetwork("https://aVoidSiteSampleForTesting");
         } catch (Exception ex) {
             assertTrue(
                     ex.getMessage().equals("Invalid URL")
@@ -28,7 +28,7 @@ public class NetworkTest {
     @Test
     public void RequestNotSafeUrl() throws Exception {
         try {
-            new Network("http://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
+            new POSTNetwork("http://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
         } catch (Exception ex) {
             assertTrue(
                     ex.getMessage().equals("URL must have SSL (HTTPS)")
@@ -38,7 +38,7 @@ public class NetworkTest {
 
     @Test
     public void RequestWithoutProperties() throws Exception {
-        Network test = new Network("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
+        POSTNetwork test = new POSTNetwork("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
         assertTrue(
                 test.call()
         );
@@ -49,7 +49,7 @@ public class NetworkTest {
 
     @Test
     public void RequestWithProperties() throws Exception {
-        Network test = new Network("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
+        POSTNetwork test = new POSTNetwork("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
         assertTrue(
                 test.addProperty("eMail", "iordkost@teicm.gr")
         );
@@ -66,7 +66,7 @@ public class NetworkTest {
 
     @Test
     public void PropertyUpdateNotExist() throws Exception {
-        Network test = new Network("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
+        POSTNetwork test = new POSTNetwork("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
         assertTrue(
                 !test.updateProperty("password", "helloWorld")
         );
@@ -74,7 +74,7 @@ public class NetworkTest {
 
     @Test
     public void PropertyUpdateExist() throws Exception {
-        Network test = new Network("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
+        POSTNetwork test = new POSTNetwork("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
         assertTrue(
                 test.addProperty("password", "myPassword")
         );
@@ -86,7 +86,7 @@ public class NetworkTest {
 
     @Test
     public void PropertyDeleteNotExist() throws Exception {
-        Network test = new Network("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
+        POSTNetwork test = new POSTNetwork("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
         assertTrue(
                 !test.removeProperty("password")
         );
@@ -94,7 +94,7 @@ public class NetworkTest {
 
     @Test
     public void PropertyDeleteExist() throws Exception {
-        Network test = new Network("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
+        POSTNetwork test = new POSTNetwork("https://ouranos.jnksoftware.eu/pointSystemAPI/v1/auth/login/");
         assertTrue(
                 test.addProperty("password", "myPassword")
         );
