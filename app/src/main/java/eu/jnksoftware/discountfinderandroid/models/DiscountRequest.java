@@ -15,12 +15,11 @@ import eu.jnksoftware.discountfinderandroid.services.POSTNetwork;
 
 public class DiscountRequest {
     private int id;
-    private String category;
+    private Category category;
     private double price;
     private String tags;
-    private CategoryAPI categAPI = new CategoryAPI(new POSTNetwork(APIConfig.APILinkReal));
 
-    public DiscountRequest(int id, String category, double price,String tags) throws Exception {
+    public DiscountRequest(int id, Category category, double price,String tags) throws Exception {
 
             this.id = id;
             this.category = category;
@@ -35,11 +34,11 @@ public class DiscountRequest {
         return id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -59,15 +58,4 @@ public class DiscountRequest {
         this.tags = tags;
     }
 
-    public boolean isAvailable(String category){
-        boolean availableString=false;
-        ArrayList<Category> availableList = categAPI.list();
-        for(int i=0;i<availableList.size();i++)
-        {
-            if(availableList.contains(category)){
-                availableString = true;
-            }
-        }
-        return availableString;
-    }
 }
