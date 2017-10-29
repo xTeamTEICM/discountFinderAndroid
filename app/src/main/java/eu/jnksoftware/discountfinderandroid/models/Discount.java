@@ -9,13 +9,13 @@ import android.widget.Toast;
 public class Discount {
 
     private  int id;
-    private String category;
+    private Category category;
     private String photoUrl;
     private double originalPrice;
     private double limitedPrice;
 
 
-    public Discount(String category, double originalPrice, double limitedPrice,int id,String photoUrl) throws Exception {
+    public Discount(Category category, double originalPrice, double limitedPrice,int id,String photoUrl) throws Exception {
          try {
              this.category = category;
              this.originalPrice = originalPrice;
@@ -35,7 +35,7 @@ public class Discount {
         return id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
