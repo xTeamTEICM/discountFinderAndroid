@@ -4,6 +4,10 @@ package eu.jnksoftware.discountfinderandroid.models;
 import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 
+import eu.jnksoftware.discountfinderandroid.api.APIConfig;
+import eu.jnksoftware.discountfinderandroid.api.CategoryAPI;
+import eu.jnksoftware.discountfinderandroid.services.POSTNetwork;
+
 /**
  *
  * Created by poz on 27/10/2017.
@@ -15,7 +19,7 @@ public class DiscountRequest {
     private String category;
     private double price;
     private String tags;
-    private Categories categ = new Categories();
+    private CategoryAPI categAPI = new CategoryAPI(new POSTNetwork(APIConfig.APILinkReal));
 
     public DiscountRequest(int id, String category, double price,String tags) throws Exception {
 
@@ -23,8 +27,6 @@ public class DiscountRequest {
             this.category = category;
             this.price = price;
             this.tags = tags;
-
-        if(!categ.isValid(category)) throw new Exception("This item does not exist");
 
     }
 
@@ -60,7 +62,7 @@ public class DiscountRequest {
 
     public boolean isAvailable(String category){
         boolean availableString=false;
-        ArrayList<String> availableList = categ.getList();
+        ArrayList<Category> availableList = categAPI.list();
         for(int i=0;i<availableList.size();i++)
         {
             if(availableList.contains(category)){
