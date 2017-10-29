@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
 
-import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 
 import eu.jnksoftware.discountfinderandroid.api.APIConfig;
