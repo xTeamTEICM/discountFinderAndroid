@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.general;
+package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

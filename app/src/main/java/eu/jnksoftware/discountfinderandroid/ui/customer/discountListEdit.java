@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.general;
+package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.*;
 import eu.jnksoftware.discountfinderandroid.R;
 
-public class deleteDiscountEdit extends AppCompatActivity {
+public class discountListEdit extends AppCompatActivity {
     private  Button buttonDelete;
     private Button buttonBack;
     private TextView discName;
@@ -16,15 +16,22 @@ public class deleteDiscountEdit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_discount_edit);
+        setContentView(R.layout.activity_discount_edit);
         Intent intent =getIntent();
         discountProduct discountproduct= (discountProduct) intent.getSerializableExtra("product");
         this.buttonBack= (Button) findViewById(R.id.backBtn);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent intent=new Intent(deleteDiscountEdit.this,deleteDiscount.class);
+            Intent intent=new Intent(discountListEdit.this,discountList.class);
                 startActivity(intent);
+
+            }
+        });
+        this.buttonDelete= (Button) findViewById(R.id.deleteBtn);
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });
