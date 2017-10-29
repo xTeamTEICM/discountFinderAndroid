@@ -71,14 +71,14 @@ public class UserTest {
     @Test
     public void getRole() throws Exception {
         User testUser= new User(1,"makis","kovanidis","makis_kovanidis@hotmail.com",Role.CUSTOMER,new Date(),new Date(),"aaaaaaaa");
-        assertEquals(Role.CUSTOMER, testUser.getEmail());
+        assertEquals(Role.CUSTOMER, testUser.getRole());
     }
 
     @Test
     public void setRole() throws Exception {
         User testUser= new User(1,"makis","kovanidis","makis_kovanidis@hotmail.com",Role.CUSTOMER,new Date(),new Date(),"aaaaaaaa");
         testUser.setRole(Role.SELLER);
-        assertEquals(Role.SELLER, testUser.getEmail());
+        assertEquals(Role.SELLER, testUser.getRole());
     }
 
     @Test
@@ -109,7 +109,7 @@ public class UserTest {
     @Test
     public void setLastLogin() throws Exception {
         User testUser= new User(1,"makis","kovanidis","makis_kovanidis@hotmail.com",Role.CUSTOMER,new Date(),new Date(2017,5,20),"aaaaaaaa");
-        testUser.setCreationDate(new Date(2017, 8,4));
+        testUser.setLastLogin(new Date(2017, 8,4));
         assertEquals(2017, testUser.getLastLogin().getYear());
         assertEquals(8, testUser.getLastLogin().getMonth());
         assertEquals(4, testUser.getLastLogin().getDate());
