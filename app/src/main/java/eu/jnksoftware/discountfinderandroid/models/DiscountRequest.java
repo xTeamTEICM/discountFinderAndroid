@@ -18,6 +18,7 @@ public class DiscountRequest {
     private Category category;
     private double price;
     private String tags;
+    private CategoryAPI categAPI = new CategoryAPI(new POSTNetwork(APIConfig.APILinkReal));
 
     public DiscountRequest(int id, Category category, double price,String tags) throws Exception {
 
@@ -27,7 +28,6 @@ public class DiscountRequest {
             this.tags = tags;
 
     }
-
 
 
     public int getId() {
@@ -57,5 +57,4 @@ public class DiscountRequest {
     public void setTags(String tags) {
         this.tags = tags;
     }
-
 }
