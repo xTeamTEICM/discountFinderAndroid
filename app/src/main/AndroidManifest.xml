@@ -3,8 +3,8 @@
     package="eu.jnksoftware.discountfinderandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,20 +14,49 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Main">
+        <activity
+            android:name=".ui.general.Main"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- Accept scheme://host/pathPrefix -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="jnksoftware.eu"
+                    android:pathPrefix="/app/discountFinder"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <!-- Accept scheme://host -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="discountFinder"
+                    android:scheme="XTeam" />
+            </intent-filter>
         </activity>
-        <activity android:name=".ui.Login" />
-        <activity android:name=".ui.RegisterRoleSelector" />
-        <activity android:name=".ui.RegisterCustomer" />
-        <activity android:name=".ui.RegisterSeller" />
-        <activity android:name=".ui.Menu" />
-        <activity android:name=".ui.Shops" />
-        <activity android:name=".ui.AboutUs" />
+        <activity android:name=".ui.general.Login" />
+        <activity android:name=".ui.general.RegisterRoleSelector" />
+        <activity android:name=".ui.customer.RegisterCustomer" />
+        <activity android:name=".ui.seller.RegisterSeller" />
+        <activity android:name=".ui.customer.MenuCustomer" />
+        <activity android:name=".ui.general.Shops" />
+        <activity android:name=".ui.general.AboutUs" />
+
+        <service android:name=".services.GeoLocation" />
     </application>
 
 </manifest>
