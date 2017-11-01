@@ -16,4 +16,15 @@
     <string name="brand">Επωνυμία</string>
     <string name="shops">Καταστηματα</string>
     <string name="about">About</string>
+    <string name="findDiscount">Βρες την προσφορά που θες τώρα</string>
+    <string name="category">Κατηγορία</string>
+    
+    <!-- String arrays for spinners    -->
+    <string-array name="categories">
+        <item>Ρούχα</item>
+        <item>Παπούτσια</item>
+        <item>Τρόφιμα</item>
+        <item>Άλλα</item>
+    </string-array>
+
 </resources>
