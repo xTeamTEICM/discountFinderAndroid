@@ -10,9 +10,8 @@
         android:id="@+id/tvFindDiscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="72dp"
+        android:layout_marginTop="40dp"
         android:text="@string/findDiscount"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/svFindDiscount"
@@ -22,11 +21,10 @@
 
     <ScrollView
         android:id="@+id/svFindDiscount"
-        android:layout_width="368dp"
-        android:layout_height="551dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="9dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:layout_marginTop="50dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,26 +39,52 @@
                 android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginBottom="20dp"
                 android:text="@string/category"
                 android:textColor="@android:color/background_light"
+                app:layout_constraintBottom_toTopOf="@+id/spinnerCategory"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/tvFindDiscount" />
 
             <Spinner
                 android:id="@+id/spinnerCategory"
-                android:layout_width="352dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="31dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="20dp"
                 android:background="@android:drawable/btn_dropdown"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintDimensionRatio="w,10:2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/price"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
+
+            <SeekBar
+                android:id="@+id/seekBarPrice"
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
         </android.support.constraint.ConstraintLayout>
+
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
