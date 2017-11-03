@@ -4,16 +4,18 @@ import android.net.Uri;
 
 import java.io.Serializable;
 
+
 public class Shop implements Serializable {
 
-    private final String name;
+    private final int id;
+    private final String ownerId;
     private final Location location;
-    private double distanceFromUser;
 
-    public Shop(String name, Location location, Location userLocation) {
-        this.name = name;
+
+    public Shop(int id, String ownerId, Location location) {
+        this.id = id;
+        this.ownerId = ownerId;
         this.location = location;
-        this.distanceFromUser = calculateDistance(userLocation);
     }
 
     private double calculateDistance(Location position) {
@@ -28,7 +30,7 @@ public class Shop implements Serializable {
 
         Double Latitude = location.getLatitude();
         Double Longitude = location.getLongitude();
-        String labelLocation = "x-Team Sample : " + name;
+        String labelLocation = "x-Team Sample : " + ownerId;
 
         return Uri.parse(
                 "geo:" +
@@ -40,22 +42,18 @@ public class Shop implements Serializable {
     // this toString prints on ListView
     public String toString(){
 
-        return this.name;
+        return this.ownerId;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
     }
 
     public Location getLocation() {
         return location;
-    }
-
-    public double getDistanceFromUser() {
-        return distanceFromUser;
-    }
-
-    public void setDistanceFromUser(double distanceFromUser) {
-        this.distanceFromUser = distanceFromUser;
     }
 }
