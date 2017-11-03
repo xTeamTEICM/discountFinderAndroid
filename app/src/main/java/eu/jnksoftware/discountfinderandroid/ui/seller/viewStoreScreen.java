@@ -10,12 +10,12 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
 
-public class sellerMainScreen extends AppCompatActivity {
+public class viewStoreScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller_main_screen);
+        setContentView(R.layout.activity_view_store_screen);
 
         List<String> discountNames = new ArrayList<>();
         discountNames.add("Discount 1");

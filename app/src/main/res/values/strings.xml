@@ -16,4 +16,7 @@
     <string name="brand">Επωνυμία</string>
     <string name="shops">Καταστηματα</string>
     <string name="about">About</string>
+    <string name="storeName">Store name</string>
+    <string name="discountsText">Discounts of this store</string>
+    <string name="addDiscount">ADD DISCOUNT</string>
 </resources>
