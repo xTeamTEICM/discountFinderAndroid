@@ -18,4 +18,5 @@
     <string name="about">About</string>
     <string name="welcomeSeller">Hello user, your shops are below</string>
     <string name="addStore">add new store</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
