@@ -19,6 +19,7 @@
     <string name="findDiscount">Βρες την προσφορά που θες τώρα</string>
     <string name="category">Κατηγορία</string>
     <string name="price">Τιμή</string>
+    <string name="Add">Προσθήκη</string>
 
     <!-- String arrays for spinners    -->
     <string-array name="categories">

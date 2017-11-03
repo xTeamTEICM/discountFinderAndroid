@@ -10,8 +10,8 @@
         android:id="@+id/tvFindDiscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="72dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:text="@string/findDiscount"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/svFindDiscount"
@@ -22,9 +22,8 @@
     <ScrollView
         android:id="@+id/svFindDiscount"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,51 +38,74 @@
                 android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="50dp"
                 android:text="@string/category"
                 android:textColor="@android:color/background_light"
-                app:layout_constraintBottom_toTopOf="@+id/spinnerCategory"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFindDiscount" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/spinnerCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
                 android:layout_marginTop="20dp"
                 android:background="@android:drawable/btn_dropdown"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
-                app:layout_constraintDimensionRatio="w,10:2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+                app:layout_constraintTop_toBottomOf="@id/tvCategory" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:text="@string/price"
                 android:textColor="@android:color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
 
+            <TextView
+                android:id="@+id/tvSeekBarValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="93dp"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
             <SeekBar
                 android:id="@+id/seekBarPrice"
-                style="@style/Widget.AppCompat.SeekBar"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
+                android:max="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSeekBarValue" />
+
+            <Button
+                android:id="@+id/btAddDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="66dp"
+                android:layout_marginStart="77dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/Add"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@id/seekBarPrice" />
+
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
