@@ -3,7 +3,9 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +27,9 @@ public class Add_Discount extends AppCompatActivity {
         ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(Add_Discount.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.categories));
         SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);
         showSeekProgress = (TextView) findViewById(R.id.tvSeekBarValue);
+        Button addButton = (Button) findViewById(R.id.btAddDiscount);
+
+        addButton.setOnClickListener(btAddDiscountClick);
 
         showSeekProgress.setText("Μέχρι "+seekBarProgress + " ευρώ");
         seekBarPrice.setMax(150);
@@ -56,4 +61,11 @@ public class Add_Discount extends AppCompatActivity {
             }
         });
     }
+
+    private final View.OnClickListener btAddDiscountClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //TODO:
+        }
+    };
 }
