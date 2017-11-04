@@ -1,6 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 import android.widget.Toast;
 
 /**
@@ -18,10 +18,10 @@ public class Discount {
     private String photoUrl;
     private double originalPrice;
     private double limitedPrice;
-    private Image image;
+    private Bitmap bitmap;
 
 
-    public Discount(int id, int shopId, Category category, String photoUrl, String desc, double originalPrice, double limitedPrice, Image image) throws Exception {
+    public Discount(int id, int shopId, Category category, String photoUrl, String desc, double originalPrice, double limitedPrice, Bitmap bitmap) throws Exception {
         try {
             this.id = id;
             this.shopId = shopId;
@@ -29,7 +29,7 @@ public class Discount {
             this.desc = desc;
             this.originalPrice = originalPrice;
             this.limitedPrice = limitedPrice;
-            this.image = image;
+            this.bitmap = bitmap;
             this.photoUrl = photoUrl;
         }catch (Exception ignored){
 
@@ -73,7 +73,7 @@ public class Discount {
     }
 
     public boolean isValidPrices(double originalPrice,double limitedPrice){
-        return originalPrice >= 0 && limitedPrice >= 0;
+        return originalPrice > 0 && limitedPrice > 0;
     }
 
     public boolean isDiscountPriceLower(){
@@ -96,11 +96,8 @@ public class Discount {
         this.desc = desc;
     }
 
-    public Image getImage() {
-        return image;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
 }

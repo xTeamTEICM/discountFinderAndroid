@@ -1,6 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 import java.util.ArrayList;
@@ -21,16 +22,16 @@ public class DiscountRequest {
     private Category category;
     private double price;
     private String tags;
-    private Image image;
+    private Bitmap bitmap;
 
-    public DiscountRequest(int id, String ownerId, Category category, double price,String tags, Image image) throws Exception {
+    public DiscountRequest(int id, String ownerId, Category category, double price,String tags, Bitmap bitmap) throws Exception {
 
             this.id = id;
             this.ownerId = ownerId;
             this.category = category;
             this.price = price;
             this.tags = tags;
-            this.image = image;
+            this.bitmap = bitmap;
 
     }
 
@@ -71,11 +72,8 @@ public class DiscountRequest {
         this.tags = tags;
     }
 
-    public Image getImage() {
-        return image;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
 }

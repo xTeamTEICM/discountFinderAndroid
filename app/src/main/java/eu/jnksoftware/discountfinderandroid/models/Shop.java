@@ -17,7 +17,7 @@ public class Shop implements Serializable {
         this.ownerId = ownerId;
         this.location = location;
     }
-
+    
     private double calculateDistance(Location position) {
         double distance;
         double subtractionX = Math.abs(position.getLatitude() - location.getLatitude());
