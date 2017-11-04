@@ -16,4 +16,9 @@
     <string name="brand">Επωνυμία</string>
     <string name="shops">Καταστηματα</string>
     <string name="about">About</string>
+    <string name="takeaphoto">Τράβα φωτογράφια</string>
+    <string name="loadphoto">Διαλεξε απο την Gallery</string>
+    <string name="sellersOfferView">sellersOfferView</string>
+    <string name="descriptionText">descriptionText</string>
+    <string name="endAddSellersOffer">Αποθηκευση</string>
 </resources>
