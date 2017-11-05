@@ -13,15 +13,13 @@ import eu.jnksoftware.discountfinderandroid.R;
 
 public class FindDiscount extends AppCompatActivity {
 
-    private ListView lvOffers;
-    private TextView offersFound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_discount);
 
-        offersFound = (TextView) findViewById(R.id.tvFoundOffers);
-        lvOffers = (ListView) findViewById(R.id.lvOffers);
+        TextView offersFound = (TextView) findViewById(R.id.tvFoundOffers);
+        ListView lvOffers = (ListView) findViewById(R.id.lvOffers);
         List<String> offersList = new ArrayList<>();
         //Static Data..... Will change
         offersList.add("Παπούτσι Nike Mercurial "+"50 ευρώ");
@@ -38,7 +36,7 @@ public class FindDiscount extends AppCompatActivity {
         String offers = "Βρέθηκαν " + offersList.size() + " προσφορές";
         offersFound.setText(offers);
 
-        ArrayAdapter<String> offersArrayAdapter = new ArrayAdapter<String>(this,R.layout.list_white_text,offersList);
+        ArrayAdapter<String> offersArrayAdapter = new ArrayAdapter<>(this, R.layout.list_white_text, offersList);
         lvOffers.setAdapter(offersArrayAdapter);
 
     }
