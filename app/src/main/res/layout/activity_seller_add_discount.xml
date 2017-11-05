@@ -7,7 +7,7 @@
     tools:context="eu.jnksoftware.discountfinderandroid.ui.seller.SellerAddDiscount">
 
     <Button
-        android:id="@+id/insertButton2"
+        android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
@@ -17,7 +17,7 @@
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountDescriptionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/productDescriptionEditText" />
 
     <Button
         android:id="@+id/insertButton"
@@ -32,10 +32,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/insertButton2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountDescriptionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/productDescriptionEditText" />
 
     <TextView
-        android:id="@+id/discountDescriptionTextView"
+        android:id="@+id/productDescriptionTextView"
         android:layout_width="336dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
@@ -45,10 +45,10 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountAvailabilityEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/productAvailabilityEditText" />
 
     <TextView
-        android:id="@+id/discountCategoryTextView"
+        android:id="@+id/productCategoryTextView"
         android:layout_width="336dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
@@ -57,11 +57,11 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountPriceEditText"
+        app:layout_constraintTop_toBottomOf="@+id/productPriceEditText"
         android:text="@string/giveProductCategory" />
 
     <TextView
-        android:id="@+id/discountPriceTextView"
+        android:id="@+id/productPriceTextView"
         android:layout_width="336dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
@@ -70,11 +70,11 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountNameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/productNameEditText"
         android:text="@string/giveProductPrice" />
 
     <TextView
-        android:id="@+id/discountNameTextView"
+        android:id="@+id/productNameTextView"
         android:layout_width="336dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
@@ -87,7 +87,7 @@
         android:text="@string/giveProductName" />
 
     <TextView
-        android:id="@+id/discountAvailabilityTextView"
+        android:id="@+id/productAvailabilityTextView"
         android:layout_width="336dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
@@ -97,10 +97,10 @@
         android:text="@string/giveProductAvailability"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountCategoryEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/productCategoryEditText" />
 
     <EditText
-        android:id="@+id/discountPriceEditText"
+        android:id="@+id/productPriceEditText"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -112,10 +112,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountPriceTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/productPriceTextView" />
 
     <EditText
-        android:id="@+id/discountCategoryEditText"
+        android:id="@+id/productCategoryEditText"
         android:layout_width="331dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -127,10 +127,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountCategoryTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/productCategoryTextView" />
 
     <EditText
-        android:id="@+id/discountNameEditText"
+        android:id="@+id/productNameEditText"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -141,10 +141,10 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountNameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
 
     <EditText
-        android:id="@+id/discountAvailabilityEditText"
+        android:id="@+id/productAvailabilityEditText"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -155,10 +155,10 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountAvailabilityTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/productAvailabilityTextView" />
 
     <EditText
-        android:id="@+id/discountDescriptionEditText"
+        android:id="@+id/productDescriptionEditText"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -169,6 +169,6 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/discountDescriptionTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/productDescriptionTextView" />
 
 </android.support.constraint.ConstraintLayout>
