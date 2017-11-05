@@ -56,7 +56,9 @@
                 tools:layout_conversion_absoluteHeight="64dp"
                 tools:layout_conversion_absoluteWidth="344dp"
                 tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="30dp" />
+                tools:layout_editor_absoluteY="30dp"
+                tools:ignore="NestedScrolling"
+                />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
