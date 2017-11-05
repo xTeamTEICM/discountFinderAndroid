@@ -20,6 +20,14 @@
     <string name="category">Κατηγορία</string>
     <string name="price">Τιμή</string>
     <string name="Add">Προσθήκη</string>
+    <string name="giveProductName">Give product name</string>
+    <string name="giveProductPrice">Give product price</string>
+    <string name="giveProductCategory">Give product category</string>
+    <string name="giveProductAvailability">Give product availability</string>
+    <string name="giveProductDescription">Give product description</string>
+    <string name="insert">INSERT</string>
+    <string name="cancel">CANCEL</string>
+
 
     <!-- String arrays for spinners    -->
     <string-array name="categories">
