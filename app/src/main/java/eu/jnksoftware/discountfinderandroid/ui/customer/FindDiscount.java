@@ -1,21 +1,26 @@
-package eu.jnksoftware.discountfinderandroid;
+package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.jnksoftware.discountfinderandroid.R;
+
 public class FindDiscount extends AppCompatActivity {
 
     private ListView lvOffers;
+    private TextView offersFound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_discount);
 
+        offersFound = (TextView) findViewById(R.id.tvFoundOffers);
         lvOffers = (ListView) findViewById(R.id.lvOffers);
         List<String> offersList = new ArrayList<>();
         //Static Data..... Will change
@@ -24,9 +29,16 @@ public class FindDiscount extends AppCompatActivity {
         offersList.add("Γυαλιά Ηλίου RayBan Wayfarer "+"110 ευρώ");
         offersList.add("Γυναικεία τσάντα Versace "+"63 ευρώ");
         offersList.add("Ανδρική κολώνια Paco Rabanne "+"89 ευρώ");
+        offersList.add("Ανδρική κολώνια Paco Rabanne "+"89 ευρώ");
+        offersList.add("Ανδρική κολώνια Paco Rabanne "+"89 ευρώ");
+        offersList.add("Ανδρική κολώνια Paco Rabanne "+"89 ευρώ");
+        offersList.add("Ανδρική κολώνια Paco Rabanne "+"89 ευρώ");
         //End of Data
 
-        ArrayAdapter<String> offersArrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,offersList);
+        String offers = "Βρέθηκαν " + offersList.size() + " προσφορές";
+        offersFound.setText(offers);
+
+        ArrayAdapter<String> offersArrayAdapter = new ArrayAdapter<String>(this,R.layout.list_white_text,offersList);
         lvOffers.setAdapter(offersArrayAdapter);
 
     }
