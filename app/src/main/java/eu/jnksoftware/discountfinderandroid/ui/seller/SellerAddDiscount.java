@@ -18,8 +18,8 @@ public class SellerAddDiscount extends AppCompatActivity {
         Button insertButton = (Button) findViewById(R.id.insertButton);
         insertButton.setOnClickListener(insertButtonClick);
 
-        Button deleteButton = (Button) findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(deleteButtonClick);
+        Button deleteButton = (Button) findViewById(R.id.cancelButton);
+        deleteButton.setOnClickListener(cancelButtonClick);
     }
 
     private final View.OnClickListener insertButtonClick = new View.OnClickListener() {
@@ -29,7 +29,7 @@ public class SellerAddDiscount extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener deleteButtonClick = new View.OnClickListener() {
+    private final View.OnClickListener cancelButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
         //TODO SellerAddDiscount.this.startActivity(new Intent(SellerAddDiscount.this , SellerMainScreen.class));
