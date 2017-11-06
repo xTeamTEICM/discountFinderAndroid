@@ -1,5 +1,32 @@
 <resources>
-    <string name="app_name">Discount Finder</string>
-    <string name="usrReg">" <u>Register as customer</u> "</string>
-    <string name="shopReg">" <u>Register as seller</u> "</string>
+    <string name="app_name">Προσφορές</string>
+    <string name="shopReg">"<u>Θέλω να εγγράψω την επιχείρηση μου</u> "</string>
+    <string name="usrReg">" <u>Θέλω να εγγραφώ ως πελάτης</u> "</string>
+    <string name="welcome">Καλωσήρθες στις προσφορες βρες και εσύ τις καλύτερες εκπτώσεις!!</string>
+    <string name="e_mail">e-Mail</string>
+    <string name="password">Κωδικος Προσβασης</string>
+    <string name="createAccount">Δεν έχεις Λογαριασμό; Δημιούργησε τώρα</string>
+    <string name="login">Συνδεση</string>
+    <string name="selectRoleRegister">Για να συνεχίσεις με την εγγραφή σου πρέπει να επιλέξεις ένα από τα παρακάτω</string>
+    <string name="firstName">Ονομα</string>
+    <string name="lastName">Επωνυμο</string>
+    <string name="registerCustomerMsg">Καλωσήρθες στο DiscountFinder κανε και εσύ τώρα εγγραφή και βρες τις καλύτερες εκπτώσεις τώρα!,μην χάνεις άλλο χρόνο!!</string>
+    <string name="register">Εγγραφη</string>
+    <string name="registerSellerMsg">Για να εγγράψεις το κατάστημα σου συμπλήρωσε την παρακάτω φόρμα</string>
+    <string name="brand">Επωνυμία</string>
+    <string name="shops">Καταστηματα</string>
+    <string name="about">About</string>
+    <string name="findDiscount">Βρες την προσφορά που θες τώρα</string>
+    <string name="category">Κατηγορία</string>
+    <string name="price">Τιμή</string>
+    <string name="Add">Προσθήκη</string>
+
+    <!-- String arrays for spinners    -->
+    <string-array name="categories">
+        <item>Ρούχα</item>
+        <item>Παπούτσια</item>
+        <item>Τρόφιμα</item>
+        <item>Άλλα</item>
+    </string-array>
+
 </resources>
