@@ -33,6 +33,13 @@ public class SellerMainScreen extends AppCompatActivity {
 
         Button addStore = (Button) findViewById(R.id.addStoreButton);
         addStore.setOnClickListener(addStoreButtonClick);
+
+        Button viewStore = (Button) findViewById(R.id.openStoreButton);
+        viewStore.setOnClickListener(openStoreButtonClick);
+        Button settingsButton = (Button) findViewById(R.id.settingsButton);
+        viewStore.setOnClickListener(settingsButtonClick);
+        Button deleteButton = (Button) findViewById(R.id.deleteButton);
+        viewStore.setOnClickListener(deleteButtonClick);
     }
 
     private final View.OnClickListener addStoreButtonClick = new View.OnClickListener() {
@@ -41,5 +48,28 @@ public class SellerMainScreen extends AppCompatActivity {
           //  SellerMainScreen.this.startActivity(new Intent(SellerMainScreen.this, SellerAddShop.class));
         }
     };
+
+    private final View.OnClickListener openStoreButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+         //   SellerMainScreen.this.startActivity(new Intent(SellerMainScreen.this , viewStoreScreen.class));
+        }
+    };
+
+    private final View.OnClickListener settingsButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+      //TODO
+        }
+    };
+
+    private final View.OnClickListener deleteButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+      //TODO
+        }
+    };
+
+
 
 }
