@@ -17,4 +17,17 @@
     <string name="shops">Καταστηματα</string>
     <string name="about">About</string>
     <string name="selectADiscount">Πατήστε πάνω σε μία προσφορά για να δείτε λεπτομέρειες</string>
+    <string name="findDiscount">Βρες την προσφορά που θες τώρα</string>
+    <string name="category">Κατηγορία</string>
+    <string name="price">Τιμή</string>
+    <string name="Add">Προσθήκη</string>
+
+    <!-- String arrays for spinners    -->
+    <string-array name="categories">
+        <item>Ρούχα</item>
+        <item>Παπούτσια</item>
+        <item>Τρόφιμα</item>
+        <item>Άλλα</item>
+    </string-array>
+
 </resources>
