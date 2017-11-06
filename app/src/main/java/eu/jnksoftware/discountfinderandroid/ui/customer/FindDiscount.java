@@ -36,7 +36,7 @@ public class FindDiscount extends AppCompatActivity {
         String offers = "Βρέθηκαν " + offersList.size() + " προσφορές";
         offersFound.setText(offers);
 
-        ArrayAdapter<String> offersArrayAdapter = new ArrayAdapter<>(this, R.layout.list_white_text, offersList);
+        ArrayAdapter<String> offersArrayAdapter = new ArrayAdapter<>(this, R.layout.list_text_color, offersList);
         lvOffers.setAdapter(offersArrayAdapter);
 
     }
