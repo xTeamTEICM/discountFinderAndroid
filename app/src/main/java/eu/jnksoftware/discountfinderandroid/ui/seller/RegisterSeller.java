@@ -1,12 +1,14 @@
 package eu.jnksoftware.discountfinderandroid.ui.seller;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 
 public class RegisterSeller extends Activity {
 
@@ -29,8 +31,8 @@ public class RegisterSeller extends Activity {
     private final View.OnClickListener registerClick = new View.OnClickListener() {
         @Override
         public void onClick(final View r) {
-            // RegisterSeller.this.startActivity(new Intent(RegisterSeller.this, MenuSeller.class));
-            // finish();
+             RegisterSeller.this.startActivity(new Intent(RegisterSeller.this, SellerMainScreen.class));
+             //finish();
         }
     };
 

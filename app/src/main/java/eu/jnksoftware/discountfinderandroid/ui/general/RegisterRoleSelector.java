@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.ui.customer.RegisterCustomer;
+import eu.jnksoftware.discountfinderandroid.ui.seller.RegisterSeller;
+import eu.jnksoftware.discountfinderandroid.ui.seller.SellerMainScreen;
 
 public class RegisterRoleSelector extends Activity {
 
@@ -33,7 +35,7 @@ public class RegisterRoleSelector extends Activity {
     private final View.OnClickListener sellerRegisterBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            // RegisterRoleSelector.this.startActivity(new Intent(RegisterRoleSelector.this, RegisterSeller.class));
+             RegisterRoleSelector.this.startActivity(new Intent(RegisterRoleSelector.this, RegisterSeller.class));
         }
     };
 }
