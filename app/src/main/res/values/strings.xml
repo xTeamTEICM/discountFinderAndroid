@@ -16,6 +16,7 @@
     <string name="brand">Επωνυμία</string>
     <string name="shops">Καταστηματα</string>
     <string name="about">About</string>
+    <string name="selectADiscount">Πατήστε πάνω σε μία προσφορά για να δείτε λεπτομέρειες</string>
     <string name="findDiscount">Βρες την προσφορά που θες τώρα</string>
     <string name="category">Κατηγορία</string>
     <string name="price">Τιμή</string>
