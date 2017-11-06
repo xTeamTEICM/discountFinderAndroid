@@ -20,7 +20,11 @@
     <string name="category">Κατηγορία</string>
     <string name="price">Τιμή</string>
     <string name="Add">Προσθήκη</string>
-
+    <string name="giveShopName">Give shop name</string>
+    <string name="giveShopLocation">Give shop location</string>
+    <string name="giveShopDescription">Give shop description</string>
+    <string name="insert">INSERT</string>
+    <string name="cancel">CANCEL</string>
     <!-- String arrays for spinners    -->
     <string-array name="categories">
         <item>Ρούχα</item>
