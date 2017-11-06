@@ -1,8 +1,11 @@
 package eu.jnksoftware.discountfinderandroid.ui.seller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 
@@ -28,6 +31,15 @@ public class SellerMainScreen extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
+        Button addStore = (Button) findViewById(R.id.addStoreButton);
+        addStore.setOnClickListener(addStoreButtonClick);
     }
+
+    private final View.OnClickListener addStoreButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          //  SellerMainScreen.this.startActivity(new Intent(SellerMainScreen.this, SellerAddShop.class));
+        }
+    };
 
 }
