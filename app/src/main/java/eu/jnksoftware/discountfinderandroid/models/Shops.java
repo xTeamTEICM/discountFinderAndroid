@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
+ *
  * Created by iordkost on 25/10/2017.
+ *
  */
 
 public class Shops implements Serializable {
@@ -25,7 +27,7 @@ public class Shops implements Serializable {
 
     public Shop getShop(String name) {
         for (Shop shop : list) {
-            if (shop.getName().equals(name)) {
+            if (shop.getOwnerId().equals(name)) {
                 return shop;
             }
         }
@@ -37,7 +39,9 @@ public class Shops implements Serializable {
         while (!(unsortedList.size() == 0)) {
             nearestShop = unsortedList.get(0);
             for (Shop shops : unsortedList) {
-                if (shops.getDistanceFromUser() < nearestShop.getDistanceFromUser()) {
+                if (shops.getLocation().getLatitude() < nearestShop.getLocation().getLongitude()
+                        &&
+                        shops.getLocation().getLongitude() < nearestShop.getLocation().getLongitude()) {
                     nearestShop = shops;
                 }
             }

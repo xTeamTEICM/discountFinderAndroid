@@ -14,16 +14,20 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
+    private String passwordSalt;
     private Role role;
     private Date creationDate;
     private Date lastLogin;
     private String token;
 
-    public User(int ID, String firstName, String lastName, String email, Role role, Date creationDate, Date lastLogin, String token) {
+    public User(int ID, String firstName, String lastName, String email, String password, String passwordSalt, Role role, Date creationDate, Date lastLogin, String token) {
         this.ID = ID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
+        this.passwordSalt = passwordSalt;
         this.role = role;
         this.creationDate = creationDate;
         this.lastLogin = lastLogin;
@@ -91,5 +95,21 @@ public class User implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 }
