@@ -21,13 +21,10 @@ import java.util.regex.Pattern;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Owner: JNK Software
- * Developer: Jordan Kostelidis
- * Date: 20/10/2017
- * License: Apache License 2.0
+ * Created by jordankostelidis on 10/11/2017.
  */
-@SuppressWarnings("SameParameterValue")
-public class POSTNetwork implements INetwork {
+
+public class PUTNetwork implements INetwork {
     private String url;
     private String result;
     private String userAgent;
@@ -35,11 +32,11 @@ public class POSTNetwork implements INetwork {
     private HashMap<String, String> headers;
     private int timeout;
 
-    public POSTNetwork(String argUrl) throws Exception {
+    public PUTNetwork(String argUrl) throws Exception {
         this(argUrl, 10000);
     }
 
-    private POSTNetwork(String argUrl, int argTimeout) throws Exception {
+    private PUTNetwork(String argUrl, int argTimeout) throws Exception {
 
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -139,7 +136,7 @@ public class POSTNetwork implements INetwork {
 
         connection.setReadTimeout(timeout);
         connection.setConnectTimeout(timeout);
-        connection.setRequestMethod("POST");
+        connection.setRequestMethod("PUT");
         connection.setDoInput(true);
         connection.setDoOutput(true);
 
@@ -190,5 +187,4 @@ public class POSTNetwork implements INetwork {
 
         return result.toString();
     }
-
 }

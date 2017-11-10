@@ -3,12 +3,9 @@ package eu.jnksoftware.discountfinderandroid.services;
 import android.os.StrictMode;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -21,13 +18,10 @@ import java.util.regex.Pattern;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Owner: JNK Software
- * Developer: Jordan Kostelidis
- * Date: 20/10/2017
- * License: Apache License 2.0
+ * Created by jordankostelidis on 10/11/2017.
  */
-@SuppressWarnings("SameParameterValue")
-public class POSTNetwork implements INetwork {
+
+public class GETNetwork implements INetwork {
     private String url;
     private String result;
     private String userAgent;
@@ -35,11 +29,11 @@ public class POSTNetwork implements INetwork {
     private HashMap<String, String> headers;
     private int timeout;
 
-    public POSTNetwork(String argUrl) throws Exception {
+    public GETNetwork(String argUrl) throws Exception {
         this(argUrl, 10000);
     }
 
-    private POSTNetwork(String argUrl, int argTimeout) throws Exception {
+    private GETNetwork(String argUrl, int argTimeout) throws Exception {
 
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -135,28 +129,17 @@ public class POSTNetwork implements INetwork {
 
     @Override
     public boolean call() throws IOException {
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(url + "?" + dataString()).openConnection();
 
         connection.setReadTimeout(timeout);
         connection.setConnectTimeout(timeout);
-        connection.setRequestMethod("POST");
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
+        connection.setRequestMethod("GET");
 
         connection.addRequestProperty("User-Agent", userAgent);
 
         for (Map.Entry<String, String> entry : headers.entrySet()) {
             connection.addRequestProperty(entry.getKey(),entry.getValue());
         }
-
-        OutputStream os = connection.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(
-                new OutputStreamWriter(os, "UTF-8"));
-        writer.write(dataString());
-
-        writer.flush();
-        writer.close();
-        os.close();
 
         if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
             InputStream input = connection.getInputStream();
@@ -190,5 +173,4 @@ public class POSTNetwork implements INetwork {
 
         return result.toString();
     }
-
 }
