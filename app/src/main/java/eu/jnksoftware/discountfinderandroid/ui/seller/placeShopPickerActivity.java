@@ -47,11 +47,13 @@ public class placeShopPickerActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
 
+        String showaddres;
         if(requestCode==placePickerRequest){
             if(resultCode==RESULT_OK)
             {
                 Place place=PlacePicker.getPlace(placeShopPickerActivity.this,data);
-                tvPlace.setText(String.valueOf(place.getLatLng()));
+                showaddres=String.valueOf(place.getLatLng());
+                tvPlace.setText(showaddres);
             }
 
         }
