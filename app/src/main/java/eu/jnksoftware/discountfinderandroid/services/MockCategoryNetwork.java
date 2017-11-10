@@ -40,6 +40,21 @@ public class MockCategoryNetwork implements INetwork {
     }
 
     @Override
+    public boolean addHeader(String header, String value) {
+        return false;
+    }
+
+    @Override
+    public boolean removeHeader(String header) {
+        return false;
+    }
+
+    @Override
+    public boolean updateHeader(String header, String value) {
+        return false;
+    }
+
+    @Override
     public boolean call() throws IOException {
         return true;
     }

@@ -33,6 +33,7 @@ public class POSTNetwork implements INetwork {
     private String result;
     private String userAgent;
     private HashMap<String, String> properties;
+    private HashMap<String, String> headers;
     private int timeout;
 
     public POSTNetwork(String argUrl) throws Exception {
@@ -50,11 +51,12 @@ public class POSTNetwork implements INetwork {
 
         if (!isValidUrl(argUrl)) throw new Exception("Invalid URL");
 
-        if (!argUrl.startsWith("https:")) throw new Exception("URL must have SSL (HTTPS)");
+        if (!argUrl.startsWith("http:")) throw new Exception("URL must have SSL (HTTPS)");
 
         url = argUrl;
         userAgent = "Mozilla/5.0";
         properties = new HashMap<>();
+        headers = new HashMap<>();
         timeout = argTimeout;
     }
 
@@ -107,8 +109,34 @@ public class POSTNetwork implements INetwork {
     }
 
     @Override
+    public boolean addHeader(String header, String value) {
+        headers.put(header, value);
+        return headers.containsKey(header);
+    }
+
+    @Override
+    public boolean removeHeader(String header) {
+        if (headers.containsKey(header)) {
+            headers.remove(header);
+            return !headers.containsKey(header);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateHeader(String header, String value) {
+        if (headers.containsKey(header)) {
+            headers.put(header, value);
+            return !headers.get(header).equals(value);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean call() throws IOException {
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 
         connection.setReadTimeout(timeout);
         connection.setConnectTimeout(timeout);
@@ -117,6 +145,10 @@ public class POSTNetwork implements INetwork {
         connection.setDoOutput(true);
 
         connection.addRequestProperty("User-Agent", userAgent);
+
+        for (Map.Entry<String, String> entry : headers.entrySet()) {
+            connection.addRequestProperty(entry.getKey(),entry.getValue());
+        }
 
         OutputStream os = connection.getOutputStream();
         BufferedWriter writer = new BufferedWriter(

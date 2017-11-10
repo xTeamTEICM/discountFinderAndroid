@@ -22,5 +22,11 @@ public interface INetwork {
 
     boolean updateProperty(String property, String value);
 
+    boolean addHeader(String header, String value);
+
+    boolean removeHeader(String header);
+
+    boolean updateHeader(String header, String value);
+
     boolean call() throws IOException;
 }
