@@ -11,7 +11,7 @@ public class PUTNetworkTest {
 
     @Test
     public void testBasicCall() throws Exception {
-        PUTNetwork test = new PUTNetwork("http://localhost/iordkost/testing/put.php");
+        PUTNetwork test = new PUTNetwork("https://localhost/iordkost/testing/put.php");
         test.addHeader("method", "put");
         test.addHeader("token", "asdfghjkl");
         test.addHeader("id", "1");

@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -51,7 +50,7 @@ public class POSTNetwork implements INetwork {
 
         if (!isValidUrl(argUrl)) throw new Exception("Invalid URL");
 
-        if (!argUrl.startsWith("http:")) throw new Exception("URL must have SSL (HTTPS)");
+        if (!argUrl.startsWith("https:")) throw new Exception("URL must have SSL (HTTPS)");
 
         url = argUrl;
         userAgent = "Mozilla/5.0";
@@ -136,7 +135,7 @@ public class POSTNetwork implements INetwork {
 
     @Override
     public boolean call() throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
 
         connection.setReadTimeout(timeout);
         connection.setConnectTimeout(timeout);
@@ -159,7 +158,7 @@ public class POSTNetwork implements INetwork {
         writer.close();
         os.close();
 
-        if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+        if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
             InputStream input = connection.getInputStream();
 
             BufferedReader r = new BufferedReader(new InputStreamReader(input));
