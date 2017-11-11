@@ -27,7 +27,7 @@ public class Shops implements Serializable {
 
     public Shop getShop(String name) {
         for (Shop shop : list) {
-            if (shop.getOwnerId().equals(name)) {
+            if (shop.getName().equals(name)) {
                 return shop;
             }
         }
