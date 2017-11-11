@@ -40,9 +40,10 @@ public class ShopsAPI implements IAPI {
 
                 list.add(
                         new Shop(
+                                i,
                                 shopRecord.getString("brandName"),
-                                new eu.jnksoftware.discountfinderandroid.models.Location(shopLocation),
-                                new eu.jnksoftware.discountfinderandroid.models.Location(currentLocation)
+                                i,
+                                new eu.jnksoftware.discountfinderandroid.models.Location(shopLocation)
                         )
                 );
 

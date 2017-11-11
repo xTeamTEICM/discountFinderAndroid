@@ -8,12 +8,14 @@ import java.io.Serializable;
 public class Shop implements Serializable {
 
     private final int id;
-    private final String ownerId;
+    private String name;
+    private final int ownerId;
     private final Location location;
 
 
-    public Shop(int id, String ownerId, Location location) {
+    public Shop(int id, String name,int ownerId, Location location) {
         this.id = id;
+        this.name = name;
         this.ownerId = ownerId;
         this.location = location;
     }
@@ -42,14 +44,22 @@ public class Shop implements Serializable {
     // this toString prints on ListView
     public String toString(){
 
-        return this.ownerId;
+        return this.name;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getOwnerId() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getOwnerId() {
         return ownerId;
     }
 

@@ -11,34 +11,6 @@ import static junit.framework.Assert.assertEquals;
  */
 
 public class ShopTest {
-    @Test
-    public void getMapsUri() throws Exception {
-        Location testLocation = new Location(50,50);
-        Shop test = new Shop(1,"owner",testLocation);
-        assertEquals("geo:" +
-                "<" + 50 + ">,<" + 50 + ">" +
-                "?q=<" + 50 + ">,<" + 50 + ">(" + "test" + ")",test.getMapsUri());
-    }
-
-    @Test
-    public void getId() throws Exception {
-        Location testLocation = new Location(50,50);
-        Shop test = new Shop(1,"owner",testLocation);
-        assertEquals(1,test.getId());
-    }
-
-    @Test
-    public void getOwnerId() throws Exception {
-        Location testLocation = new Location(50,50);
-        Shop test = new Shop(1,"owner",testLocation);
-        assertEquals("owner",test.getOwnerId());
-    }
-
-    @Test
-    public void getLocation() throws Exception {
-        Location testLocation = new Location(50,50);
-        Shop test = new Shop(1,"owner",testLocation);
-        assertEquals(testLocation,test.getLocation());
-    }
+    // ToDo : Need Testing
 
 }
