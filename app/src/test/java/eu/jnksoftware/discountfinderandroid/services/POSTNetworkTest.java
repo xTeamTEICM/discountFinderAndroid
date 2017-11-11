@@ -101,17 +101,7 @@ public class POSTNetworkTest {
         );
     }
 
-    @Test
-    public void testBasicCall() throws Exception {
-        POSTNetwork test = new POSTNetwork("https://localhost/iordkost/testing/post.php");
-        test.addHeader("method", "post");
-        test.addHeader("token", "asdfghjkl");
-        test.addHeader("id", "1");
+    // ToDo : Testing
 
-        test.addProperty("name", "lalakisShop");
-
-        test.call();
-        System.out.println(test.getResult());
-    }
 
 }
