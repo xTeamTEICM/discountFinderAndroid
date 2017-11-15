@@ -8,13 +8,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.api.APIConfig;
-import eu.jnksoftware.discountfinderandroid.api.IAPI;
-import eu.jnksoftware.discountfinderandroid.api.ShopsAPI;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
-import eu.jnksoftware.discountfinderandroid.services.POSTNetwork;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
-import eu.jnksoftware.discountfinderandroid.ui.general.Shops;
 
 public class MenuCustomer extends AppCompatActivity {
 
@@ -23,7 +18,7 @@ public class MenuCustomer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu_customer);
 
         geoLocation = new GeoLocation(this);
 
@@ -48,20 +43,9 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(final View v) {
             if (geoLocation.getLocation() != null) {
                 try {
-                    // Ask API for Shops
-                    POSTNetwork POSTNetwork = new POSTNetwork(APIConfig.APILinkReal + "shop/");
-                    POSTNetwork.call();
-                    eu.jnksoftware.discountfinderandroid.models.Shops shops = new eu.jnksoftware.discountfinderandroid.models.Shops();
-                    // Parse the result
+                    // TODO : call discountAPI to take the nearest discounts
 
-                    IAPI shopsAPI = new ShopsAPI();
-                    if (shopsAPI.load(POSTNetwork.getResult(), geoLocation.getLocation())) {
-                        //noinspection unchecked
-                        shops = new eu.jnksoftware.discountfinderandroid.models.Shops(shopsAPI.getList());
-                    }
-
-                    Intent intent = new Intent(MenuCustomer.this, Shops.class);
-                    intent.putExtra("shopsList", shops);
+                    Intent intent = new Intent(MenuCustomer.this, DiscountCustomer.class);
                     startActivity(intent);
 
                 } catch (Exception ex) {

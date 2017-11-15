@@ -35,7 +35,7 @@ public class Login extends Activity {
     private final View.OnClickListener registerBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(final View registerView) {
-            Login.this.startActivity(new Intent(Login.this, RegisterRoleSelector.class));
+            Login.this.startActivity(new Intent(Login.this, Register.class));
         }
     };
 }
