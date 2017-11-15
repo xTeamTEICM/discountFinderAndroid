@@ -23,36 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- Accept scheme://host/pathPrefix -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="jnksoftware.eu"
-                    android:pathPrefix="/app/discountFinder"
-                    android:scheme="https" />
-            </intent-filter>
 
-            <!-- Accept scheme://host -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="discountFinder"
-                    android:scheme="XTeam" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.general.Login" />
-        <activity android:name=".ui.customer.RegisterCustomer" />
-        <activity android:name=".ui.seller.RegisterSeller" />
+        <activity android:name=".ui.general.Register" />
         <activity android:name=".ui.customer.MenuCustomer" />
-        <activity android:name=".ui.general.Shops" />
+        <activity android:name=".ui.customer.DiscountCustomer" />
         <activity android:name=".ui.general.AboutUs" />
 
         <service android:name=".services.GeoLocation" />

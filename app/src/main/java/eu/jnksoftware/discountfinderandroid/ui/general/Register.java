@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.general;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 
-public class RegisterCustomer extends Activity {
+public class Register extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_customer);
+        setContentView(R.layout.activity_register);
 
         Button register = findViewById(R.id.registerBtn);
         register.setOnClickListener(registerBtnClick);
@@ -23,7 +24,7 @@ public class RegisterCustomer extends Activity {
     private final View.OnClickListener registerBtnClick = new View.OnClickListener() {
         @Override
         public  void onClick(final View reg) {
-            RegisterCustomer.this.startActivity(new Intent(RegisterCustomer.this, MenuCustomer.class));
+            Register.this.startActivity(new Intent(Register.this, MenuCustomer.class));
             finish();
         }
         };
