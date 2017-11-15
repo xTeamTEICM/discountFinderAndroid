@@ -5,7 +5,7 @@ import android.net.Uri;
 import java.io.Serializable;
 
 
-public class Shop implements Serializable {
+public class Shop {
 
     private final int id;
     private String name;

@@ -49,7 +49,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.general.Login" />
-        <activity android:name=".ui.general.RegisterRoleSelector" />
         <activity android:name=".ui.customer.RegisterCustomer" />
         <activity android:name=".ui.seller.RegisterSeller" />
         <activity android:name=".ui.customer.MenuCustomer" />

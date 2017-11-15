@@ -8,11 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.api.APIConfig;
-import eu.jnksoftware.discountfinderandroid.api.IAPI;
-import eu.jnksoftware.discountfinderandroid.api.ShopsAPI;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
-import eu.jnksoftware.discountfinderandroid.services.POSTNetwork;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Shops;
 
