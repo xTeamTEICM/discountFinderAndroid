@@ -15,7 +15,10 @@ import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 public class Login extends Activity {
 
     private String email;
+    private String password;
+    public String toastLoginFailed="Login Failed,try again!";
     EditText etEmail;
+    EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class Login extends Activity {
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
         etEmail = findViewById(R.id.eMailField);
+        etPassword = findViewById(R.id.passwordField);
 
         TextView registerView = findViewById(R.id.registerBtn);
         registerView.setOnClickListener(registerBtnClick);
@@ -35,6 +39,7 @@ public class Login extends Activity {
         @Override
         public void onClick(final View loginView) {
             email = etEmail.getText().toString();
+            password = etPassword.getText().toString();
             performLogin();
         }
     };
@@ -46,12 +51,12 @@ public class Login extends Activity {
     };
 
     private void performLogin(){
-        if(!email.isEmpty()) {
+        if(email.isEmpty() || password.isEmpty())
+            Toast.makeText(Login.this,toastLoginFailed, Toast.LENGTH_SHORT).show();
+        else {
             Login.this.startActivity(new Intent(Login.this, MenuCustomer.class));
             finish();
         }
-        else
-            Toast.makeText(Login.this, "Login failed,try again", Toast.LENGTH_SHORT).show();
     }
 
 }
