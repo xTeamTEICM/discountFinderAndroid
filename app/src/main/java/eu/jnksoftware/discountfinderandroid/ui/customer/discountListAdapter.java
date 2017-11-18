@@ -10,12 +10,13 @@ import android.content.*;
 import android.widget.*;
 
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.DiscountCustomer;
 
 
-public class discountListAdapter extends  ArrayAdapter<discountProduct> {
+public class discountListAdapter extends  ArrayAdapter<DiscountCustomer> {
     private Context context;
-    private List<discountProduct> discountproducts;
-    public discountListAdapter(Context context,List<discountProduct>discountproducts){
+    private List<DiscountCustomer> discountproducts;
+    public discountListAdapter(Context context,List<DiscountCustomer>discountproducts){
         super(context, R.layout.activity_item_discount_list,discountproducts);
         this.context=context;
         this.discountproducts=discountproducts;
@@ -29,20 +30,21 @@ public class discountListAdapter extends  ArrayAdapter<discountProduct> {
         View view=layoutInflater.inflate(R.layout.activity_item_discount_list,parent,false);
         //Set Image
         ImageView imageDiscountPhoto=view.findViewById(R.id.discountImageView);
-        imageDiscountPhoto.setImageResource(discountproducts.get(position).getDiscountImage());
+        //imageDiscountPhoto.setImageResource(discountproducts.get(position).getProductImage());
+        imageDiscountPhoto.setImageBitmap(discountproducts.get(position).getProductImage());
         //Set discountname text
         TextView textViewDiscountName=view.findViewById(R.id.discountNameTextView);
-        textViewDiscountName.setText(discountproducts.get(position).getDiscountName());
+        textViewDiscountName.setText(discountproducts.get(position).getShortDescription());
         //Set discountprice text
         TextView textViewDiscountPrice=view.findViewById(R.id.discountPriceTextView);
-        textViewDiscountPrice.setText(String.valueOf(discountproducts.get(position).getDiscountPrice()));
+        textViewDiscountPrice.setText(String.valueOf(discountproducts.get(position).getFinalPrice()));
 
 
 
 
         return view;
     }
-public void deleteDiscount(discountProduct discountproduct)
+public void deleteDiscount(DiscountCustomer discountproduct)
 {
     
 }

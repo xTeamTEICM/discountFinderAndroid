@@ -45,7 +45,7 @@ public class MenuCustomer extends AppCompatActivity {
                 try {
                     // TODO : call discountAPI to take the nearest discounts
 
-                    Intent intent = new Intent(MenuCustomer.this, DiscountCustomer.class);
+                    Intent intent = new Intent(MenuCustomer.this, DiscountCustomerList.class);
                     startActivity(intent);
 
                 } catch (Exception ex) {
