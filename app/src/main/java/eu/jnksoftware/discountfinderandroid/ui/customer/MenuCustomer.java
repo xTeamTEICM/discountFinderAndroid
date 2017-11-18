@@ -20,6 +20,8 @@ public class MenuCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
 
+        Bundle bundle=getIntent().getExtras();
+
         geoLocation = new GeoLocation(this);
 
         if (geoLocation.canGetLocation()) {
