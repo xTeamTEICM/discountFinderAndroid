@@ -35,7 +35,7 @@ public class DiscountCustomerList extends AppCompatActivity {
         setContentView(R.layout.activity_discount_customer_listview);
 
         discountProducts=new ArrayList<DiscountCustomer>();
-        //add 2 items
+        //add 2 items 
         discountProducts.add(new DiscountCustomer(1,"Ανδρικο παπουτσι Nike"
                 ,"Παπουτσής",35,shoe1));
         discountProducts.add(new DiscountCustomer(2,"Ορειβατικο Μποτακι"
