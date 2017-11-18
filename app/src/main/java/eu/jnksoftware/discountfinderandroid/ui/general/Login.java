@@ -13,11 +13,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import eu.jnksoftware.discountfinderandroid.Apis.loginApi;
+import eu.jnksoftware.discountfinderandroid.Apis.LoginApi;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.User;
-import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
-
 
 
 public class Login extends Activity {
@@ -46,7 +43,7 @@ public class Login extends Activity {
             loginValues.put("username",eMail.getText().toString());
             loginValues.put("password",password.getText().toString());
             JSONObject sendLogin=new JSONObject(loginValues);
-            loginApi loginApi=new loginApi();
+            LoginApi loginApi=new LoginApi();
             loginApi.doLogin(Login.this,sendLogin);
 
 

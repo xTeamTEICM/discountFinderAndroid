@@ -2,6 +2,7 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,13 +20,12 @@ import java.util.Map;
 
 import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
-import eu.jnksoftware.discountfinderandroid.ui.general.Login;
 
 /**
  * Created by nikos on 17/11/2017.
  */
 
-public class loginApi {
+public class LoginApi {
     private JsonObjectRequest jsonObjectRequest;
     private Context context;
     private JSONObject jsonObject;
@@ -33,7 +33,7 @@ public class loginApi {
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
 
-    public void doLogin(final Context context, JSONObject jsonObject) {
+    public void doLogin(final Context context, final JSONObject jsonObject) {
         jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, LOGIN_URL, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -44,7 +44,14 @@ public class loginApi {
                     user.setRefreshToken(response.getString("refresh_token"));
                     user.setTokenType(response.getString("token_type"));
                     Intent intent=new Intent(context,MenuCustomer.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("access_token",jsonObject.getString("access_token"));
+                    bundle.putString("expires_in",jsonObject.getString("expires_in"));
+                    bundle.putString("refresh_token",jsonObject.getString("refresh_token"));
+                    bundle.putString("token_type",jsonObject.getString("token_type"));
+                    intent.putExtras(bundle);
                     context.startActivity(intent);
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -71,7 +78,7 @@ public class loginApi {
 
         };
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(timeOutInMs, numberOfTries, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        singleton.getmInstance(context).addToRequestQueue(jsonObjectRequest);
+        Singleton.getmInstance(context).addToRequestQueue(jsonObjectRequest);
 
     }
 }

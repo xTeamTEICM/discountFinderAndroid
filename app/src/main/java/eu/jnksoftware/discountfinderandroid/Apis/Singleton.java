@@ -10,12 +10,12 @@ import com.android.volley.toolbox.Volley;
  * Created by nikos on 17/11/2017.
  */
 
-public class singleton {
-    private static singleton mInstance;
+public class Singleton {
+    private static Singleton mInstance;
     private RequestQueue requestQueue;
     private static Context mCtx;
 
-    private singleton(Context context){
+    private Singleton(Context context){
         mCtx=context;
         requestQueue=getRequestQueue();
     }
@@ -29,10 +29,10 @@ public class singleton {
         return requestQueue;
     }
 
-    public static synchronized singleton getmInstance(Context context){
+    public static synchronized Singleton getmInstance(Context context){
         if(mInstance ==null)
         {
-            mInstance=new singleton(context);
+            mInstance=new Singleton(context);
         }
         return mInstance;
     }
