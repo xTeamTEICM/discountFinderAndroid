@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -19,21 +20,23 @@ import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 
 
-
 public class Login extends Activity {
-    private EditText eMail;
-    private EditText password;
+    private String email;
+    private String password;
+    public String toastLoginFailed="Login Failed,try again!";
+    EditText etEmail;
+    EditText etPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-         eMail=(EditText) findViewById(R.id.eMailField);
-         password=(EditText)findViewById(R.id.passwordField);
 
-
-
+        //Login components
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
+        etEmail = findViewById(R.id.eMailField);
+        etPassword = findViewById(R.id.passwordField);
 
         TextView registerView = findViewById(R.id.registerBtn);
         registerView.setOnClickListener(registerBtnClick);
@@ -42,17 +45,18 @@ public class Login extends Activity {
     private final View.OnClickListener loginBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(final View loginView) {
+          
+            email = etEmail.getText().toString();
+            password = etPassword.getText().toString();
+            //performLogin();
+              
             Map<String,String>loginValues=new HashMap<>();
-            loginValues.put("username",eMail.getText().toString());
-            loginValues.put("password",password.getText().toString());
+            loginValues.put("username",email);
+            loginValues.put("password",password);
 
             JSONObject sendLogin=new JSONObject(loginValues);
             loginApi loginApi=new loginApi();
             loginApi.doLogin(Login.this,sendLogin);
-
-
-
-
         }
     };
     private final View.OnClickListener registerBtnClick = new View.OnClickListener() {
@@ -61,4 +65,16 @@ public class Login extends Activity {
             Login.this.startActivity(new Intent(Login.this, Register.class));
         }
     };
+
+    private void performLogin(){
+        if(email.isEmpty() || password.isEmpty())
+            Toast.makeText(Login.this,toastLoginFailed, Toast.LENGTH_SHORT).show();
+        else {
+            Login.this.startActivity(new Intent(Login.this, MenuCustomer.class));
+            finish();
+        }
+    }
+
 }
+
+
