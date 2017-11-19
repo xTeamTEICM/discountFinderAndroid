@@ -3,6 +3,7 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -51,9 +52,7 @@ public class MenuCustomer extends AppCompatActivity {
             if (geoLocation.getLocation() != null) {
                 try {
                     // TODO : call discountAPI to take the nearest discounts
-
-                    Intent intent = new Intent(MenuCustomer.this, DiscountCustomer.class);
-                    startActivity(intent);
+                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerList.class));
 
                 } catch (Exception ex) {
                     Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();

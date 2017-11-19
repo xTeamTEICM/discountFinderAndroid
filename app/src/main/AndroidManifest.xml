@@ -30,7 +30,7 @@
         <activity android:name=".ui.general.Login" />
         <activity android:name=".ui.general.Register" />
         <activity android:name=".ui.customer.MenuCustomer" />
-        <activity android:name=".ui.customer.DiscountCustomer" />
+        <activity android:name=".ui.customer.DiscountCustomerList" />
         <activity android:name=".ui.general.AboutUs" />
 
         <service android:name=".services.GeoLocation" />
