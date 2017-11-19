@@ -55,14 +55,15 @@ public class DiscountCustomerList extends AppCompatActivity {
     }
 
     private void fillDiscountProductsList(){
-        Uri uriShoe1 = Uri.parse("https://www.adidas.com/dis/dw/image/v2/aaqx_prd/on/demandware.static/-/Sites-adidas-products/en_US/dw1ad515f2/zoom/BY1910_01_standard.jpg?sw=276&sh=276&sm=fit&hei=276&wid=276");
-
-
         discountProducts.add(new DiscountCustomer(1,"Ανδρικο παπουτσι Nike"
                 ,"Παπουτσής",35,shoe1));
-/*
         discountProducts.add(new DiscountCustomer(2,"Ορειβατικο Μποτακι"
-                ,"Παπουτσής",50,shoe));
-        */
+                ,"Παπουτσής",50,shoe1));
+        discountProducts.add(new DiscountCustomer(3,"Γυναικεία Γόβα"
+                ,"Παπουτσάδικο Μένιος",89,shoe1));
+        discountProducts.add(new DiscountCustomer(4,"Adidas Stan Smith"
+                ,"Παπουτσάδικο Μένιος",75,shoe1));
+
+
     }
 }
