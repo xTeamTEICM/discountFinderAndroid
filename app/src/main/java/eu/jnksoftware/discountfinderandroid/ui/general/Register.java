@@ -8,19 +8,29 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import eu.jnksoftware.discountfinderandroid.Apis.RegisterApi;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 
 public class Register extends Activity {
 
     private String errorType = "";
+    private EditText firstName, lastName, email, passWord;
+    private Button register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Button register = findViewById(R.id.registerBtn);
+        
         register.setOnClickListener(registerBtnClick);
     }
 
@@ -38,12 +48,12 @@ public class Register extends Activity {
         final EditText email =  findViewById(R.id.eMailField);
         return email.getText().toString();
     }
-
+    
     public final String getPassword() {
         final EditText password =  findViewById(R.id.passwordField);
         return password.getText().toString();
     }
-
+    
     private void checkMailValidation(CharSequence target) {
         if (target == null || !Patterns.EMAIL_ADDRESS.matcher(target).matches()) {
             errorType = "invalid email";
@@ -55,19 +65,7 @@ public class Register extends Activity {
             errorType = "blank fields";
         }
     }
-
-    private final View.OnClickListener registerBtnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(final View reg) {
-            checkMailValidation(getEmail());
-            checkMissedInfos();
-            if (errorType.equals("")) {
-                Register.this.startActivity(new Intent(Register.this, MenuCustomer.class));
-                finish();
-            } else showErrorType();
-        }
-    };
-
+    
     private void showErrorType() {
         if (errorType.equals("blank fields")) {
             new AlertDialog.Builder(Register.this).setTitle("Invalid informations").setMessage("Please fill all the informations required").setNeutralButton("Close", null).show();
@@ -76,4 +74,27 @@ public class Register extends Activity {
         }
         errorType = "";
     }
+  
+    private final View.OnClickListener registerBtnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(final View reg) {
+            checkMailValidation(getEmail());
+            checkMissedInfos();
+            if (errorType.equals("")) {
+                Map<String, String> params = new HashMap<>();
+                params.put("firstName", firstName.getText().toString());
+                params.put("lastName", lastName.getText().toString());
+                params.put("eMail", email.getText().toString());
+                params.put("password", passWord.getText().toString());
+
+                JSONObject parameters = new JSONObject(params);
+
+                RegisterApi registerApi= new RegisterApi();
+                registerApi.doRegister(Register.this,parameters);
+                Register.this.startActivity(new Intent(Register.this, MenuCustomer.class));
+                finish();
+            } else showErrorType();
+        }
+    };
+   
 }

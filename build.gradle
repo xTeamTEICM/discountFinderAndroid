@@ -19,6 +19,7 @@ allprojects {
         jcenter()
         mavenCentral() // add repository
         maven { url 'https://maven.google.com' }
+        google()
     }
 }
 

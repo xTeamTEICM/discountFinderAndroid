@@ -6,23 +6,19 @@ package eu.jnksoftware.discountfinderandroid.models;
 
 public class User{
 
-    private String token;
+    private String tokenType;
     private String refreshToken;
     private String expireToken;
+    private String accessToken;
 
-    public User(String token, String refreshToken, String expireToken) {
-        this.token = token;
-        this.refreshToken = refreshToken;
-        this.expireToken = expireToken;
-    }
 
-    public String getToken() {
-        return token;
-    }
+    public String getAccessToken() {return accessToken;}
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+    public void setAccessToken(String accessToken) {this.accessToken = accessToken;}
+
+    public String getTokenType() {return tokenType;}
+
+    public void setTokenType(String tokenType) {this.tokenType = tokenType;}
 
     public String getRefreshToken() {
         return refreshToken;
