@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 
@@ -36,6 +39,10 @@ public class MenuCustomer extends AppCompatActivity {
         shops.setOnClickListener(shopsClick);
         Button about = (Button) findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
+
+        Gson gson = new Gson();
+        User user = gson.fromJson(getIntent().getStringExtra("myjson"), User.class);
+        Toast.makeText(getApplicationContext(), "token"+user.getAccessToken(), Toast.LENGTH_LONG).show();
 
     }
 
