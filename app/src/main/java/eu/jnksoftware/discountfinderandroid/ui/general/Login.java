@@ -45,6 +45,7 @@ public class Login extends Activity {
             Map<String,String>loginValues=new HashMap<>();
             loginValues.put("username",eMail.getText().toString());
             loginValues.put("password",password.getText().toString());
+
             JSONObject sendLogin=new JSONObject(loginValues);
             loginApi loginApi=new loginApi();
             loginApi.doLogin(Login.this,sendLogin);
