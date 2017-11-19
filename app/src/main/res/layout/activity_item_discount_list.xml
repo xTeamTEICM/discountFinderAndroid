@@ -15,27 +15,37 @@
 
     <TextView
         android:id="@+id/discountNameTextView"
-        android:textSize="25dp"
-        android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/discountImageView"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/discountImageView"
+        android:paddingLeft="10dp"
         android:text="TextView"
         android:textColor="@android:color/white"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/discountShopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/discountPriceTextView"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/discountImageView" />
+        android:layout_toEndOf="@+id/discountImageView"
+        android:paddingLeft="10dp"
+        android:text="Κατάστημα: "
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/discountPriceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
+        android:layout_alignBottom="@+id/discountImageView"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/discountNameTextView"
-        android:layout_marginTop="14dp"
         android:layout_toEndOf="@+id/discountImageView"
-        android:text="TextView"
+        android:paddingLeft="13dp"
+        android:text="Τιμή: "
         android:textColor="@android:color/white"
         android:textSize="20dp" />
 

@@ -30,22 +30,23 @@ public class discountListAdapter extends  ArrayAdapter<DiscountCustomer> {
         View view=layoutInflater.inflate(R.layout.activity_item_discount_list,parent,false);
         //Set Image
         ImageView imageDiscountPhoto=view.findViewById(R.id.discountImageView);
-        //imageDiscountPhoto.setImageResource(discountproducts.get(position).getProductImage());
         imageDiscountPhoto.setImageBitmap(discountproducts.get(position).getProductImage());
         //Set discountname text
         TextView textViewDiscountName=view.findViewById(R.id.discountNameTextView);
         textViewDiscountName.setText(discountproducts.get(position).getShortDescription());
+        //Set discountShopName text
+        TextView tvDiscountShopName = view.findViewById(R.id.discountShopName);
+        tvDiscountShopName.append(discountproducts.get(position).getShopName());
         //Set discountprice text
         TextView textViewDiscountPrice=view.findViewById(R.id.discountPriceTextView);
-        textViewDiscountPrice.setText(String.valueOf(discountproducts.get(position).getFinalPrice()));
-
-
-
+        textViewDiscountPrice.append(String.valueOf(discountproducts.get(position).getFinalPrice()));
 
         return view;
     }
+
 public void deleteDiscount(DiscountCustomer discountproduct)
 {
     
 }
+
 }
