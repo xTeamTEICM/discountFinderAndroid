@@ -28,17 +28,18 @@ import eu.jnksoftware.discountfinderandroid.ui.general.Login;
  */
 
 public class loginApi extends AppCompatActivity {
-    private JsonObjectRequest jsonObjectRequest;
-    private Context context;
-    private JSONObject jsonObject;
+
     private static final String LOGIN_URL = "http://83.212.117.108:9001/api/login";
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
 
+    public loginApi() {
+    }
+
     public void doLogin(final Context context, JSONObject jsonObject) {
         User user=new User();
 
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, LOGIN_URL, jsonObject, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, LOGIN_URL, jsonObject, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
