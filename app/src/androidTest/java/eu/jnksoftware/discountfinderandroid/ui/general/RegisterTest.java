@@ -76,7 +76,7 @@ public class RegisterTest {
         onView(withId(R.id.registerBtn)).perform(click());
         onView(withText("Invalid informations")).check(matches(isDisplayed()));
     }
-
+/*
     @Test
     public void rightEmailValidation(){
         onView(withId(R.id.firstNameField)).perform(clearText(),typeText(firstName));
@@ -87,7 +87,7 @@ public class RegisterTest {
         onView(withId(R.id.registerBtn)).perform(click());
         onView(withId(R.id.showShopsBtn)).check(matches(isDisplayed()));
     }
-
+*/
     @Test
     public void wrongEmailValidation(){
         onView(withId(R.id.firstNameField)).perform(clearText(),typeText(firstName));

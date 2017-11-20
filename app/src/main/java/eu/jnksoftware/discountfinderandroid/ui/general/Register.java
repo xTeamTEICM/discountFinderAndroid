@@ -82,16 +82,16 @@ public class Register extends Activity {
             checkMissedInfos();
             if (errorType.equals("")) {
                 Map<String, String> params = new HashMap<>();
-                params.put("firstName", firstName.getText().toString());
-                params.put("lastName", lastName.getText().toString());
-                params.put("eMail", email.getText().toString());
-                params.put("password", passWord.getText().toString());
+                params.put("firstName", getFirstName());
+                params.put("lastName", getLastName());
+                params.put("eMail", getEmail());
+                params.put("password", getPassword());
 
                 JSONObject parameters = new JSONObject(params);
 
                 RegisterApi registerApi= new RegisterApi();
                 registerApi.doRegister(Register.this,parameters);
-                Register.this.startActivity(new Intent(Register.this, MenuCustomer.class));
+
                 finish();
             } else showErrorType();
         }

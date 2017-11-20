@@ -35,10 +35,10 @@ public class Login extends Activity {
         //Login components
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
-        etEmail = findViewById(R.id.eMailField);
-        etPassword = findViewById(R.id.passwordField);
+        etEmail = findViewById(R.id.loginEMailField);
+        etPassword = findViewById(R.id.loginPasswordField);
 
-        TextView registerView = findViewById(R.id.registerBtn);
+        TextView registerView = findViewById(R.id.loginRegisterBtn);
         registerView.setOnClickListener(registerBtnClick);
     }
 
@@ -48,7 +48,6 @@ public class Login extends Activity {
           
             email = etEmail.getText().toString();
             password = etPassword.getText().toString();
-            //performLogin();
               
             Map<String,String>loginValues=new HashMap<>();
             loginValues.put("username",email);
@@ -57,6 +56,7 @@ public class Login extends Activity {
             JSONObject sendLogin=new JSONObject(loginValues);
             loginApi loginApi=new loginApi();
             loginApi.doLogin(Login.this,sendLogin);
+
         }
     };
     private final View.OnClickListener registerBtnClick = new View.OnClickListener() {
@@ -65,15 +65,6 @@ public class Login extends Activity {
             Login.this.startActivity(new Intent(Login.this, Register.class));
         }
     };
-
-    private void performLogin(){
-        if(email.isEmpty() || password.isEmpty())
-            Toast.makeText(Login.this,toastLoginFailed, Toast.LENGTH_SHORT).show();
-        else {
-            Login.this.startActivity(new Intent(Login.this, MenuCustomer.class));
-            finish();
-        }
-    }
 
 }
 

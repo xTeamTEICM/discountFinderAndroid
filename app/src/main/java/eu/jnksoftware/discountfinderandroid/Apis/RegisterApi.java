@@ -21,6 +21,7 @@ import java.util.Map;
 
 import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
+import eu.jnksoftware.discountfinderandroid.ui.general.Login;
 
 /**
  * Created by makis on 18/11/2017.
@@ -49,7 +50,7 @@ public class RegisterApi extends AppCompatActivity {
                     user.setRefreshToken(response.getString("refresh_token"));
                     user.setTokenType(response.getString("token_type"));
 
-                    Intent intent=new Intent(context,MenuCustomer.class);
+                    Intent intent=new Intent(context,Login.class);
                     Gson myGson=new Gson();
                     String myJson = myGson.toJson(user);
                     intent.putExtra("myjson", myJson);
