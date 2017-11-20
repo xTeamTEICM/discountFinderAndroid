@@ -1,51 +1,66 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
-import android.content.Intent;
 import android.net.Uri;
 
-import java.io.Serializable;
+public class Shop {
 
-public class Shop implements Serializable {
+    private final int id;
+    private String name;
+    private final int ownerId;
+    private final Location location;
 
-    private final String shopName;
-    private final Position location;
-    private final double distanceFromUser;
 
-    public Shop(String shopName, Position location,double distanceFromUser) {
-        this.shopName = shopName;
+    public Shop(int id, String name,int ownerId, Location location) {
+        this.id = id;
+        this.name = name;
+        this.ownerId = ownerId;
         this.location = location;
-        this.distanceFromUser = distanceFromUser;
+    }
+    
+    private double calculateDistance(Location position) {
+        double distance;
+        double subtractionX = Math.abs(position.getLatitude() - location.getLatitude());
+        double subtractionY = Math.abs(position.getLongitude() - location.getLongitude());
+        distance = Math.sqrt((Math.pow(subtractionX, 2)) + (Math.pow(subtractionY, 2)));
+        return distance;
     }
 
-    public Intent openOnMaps(){
+    public Uri getMapsUri() {
 
-        Double Latitude = location.getX();
-        Double Longitude = location.getY();
-        String labelLocation = "x-Team Sample : " + shopName;
-        Intent intent=new Intent(Intent.ACTION_VIEW);
+        Double Latitude = location.getLatitude();
+        Double Longitude = location.getLongitude();
+        String labelLocation = "x-Team Sample : " + ownerId;
 
-        intent.setData(Uri.parse("geo:<" + Latitude  + ">,<" + Longitude + ">?q=<" + Latitude  + ">,<" + Longitude + ">(" + labelLocation+ ")"));
-
-        //if user has not the application googleMaps it will show him a dialog with Launch Maps
-        return Intent.createChooser(intent, "Launch Maps");
-
-
+        return Uri.parse(
+                "geo:" +
+                        "<" + Latitude + ">,<" + Longitude + ">" +
+                        "?q=<" + Latitude + ">,<" + Longitude + ">(" + labelLocation + ")"
+        );
     }
+
     // this toString prints on ListView
     public String toString(){
 
-        return this.shopName;
+        return this.name;
     }
 
-    public String getShopName() {
-        return shopName;
+    public int getId() {
+        return id;
     }
 
-    public Position getLocation() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public Location getLocation() {
         return location;
-    }
-
-    public double getDistanceFromUser() {
-        return distanceFromUser;
     }
 }
