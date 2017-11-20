@@ -12,9 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
-/**
- * Created by makis on 21/10/2017.
- */
+
 public class GeoLocation extends Service implements LocationListener {
 
     private final Context context;

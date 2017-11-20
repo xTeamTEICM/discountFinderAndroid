@@ -8,7 +8,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import eu.jnksoftware.discountfinderandroid.R;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -18,18 +17,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 
 
-/**
- * Created by kostas on 16/11/2017.
- */
-
 public class LoginTest {
 
     @Rule
     public ActivityTestRule<Login> loginActivityTestRule = new ActivityTestRule<>(Login.class);
 
-    private String validEmail = "kostas@email.com";
+    private String validEmail = "kostas@gmail.com";
     private String emptyEmail = "";
-    private String password = "12345678";
+    private String password = "kostas123";
     private String emptyPassword = "";
     //
 
@@ -118,6 +113,13 @@ public class LoginTest {
         onView(withId(R.id.loginBtn)).perform(click());
         //if email and password are correct the customer menu will open
         //so i check the shops button in customer menu if it's displayed
+        /*
+        int i=0;
+        for (i=0;i<99999999;i++){
+            int k=4;
+            i = i -3;
+        }
+
         onView(withId(R.id.showShopsBtn)).check(matches(isDisplayed()));
     }
 */

@@ -7,23 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import eu.jnksoftware.discountfinderandroid.Apis.loginApi;
+import eu.jnksoftware.discountfinderandroid.Apis.LoginApi;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.User;
-import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 
 
 public class Login extends Activity {
     private String email;
     private String password;
-    public String toastLoginFailed="Login Failed,try again!";
     EditText etEmail;
     EditText etPassword;
 
@@ -32,7 +25,6 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Login components
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
         etEmail = findViewById(R.id.loginEMailField);
@@ -54,7 +46,7 @@ public class Login extends Activity {
             loginValues.put("password",password);
 
             JSONObject sendLogin=new JSONObject(loginValues);
-            loginApi loginApi=new loginApi();
+            LoginApi loginApi=new LoginApi();
             loginApi.doLogin(Login.this,sendLogin);
 
         }

@@ -3,13 +3,10 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
@@ -35,14 +32,15 @@ public class MenuCustomer extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
-        Button shops = (Button) findViewById(R.id.showShopsBtn);
+        Button shops = findViewById(R.id.showShopsBtn);
         shops.setOnClickListener(shopsClick);
-        Button about = (Button) findViewById(R.id.aboutBtn);
+        Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
 
-        Gson gson = new Gson();
+        /*Gson gson = new Gson();
         User user = gson.fromJson(getIntent().getStringExtra("myjson"), User.class);
         Toast.makeText(getApplicationContext(), "token"+user.getAccessToken(), Toast.LENGTH_LONG).show();
+        */
 
     }
 

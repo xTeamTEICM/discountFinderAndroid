@@ -1,10 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
-import java.io.Serializable;
-
-/**
- * Created by iordkost on 25/10/2017.
- */
 
 public class Location {
     private double latitude;

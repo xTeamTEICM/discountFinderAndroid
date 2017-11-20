@@ -2,9 +2,6 @@ package eu.jnksoftware.discountfinderandroid.models;
 
 import android.net.Uri;
 
-import java.io.Serializable;
-
-
 public class Shop {
 
     private final int id;

@@ -28,7 +28,7 @@ public class RegisterTest {
     private String lastName = "Johnson";
     private String email = "tomJohnson@gmail.com";
     private String wrongEmail = "tomJohnson@gmail";
-    private String password = "tom123";
+    private String password = "tom1234";
     @Before
     public void setUp() throws Exception {
     }
@@ -85,7 +85,7 @@ public class RegisterTest {
         onView(withId(R.id.passwordField)).perform(clearText(),typeText(password));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.registerBtn)).perform(click());
-        onView(withId(R.id.showShopsBtn)).check(matches(isDisplayed()));
+        onView(withId(R.id.loginBtn)).check(matches(isDisplayed()));
     }
 */
     @Test

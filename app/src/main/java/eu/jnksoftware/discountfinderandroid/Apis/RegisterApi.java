@@ -12,20 +12,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import eu.jnksoftware.discountfinderandroid.models.User;
-import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import eu.jnksoftware.discountfinderandroid.ui.general.Login;
-
-/**
- * Created by makis on 18/11/2017.
- */
 
 public class RegisterApi extends AppCompatActivity {
 
@@ -37,7 +29,6 @@ public class RegisterApi extends AppCompatActivity {
     }
 
     public void doRegister(final Context context, JSONObject jsonObject) {
-        User user=new User();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, LOGIN_URL, jsonObject, new Response.Listener<JSONObject>() {
 
@@ -61,13 +52,13 @@ public class RegisterApi extends AppCompatActivity {
                 }
 
                 Log.d("", "");
-                Toast.makeText(context, "Everything Works Fine", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "You registered successfully", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("", "");
-                Toast.makeText(context, "You put wrong password or Email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Invalid email or password", Toast.LENGTH_SHORT).show();
 
             }
         }) {
@@ -81,7 +72,7 @@ public class RegisterApi extends AppCompatActivity {
 
         };
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(timeOutInMs, numberOfTries, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        singleton.getmInstance(context).addToRequestQueue(jsonObjectRequest);
+        Singleton.getmInstance(context).addToRequestQueue(jsonObjectRequest);
 
 
     }

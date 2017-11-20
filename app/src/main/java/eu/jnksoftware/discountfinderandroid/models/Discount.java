@@ -1,15 +1,9 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
 import android.graphics.Bitmap;
-import android.widget.Toast;
 
-/**
- *
- * Created by Sotiris on 26/10/2017.
- *
- */
 
-public class DiscountCustomer {
+public class Discount {
 
     private  int id;
     private String shortDescription;
@@ -17,7 +11,7 @@ public class DiscountCustomer {
     private float finalPrice;
     private Bitmap productImage;
 
-    public DiscountCustomer(int id, String shortDescription, String shopName, float finalPrice, Bitmap productImage) {
+    public Discount(int id, String shortDescription, String shopName, float finalPrice, Bitmap productImage) {
         this.id = id;
         this.shortDescription = shortDescription;
         this.shopName = shopName;

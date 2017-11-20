@@ -1,8 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
-/**
- * Created by makis on 26/10/2017.
- */
 
 public class User{
 

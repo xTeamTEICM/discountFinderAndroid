@@ -8,15 +8,14 @@ import android.support.annotation.Nullable;
 import android.view.*;
 import android.content.*;
 import android.widget.*;
-
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.DiscountCustomer;
+import eu.jnksoftware.discountfinderandroid.models.Discount;
 
 
-public class discountListAdapter extends  ArrayAdapter<DiscountCustomer> {
+public class discountListAdapter extends  ArrayAdapter<Discount> {
     private Context context;
-    private List<DiscountCustomer> discountproducts;
-    public discountListAdapter(Context context,List<DiscountCustomer>discountproducts){
+    private List<Discount> discountproducts;
+    public discountListAdapter(Context context,List<Discount>discountproducts){
         super(context, R.layout.activity_item_discount_list,discountproducts);
         this.context=context;
         this.discountproducts=discountproducts;
@@ -44,7 +43,7 @@ public class discountListAdapter extends  ArrayAdapter<DiscountCustomer> {
         return view;
     }
 
-public void deleteDiscount(DiscountCustomer discountproduct)
+public void deleteDiscount(Discount discountproduct)
 {
     
 }
