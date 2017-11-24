@@ -36,6 +36,8 @@ public class MenuCustomer extends AppCompatActivity {
         shops.setOnClickListener(shopsClick);
         Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
+        Button addDiscount = findViewById(R.id.requestDiscountBtn);
+        addDiscount.setOnClickListener(addDiscountClick);
 
         /*Gson gson = new Gson();
         User user = gson.fromJson(getIntent().getStringExtra("myjson"), User.class);
@@ -66,6 +68,13 @@ public class MenuCustomer extends AppCompatActivity {
         @Override
         public void onClick(final View v) {
             startActivity(new Intent(MenuCustomer.this, AboutUs.class));
+        }
+    };
+
+    private final View.OnClickListener addDiscountClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(MenuCustomer.this,Add_Discount.class));
         }
     };
 
