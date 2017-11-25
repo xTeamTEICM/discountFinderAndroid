@@ -71,26 +71,5 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 
-    boolean doubleBackPressed = false;
-    @Override
-    public void onBackPressed() {
 
-        if (doubleBackPressed) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            System.exit(0);
-        }doubleBackPressed = true;
-
-        Toast.makeText(MenuCustomer.this,"Please press BACK again to exit",Toast.LENGTH_LONG).show();
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run(){
-                doubleBackPressed = false;
-            }
-        }, 3000);
-        doubleBackPressed = true;
-    }
 }
