@@ -22,19 +22,17 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-
-
         </activity>
         <activity android:name=".ui.general.Login" />
         <activity android:name=".ui.general.Register" />
         <activity android:name=".ui.customer.MenuCustomer" />
         <activity android:name=".ui.customer.DiscountCustomerList" />
-        <activity android:name=".ui.customer.Add_Discount"/>
+        <activity android:name=".ui.customer.Add_Discount" />
         <activity android:name=".ui.general.AboutUs" />
 
         <service android:name=".services.GeoLocation" />
+
+        <activity android:name=".ui.general.Settings"></activity>
     </application>
 
 </manifest>

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
+import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
 
 public class MenuCustomer extends AppCompatActivity {
 
@@ -38,7 +40,7 @@ public class MenuCustomer extends AppCompatActivity {
         about.setOnClickListener(aboutClick);
         Button addDiscount = findViewById(R.id.requestDiscountBtn);
         addDiscount.setOnClickListener(addDiscountClick);
-
+        checkSellerButton();
         /*Gson gson = new Gson();
         User user = gson.fromJson(getIntent().getStringExtra("myjson"), User.class);
         Toast.makeText(getApplicationContext(), "token"+user.getAccessToken(), Toast.LENGTH_LONG).show();
@@ -74,9 +76,23 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener addDiscountClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(MenuCustomer.this,Add_Discount.class));
+            startActivity(new Intent(MenuCustomer.this,Settings.class));
         }
     };
+    private final void checkSellerButton(){
+        CheckBox seller = findViewById(R.id.sellerCheckBox);
+        Button showSeller = findViewById(R.id.showSellerButton);
+        boolean isSellerChecked = this.getIntent().getBooleanExtra("checkBoxValue",false);
+        try {
+            if (isSellerChecked)
+                showSeller.setVisibility(View.VISIBLE);
+            else
+                showSeller.setVisibility(View.GONE);
+        }
+        catch (NullPointerException e){
+            showSeller.setVisibility(View.GONE);
+        }
+    }
 
 
 }

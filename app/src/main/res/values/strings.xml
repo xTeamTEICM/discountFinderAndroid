@@ -23,6 +23,9 @@
     <string name="category">Κατηγορία</string>
     <string name="price">Τιμή</string>
     <string name="Add">Προσθήκη</string>
+    <string name="myShops">Τα καταστηματα μου</string>
+    <string name="settings">ΡΥΘΜΙΣΕΙΣ</string>
+    <string name="enableSeller">Καταστηματάρχης</string>
 
     <!-- String arrays for spinners    -->
     <string-array name="categories">
