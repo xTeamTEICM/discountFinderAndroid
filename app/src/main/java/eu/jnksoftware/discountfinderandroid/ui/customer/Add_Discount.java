@@ -10,12 +10,17 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import eu.jnksoftware.discountfinderandroid.Apis.CategoriesAPI;
 import eu.jnksoftware.discountfinderandroid.R;
 
 public class Add_Discount extends AppCompatActivity {
 
     private int seekBarProgress=0;
     private TextView showSeekProgress;
+    List categories = new ArrayList();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -24,7 +29,10 @@ public class Add_Discount extends AppCompatActivity {
         setContentView(R.layout.activity_add__discount);
 
         Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
-        ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(Add_Discount.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.categories));
+
+        CategoriesAPI categoriesAPI = new CategoriesAPI();
+        categoriesAPI.loadCategoriesToList(Add_Discount.this,categories);
+        ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(Add_Discount.this, android.R.layout.simple_list_item_1, categories);
         SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);
         showSeekProgress = (TextView) findViewById(R.id.tvSeekBarValue);
         Button addButton = (Button) findViewById(R.id.btAddDiscount);
