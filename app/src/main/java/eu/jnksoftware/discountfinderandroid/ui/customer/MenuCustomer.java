@@ -89,6 +89,7 @@ public class MenuCustomer extends AppCompatActivity {
             @Override
             public void run(){
                 doubleBackPressed = false;
+
             }
         }, 3000);
         doubleBackPressed = true;
