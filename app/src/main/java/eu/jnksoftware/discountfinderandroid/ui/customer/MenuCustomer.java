@@ -6,9 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.google.gson.Gson;
+
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 
@@ -36,13 +35,10 @@ public class MenuCustomer extends AppCompatActivity {
         shops.setOnClickListener(shopsClick);
         Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
-        Button addDiscount = findViewById(R.id.settingsBtn);
-        addDiscount.setOnClickListener(settingsButtonClick);
-
-        /*Gson gson = new Gson();
-        User user = gson.fromJson(getIntent().getStringExtra("myjson"), User.class);
-        Toast.makeText(getApplicationContext(), "token"+user.getAccessToken(), Toast.LENGTH_LONG).show();
-        */
+        Button settingsBtn = findViewById(R.id.settingsBtn);
+        settingsBtn.setOnClickListener(settingsButtonClick);
+        Button filtersBtn = findViewById(R.id.filtersBtn);
+        filtersBtn.setOnClickListener(filtersButtonClick);
 
     }
 
@@ -74,7 +70,14 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener settingsButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(MenuCustomer.this,Add_Discount.class));
+            startActivity(new Intent(MenuCustomer.this,UserPreferences.class));
+        }
+    };
+
+    private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(MenuCustomer.this,UserPreferences.class));
         }
     };
 
