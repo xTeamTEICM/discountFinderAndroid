@@ -31,8 +31,8 @@ public class UserPreferences extends AppCompatActivity {
 
         Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
 
-        CategoriesAPI categoriesAPI = new CategoriesAPI(UserPreferences.this);
-        categories = categoriesAPI.getCategories();
+        CategoriesAPI categoriesAPI = new CategoriesAPI();
+        categories = categoriesAPI.getCategories(UserPreferences.this);
         ArrayList<String> test = new ArrayList<>();
         ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(UserPreferences.this, android.R.layout.simple_list_item_1,test );
         SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);

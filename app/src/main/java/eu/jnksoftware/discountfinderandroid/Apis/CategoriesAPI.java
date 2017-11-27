@@ -53,7 +53,6 @@ public class CategoriesAPI {
                             }
 
                         }
-                        Toast.makeText(context, "ok\n"+ message, Toast.LENGTH_LONG).show();
 
                     }
                 }
