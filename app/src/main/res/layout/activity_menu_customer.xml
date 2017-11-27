@@ -59,13 +59,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/showSellerButton"
+        android:id="@+id/showShopsButton"
         android:layout_width="151dp"
         android:layout_height="59dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/myShops"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/actionBar"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -1,15 +1,23 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.Toast;
-import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
@@ -29,24 +37,44 @@ public class MenuCustomer extends AppCompatActivity {
 
             double latitude = geoLocation.getLatitude();
             double longitude = geoLocation.getLongitude();
-
-            // \n is for new line
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
-        Button shops = findViewById(R.id.showShopsBtn);
-        shops.setOnClickListener(shopsClick);
         Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
         Button addDiscount = findViewById(R.id.requestDiscountBtn);
-        addDiscount.setOnClickListener(addDiscountClick);
-        checkSellerButton();
-        /*Gson gson = new Gson();
-        User user = gson.fromJson(getIntent().getStringExtra("myjson"), User.class);
-        Toast.makeText(getApplicationContext(), "token"+user.getAccessToken(), Toast.LENGTH_LONG).show();
-        */
+        addDiscount.setOnClickListener(settingsClick);
+        Button myShops = findViewById(R.id.showShopsButton);
+        myShops.setOnClickListener(showShopsButtonClick);
 
+            File file = new File(getBaseContext().getFilesDir(), "saveFile");
+            FileReader fileReader;
+            String line = "";
+            BufferedReader bufferedReader;
+            try {
+                fileReader = new FileReader(file);
+                bufferedReader = new BufferedReader(fileReader);
+                line = bufferedReader.readLine();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Button showSeller = findViewById(R.id.showShopsButton);
+            if (line.equals("yes")) {
+                showSeller.setVisibility(View.VISIBLE);
+            } else {
+                showSeller.setVisibility(View.GONE);
+            }
     }
+
+    private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
+            startActivity(intent);
+        }
+    };
 
     private final View.OnClickListener shopsClick = new View.OnClickListener() {
         @Override
@@ -73,26 +101,21 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener addDiscountClick = new View.OnClickListener() {
+    private final View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(MenuCustomer.this,Settings.class));
+            Button button = findViewById(R.id.showShopsButton);
+            Intent intent = new Intent(MenuCustomer.this, Settings.class);
+            intent.putExtra("isEnabled",button.isShown());
+            startActivity(intent);
         }
     };
-    private final void checkSellerButton(){
-        CheckBox seller = findViewById(R.id.sellerCheckBox);
-        Button showSeller = findViewById(R.id.showSellerButton);
-        boolean isSellerChecked = this.getIntent().getBooleanExtra("checkBoxValue",false);
-        try {
-            if (isSellerChecked)
+
+    private final void checkIfSeller() {
+
+                /*
                 showSeller.setVisibility(View.VISIBLE);
-            else
                 showSeller.setVisibility(View.GONE);
-        }
-        catch (NullPointerException e){
-            showSeller.setVisibility(View.GONE);
-        }
+                */
     }
-
-
 }

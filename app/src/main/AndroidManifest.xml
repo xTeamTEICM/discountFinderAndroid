@@ -32,7 +32,8 @@
 
         <service android:name=".services.GeoLocation" />
 
-        <activity android:name=".ui.general.Settings"></activity>
+        <activity android:name=".ui.general.Settings" />
+        <activity android:name=".ui.customer.SellerShops"></activity>
     </application>
 
 </manifest>
