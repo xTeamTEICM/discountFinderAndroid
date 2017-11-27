@@ -1,22 +1,11 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
@@ -46,26 +35,6 @@ public class MenuCustomer extends AppCompatActivity {
         addDiscount.setOnClickListener(settingsClick);
         Button myShops = findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
-
-            File file = new File(getBaseContext().getFilesDir(), "saveFile");
-            FileReader fileReader;
-            String line = "";
-            BufferedReader bufferedReader;
-            try {
-                fileReader = new FileReader(file);
-                bufferedReader = new BufferedReader(fileReader);
-                line = bufferedReader.readLine();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Button showSeller = findViewById(R.id.showShopsButton);
-            if (line.equals("yes")) {
-                showSeller.setVisibility(View.VISIBLE);
-            } else {
-                showSeller.setVisibility(View.GONE);
-            }
     }
 
     private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
@@ -106,16 +75,8 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(View view) {
             Button button = findViewById(R.id.showShopsButton);
             Intent intent = new Intent(MenuCustomer.this, Settings.class);
-            intent.putExtra("isEnabled",button.isShown());
+            intent.putExtra("isSellerEnabled",button.isShown());
             startActivity(intent);
         }
     };
-
-    private final void checkIfSeller() {
-
-                /*
-                showSeller.setVisibility(View.VISIBLE);
-                showSeller.setVisibility(View.GONE);
-                */
-    }
 }

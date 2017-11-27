@@ -33,11 +33,7 @@ public class Main extends AppCompatActivity {
         this.setTheme(R.style.SplashTheme);
         super.onCreate(savedInstanceState);
         geoLocation = new GeoLocation(this);
-        try {
-            writeSaveFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             geoLocation.requestPermissions(this);
         } else {
@@ -45,36 +41,6 @@ public class Main extends AppCompatActivity {
         }
     }
 
-    public void writeSaveFile() throws IOException {
-        String filename = "saveFile";
-        String seller = "no";
-        FileOutputStream outputStream;
-        if(saveFileExists()==false){
-            try {
-                outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                outputStream.write(seller.getBytes());
-                outputStream.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-        private boolean saveFileExists(){
-            FileInputStream inputStream = null;
-            try {
-                inputStream = openFileInput("saveFile");
-                if (inputStream != null) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }catch (FileNotFoundException e){
-                return false;
-            }
-        }
 
         @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
