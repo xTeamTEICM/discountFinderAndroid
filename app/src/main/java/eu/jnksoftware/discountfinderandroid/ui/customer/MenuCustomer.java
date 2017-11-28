@@ -31,8 +31,8 @@ public class MenuCustomer extends AppCompatActivity {
 
         Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
-        Button addDiscount = findViewById(R.id.requestDiscountBtn);
-        addDiscount.setOnClickListener(settingsClick);
+        Button settings = findViewById(R.id.settingsButton);
+        settings.setOnClickListener(settingsClick);
         Button myShops = findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
     }
