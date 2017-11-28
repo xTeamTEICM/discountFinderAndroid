@@ -35,6 +35,9 @@ public class MenuCustomer extends AppCompatActivity {
         settings.setOnClickListener(settingsClick);
         Button myShops = findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
+        Button filtersBtn = findViewById(R.id.filtersBtn);
+        filtersBtn.setOnClickListener(filtersButtonClick);
+
     }
 
     private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
@@ -77,6 +80,11 @@ public class MenuCustomer extends AppCompatActivity {
             Intent intent = new Intent(MenuCustomer.this, Settings.class);
             intent.putExtra("isSellerEnabled",button.isShown());
             startActivity(intent);
+
+    private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(MenuCustomer.this,UserPreferences.class));
         }
     };
 }

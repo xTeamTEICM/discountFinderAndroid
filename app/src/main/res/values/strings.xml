@@ -27,12 +27,4 @@
     <string name="settings">ΡΥΘΜΙΣΕΙΣ</string>
     <string name="enableSeller">Καταστηματάρχης</string>
 
-    <!-- String arrays for spinners    -->
-    <string-array name="categories">
-        <item>Ρούχα</item>
-        <item>Παπούτσια</item>
-        <item>Τρόφιμα</item>
-        <item>Άλλα</item>
-    </string-array>
-
 </resources>
