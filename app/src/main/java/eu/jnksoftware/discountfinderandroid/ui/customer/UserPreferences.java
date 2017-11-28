@@ -1,8 +1,8 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,14 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.CategoriesAPI;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.DiscountCategory;
-import eu.jnksoftware.discountfinderandroid.ui.general.Main;
-
-import static java.lang.Thread.sleep;
 
 public class UserPreferences extends AppCompatActivity {
 
@@ -31,15 +26,15 @@ public class UserPreferences extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add__discount);
+        setContentView(R.layout.activity_user_preferences);
 
-        Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
+        Spinner spinnerCat = findViewById(R.id.spinnerCategory);
         CategoriesAPI categoriesAPI = new CategoriesAPI();
         categories = categoriesAPI.getCategories(UserPreferences.this);
         ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(UserPreferences.this, android.R.layout.simple_list_item_1,categories);
-        SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);
-        showSeekProgress = (TextView) findViewById(R.id.tvSeekBarValue);
-        Button addButton = (Button) findViewById(R.id.btAddDiscount);
+        SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
+        showSeekProgress = findViewById(R.id.tvSeekBarValue);
+        Button addButton = findViewById(R.id.btAddDiscount);
 
         addButton.setOnClickListener(btAddDiscountClick);
 
