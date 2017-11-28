@@ -34,9 +34,9 @@ public class UserPreferences extends AppCompatActivity {
         ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(UserPreferences.this, android.R.layout.simple_list_item_1,categories);
         SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
         showSeekProgress = findViewById(R.id.tvSeekBarValue);
-        Button addButton = findViewById(R.id.btAddDiscount);
+        Button savePrefButton = findViewById(R.id.btSavePreferences);
 
-        addButton.setOnClickListener(btAddDiscountClick);
+        savePrefButton.setOnClickListener(savePrefClick);
 
         showSeekProgress.setText("Μέχρι "+seekBarProgress + " ευρώ");
         seekBarPrice.setMax(150);
@@ -69,7 +69,7 @@ public class UserPreferences extends AppCompatActivity {
         });
     }
 
-    private final View.OnClickListener btAddDiscountClick = new View.OnClickListener() {
+    private final View.OnClickListener savePrefClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             //TODO:

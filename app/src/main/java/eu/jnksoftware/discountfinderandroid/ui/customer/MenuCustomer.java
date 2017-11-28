@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
@@ -78,8 +79,10 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(View view) {
             Button button = findViewById(R.id.showShopsButton);
             Intent intent = new Intent(MenuCustomer.this, Settings.class);
-            intent.putExtra("isSellerEnabled",button.isShown());
+            intent.putExtra("isSellerEnabled", button.isShown());
             startActivity(intent);
+        }
+    };
 
     private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
         @Override
