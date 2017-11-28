@@ -31,7 +31,7 @@ public class CategoriesAPI {
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
     ArrayList<String> categories=new ArrayList<>();
-    String categories_url = "http://83.212.117.108:9001/api/category";
+    String categories_url = "http://83.212.117.108:9002/api/category";
 
     public CategoriesAPI(){
     }
