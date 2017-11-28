@@ -20,7 +20,7 @@ import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 
 public class LoginApi extends AppCompatActivity {
 
-    private static final String LOGIN_URL = "http://83.212.117.108:9001/api/login";
+    private static final String LOGIN_URL = "http://83.212.117.108:9002/api/login";
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
 
