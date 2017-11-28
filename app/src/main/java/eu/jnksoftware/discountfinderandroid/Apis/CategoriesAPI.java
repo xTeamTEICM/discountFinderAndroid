@@ -4,6 +4,7 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -16,7 +17,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import eu.jnksoftware.discountfinderandroid.models.Discount;
 import eu.jnksoftware.discountfinderandroid.models.DiscountCategory;
@@ -54,7 +57,7 @@ public class CategoriesAPI {
                             }
 
                         }
-                        Toast.makeText(context, "size in API: "+ categories.size(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
                 , new Response.ErrorListener() {
