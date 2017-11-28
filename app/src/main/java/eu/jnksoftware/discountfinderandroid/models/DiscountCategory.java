@@ -1,6 +1,8 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
 
+import java.util.ArrayList;
+
 public class DiscountCategory {
     private String categoryId;
     private String categoryTitle;
@@ -24,5 +26,13 @@ public class DiscountCategory {
 
     public void setCategoryTitle(String categoryTitle) {
         this.categoryTitle = categoryTitle;
+    }
+
+    public ArrayList<String> getCategories(ArrayList<DiscountCategory> arrayList){
+        ArrayList<String> tempCategoties=new ArrayList<>();
+        for(int i=0;i<arrayList.size();i++){
+            tempCategoties.add(arrayList.get(i).getCategoryTitle());
+        }
+        return tempCategoties;
     }
 }

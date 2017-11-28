@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +18,13 @@ import eu.jnksoftware.discountfinderandroid.Apis.CategoriesAPI;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.DiscountCategory;
 
+import static java.lang.Thread.sleep;
+
 public class UserPreferences extends AppCompatActivity {
 
     private int seekBarProgress=0;
     private TextView showSeekProgress;
-    ArrayList<DiscountCategory> categories = new ArrayList<>();
+    ArrayList<String> categories = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,8 +36,11 @@ public class UserPreferences extends AppCompatActivity {
 
         CategoriesAPI categoriesAPI = new CategoriesAPI();
         categories = categoriesAPI.getCategories(UserPreferences.this);
-        ArrayList<String> test = new ArrayList<>();
-        ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(UserPreferences.this, android.R.layout.simple_list_item_1,test );
+
+        Toast.makeText(UserPreferences.this, "size: "+ categories.size(), Toast.LENGTH_LONG).show();
+        //ArrayList<String> test = new ArrayList<>();
+
+        ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(UserPreferences.this, android.R.layout.simple_list_item_1,categories);
         SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);
         showSeekProgress = (TextView) findViewById(R.id.tvSeekBarValue);
         Button addButton = (Button) findViewById(R.id.btAddDiscount);
@@ -75,6 +81,7 @@ public class UserPreferences extends AppCompatActivity {
     private final View.OnClickListener btAddDiscountClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Toast.makeText(UserPreferences.this, "size: "+ categories.size(), Toast.LENGTH_LONG).show();
             //TODO:
         }
     };

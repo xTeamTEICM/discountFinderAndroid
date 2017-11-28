@@ -20,19 +20,20 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.models.Discount;
 import eu.jnksoftware.discountfinderandroid.models.DiscountCategory;
+import eu.jnksoftware.discountfinderandroid.ui.customer.UserPreferences;
 
 public class CategoriesAPI {
 
 
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
-    ArrayList<DiscountCategory> categories=new ArrayList<>();
+    ArrayList<String> categories=new ArrayList<>();
     String categories_url = "http://83.212.117.108:9001/api/category";
 
     public CategoriesAPI(){
     }
 
-    public ArrayList<DiscountCategory> getCategories(final Context context){
+    public ArrayList<String> getCategories(final Context context){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, categories_url
                 , null
                 , new Response.Listener<JSONArray>() {
@@ -45,7 +46,7 @@ public class CategoriesAPI {
                                 JSONObject jsonObject = response.getJSONObject(counter);
                                 DiscountCategory category = new DiscountCategory(jsonObject.getString("id")
                                         ,jsonObject.getString("title"));
-                                categories.add(category);
+                                categories.add(category.getCategoryTitle());
                                 message+="\n"+category.getCategoryTitle();
                                 counter++;
                             } catch (JSONException e) {
@@ -53,7 +54,7 @@ public class CategoriesAPI {
                             }
 
                         }
-
+                        Toast.makeText(context, "size in API: "+ categories.size(), Toast.LENGTH_SHORT).show();
                     }
                 }
                 , new Response.ErrorListener() {
