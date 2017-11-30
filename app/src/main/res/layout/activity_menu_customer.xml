@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Ψαξε τωρα για νεες προσφορες"
+        android:text="@string/searchDiscount"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,12 +50,12 @@
         tools:layout_editor_absoluteY="497dp">
 
         <Button
-            android:id="@+id/showShopsBtn"
+            android:id="@+id/showDiscountsButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Οι προσφορές μου"
+            android:text="@string/myOffers"
             android:textAlignment="center" />
 
         <Button
