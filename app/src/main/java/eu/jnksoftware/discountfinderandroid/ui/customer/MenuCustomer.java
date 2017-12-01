@@ -37,13 +37,13 @@ public class MenuCustomer extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
-        Button about = findViewById(R.id.aboutBtn);
+        Button about = (Button) findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
-        Button settings = findViewById(R.id.settingsBtn);
+        Button settings = (Button) findViewById(R.id.settingsBtn);
         settings.setOnClickListener(settingsClick);
-        Button myShops = findViewById(R.id.showShopsButton);
+        Button myShops = (Button) findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
-        Button filtersBtn = findViewById(R.id.filtersBtn);
+        Button filtersBtn = (Button) findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
 
     }
@@ -84,7 +84,7 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Button button = findViewById(R.id.showShopsButton);
+            Button button = (Button) findViewById(R.id.showShopsButton);
             Intent intent = new Intent(MenuCustomer.this, Settings.class);
             intent.putExtra("isSellerEnabled", button.isShown());
             startActivity(intent);

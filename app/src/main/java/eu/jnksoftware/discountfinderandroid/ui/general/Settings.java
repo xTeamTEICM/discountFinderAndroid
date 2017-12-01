@@ -16,10 +16,10 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Button backButton = findViewById(R.id.backButton);
+        Button backButton = (Button) findViewById(R.id.backButton);
         backButton.setOnClickListener(backButtonClick);
 
-        CheckBox sellerCheckBox = findViewById(R.id.sellerCheckBox);
+        CheckBox sellerCheckBox = (CheckBox) findViewById(R.id.sellerCheckBox);
         boolean isEnabled = getIntent().getBooleanExtra("isSellerEnabled",false);
         if(isEnabled){
             sellerCheckBox.setChecked(true);
