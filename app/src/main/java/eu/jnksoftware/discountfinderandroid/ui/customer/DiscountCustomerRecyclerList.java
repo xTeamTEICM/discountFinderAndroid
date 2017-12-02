@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import java.util.ArrayList;
+
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Discount;
 
@@ -18,7 +20,6 @@ import eu.jnksoftware.discountfinderandroid.models.Discount;
 public class DiscountCustomerRecyclerList extends AppCompatActivity{
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
-    RecyclerView.LayoutManager layoutManager;
     ArrayList<Discount> discountProducts = new ArrayList<>();
     private Bitmap shoe1;
 
@@ -27,8 +28,7 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discount_customer_recycler_list);
         recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         fillDiscountProductsList();
         adapter = new DiscountRecyclerAdapter(discountProducts);
@@ -41,8 +41,8 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity{
         discountProducts.add(new Discount(2,"Ορειβατικο Μποτακι"
                 ,"Παπουτσής",50,shoe1));
         discountProducts.add(new Discount(3,"Γυναικεία Γόβα"
-                ,"Παπουτσάδικο Μένιος",89,shoe1));
+                ,"Ο Μένιος",89,shoe1));
         discountProducts.add(new Discount(4,"Adidas Stan Smith"
-                ,"Παπουτσάδικο Μένιος",75,shoe1));
+                ,"Ο Μένιος",75,shoe1));
     }
 }

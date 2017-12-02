@@ -26,11 +26,11 @@
         <activity android:name=".ui.general.Login" />
         <activity android:name=".ui.general.Register" />
         <activity android:name=".ui.customer.MenuCustomer"/>
-        <activity android:name=".ui.customer.DiscountCustomerList" />
         <activity android:name=".ui.customer.UserPreferences"/>
         <activity android:name=".ui.general.AboutUs" />
         <activity android:name=".ui.general.Settings" />
         <activity android:name=".ui.customer.SellerShops" />
+        <activity android:name=".ui.customer.DiscountCustomerRecyclerList"/>
 
         <service android:name=".services.GeoLocation" />
 

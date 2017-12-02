@@ -39,6 +39,8 @@ public class MenuCustomer extends AppCompatActivity {
         myShops.setOnClickListener(showShopsButtonClick);
         Button filtersBtn = findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
+        Button myDiscounts = findViewById(R.id.showDiscountsButton);
+        myDiscounts.setOnClickListener(myDiscountsClick);
 
     }
 
@@ -50,17 +52,16 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener shopsClick = new View.OnClickListener() {
+    private final View.OnClickListener myDiscountsClick = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
             if (geoLocation.getLocation() != null) {
                 try {
                     // TODO : call discountAPI to take the nearest discounts
-                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerList.class));
+                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerRecyclerList.class));
 
                 } catch (Exception ex) {
                     Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
             } else {
                 Toast.makeText(MenuCustomer.this, "We don't have your location yet !", Toast.LENGTH_SHORT).show();
@@ -72,6 +73,23 @@ public class MenuCustomer extends AppCompatActivity {
         @Override
         public void onClick(final View v) {
             startActivity(new Intent(MenuCustomer.this, AboutUs.class));
+        }
+    };
+
+    private final View.OnClickListener settingsClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Button button = findViewById(R.id.showShopsButton);
+            Intent intent = new Intent(MenuCustomer.this, Settings.class);
+            intent.putExtra("isSellerEnabled", button.isShown());
+            startActivity(intent);
+        }
+    };
+
+    private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(MenuCustomer.this,UserPreferences.class));
         }
     };
 
@@ -99,21 +117,6 @@ public class MenuCustomer extends AppCompatActivity {
         doubleBackPressed = true;
     }
 
-    private final View.OnClickListener settingsClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Button button = findViewById(R.id.showShopsButton);
-            Intent intent = new Intent(MenuCustomer.this, Settings.class);
-            intent.putExtra("isSellerEnabled", button.isShown());
-            startActivity(intent);
-        }
-    };
 
-    private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            startActivity(new Intent(MenuCustomer.this,UserPreferences.class));
-        }
-    };
 }
 
