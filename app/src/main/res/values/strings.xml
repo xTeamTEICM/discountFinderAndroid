@@ -23,13 +23,10 @@
     <string name="category">Κατηγορία</string>
     <string name="price">Τιμή</string>
     <string name="Add">Προσθήκη</string>
-
-    <!-- String arrays for spinners    -->
-    <string-array name="categories">
-        <item>Ρούχα</item>
-        <item>Παπούτσια</item>
-        <item>Τρόφιμα</item>
-        <item>Άλλα</item>
-    </string-array>
+    <string name="myShops">Τα καταστηματα μου</string>
+    <string name="settings">ΡΥΘΜΙΣΕΙΣ</string>
+    <string name="enableSeller">Καταστηματάρχης</string>
+    <string name="searchDiscount">Ψαξε τωρα για νεες προσφορες</string>
+    <string name="myOffers">Οι προσφορές μου</string>
 
 </resources>

@@ -21,7 +21,7 @@ import eu.jnksoftware.discountfinderandroid.ui.general.Login;
 
 public class RegisterApi extends AppCompatActivity {
 
-    private static final String LOGIN_URL = "http://83.212.117.108:9001/api/register";
+    private static final String LOGIN_URL = "http://83.212.117.108:9002/api/register";
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
 
