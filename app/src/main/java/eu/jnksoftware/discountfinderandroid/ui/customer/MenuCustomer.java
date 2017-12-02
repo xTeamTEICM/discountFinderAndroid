@@ -2,6 +2,8 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +76,31 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 
+    boolean doubleBackPressed = false;
+    @Override
+    public void onBackPressed() {
+
+        if (doubleBackPressed) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        }doubleBackPressed = true;
+
+        Toast.makeText(MenuCustomer.this,"Please press BACK again to exit",Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                doubleBackPressed = false;
+
+            }
+        }, 3000);
+        doubleBackPressed = true;
+    }
+}
+
     private final View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -91,3 +118,4 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 }
+
