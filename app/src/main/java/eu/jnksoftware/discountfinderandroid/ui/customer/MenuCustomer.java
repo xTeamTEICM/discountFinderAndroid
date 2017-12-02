@@ -2,7 +2,6 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -99,7 +98,6 @@ public class MenuCustomer extends AppCompatActivity {
         }, 3000);
         doubleBackPressed = true;
     }
-}
 
     private final View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override

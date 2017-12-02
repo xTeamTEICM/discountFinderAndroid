@@ -1,26 +1,31 @@
 package eu.jnksoftware.discountfinderandroid.Apis;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 
 
 public class LoginApi extends AppCompatActivity {
 
-    private static final String LOGIN_URL = "http://83.212.117.108:9002/api/login";
+    private static final String LOGIN_URL = "http://83.212.117.108:9000/api/login";
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
 

@@ -4,34 +4,27 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import eu.jnksoftware.discountfinderandroid.models.Discount;
 import eu.jnksoftware.discountfinderandroid.models.DiscountCategory;
-import eu.jnksoftware.discountfinderandroid.ui.customer.UserPreferences;
 
 public class CategoriesAPI {
 
 
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
-    ArrayList<String> categories=new ArrayList<>();
-    String categories_url = "http://83.212.117.108:9002/api/category";
+    private ArrayList<String> categories=new ArrayList<>();
+    private String categories_url = "http://83.212.117.108:9000/api/category";
 
     public CategoriesAPI(){
     }
@@ -40,7 +33,6 @@ public class CategoriesAPI {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, categories_url
                 , null
                 , new Response.Listener<JSONArray>() {
-                    String message="";
                     @Override
                     public void onResponse(JSONArray response) {
                         int counter=0;
@@ -50,7 +42,6 @@ public class CategoriesAPI {
                                 DiscountCategory category = new DiscountCategory(jsonObject.getString("id")
                                         ,jsonObject.getString("title"));
                                 categories.add(category.getCategoryTitle());
-                                message+="\n"+category.getCategoryTitle();
                                 counter++;
                             } catch (JSONException e) {
                                 e.printStackTrace();
