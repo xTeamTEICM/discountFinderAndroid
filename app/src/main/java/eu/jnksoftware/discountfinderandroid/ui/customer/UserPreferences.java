@@ -102,16 +102,19 @@ public class UserPreferences extends AppCompatActivity {
             discountPreferencesRequest.setCategory("1");
             discountPreferencesRequest.setPrice("50");
             discountPreferencesRequest.setTags("Sample");
-           // doUserPreference(discountPreferencesRequest);
+            String auth;
+            auth="Bearer "+userTokenResponse.getAccessToken();
+            doUserPreference(discountPreferencesRequest,auth);
+
 
 
         }
     };
 
-    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest) {
+    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest,String auth) {
 
 
-        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest);
+        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
                 @Override
                 public void onResponse(Call<DiscountPreferencesPostResponse> call, Response<DiscountPreferencesPostResponse> response) {
@@ -119,7 +122,7 @@ public class UserPreferences extends AppCompatActivity {
                     int statusCode=response.code();
                     Log.d("UserPreferences","onResponse:"+statusCode);
                     DiscountPreferencesPostResponse discountPreferencesPostResponse=response.body();
-                    Toast.makeText(UserPreferences.this,"Preference add"+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPreferences.this,"Preference add "+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
 
                 }
                 else
