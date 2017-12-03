@@ -8,17 +8,16 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
 
-        def buildNumber = System.getenv("BUILD_NUMBER") ?: 0
+        def buildNumber = System.getenv("BUILD_NUMBER") ?: 0;
         if (buildNumber != 0) {
             versionCode = buildNumber.toInteger()
-            versionName = "${buildNumber}-" + getDate()
+            versionName = "${buildNumber}-" + getDate();
         } else {
             versionCode = 0
-            versionName = "local-" + getDate()
+            versionName = "local-" + getDate();
         }
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     signingConfigs {
@@ -45,33 +44,15 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
-    // Android runner and rules support
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
-
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.github.medyo:android-about-page:1.1.1'
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.json:json:20160810'
-
-    //Mockito (testing)
-    testCompile 'org.mockito:mockito-core:2.7.22'
-    androidTestCompile 'org.mockito:mockito-android:2.7.22'
-
-    // Espresso support
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //for mocking support
-    androidTestCompile 'com.android.support.test.espresso:espresso-intents:3.0.1'
-
-
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.github.medyo:android-about-page:1.1.1'
+    compile 'com.android.volley:volley:1.0.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.json:json:20160810'
 }
 
 static def getDate() {

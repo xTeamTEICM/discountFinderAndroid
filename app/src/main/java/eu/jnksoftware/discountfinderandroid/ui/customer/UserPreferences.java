@@ -28,13 +28,13 @@ public class UserPreferences extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_preferences);
 
-        Spinner spinnerCat = findViewById(R.id.spinnerCategory);
+        Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
         CategoriesAPI categoriesAPI = new CategoriesAPI();
         categories = categoriesAPI.getCategories(UserPreferences.this);
         ArrayAdapter<String> spinContentAdapter = new ArrayAdapter<>(UserPreferences.this, android.R.layout.simple_list_item_1,categories);
-        SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
-        showSeekProgress = findViewById(R.id.tvSeekBarValue);
-        Button savePrefButton = findViewById(R.id.btSavePreferences);
+        SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);
+        showSeekProgress = (TextView) findViewById(R.id.tvSeekBarValue);
+        Button savePrefButton = (Button) findViewById(R.id.btSavePreferences);
 
         savePrefButton.setOnClickListener(savePrefClick);
 
