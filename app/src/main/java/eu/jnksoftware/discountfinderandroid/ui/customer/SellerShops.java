@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
-
-import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
 import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,42 +34,12 @@ public class SellerShops extends AppCompatActivity {
         shopsRecyclerView.setHasFixedSize(true);
 
         apiService = RestClient.getClient().create(ShopsApiInterface.class);
-        //fetchShopsList();
-       // fetchShopsListWithId();
-        addShop();
+        fetchShopsList();
 
-  /*  Button addStore = findViewById(R.id.addStoreButton);
+    Button addStore = findViewById(R.id.addStoreButton);
         addStore.setOnClickListener(addStoreButtonClick);
 
-    Button viewStore = findViewById(R.id.openStoreButton);
-        viewStore.setOnClickListener(openStoreButtonClick);
-    Button settingsButton = findViewById(R.id.settingsButton);
-        viewStore.setOnClickListener(settingsButtonClick);
-    Button deleteButton =  findViewById(R.id.deleteButton);
-        viewStore.setOnClickListener(deleteButtonClick);
-*/
-
 }
-    private void addShop(){
-
-        PostShop postShop = new PostShop("gatidis",45.55548,14.12516);
-        Call<List<Shop>> call = apiService.createShop(postShop);
-        call.enqueue(new Callback<List<Shop>>() {
-            @Override
-            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
-            {
-                Toast.makeText(SellerShops.this, "shop added succesfully", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<List<Shop>> call, Throwable t) {
-                Toast.makeText(SellerShops.this, "shop add error", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-
     private void fetchShopsListWithId(){
 
         Call<List<Shop>> call = apiService.getShopWithId(1);
@@ -99,12 +67,6 @@ public class SellerShops extends AppCompatActivity {
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
             {
                 shops = response.body();
-                Location location = new Location(45.25161,65.5151662);
-                Shop shop1 = new Shop(1,1,"gatidis",location);
-                Shop shop2 = new Shop(2,2,"fresh",location);
-
-                shops.add(shop1);
-                shops.add(shop2);
                 adapter = new RecyclerAdapter(shops);
                 shopsRecyclerView.setAdapter(adapter);
             }
