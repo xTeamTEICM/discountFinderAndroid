@@ -21,6 +21,7 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
+import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,18 +45,6 @@ public class Register extends Activity {
         lastName=(EditText)findViewById(R.id.lastNameField);
         password=(EditText)findViewById(R.id.passwordField);
     }
-
-
-
-
-
-
-    
-
-    
-
-
-    
 
   
     private final View.OnClickListener registerBtnClick = new View.OnClickListener() {

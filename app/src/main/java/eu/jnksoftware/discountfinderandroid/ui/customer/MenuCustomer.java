@@ -20,18 +20,13 @@ import retrofit2.Call;
 public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
-    String accessToken;
-    IuserService iuserService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
 
-        Bundle bundle=getIntent().getExtras();
 
-        String accessToken;
-        accessToken=bundle.getString("tokenAccess");
-        Toast.makeText(MenuCustomer.this, "" +accessToken, Toast.LENGTH_LONG).show();
 
 
 
@@ -107,7 +102,7 @@ public class MenuCustomer extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent=new Intent(MenuCustomer.this,UserPreferences.class);
-            intent.putExtra("tokenAccess",accessToken);
+
             startActivity(intent);
 
         }

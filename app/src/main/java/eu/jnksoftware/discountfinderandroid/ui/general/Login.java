@@ -79,11 +79,9 @@ public class Login extends Activity {
                 {
                     UserTokenResponse userTokenResponse=response.body();
 
-                    Log.d("MainActivity","onResponse:"+statusCode);
+                    Log.d("Login","onResponse:"+statusCode);
                     Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Login.this,MenuCustomer.class);
-                    intent.putExtra("username",userTokenRequest.getUsername().toString());
-                    intent.putExtra("password",userTokenRequest.getPassword().toString());
                     startActivity(intent);
 
 
