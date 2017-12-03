@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by nikos on 1/12/2017.
  */
 
-public class DiscountPreferencesPostRequest {
+public class DiscountPreferencesPostResponse {
 
     @SerializedName("userid")
     @Expose
