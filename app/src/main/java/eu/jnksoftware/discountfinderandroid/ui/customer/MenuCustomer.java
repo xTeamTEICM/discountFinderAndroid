@@ -8,26 +8,35 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
+import retrofit2.Call;
 
 public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
-
+    String accessToken;
+    IuserService iuserService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
 
         Bundle bundle=getIntent().getExtras();
-        String username;
-   if(bundle!=null){
-        username=bundle.getString("username");
-        Toast.makeText(MenuCustomer.this,""+username,Toast.LENGTH_SHORT).show();
-    }
+
+        String accessToken;
+        accessToken=bundle.getString("tokenAccess");
+        Toast.makeText(MenuCustomer.this, "" +accessToken, Toast.LENGTH_LONG).show();
+
+
+
+
+
 
         geoLocation = new GeoLocation(this);
 
@@ -35,7 +44,7 @@ public class MenuCustomer extends AppCompatActivity {
 
             double latitude = geoLocation.getLatitude();
             double longitude = geoLocation.getLongitude();
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
         Button about = (Button) findViewById(R.id.aboutBtn);
@@ -48,6 +57,7 @@ public class MenuCustomer extends AppCompatActivity {
         filtersBtn.setOnClickListener(filtersButtonClick);
         Button myDiscounts = findViewById(R.id.showDiscountsButton);
         myDiscounts.setOnClickListener(myDiscountsClick);
+
 
     }
 
@@ -96,7 +106,10 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(MenuCustomer.this,UserPreferences.class));
+            Intent intent=new Intent(MenuCustomer.this,UserPreferences.class);
+            intent.putExtra("tokenAccess",accessToken);
+            startActivity(intent);
+
         }
     };
 
