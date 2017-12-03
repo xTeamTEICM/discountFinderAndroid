@@ -1,6 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostRequest;
+//import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostRequest;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
@@ -25,7 +25,7 @@ public interface IuserService {
 
     @POST("requestDiscount")
     Call<DiscountPreferencesRequest> postDiscountPreferences(@Body DiscountPreferencesPostRequest discountPreferencesPostRequest);
-    
+
     @GET("requestDiscount/1")
     Call<DiscountPreferencesResponse> getOneDiscountPreference();
 

@@ -7,18 +7,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.User;
+import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
+import eu.jnksoftware.discountfinderandroid.ui.general.Login;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
 import retrofit2.Call;
 
 public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
+    private UserTokenResponse userTokenResponse;
     String accessToken;
     IuserService iuserService;
     @Override
@@ -26,13 +31,16 @@ public class MenuCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
 
-        Bundle bundle=getIntent().getExtras();
+
+        Gson user = new Gson();
+        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
+        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+
+        /*Bundle bundle=getIntent().getExtras();
 
         String accessToken;
         accessToken=bundle.getString("tokenAccess");
-        Toast.makeText(MenuCustomer.this, "" +accessToken, Toast.LENGTH_LONG).show();
-
-
+        Toast.makeText(MenuCustomer.this, "" +accessToken, Toast.LENGTH_LONG).show();*/
 
 
 
@@ -104,10 +112,10 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(MenuCustomer.this,UserPreferences.class);
-            intent.putExtra("tokenAccess",accessToken);
-            startActivity(intent);
-
+            Gson user=new Gson();
+            Intent userPreferences=new Intent(MenuCustomer.this,UserPreferences.class);
+            userPreferences.putExtra("User", user.toJson(userTokenResponse));
+            startActivity(userPreferences);
         }
     };
 }

@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -79,12 +81,16 @@ public class Login extends Activity {
                 {
                     UserTokenResponse userTokenResponse=response.body();
 
+                    Gson user=new Gson();
+                    Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
+                    menuCustomer.putExtra("User", user.toJson(userTokenResponse));
+                    startActivity(menuCustomer);
                     Log.d("MainActivity","onResponse:"+statusCode);
                     Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(Login.this,MenuCustomer.class);
+                    /*Intent intent=new Intent(Login.this,MenuCustomer.class);
                     intent.putExtra("username",userTokenRequest.getUsername().toString());
                     intent.putExtra("password",userTokenRequest.getPassword().toString());
-                    startActivity(intent);
+                    startActivity(intent);*/
 
 
                 }

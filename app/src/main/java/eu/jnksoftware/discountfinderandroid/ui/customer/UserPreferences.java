@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
@@ -29,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserPreferences extends AppCompatActivity {
-
+    private UserTokenResponse userTokenResponse;
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
     public ArrayList<String> categories = new ArrayList<>();
@@ -44,9 +46,10 @@ public class UserPreferences extends AppCompatActivity {
         setContentView(R.layout.activity_user_preferences);
         String accessToken;
         iuserService= ApiUtils.getUserService();
-        Bundle bundle=getIntent().getExtras();
-        accessToken=bundle.getString("tokenAccess");
 
+        Gson user = new Gson();
+        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
+        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
 
 
         Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
@@ -99,7 +102,7 @@ public class UserPreferences extends AppCompatActivity {
             discountPreferencesRequest.setCategory("1");
             discountPreferencesRequest.setPrice("50");
             discountPreferencesRequest.setTags("Sample");
-            doUserPreference(discountPreferencesRequest);
+           // doUserPreference(discountPreferencesRequest);
 
 
         }
