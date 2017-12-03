@@ -8,14 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
-import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
-import retrofit2.Call;
 
 public class MenuCustomer extends AppCompatActivity {
 
@@ -26,12 +22,12 @@ public class MenuCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
 
-
-
-
-
-
-
+        Bundle bundle = getIntent().getExtras();
+        String username;
+        if (bundle != null) {
+            username = bundle.getString("username");
+            Toast.makeText(MenuCustomer.this, "" + username, Toast.LENGTH_SHORT).show();
+        }
 
         geoLocation = new GeoLocation(this);
 
@@ -39,7 +35,7 @@ public class MenuCustomer extends AppCompatActivity {
 
             double latitude = geoLocation.getLatitude();
             double longitude = geoLocation.getLongitude();
-            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
         Button about = (Button) findViewById(R.id.aboutBtn);
@@ -50,9 +46,6 @@ public class MenuCustomer extends AppCompatActivity {
         myShops.setOnClickListener(showShopsButtonClick);
         Button filtersBtn = (Button) findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
-        Button myDiscounts = findViewById(R.id.showDiscountsButton);
-        myDiscounts.setOnClickListener(myDiscountsClick);
-
 
     }
 
@@ -64,16 +57,17 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener myDiscountsClick = new View.OnClickListener() {
+    private final View.OnClickListener shopsClick = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
             if (geoLocation.getLocation() != null) {
                 try {
                     // TODO : call discountAPI to take the nearest discounts
-                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerRecyclerList.class));
+                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerList.class));
 
                 } catch (Exception ex) {
                     Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+
                 }
             } else {
                 Toast.makeText(MenuCustomer.this, "We don't have your location yet !", Toast.LENGTH_SHORT).show();
@@ -101,13 +95,9 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(MenuCustomer.this,UserPreferences.class);
-
-            startActivity(intent);
-
+            startActivity(new Intent(MenuCustomer.this, UserPreferences.class));
         }
     };
-
     boolean doubleBackPressed = false;
     @Override
     public void onBackPressed() {
@@ -131,7 +121,4 @@ public class MenuCustomer extends AppCompatActivity {
         }, 3000);
         doubleBackPressed = true;
     }
-
-
 }
-
