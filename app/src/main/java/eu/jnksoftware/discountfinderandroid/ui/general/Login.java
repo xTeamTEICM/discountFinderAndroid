@@ -11,14 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.Apis.LoginApi;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
@@ -81,6 +76,12 @@ public class Login extends Activity {
                 {
                     UserTokenResponse userTokenResponse=response.body();
 
+                    Gson user=new Gson();
+                    Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
+                    menuCustomer.putExtra("User", user.toJson(userTokenResponse));
+                    startActivity(menuCustomer);
+                    Log.d("MainActivity","onResponse:"+statusCode);
+                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
                     Log.d("Login","onResponse:"+statusCode);
                     Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Login.this,MenuCustomer.class);

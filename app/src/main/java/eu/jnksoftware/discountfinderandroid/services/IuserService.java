@@ -1,5 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
+import java.util.List;
+import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesResponse;
@@ -14,9 +16,6 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
-/**
- * Created by nikos on 1/12/2017.
- */
 
 public interface IuserService {
     @POST("login")
@@ -25,12 +24,11 @@ public interface IuserService {
     @POST("register")
     Call<UserTokenResponse> register(@Body RegisterTokenRequest registerTokenRequest);
 
-    @PUT("requestDiscount/3")
+    @PUT("requestedDiscount/3")
     Call<DiscountPreferencesResponse> putDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesRequest);
+
     @POST("requestedDiscount")
-    Call<Void>postDiscoutPreferencesHeader(@Header("Authorization")String auth);
-    @POST("requestedDiscount")
-    Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesRequest);
+    Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesPostRequest,@Header("Authorization") String auth);
 
     @GET("requestedDiscount/1")
     Call<DiscountPreferencesResponse> getOneDiscountPreference();
@@ -40,6 +38,10 @@ public interface IuserService {
 
     @DELETE("requestedDiscount/3")
     Call<Void> deleteDiscountPreference();
+
+    @GET("category")
+    Call<List<Category>> fetchCategories();
+
 
 
 }

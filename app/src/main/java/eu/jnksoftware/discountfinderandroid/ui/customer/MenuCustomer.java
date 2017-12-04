@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
@@ -16,11 +19,17 @@ import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
 public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
+    private UserTokenResponse userTokenResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
+
+
+        Gson user = new Gson();
+        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
+        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
 
         Bundle bundle = getIntent().getExtras();
         String username;
@@ -95,6 +104,10 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Gson user=new Gson();
+            Intent userPreferences=new Intent(MenuCustomer.this,UserPreferences.class);
+            userPreferences.putExtra("User", user.toJson(userTokenResponse));
+            startActivity(userPreferences);
             startActivity(new Intent(MenuCustomer.this, UserPreferences.class));
         }
     };
