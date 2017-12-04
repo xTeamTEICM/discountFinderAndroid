@@ -40,7 +40,7 @@ public class MenuCustomer extends AppCompatActivity {
 
         Button about = (Button) findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
-        Button settings = (Button) findViewById(R.id.settingsBtn);
+        Button settings = findViewById(R.id.settingsBtn);
         settings.setOnClickListener(settingsClick);
         Button myShops = (Button) findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);

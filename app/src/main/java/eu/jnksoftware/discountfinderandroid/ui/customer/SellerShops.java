@@ -2,43 +2,84 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-
+import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
-
+import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
+import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.Shop;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SellerShops extends AppCompatActivity {
+    RecyclerView shopsRecyclerView;
+    RecyclerView.Adapter adapter;
+    RecyclerView.LayoutManager layoutManager;
+    List<Shop> shops = new ArrayList<>();
+    ShopsApiInterface apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_shops);
+        shopsRecyclerView = findViewById(R.id.shopsRecyclerView);
+        layoutManager = new LinearLayoutManager(this);
+        shopsRecyclerView.setLayoutManager(layoutManager);
+        shopsRecyclerView.setHasFixedSize(true);
 
-    List<String> shopNames = new ArrayList<>();
-        shopNames.add("store 1");
-        shopNames.add("store 2");
-        shopNames.add("store 3");
+        apiService = RestClient.getClient().create(ShopsApiInterface.class);
+        fetchShopsList();
 
-    final Spinner spinner = (Spinner) findViewById(R.id.ShopSpinner);
-    final ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, shopNames);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
-
-    Button addStore = (Button) findViewById(R.id.addStoreButton);
+    Button addStore = findViewById(R.id.addStoreButton);
         addStore.setOnClickListener(addStoreButtonClick);
 
-    Button viewStore = (Button) findViewById(R.id.openStoreButton);
-        viewStore.setOnClickListener(openStoreButtonClick);
-    Button settingsButton = (Button) findViewById(R.id.settingsButton);
-        viewStore.setOnClickListener(settingsButtonClick);
-    Button deleteButton = (Button) findViewById(R.id.deleteButton);
-        viewStore.setOnClickListener(deleteButtonClick);
 }
+    private void fetchShopsListWithId(){
+
+        Call<List<Shop>> call = apiService.getShopWithId(1);
+        call.enqueue(new Callback<List<Shop>>() {
+            @Override
+            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
+            {
+                shops = response.body();
+                adapter = new RecyclerAdapter(shops);
+                shopsRecyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Shop>> call, Throwable t) {
+                Toast.makeText(SellerShops.this, "error occured", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void fetchShopsList(){
+        Call<List<Shop>> call = apiService.getShopsList();
+        call.enqueue(new Callback<List<Shop>>() {
+            @Override
+            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
+            {
+                shops = response.body();
+                adapter = new RecyclerAdapter(shops);
+                shopsRecyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Shop>> call, Throwable t) {
+                Toast.makeText(SellerShops.this, "error occured", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
 
     private final View.OnClickListener addStoreButtonClick = new View.OnClickListener() {
         @Override
