@@ -50,7 +50,7 @@
         tools:layout_editor_absoluteY="497dp">
 
         <Button
-            android:id="@+id/showDiscountsButton"
+            android:id="@+id/showDiscountsBtn"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/myShops"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/actionBar"
         app:layout_constraintEnd_toEndOf="parent" />
 

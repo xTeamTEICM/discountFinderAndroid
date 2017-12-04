@@ -28,5 +28,8 @@
     <string name="enableSeller">Καταστηματάρχης</string>
     <string name="searchDiscount">Ψαξε τωρα για νεες προσφορες</string>
     <string name="myOffers">Οι προσφορές μου</string>
-
+    <string name="shop">Κατάστημα </string>
+    <string name="ShortDescription">Περιγραφη</string>
+    <string name="shopName">Μαγαζι</string>
+    <string name="Price">Τιμη</string>
 </resources>

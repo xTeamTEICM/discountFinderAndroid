@@ -43,9 +43,9 @@ public class discountListAdapter extends  ArrayAdapter<Discount> {
         return view;
     }
 
-public void deleteDiscount(Discount discountproduct)
-{
-    
-}
+    public void deleteDiscount(Discount discountproduct)
+    {
+
+    }
 
 }

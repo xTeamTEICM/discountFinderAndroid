@@ -2,6 +2,7 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,23 +10,17 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
-import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
-import eu.jnksoftware.discountfinderandroid.ui.general.Login;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
-import retrofit2.Call;
 
 public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
     private UserTokenResponse userTokenResponse;
-    String accessToken;
-    IuserService iuserService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +31,12 @@ public class MenuCustomer extends AppCompatActivity {
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
         Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
 
-        /*Bundle bundle=getIntent().getExtras();
-
-        String accessToken;
-        accessToken=bundle.getString("tokenAccess");
-        Toast.makeText(MenuCustomer.this, "" +accessToken, Toast.LENGTH_LONG).show();*/
-
-
-
+        Bundle bundle = getIntent().getExtras();
+        String username;
+        if (bundle != null) {
+            username = bundle.getString("username");
+            Toast.makeText(MenuCustomer.this, "" + username, Toast.LENGTH_SHORT).show();
+        }
 
         geoLocation = new GeoLocation(this);
 
@@ -51,18 +44,17 @@ public class MenuCustomer extends AppCompatActivity {
 
             double latitude = geoLocation.getLatitude();
             double longitude = geoLocation.getLongitude();
-            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
         Button about = (Button) findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
-        Button settings = (Button) findViewById(R.id.settingsBtn);
+        Button settings = findViewById(R.id.settingsBtn);
         settings.setOnClickListener(settingsClick);
         Button myShops = (Button) findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
         Button filtersBtn = (Button) findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
-
 
     }
 
@@ -116,6 +108,30 @@ public class MenuCustomer extends AppCompatActivity {
             Intent userPreferences=new Intent(MenuCustomer.this,UserPreferences.class);
             userPreferences.putExtra("User", user.toJson(userTokenResponse));
             startActivity(userPreferences);
+            startActivity(new Intent(MenuCustomer.this, UserPreferences.class));
         }
     };
+    boolean doubleBackPressed = false;
+    @Override
+    public void onBackPressed() {
+
+        if (doubleBackPressed) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+            System.exit(0);
+        }doubleBackPressed = true;
+
+        Toast.makeText(MenuCustomer.this,"Please press BACK again to exit",Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                doubleBackPressed = false;
+
+            }
+        }, 3000);
+        doubleBackPressed = true;
+    }
 }

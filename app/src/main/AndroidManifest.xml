@@ -25,15 +25,32 @@
         </activity>
         <activity android:name=".ui.general.Login" />
         <activity android:name=".ui.general.Register" />
-        <activity android:name=".ui.customer.MenuCustomer" />
-        <activity android:name=".ui.customer.DiscountCustomerList" />
+        <activity android:name=".ui.customer.MenuCustomer"/>
         <activity android:name=".ui.customer.UserPreferences"/>
         <activity android:name=".ui.general.AboutUs" />
+        <activity android:name=".ui.general.Settings" />
+        <activity android:name=".ui.customer.SellerShops" />
+        <activity android:name=".ui.customer.DiscountCustomerRecyclerList"/>
+        <activity android:name=".ui.customer.FullDiscount">
+            <intent-filter>
+                <action android:name="FULLDISCOUNT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".services.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".services.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <service android:name=".services.GeoLocation" />
 
-        <activity android:name=".ui.general.Settings" />
-        <activity android:name=".ui.customer.SellerShops"></activity>
     </application>
 
 </manifest>

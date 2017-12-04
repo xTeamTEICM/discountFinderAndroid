@@ -10,15 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.Apis.LoginApi;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
@@ -40,7 +35,7 @@ public class Login extends Activity {
         eMail=(EditText) findViewById(R.id.loginEMailField);
         password=(EditText)findViewById(R.id.loginPasswordField);
         iuserService= ApiUtils.getUserService();
-
+        String token = FirebaseInstanceId.getInstance().getToken();
 
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
@@ -87,10 +82,10 @@ public class Login extends Activity {
                     startActivity(menuCustomer);
                     Log.d("MainActivity","onResponse:"+statusCode);
                     Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
-                    /*Intent intent=new Intent(Login.this,MenuCustomer.class);
-                    intent.putExtra("username",userTokenRequest.getUsername().toString());
-                    intent.putExtra("password",userTokenRequest.getPassword().toString());
-                    startActivity(intent);*/
+                    Log.d("Login","onResponse:"+statusCode);
+                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(Login.this,MenuCustomer.class);
+                    startActivity(intent);
 
 
                 }

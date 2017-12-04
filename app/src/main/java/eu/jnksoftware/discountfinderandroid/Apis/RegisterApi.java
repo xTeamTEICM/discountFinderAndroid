@@ -12,16 +12,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import eu.jnksoftware.discountfinderandroid.models.User;
 import eu.jnksoftware.discountfinderandroid.ui.general.Login;
 
 public class RegisterApi extends AppCompatActivity {
 
-    private static final String LOGIN_URL = "http://83.212.117.108:9002/api/register";
+    private static final String LOGIN_URL = "http://83.212.117.108:9000/api/register";
     private static final int timeOutInMs = 10000;
     private static final int numberOfTries = 1;
 
