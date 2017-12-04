@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,7 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
+import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +31,8 @@ import retrofit2.Response;
 public class UserPreferences extends AppCompatActivity {
 
     private int seekBarProgress=0;
+    private UserTokenResponse userTokenResponse;
+    private int seekBarProgress = 0;
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
     private List<String> catTemp = new ArrayList<>();
@@ -42,8 +47,11 @@ public class UserPreferences extends AppCompatActivity {
         setContentView(R.layout.activity_user_preferences);
         String accessToken;
         iuserService= ApiUtils.getUserService();
-        Bundle bundle=getIntent().getExtras();
-        accessToken=bundle.getString("tokenAccess");
+
+        Gson user = new Gson();
+        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
+        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+
 
         Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<String>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
@@ -91,15 +99,18 @@ public class UserPreferences extends AppCompatActivity {
             discountPreferencesRequest.setCategory("1");
             discountPreferencesRequest.setPrice("50");
             discountPreferencesRequest.setTags("Sample");
-            doUserPreference(discountPreferencesRequest);
+            String auth;
+            auth="Bearer "+userTokenResponse.getAccessToken();
+            doUserPreference(discountPreferencesRequest,auth);
+
 
 
         }
     };
 
-    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest) {
+    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest,String auth) {
 
-        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest);
+        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
                 @Override
                 public void onResponse(Call<DiscountPreferencesPostResponse> call, Response<DiscountPreferencesPostResponse> response) {
@@ -107,7 +118,7 @@ public class UserPreferences extends AppCompatActivity {
                     int statusCode=response.code();
                     Log.d("UserPreferences","onResponse:"+statusCode);
                     DiscountPreferencesPostResponse discountPreferencesPostResponse=response.body();
-                    Toast.makeText(UserPreferences.this,"Preference add"+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPreferences.this,"Preference add "+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
 
                 }
                 else
