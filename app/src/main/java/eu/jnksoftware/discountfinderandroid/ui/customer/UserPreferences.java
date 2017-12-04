@@ -50,7 +50,7 @@ public class UserPreferences extends AppCompatActivity {
 
         Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+        Toast.makeText(UserPreferences.this, "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
         
         spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<String>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
