@@ -3,25 +3,17 @@ package eu.jnksoftware.discountfinderandroid.ui.general;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
-
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.Apis.RegisterApi;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -38,6 +38,7 @@ public class UserPreferences extends AppCompatActivity {
     IuserService iuserService;
     String accessToken;
     private ArrayAdapter<String> spinContentAdapter;
+    private Spinner spinnerCat;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -51,7 +52,7 @@ public class UserPreferences extends AppCompatActivity {
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
         Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
         
-        Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
+        spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<String>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
         spinnerCat.getBackground().setAlpha(130);
         spinContentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -92,17 +93,15 @@ public class UserPreferences extends AppCompatActivity {
     private final View.OnClickListener savePrefClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            ;
             DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-            discountPreferencesRequest.setCategory("1");
-            discountPreferencesRequest.setPrice("50");
+            discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
+            discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
             discountPreferencesRequest.setTags("Sample");
             String auth;
             auth="Bearer "+userTokenResponse.getAccessToken();
             doUserPreference(discountPreferencesRequest,auth);
-
-
-
+            Toast.makeText(UserPreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
         }
     };
 
