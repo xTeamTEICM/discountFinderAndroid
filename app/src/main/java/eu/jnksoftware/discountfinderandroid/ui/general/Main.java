@@ -1,13 +1,25 @@
 package eu.jnksoftware.discountfinderandroid.ui.general;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
@@ -21,6 +33,7 @@ public class Main extends AppCompatActivity {
         this.setTheme(R.style.SplashTheme);
         super.onCreate(savedInstanceState);
         geoLocation = new GeoLocation(this);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             geoLocation.requestPermissions(this);
         } else {
@@ -28,7 +41,8 @@ public class Main extends AppCompatActivity {
         }
     }
 
-    @Override
+
+        @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 100) {
@@ -57,7 +71,8 @@ public class Main extends AppCompatActivity {
     }
 
     private void openLogin() {
-        startActivity(new Intent(Main.this, Login.class));
+        Intent intent = new Intent(Main.this,Login.class);
+        startActivity(intent);
         finish();
     }
 }

@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer">
 
+    <TextView
+        android:id="@+id/tvNewDiscounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/searchDiscount"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/filtersBtn"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/filters_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/settingsBtn"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/settings_icon"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
         android:id="@+id/actionBar"
         style="?android:attr/buttonBarStyle"
@@ -21,12 +50,12 @@
         tools:layout_editor_absoluteY="497dp">
 
         <Button
-            android:id="@+id/showShopsBtn"
+            android:id="@+id/showDiscountsBtn"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/shops"
+            android:text="@string/myOffers"
             android:textAlignment="center" />
 
         <Button
@@ -38,5 +67,16 @@
             android:text="@string/about"
             android:textAlignment="center" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/showShopsButton"
+        android:layout_width="151dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/myShops"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/actionBar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
