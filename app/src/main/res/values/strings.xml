@@ -32,4 +32,17 @@
     <string name="ShortDescription">Περιγραφη</string>
     <string name="shopName">Μαγαζι</string>
     <string name="Price">Τιμη</string>
+    <string name="giveShopName">Give shop name</string>
+    <string name="giveShopLocation">Give shop location</string>
+    <string name="giveShopDescription">Give shop description</string>
+    <string name="insert">INSERT</string>
+    <string name="cancel">CANCEL</string>
+    <!-- String arrays for spinners    -->
+    <string-array name="categories">
+        <item>Ρούχα</item>
+        <item>Παπούτσια</item>
+        <item>Τρόφιμα</item>
+        <item>Άλλα</item>
+    </string-array>
+
 </resources>
