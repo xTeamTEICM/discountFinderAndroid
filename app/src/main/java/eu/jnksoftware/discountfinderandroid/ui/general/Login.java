@@ -80,13 +80,12 @@ public class Login extends Activity {
                     Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
                     menuCustomer.putExtra("User", user.toJson(userTokenResponse));
                     startActivity(menuCustomer);
-                    Log.d("MainActivity","onResponse:"+statusCode);
+                   /* Log.d("MainActivity","onResponse:"+statusCode);
                     Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
                     Log.d("Login","onResponse:"+statusCode);
                     Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Login.this,MenuCustomer.class);
-                    startActivity(intent);
-
+                    */
 
                 }
                 else
