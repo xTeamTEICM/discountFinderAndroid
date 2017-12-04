@@ -30,7 +30,6 @@ import retrofit2.Response;
 
 public class UserPreferences extends AppCompatActivity {
 
-    private int seekBarProgress=0;
     private UserTokenResponse userTokenResponse;
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
@@ -51,8 +50,7 @@ public class UserPreferences extends AppCompatActivity {
         Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
         Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
-
-
+        
         Spinner spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<String>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
         spinnerCat.getBackground().setAlpha(130);
@@ -154,7 +152,5 @@ public class UserPreferences extends AppCompatActivity {
 
         });
     }
-
-
 
 }
