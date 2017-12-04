@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -38,7 +40,7 @@ public class Login extends Activity {
         eMail=(EditText) findViewById(R.id.loginEMailField);
         password=(EditText)findViewById(R.id.loginPasswordField);
         iuserService= ApiUtils.getUserService();
-
+        String token = FirebaseInstanceId.getInstance().getToken();
 
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
