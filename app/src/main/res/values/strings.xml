@@ -26,5 +26,8 @@
     <string name="myShops">Τα καταστηματα μου</string>
     <string name="settings">ΡΥΘΜΙΣΕΙΣ</string>
     <string name="enableSeller">Καταστηματάρχης</string>
+    <string name="searchDiscount">Ψαξε τωρα για νεες προσφορες</string>
+    <string name="myOffers">Οι προσφορές μου</string>
+    <string name="shop">Κατάστημα </string>
 
 </resources>

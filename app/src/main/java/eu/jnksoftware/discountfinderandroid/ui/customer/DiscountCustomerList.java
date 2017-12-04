@@ -27,7 +27,7 @@ public class DiscountCustomerList extends AppCompatActivity {
 
         discountProducts= new ArrayList<>();
         fillDiscountProductsList();
-        this.listViewDiscountProducts= findViewById(R.id.shopsList);
+        this.listViewDiscountProducts= (ListView) findViewById(R.id.shopsList);
         this.listViewDiscountProducts.setAdapter(new discountListAdapter(this,discountProducts));
         this.listViewDiscountProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
