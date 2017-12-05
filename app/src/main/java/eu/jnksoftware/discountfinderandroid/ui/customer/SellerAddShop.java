@@ -1,5 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -56,20 +57,6 @@ public class SellerAddShop extends AppCompatActivity {
             }
         });
     }
-    private void deleteShop(int id) {
-         Call<Void> call = apiService.deleteShop(id, auth);
-         call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(SellerAddShop.this, "shop deleted", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(SellerAddShop.this, "error occured", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     private final View.OnClickListener insertButtonClick = new View.OnClickListener() {
         @Override
@@ -81,11 +68,7 @@ public class SellerAddShop extends AppCompatActivity {
     private final View.OnClickListener cancelButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-           //   SellerAddShop.this.startActivity(new Intent(SellerAddShop.this, SellerShops.class));
-            EditText delete = findViewById(R.id.shopDescriptionEditText);
-            String deleteId = delete.getText().toString();
-            int id = Integer.parseInt(deleteId);
-            deleteShop(id);
+              SellerAddShop.this.startActivity(new Intent(SellerAddShop.this, SellerShops.class));
         }
     };
 
