@@ -5,47 +5,59 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 
-/**
- * Created by dito on 12/2/2017.
- */
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
-    List<Shop> arrayList = new ArrayList<>();
+    public interface OnItemClickListener {
+        void onItemClick(Shop shop);
+    }
 
-    public RecyclerAdapter(List<Shop> arrayList){
-        this.arrayList = arrayList;
+    private List<Shop> shopList = new ArrayList<>();
+    private final OnItemClickListener shopListener;
+    public RecyclerAdapter(List<Shop> shopList, OnItemClickListener shopListener){
+        this.shopList = shopList;
+        this.shopListener = shopListener;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
-        return  myViewHolder;
+        return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.brandName.setText(arrayList.get(position).getBrandName());
+
+        holder.bind(shopList.get(position), shopListener);
+        holder.brandName.setText(shopList.get(position).getBrandName());
     }
+
 
     @Override
     public int getItemCount() {
-            return arrayList.size();
+        return shopList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView brandName;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             brandName = itemView.findViewById(R.id.shopNameTextView);
+        }
+
+        public void bind(final Shop shop, final OnItemClickListener listener) {
+            this.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(shop);
+                }
+            });
         }
     }
 }

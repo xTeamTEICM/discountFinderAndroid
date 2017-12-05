@@ -40,21 +40,23 @@ public class MenuCustomer extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
-        Button about = (Button) findViewById(R.id.aboutBtn);
+        Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
         Button settings = findViewById(R.id.settingsBtn);
         settings.setOnClickListener(settingsClick);
-        Button myShops = (Button) findViewById(R.id.showShopsButton);
+        Button myShops = findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
-        Button filtersBtn = (Button) findViewById(R.id.filtersBtn);
+        Button filtersBtn = findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
-
+        
     }
 
     private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
+            Gson user = new Gson();
+            intent.putExtra("User", user.toJson(userTokenResponse));
             startActivity(intent);
         }
     };
