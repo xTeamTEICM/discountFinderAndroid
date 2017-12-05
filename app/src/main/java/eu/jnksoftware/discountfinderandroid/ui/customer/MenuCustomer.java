@@ -47,14 +47,16 @@ public class MenuCustomer extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
         }
 
-        Button about = (Button) findViewById(R.id.aboutBtn);
+        Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
         Button settings = findViewById(R.id.settingsBtn);
         settings.setOnClickListener(settingsClick);
-        Button myShops = (Button) findViewById(R.id.showShopsButton);
+        Button myShops =  findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
-        Button filtersBtn = (Button) findViewById(R.id.filtersBtn);
+        Button filtersBtn =  findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
+        Button myDiscount = findViewById(R.id.showDiscountsBtn);
+        myDiscount.setOnClickListener(discountClick);
 
     }
 
@@ -66,13 +68,13 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener shopsClick = new View.OnClickListener() {
+    private final View.OnClickListener discountClick = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
             if (geoLocation.getLocation() != null) {
                 try {
                     // TODO : call discountAPI to take the nearest discounts
-                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerList.class));
+                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerRecyclerList.class));
 
                 } catch (Exception ex) {
                     Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -94,7 +96,7 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Button button = (Button) findViewById(R.id.showShopsButton);
+            Button button = findViewById(R.id.showShopsButton);
             Intent intent = new Intent(MenuCustomer.this, Settings.class);
             intent.putExtra("isSellerEnabled", button.isShown());
             startActivity(intent);
@@ -111,6 +113,14 @@ public class MenuCustomer extends AppCompatActivity {
             startActivity(new Intent(MenuCustomer.this, UserPreferences.class));
         }
     };
+
+    private final View.OnClickListener shopClick = new View.OnClickListener() {
+        @Override
+        public void onClick(final View v) {
+            startActivity(new Intent(MenuCustomer.this, AboutUs.class));
+        }
+    };
+
     boolean doubleBackPressed = false;
     @Override
     public void onBackPressed() {
