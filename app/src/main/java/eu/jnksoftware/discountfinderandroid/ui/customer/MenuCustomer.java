@@ -31,13 +31,6 @@ public class MenuCustomer extends AppCompatActivity {
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
         Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
 
-        Bundle bundle = getIntent().getExtras();
-        String username;
-        if (bundle != null) {
-            username = bundle.getString("username");
-            Toast.makeText(MenuCustomer.this, "" + username, Toast.LENGTH_SHORT).show();
-        }
-
         geoLocation = new GeoLocation(this);
 
         if (geoLocation.canGetLocation()) {
@@ -110,7 +103,6 @@ public class MenuCustomer extends AppCompatActivity {
             Intent userPreferences=new Intent(MenuCustomer.this,UserPreferences.class);
             userPreferences.putExtra("User", user.toJson(userTokenResponse));
             startActivity(userPreferences);
-            startActivity(new Intent(MenuCustomer.this, UserPreferences.class));
         }
     };
 
