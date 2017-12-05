@@ -32,8 +32,8 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        eMail=(EditText) findViewById(R.id.loginEMailField);
-        password=(EditText)findViewById(R.id.loginPasswordField);
+        eMail= findViewById(R.id.loginEMailField);
+        password=findViewById(R.id.loginPasswordField);
         iuserService= ApiUtils.getUserService();
         String token = FirebaseInstanceId.getInstance().getToken();
 
