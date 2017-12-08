@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by dito on 12/5/2017.
  */
 
-public class UpdateShop {
+public class UpdatePostShop {
 
     @SerializedName("id")
     @Expose
@@ -25,7 +25,7 @@ public class UpdateShop {
     @Expose
     private final double latPos;
 
-    public UpdateShop(int id, String brandName, double logPos, double latPos) {
+    public UpdatePostShop(int id, String brandName, double logPos, double latPos) {
         this.id = id;
         this.brandName = brandName;
         this.logPos = logPos;

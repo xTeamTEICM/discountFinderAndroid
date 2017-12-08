@@ -42,7 +42,7 @@ public interface ShopsApiInterface {
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @PUT("shop")
-    Call<Void> updateShop(@Body UpdateShop updateShop,@Header("Authorization") String auth);
+    Call<Void> updateShop(@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
 
 
 
