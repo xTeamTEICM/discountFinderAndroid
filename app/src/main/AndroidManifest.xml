@@ -37,6 +37,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.customer.SellerAddShop"/>
 
         <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>

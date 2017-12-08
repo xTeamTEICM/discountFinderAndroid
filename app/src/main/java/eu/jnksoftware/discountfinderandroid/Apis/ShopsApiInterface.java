@@ -44,4 +44,6 @@ public interface ShopsApiInterface {
     @PUT("shop")
     Call<Void> updateShop(@Body UpdateShop updateShop,@Header("Authorization") String auth);
 
+
+
 }
