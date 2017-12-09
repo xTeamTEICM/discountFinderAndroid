@@ -1,21 +1,18 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
-import eu.jnksoftware.discountfinderandroid.Apis.UpdateShop;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 import retrofit2.Call;
@@ -61,25 +58,12 @@ public class ViewStore extends AppCompatActivity {
     private final View.OnClickListener settingsClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            updateShop();
+           Intent intent = new Intent(ViewStore.this, UpdateShop.class);
+           intent.putExtra("auth",auth);
+           intent.putExtra("shopId",shopId);
+           startActivity(intent);
         }
     };
-
-    private final void updateShop(){
-        UpdateShop updateShop = new UpdateShop(36,"ditoUpdated",45,45);
-        Call<Void> call = apiService.updateShop(updateShop,auth);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(ViewStore.this, "Shop updated", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(ViewStore.this, "Shop didn't update", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     private final View.OnClickListener deleteClick = new View.OnClickListener() {
         @Override
