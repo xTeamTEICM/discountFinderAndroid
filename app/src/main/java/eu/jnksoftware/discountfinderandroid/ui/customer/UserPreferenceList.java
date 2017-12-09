@@ -48,11 +48,24 @@ public class UserPreferenceList extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        Gson user = new Gson();
+         Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"), UserTokenResponse.class);
+        Button deletePreference=findViewById(R.id.deleteprefBtn);
         iuserService = ApiUtils.getUserService();
         String auth="Bearer "+userTokenResponse.getAccessToken();
         fetchUserPreferences(auth);
+
+        deletePreference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gson user = new Gson();
+
+                Intent intent=new Intent(UserPreferenceList.this,DeletePreference.class);
+                intent.putExtra("User", user.toJson(userTokenResponse));
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -66,7 +79,20 @@ public class UserPreferenceList extends AppCompatActivity {
            startActivity(userPreferences);
             }
            });
-         }
+
+   Button updatePreference=findViewById(R.id.updateprefBtn);
+   updatePreference.setOnClickListener(new View.OnClickListener() {
+       @Override
+       public void onClick(View view) {
+           Gson user = new Gson();
+           Intent userUpdatePreferences = new Intent(UserPreferenceList.this, UserUpdatePreferences.class);
+           userUpdatePreferences.putExtra("User", user.toJson(userTokenResponse));
+           startActivity(userUpdatePreferences);
+       }
+   });
+    }
+
+
 
     public void fetchUserPreferences(String auth) {
         Call<List<DiscountPreferencesResponse>> disc=iuserService.getDiscountsPreference(auth);
