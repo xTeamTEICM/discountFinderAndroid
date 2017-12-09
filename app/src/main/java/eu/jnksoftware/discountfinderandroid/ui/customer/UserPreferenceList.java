@@ -57,17 +57,17 @@ public class UserPreferenceList extends AppCompatActivity {
 
 
 
-       // Button addPrefence = findViewById(R.id.userPreferencesBtn);
-        //addPrefence.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-        //   public void onClick(View view) {
-        //   Gson user = new Gson();
-        //      Intent userPreferences = new Intent(UserPreferenceList.this, UserPreferences.class);
-        //     userPreferences.putExtra("User", user.toJson(userTokenResponse));
-        //     startActivity(userPreferences);
-        //     }
-        //   });
-         }//
+       Button addPrefence = findViewById(R.id.userPreferencesBtn);
+       addPrefence.setOnClickListener(new View.OnClickListener() {
+           @Override
+          public void onClick(View view) {
+          Gson user = new Gson();
+              Intent userPreferences = new Intent(UserPreferenceList.this, UserPreferences.class);
+             userPreferences.putExtra("User", user.toJson(userTokenResponse));
+           startActivity(userPreferences);
+            }
+           });
+         }
 
     public void fetchUserPreferences(String auth) {
         Call<List<DiscountPreferencesResponse>> disc=iuserService.getDiscountsPreference(auth);
