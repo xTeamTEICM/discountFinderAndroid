@@ -2,6 +2,9 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 
 import java.util.List;
 
+import eu.jnksoftware.discountfinderandroid.models.DiscountGet;
+import eu.jnksoftware.discountfinderandroid.models.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -44,6 +47,12 @@ public interface ShopsApiInterface {
     @PUT("shop")
     Call<Void> updateShop(@Body UpdateShop updateShop,@Header("Authorization") String auth);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @POST("discount")
+    Call<DiscountGet> addDiscount(@Body DiscountPost discountPost, @Header("Authorization") String auth);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @GET("discount")
+    Call<List<SellerDiscount>> getSellerDiscounts(@Header("Authorization") String auth);
 
 }

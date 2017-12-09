@@ -1,8 +1,8 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
@@ -64,7 +65,7 @@ public class SellerShops extends AppCompatActivity {
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
             {
                 shops = response.body();
-                adapter = new RecyclerAdapter(shops,getBaseContext(),auth);
+                adapter = new RecyclerAdapter(shops,SellerShops.this,auth);
                 shopsRecyclerView.setAdapter(adapter);
             }
 
