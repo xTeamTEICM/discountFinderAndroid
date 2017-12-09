@@ -40,7 +40,7 @@ public interface IuserService {
     Call<List<DiscountPreferencesResponse>>getDiscountsPreference(@Header("Authorization")String auth);
 
     @DELETE("requestedDiscount/3")
-    Call<Void> deleteDiscountPreference();
+    Call<Void> deleteDiscountPreference(@Query("id")int id,@Header("Authorization")String auth);
 
     @GET("category")
     Call<List<Category>> fetchCategories();
