@@ -48,7 +48,6 @@ public class UserPreferenceList extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
         Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"), UserTokenResponse.class);
         iuserService = ApiUtils.getUserService();

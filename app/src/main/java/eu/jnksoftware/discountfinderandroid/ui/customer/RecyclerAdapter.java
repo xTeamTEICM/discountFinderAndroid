@@ -45,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            brandName = itemView.findViewById(R.id.shopNameTextView);
+            brandName = itemView.findViewById(R.id.categoryTextView);
         }
     }
 }

@@ -6,126 +6,80 @@
     android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="25dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:layout_marginBottom="1dp"
-        android:layout_weight="1">
+    <Button
+        android:id="@+id/openStoreButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/ic_menu_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/updateButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/idTextView"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="11dp"
-            android:layout_toEndOf="@+id/priceText"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="@android:color/holo_orange_light"
-            tools:layout_editor_absoluteX="181dp"
-            tools:layout_editor_absoluteY="30dp" />
-
-        <TextView
-            android:id="@+id/imageText"
-            android:layout_width="90dp"
-            android:layout_height="20dp"
-            android:layout_alignStart="@+id/idTextView"
-            android:layout_below="@+id/settingsButton"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="@android:color/holo_orange_light"
-            tools:layout_editor_absoluteX="81dp"
-            tools:layout_editor_absoluteY="53dp" />
-
-        <TextView
-            android:id="@+id/categoryNameText"
-            android:layout_width="90dp"
-            android:layout_height="20dp"
-            android:layout_alignStart="@+id/imageText"
-            android:layout_below="@+id/priceText"
-            android:text="TextView"
-            android:textColor="@android:color/holo_orange_light"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="2dp" />
-
-        <TextView
-            android:id="@+id/userIdText"
-            android:layout_width="90dp"
-            android:layout_height="20dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="@android:color/holo_orange_light"
-            tools:layout_editor_absoluteX="165dp"
-            tools:layout_editor_absoluteY="2dp" />
-
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:background="@android:drawable/ic_delete"
-            tools:layout_editor_absoluteX="347dp"
-            tools:layout_editor_absoluteY="2dp" />
-
-        <Button
-            android:id="@+id/settingsButton"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="39dp"
-            android:layout_toStartOf="@+id/deleteButton"
-            android:layout_weight="1"
-            android:background="@android:drawable/ic_menu_preferences"
-            tools:layout_editor_absoluteX="317dp" />
-
-        <TextView
-            android:id="@+id/priceText"
-            android:layout_width="88dp"
-            android:layout_height="32dp"
-            android:layout_alignBaseline="@+id/imageText"
-            android:layout_alignBottom="@+id/imageText"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="@android:color/holo_orange_light"
-            tools:layout_editor_absoluteX="169dp"
-            tools:layout_editor_absoluteY="87dp" />
-    </RelativeLayout>
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="26dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/ic_menu_preferences"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/categoryText"
-        android:layout_width="83dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView"
+        android:id="@+id/categoryTextView"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:textColor="@android:color/holo_orange_light"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="67dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tagsTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tagsTextView"
-        android:layout_width="85dp"
-        android:layout_height="34dp"
-        android:layout_weight="1"
-        android:baselineAligned="false"
-        android:textColor="@android:color/holo_orange_light"
-        tools:layout_editor_absoluteX="201dp"
-        tools:layout_editor_absoluteY="48dp" />
-
-    <Button
-        android:id="@+id/openStoreButton"
-        android:layout_width="40dp"
+        android:layout_width="90dp"
         android:layout_height="30dp"
-        android:layout_weight="1"
-        android:background="@android:drawable/ic_menu_view"
-        tools:layout_editor_absoluteX="302dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/priceText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/priceText"
+        android:layout_width="32dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_orange_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/openStoreButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/idPref"
+        android:layout_width="32dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/holo_orange_light"
+        app:layout_constraintEnd_toStartOf="@+id/categoryTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
 
