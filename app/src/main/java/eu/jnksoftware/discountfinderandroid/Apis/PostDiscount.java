@@ -28,28 +28,4 @@ public class PostDiscount {
         this.latPos = latPos;
         this.distanceInMeters = distanceInMeters;
     }
-
-    public double getLogPos() {
-        return logPos;
-    }
-
-    public void setLogPos(double logPos) {
-        this.logPos = logPos;
-    }
-
-    public double getLatPos() {
-        return latPos;
-    }
-
-    public void setLatPos(double latPos) {
-        this.latPos = latPos;
-    }
-
-    public int getDistanceInMeters() {
-        return distanceInMeters;
-    }
-
-    public void setDistanceInMeters(int distanceInMeters) {
-        this.distanceInMeters = distanceInMeters;
-    }
 }

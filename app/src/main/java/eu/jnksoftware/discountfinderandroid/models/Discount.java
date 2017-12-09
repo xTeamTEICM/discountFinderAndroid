@@ -3,14 +3,14 @@ package eu.jnksoftware.discountfinderandroid.models;
 public class Discount {
 
     private  int id;
-    private Category category;
+    private String category;
     private String shortDescription;
     private String shopName;
     private float finalPrice;
     private String productImageUrl;
     private double distance;
 
-    public Discount(int id , Category category, String shortDescription, String shopName, float finalPrice, String productImageUrl,double distance) {
+    public Discount(int id , String category, String shortDescription, String shopName, float finalPrice, String productImageUrl,double distance) {
         this.id = id;
         this.category = category;
         this.shortDescription = shortDescription;
@@ -60,11 +60,11 @@ public class Discount {
         this.productImageUrl = productImageUrl;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 

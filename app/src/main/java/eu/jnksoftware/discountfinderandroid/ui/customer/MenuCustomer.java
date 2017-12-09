@@ -7,9 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Discount;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
@@ -28,10 +26,9 @@ public class MenuCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
 
-
         Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        //Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Token :"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
 
         geoLocation = new GeoLocation(this);
 
@@ -51,7 +48,7 @@ public class MenuCustomer extends AppCompatActivity {
         Button filtersBtn =  findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
         Button myDiscount = findViewById(R.id.showDiscountsBtn);
-        myDiscount.setOnClickListener(showDiscountsClick);
+        myDiscount.setOnClickListener(discountClick);
 
     }
 
@@ -63,16 +60,15 @@ public class MenuCustomer extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener showDiscountsClick = new View.OnClickListener() {
+    private final View.OnClickListener discountClick = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
             if (geoLocation.getLocation() != null) {
                 try {
-                    Gson user=new Gson();
-                    Intent discountCustomerRecyclerList=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
+                    Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
                     auth = userTokenResponse.getAccessToken();
-                    discountCustomerRecyclerList.putExtra("User",user.toJson(userTokenResponse));
-                    startActivity(discountCustomerRecyclerList);
+                    intent.putExtra("auth", auth);
+                    startActivity(intent);
 
                 } catch (Exception ex) {
                     Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();

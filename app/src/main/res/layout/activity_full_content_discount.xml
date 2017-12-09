@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.FullContentDiscount">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/discountImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/about_icon_github"
+            android:contentDescription="Discount Image" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/discountImage"
+            android:layout_marginTop="26dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/discountId"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Discount Id : " />
+
+                <TextView
+                    android:id="@+id/discountCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Category : " />
+
+                <TextView
+                    android:id="@+id/discountDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="Description : " />
+
+                <TextView
+                    android:id="@+id/discountShopName"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Shop Name : " />
+
+                <TextView
+                    android:id="@+id/discountPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Price : " />
+
+                <TextView
+                    android:id="@+id/discountDistance"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Distance : " />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

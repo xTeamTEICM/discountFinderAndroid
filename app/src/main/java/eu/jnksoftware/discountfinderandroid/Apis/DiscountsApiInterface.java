@@ -17,7 +17,7 @@ import retrofit2.http.POST;
 public interface DiscountsApiInterface {
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @POST("/user/findDiscounts")
+    @POST("/api/user/findDiscounts")
     Call<List<Discount>> getDiscounts(@Body PostDiscount postDiscount, @Header("Authorization") String auth);
 
 
