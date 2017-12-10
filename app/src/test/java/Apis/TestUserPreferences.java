@@ -34,7 +34,7 @@ public class TestUserPreferences extends TestCase{
             assertEquals("1", discountPreferencesPostResponse.getId().toString());
         }
 
- 
+
 
     @Test
     public void testPostCategory() throws IOException
@@ -209,7 +209,7 @@ public class TestUserPreferences extends TestCase{
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
-        assertEquals("0", discountPreferencesResponse.getUserId().toString());
+        assertEquals("1", discountPreferencesResponse.getUserId().toString());
     }
     @Test
     public void testPutImage() throws IOException
