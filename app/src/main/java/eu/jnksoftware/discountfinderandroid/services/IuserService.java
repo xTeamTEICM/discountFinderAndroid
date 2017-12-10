@@ -31,7 +31,7 @@ public interface IuserService {
     Call<UserTokenResponse> register(@Body RegisterTokenRequest registerTokenRequest);
 
     @PUT("requestedDiscount/{id}")
-    Call<DiscountPreferencesPostResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
+    Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
 
     @POST("requestedDiscount")
     Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesPostRequest,@Header("Authorization") String auth);

@@ -2,6 +2,7 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,8 +30,8 @@ public class DeletePreference extends AppCompatActivity {
         setContentView(R.layout.activity_delete_preference);
         final Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"), UserTokenResponse.class);
+        final EditText id=findViewById(R.id.idTxt);
         iuserService= ApiUtils.getUserService();
-
 
         Button deleteButton=findViewById(R.id.dltBtn);
         deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +39,7 @@ public class DeletePreference extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String auth;
-                EditText id=findViewById(R.id.idTxt);
+
                 auth="Bearer "+userTokenResponse.getAccessToken();
                 int idpref;
                 String s1;
@@ -66,4 +67,9 @@ public class DeletePreference extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(DeletePreference.this,UserPreferenceList.class);
+        startActivity(intent);
+    }
 }

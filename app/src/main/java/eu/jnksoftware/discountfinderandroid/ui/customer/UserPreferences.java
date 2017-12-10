@@ -1,6 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -152,4 +153,10 @@ public class UserPreferences extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(UserPreferences.this,UserPreferenceList.class);
+        startActivity(intent);
+    }
 }
