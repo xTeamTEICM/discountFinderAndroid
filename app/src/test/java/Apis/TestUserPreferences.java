@@ -9,6 +9,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
@@ -20,7 +21,7 @@ import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
 public class TestUserPreferences extends TestCase{
         @Test
-        public void testPostuserId() throws IOException
+        public void testPostId() throws IOException
 
         {
             IuserService s = ApiUtils.getUserMockService();
@@ -30,8 +31,11 @@ public class TestUserPreferences extends TestCase{
             discountPreferencesRequest.setTags("Sample,Demo,App,Data");
             String auth="Bearer mock_access";
             DiscountPreferencesPostResponse discountPreferencesPostResponse  = s.postDiscountPreferences(discountPreferencesRequest,auth).execute().body();
-            assertEquals("1", discountPreferencesPostResponse.getUserid().toString());
+            assertEquals("1", discountPreferencesPostResponse.getId().toString());
         }
+
+ 
+
     @Test
     public void testPostCategory() throws IOException
 
@@ -77,8 +81,8 @@ public class TestUserPreferences extends TestCase{
     {
         IuserService s = ApiUtils.getUserMockService();
         String auth="Bearer mock_access";
-       DiscountPreferencesResponse discountPreferencesResponse= (DiscountPreferencesResponse) s.getDiscountsPreference(auth).execute().body();
-        assertEquals(37, discountPreferencesResponse.getId().toString());
+       List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
+        assertEquals("37", discountPreferencesResponse.get(0).getId().toString());
     }
     @Test
     public void testGetCategory() throws IOException
@@ -86,8 +90,8 @@ public class TestUserPreferences extends TestCase{
     {
         IuserService s = ApiUtils.getUserMockService();
         String auth="Bearer mock_access";
-        DiscountPreferencesResponse discountPreferencesResponse= (DiscountPreferencesResponse) s.getDiscountsPreference(auth).execute().body();
-        assertEquals(1, discountPreferencesResponse.getCategory().toString());
+        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
+        assertEquals("1", discountPreferencesResponse.get(0).getCategory().toString());
     }
     @Test
     public void testGetUserid() throws IOException
@@ -95,8 +99,8 @@ public class TestUserPreferences extends TestCase{
     {
         IuserService s = ApiUtils.getUserMockService();
         String auth="Bearer mock_access";
-        DiscountPreferencesResponse discountPreferencesResponse= (DiscountPreferencesResponse) s.getDiscountsPreference(auth).execute().body();
-        assertEquals(30, discountPreferencesResponse.getUserId().toString());
+        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
+        assertEquals("30", discountPreferencesResponse.get(0).getUserId().toString());
     }
     @Test
     public void testGetPrice() throws IOException
@@ -104,8 +108,8 @@ public class TestUserPreferences extends TestCase{
     {
         IuserService s = ApiUtils.getUserMockService();
         String auth="Bearer mock_access";
-        DiscountPreferencesResponse discountPreferencesResponse= (DiscountPreferencesResponse) s.getDiscountsPreference(auth).execute().body();
-        assertEquals(50, discountPreferencesResponse.getPrice().toString());
+        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
+        assertEquals("50", discountPreferencesResponse.get(0).getPrice().toString());
     }
 
     @Test
@@ -114,8 +118,8 @@ public class TestUserPreferences extends TestCase{
     {
         IuserService s = ApiUtils.getUserMockService();
         String auth="Bearer mock_access";
-        DiscountPreferencesResponse discountPreferencesResponse= (DiscountPreferencesResponse) s.getDiscountsPreference(auth).execute().body();
-        assertEquals("Sample, Demo, App, Data", discountPreferencesResponse.getTags().toString());
+        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
+        assertEquals("Sample, Demo, App, Data", discountPreferencesResponse.get(0).getTags().toString());
     }
 
     @Test
@@ -124,8 +128,8 @@ public class TestUserPreferences extends TestCase{
     {
         IuserService s = ApiUtils.getUserMockService();
         String auth="Bearer mock_access";
-        DiscountPreferencesResponse discountPreferencesResponse= (DiscountPreferencesResponse) s.getDiscountsPreference(auth).execute().body();
-        assertEquals("http://img.youtube.com/", discountPreferencesResponse.getImage().toString());
+        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
+        assertEquals("http://img.youtube.com/", discountPreferencesResponse.get(0).getImage().toString());
     }
     @Test
     public void testGetCategoryTitle() throws IOException
@@ -133,8 +137,8 @@ public class TestUserPreferences extends TestCase{
     {
         IuserService s = ApiUtils.getUserMockService();
         String auth="Bearer mock_access";
-        DiscountPreferencesResponse discountPreferencesResponse= (DiscountPreferencesResponse) s.getDiscountsPreference(auth).execute().body();
-        assertEquals("Computer", discountPreferencesResponse.getCategoryTitle().toString());
+        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
+        assertEquals("Computer", discountPreferencesResponse.get(0).getCategoryTitle().toString());
     }
 
     @Test
@@ -179,6 +183,49 @@ public class TestUserPreferences extends TestCase{
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
         assertEquals("Demo,App,Data", discountPreferencesResponse.getTags().toString());
     }
+    @Test
+    public void testPutId() throws IOException
+
+    {
+        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
+        discountPreferencesRequest.setCategory("1");
+        discountPreferencesRequest.setPrice("50");
+        discountPreferencesRequest.setTags("Demo,App,Data");
+        IuserService s = ApiUtils.getUserMockService();
+        String auth="Bearer mock_access";
+        int id=1;
+        DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
+        assertEquals("1", discountPreferencesResponse.getId().toString());
+    }
+    @Test
+    public void testPutUserId() throws IOException
+
+    {
+        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
+        discountPreferencesRequest.setCategory("1");
+        discountPreferencesRequest.setPrice("50");
+        discountPreferencesRequest.setTags("Demo,App,Data");
+        IuserService s = ApiUtils.getUserMockService();
+        String auth="Bearer mock_access";
+        int id=1;
+        DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
+        assertEquals("0", discountPreferencesResponse.getUserId().toString());
+    }
+    @Test
+    public void testPutImage() throws IOException
+
+    {
+        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
+        discountPreferencesRequest.setCategory("1");
+        discountPreferencesRequest.setPrice("50");
+        discountPreferencesRequest.setTags("Demo,App,Data");
+        IuserService s = ApiUtils.getUserMockService();
+        String auth="Bearer mock_access";
+        int id=1;
+        DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
+        assertEquals("http://img.youtube.com/", discountPreferencesResponse.getImage().toString());
+    }
+
 
 
 
