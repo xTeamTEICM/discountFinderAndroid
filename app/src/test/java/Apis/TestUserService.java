@@ -28,4 +28,31 @@ public class TestUserService extends TestCase {
         UserTokenResponse userTokenResponse = s.getTokenAcess(userTokenRequest).execute().body();
         assertEquals("Bearer", userTokenResponse.getTokenType().toString());
     }
+    public void testAccesType() throws IOException{
+        IuserService s = ApiUtils.getMockUserService();
+        UserTokenRequest userTokenRequest = new UserTokenRequest();
+        userTokenRequest.setUsername("n@gmail.com");
+        userTokenRequest.setPassword("123455");
+
+        UserTokenResponse userTokenResponse = s.getTokenAcess(userTokenRequest).execute().body();
+        assertEquals("mock_access", userTokenResponse.getAccessToken().toString());
+    }
+    public void testExpiresIn() throws IOException{
+        IuserService s = ApiUtils.getMockUserService();
+        UserTokenRequest userTokenRequest = new UserTokenRequest();
+        userTokenRequest.setUsername("n@gmail.com");
+        userTokenRequest.setPassword("123455");
+
+        UserTokenResponse userTokenResponse = s.getTokenAcess(userTokenRequest).execute().body();
+        assertEquals("7199", userTokenResponse.getExpiresIn().toString());
+    }
+    public void testRefreshToken() throws IOException{
+        IuserService s = ApiUtils.getMockUserService();
+        UserTokenRequest userTokenRequest = new UserTokenRequest();
+        userTokenRequest.setUsername("n@gmail.com");
+        userTokenRequest.setPassword("123455");
+
+        UserTokenResponse userTokenResponse = s.getTokenAcess(userTokenRequest).execute().body();
+        assertEquals("mock_refresh", userTokenResponse.getRefreshToken().toString());
+    }
 }
