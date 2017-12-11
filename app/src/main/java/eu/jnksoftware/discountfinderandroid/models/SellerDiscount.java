@@ -5,6 +5,7 @@ package eu.jnksoftware.discountfinderandroid.models;
  */
 
 public class SellerDiscount {
+    int id;
     private int shopId;
     private int category;
     private double originalPrice;
@@ -20,6 +21,8 @@ public class SellerDiscount {
         this.description = description;
         this.image = image;
     }
+
+    public int getId(){ return id; }
 
     public int getShopId() {
         return shopId;

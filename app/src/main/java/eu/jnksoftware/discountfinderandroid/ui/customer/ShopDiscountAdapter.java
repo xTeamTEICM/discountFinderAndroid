@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
     @Override
     public ShopDiscountAdapter.DiscountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_discount_template,parent,false);
-        DiscountViewHolder discountViewHolder = new DiscountViewHolder(view);
+        DiscountViewHolder discountViewHolder = new DiscountViewHolder(view,context);
         return discountViewHolder;
     }
 
@@ -39,22 +41,49 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
         holder.category.setText("Κατηγορία: " + Integer.toString(discounts.get(position).getCategory()));
     }
 
+    public void removeDiscount(int position){
+        discounts.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreDiscount(SellerDiscount discount,int position){
+        discounts.add(position,discount);
+        notifyItemInserted(position);
+    }
+
+    public int getDiscountId(int position){
+        return discounts.get(position).getId();
+    }
+
     @Override
     public int getItemCount() {
         return discounts.size();
     }
 
-    public static class DiscountViewHolder extends RecyclerView.ViewHolder{
+    public static class DiscountViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
         TextView title,price,percentage,category;
         ImageView image;
+        Context context;
+        LinearLayout foregroundView;
+        RelativeLayout backgroundView;
 
-        public DiscountViewHolder(View itemView) {
+        public DiscountViewHolder(View itemView,Context context) {
             super(itemView);
             title = itemView.findViewById(R.id.tvOfferTitle);
             price = itemView.findViewById(R.id.tvOfferPrice);
             percentage = itemView.findViewById(R.id.tvOfferPercentage);
             category = itemView.findViewById(R.id.tvOfferCategory);
             image = itemView.findViewById(R.id.offerItemImage);
+            this.context = context;
+            foregroundView = itemView.findViewById(R.id.foreground_view);
+            backgroundView = itemView.findViewById(R.id.background_view);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+
+        }
+
     }
 }

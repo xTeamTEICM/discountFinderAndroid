@@ -55,4 +55,7 @@ public interface ShopsApiInterface {
     @GET("discount")
     Call<List<SellerDiscount>> getSellerDiscounts(@Header("Authorization") String auth);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @DELETE("discount/{id}")
+    Call<Void> deleteSellerDiscount(@Path("id") int id,@Header("Authorization") String auth);
 }

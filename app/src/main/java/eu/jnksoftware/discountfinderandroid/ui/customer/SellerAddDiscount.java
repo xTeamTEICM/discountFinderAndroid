@@ -1,6 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -53,7 +52,7 @@ public class SellerAddDiscount extends AppCompatActivity {
             @Override
             public void onResponse(Call<DiscountGet> call, Response<DiscountGet> response) {
                 Toast.makeText(SellerAddDiscount.this, response.message() + "\nDiscount Added", Toast.LENGTH_SHORT).show();
-                if(response.message().equals("OK")) startActivity(new Intent(SellerAddDiscount.this,ViewStore.class));
+                if(response.message().equals("OK")) finish();
             }
 
             @Override
