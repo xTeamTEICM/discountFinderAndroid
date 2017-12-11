@@ -1,13 +1,25 @@
 package eu.jnksoftware.discountfinderandroid.Apis;
 
-public class PostShop {
- private String brandName;
- private double lonPos;
- private double latPost;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public PostShop(String brandName, double lonPos, double latPost) {
+public class PostShop {
+
+    @SerializedName("brandName")
+    @Expose
+    private String brandName;
+
+    @SerializedName("logPos")
+    @Expose
+    private double logPos;
+
+    @SerializedName("latPos")
+    @Expose
+    private double latPost;
+
+    public PostShop(String brandName, double logPos, double latPost) {
         this.brandName = brandName;
-        this.lonPos = lonPos;
+        this.logPos = logPos;
         this.latPost = latPost;
     }
 
@@ -19,12 +31,12 @@ public class PostShop {
         this.brandName = brandName;
     }
 
-    public double getLonPos() {
-        return lonPos;
+    public double getLogPos() {
+        return logPos;
     }
 
-    public void setLonPos(double lonPos) {
-        this.lonPos = lonPos;
+    public void setLogPos(double logPos) {
+        this.logPos = logPos;
     }
 
     public double getLatPost() {
