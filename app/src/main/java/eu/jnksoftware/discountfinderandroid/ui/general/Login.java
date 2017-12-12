@@ -58,13 +58,12 @@ public class Login extends Activity {
             UserTokenRequest userTokenRequest=new UserTokenRequest();
             userTokenRequest.setUsername(eMail.getText().toString().trim());
             userTokenRequest.setPassword(password.getText().toString().trim());
-
-
+            doLogin(userTokenRequest);
             loadingBar.setVisibility(View.VISIBLE);
             loadingText.setVisibility(View.VISIBLE);
             loadingText.setText("Please Wait...");
             new aSyncTask().execute();
-            doLogin(userTokenRequest);
+
         }
     };
 
@@ -92,12 +91,7 @@ public class Login extends Activity {
                     Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
                     menuCustomer.putExtra("User", user.toJson(userTokenResponse));
                     startActivity(menuCustomer);
-                   /* Log.d("MainActivity","onResponse:"+statusCode);
-                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
-                    Log.d("Login","onResponse:"+statusCode);
-                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(Login.this,MenuCustomer.class);
-                    */
+
 
                 }
                 else

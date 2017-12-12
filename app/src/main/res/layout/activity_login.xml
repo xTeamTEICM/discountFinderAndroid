@@ -53,7 +53,6 @@
                 android:hint="@string/e_mail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
-                android:text="aris.pozidis96@gmail.com"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
 
@@ -66,7 +65,6 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="10dp"
-                android:text="arispoz"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
 
