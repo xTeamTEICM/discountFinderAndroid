@@ -54,6 +54,15 @@
             </intent-filter>
         </service>
         <service android:name=".services.GeoLocation" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/GOOGLE_MAPS_API_KEY" />
+
+        <activity
+            android:name=".services.ChooseStoreLocationActivity"
+            android:label="@string/title_activity_choose_store_location"></activity>
+      
     </application>
 
 </manifest>
