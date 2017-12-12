@@ -3,20 +3,13 @@ package eu.jnksoftware.discountfinderandroid.ui.general;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
-
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.Apis.RegisterApi;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
@@ -44,18 +37,6 @@ public class Register extends Activity {
         lastName=(EditText)findViewById(R.id.lastNameField);
         password=(EditText)findViewById(R.id.passwordField);
     }
-
-
-
-
-
-
-    
-
-    
-
-
-    
 
   
     private final View.OnClickListener registerBtnClick = new View.OnClickListener() {

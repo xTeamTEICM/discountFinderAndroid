@@ -1,4 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
+
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.After;
@@ -25,9 +26,19 @@ public class MenuCustomerTest {
     }
 
     @Test
+    public void menuCustomerComponentsDisplayed(){
+        onView(withId(R.id.tvNewDiscounts)).check(matches(isDisplayed()));
+        onView(withId(R.id.filtersBtn)).check(matches(isDisplayed()));
+        onView(withId(R.id.settingsBtn)).check(matches(isDisplayed()));
+        onView(withId(R.id.showDiscountsButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.aboutBtn)).check(matches(isDisplayed()));
+        onView(withId(R.id.showShopsButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void testShopsButtonClick(){
-        onView(withId(R.id.showShopsBtn)).perform(click());
-        onView(withId(R.id.shopsList)).check(matches(isDisplayed()));
+        //onView(withId(R.id.showDiscountsButton)).perform(click());
+       // onView(withId(R.id.shopsList)).check(matches(isDisplayed()));
     }
 
     @Test
