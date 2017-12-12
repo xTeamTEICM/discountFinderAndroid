@@ -26,7 +26,7 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
 
     @Override
     public MyViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item_discount_list,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_discount_items,parent,false);
         MyViewHolder myView = new MyViewHolder(view);
         return myView;
     }
@@ -50,10 +50,10 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.discountNameTextView);
-            shop = itemView.findViewById(R.id.discountShopName);
-            price = itemView.findViewById(R.id.discountPriceTextView);
-            image = itemView.findViewById(R.id.discountImageView);
+            title = itemView.findViewById(R.id.recyclerHeader);
+            shop = itemView.findViewById(R.id.recyclerShop);
+            price = itemView.findViewById(R.id.recyclerPrice);
+            image = itemView.findViewById(R.id.recyclerImage);
         }
     }
 }
