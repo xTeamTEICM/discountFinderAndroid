@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +11,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.json.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
-import eu.jnksoftware.discountfinderandroid.Apis.LoginApi;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
@@ -63,13 +58,13 @@ public class Login extends Activity {
             UserTokenRequest userTokenRequest=new UserTokenRequest();
             userTokenRequest.setUsername(eMail.getText().toString().trim());
             userTokenRequest.setPassword(password.getText().toString().trim());
-            doLogin(userTokenRequest);
-          
+
+
             loadingBar.setVisibility(View.VISIBLE);
             loadingText.setVisibility(View.VISIBLE);
             loadingText.setText("Please Wait...");
             new aSyncTask().execute();
-
+            doLogin(userTokenRequest);
         }
     };
 
@@ -79,57 +74,14 @@ public class Login extends Activity {
             Login.this.startActivity(new Intent(Login.this, Register.class));
         }
     };
-  
+
+
     public void doLogin(final UserTokenRequest userTokenRequest){
         Call<UserTokenResponse> call=iuserService.getTokenAcess(userTokenRequest);
         call.enqueue(new Callback<UserTokenResponse>() {
             @Override
             public void onResponse(Call<UserTokenResponse> call, Response<UserTokenResponse> response) {
                 int statusCode=response.code();
-
-    class aSyncTask extends AsyncTask<String, Integer, String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(getApplicationContext(), "Connection Starting ...", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            for (loadingStatus=0; loadingStatus < 100; loadingStatus++) {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-
-                }
-                loadingBar.setProgress(loadingStatus);
-                publishProgress(loadingStatus);
-            }
-            if (loadingStatus == 100) {
-                return "Connection Accomplished!!!";
-            } else {
-                return "Connection Error...";
-            }
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            loadingBar.setProgress(values[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-            loadingBar.setVisibility(View.INVISIBLE);
-            loadingText.setText(s);
-        }
-
-    }
-}
 
 
                 if(response.isSuccessful())
@@ -161,6 +113,49 @@ public class Login extends Activity {
                 Toast.makeText(Login.this,"Wrong!"+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private class aSyncTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Toast.makeText(getApplicationContext(), "Connection Starting ...", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            for (loadingStatus=0; loadingStatus < 25; loadingStatus++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+
+                }
+                loadingBar.setProgress(loadingStatus);
+                publishProgress(loadingStatus);
+            }
+            if (loadingStatus == 25) {
+                return "Connection Accomplished!!!";
+            } else {
+                return "Connection Error...";
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            loadingBar.setProgress(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+            loadingBar.setVisibility(View.INVISIBLE);
+            loadingText.setText(s);
+        }
+
     }
 }
 
