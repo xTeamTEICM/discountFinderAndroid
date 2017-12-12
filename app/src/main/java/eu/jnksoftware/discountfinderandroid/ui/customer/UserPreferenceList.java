@@ -94,14 +94,16 @@ public class UserPreferenceList extends AppCompatActivity {
 
 
 
-    public void fetchUserPreferences(String auth) {
+    public void fetchUserPreferences(final String auth) {
         Call<List<DiscountPreferencesResponse>> disc=iuserService.getDiscountsPreference(auth);
         disc.enqueue(new Callback<List<DiscountPreferencesResponse>>() {
             @Override
             public void onResponse(Call<List<DiscountPreferencesResponse>> call, Response<List<DiscountPreferencesResponse>> response) {
                 discountPreferencesResponses=response.body();
-                adapter=new RecyclerPreference(discountPreferencesResponses, UserPreferenceList.this);
+                adapter=new RecyclerPreference(discountPreferencesResponses, UserPreferenceList.this,auth);
                 recyclerView.setAdapter(adapter);
+
+
             }
 
             @Override
