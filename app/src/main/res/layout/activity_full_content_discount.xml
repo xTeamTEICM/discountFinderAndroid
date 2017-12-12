@@ -14,8 +14,9 @@
             android:id="@+id/discountImage"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            app:srcCompat="@drawable/about_icon_github"
-            android:contentDescription="Discount Image" />
+            android:contentDescription="Discount Image"
+            android:visibility="visible"
+            app:srcCompat="@drawable/about_icon_github" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"

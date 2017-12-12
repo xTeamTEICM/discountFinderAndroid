@@ -25,6 +25,8 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.Discount;
 import eu.jnksoftware.discountfinderandroid.Apis.PostDiscount;
+import eu.jnksoftware.discountfinderandroid.models.Location;
+import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +38,7 @@ import retrofit2.Response;
  */
 
 public class DiscountCustomerRecyclerList extends AppCompatActivity {
-    private int seekProgress = 0;
+    private int barProgress = 0;
     private SeekBar distanceBar;
     private TextView distanceText;
     private RecyclerView recyclerView;
@@ -45,7 +47,8 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
     private List<Discount> discountProducts = new ArrayList<>();
     private DiscountsApiInterface supportApi;
     private String auth;
-
+    private double latitude ,longitude;
+    private Location location = new Location();
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -60,6 +63,9 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         auth = "Bearer " + getIntent().getStringExtra("auth");
+        latitude = getIntent().getDoubleExtra("latitude", location.getLatitude());
+        longitude = getIntent().getDoubleExtra("longitude",location.getLongitude());
+
         supportApi = RestClient.getClient().create(DiscountsApiInterface.class);
 
         seekBarProgressCalc();
@@ -71,14 +77,22 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         discountProducts.add(new Discount(1, category, "Pc", "Tech", 100, "https://www.cyberpowerpc.com/images/cs/smraidmax/blk_400.png", 500));
         adapter = new DiscountRecyclerAdapter(discountProducts);
         recyclerView.setAdapter(adapter);*/
-        final PostDiscount postDiscount = new PostDiscount(41.088535, 23.551294, 1500);
+
+
+        //Location for discounts : logPos = 41.088535 , latPos = 23.551294 & distanceInMeters = barProgress
+        longitude = 41.088535;
+        latitude = 23.551294;
+
+        final PostDiscount postDiscount = new PostDiscount(longitude, latitude, 1500);
+        Toast.makeText(DiscountCustomerRecyclerList.this, "Longitude :" + String.valueOf(longitude)  + "\n Latitude :" + String.valueOf(latitude), Toast.LENGTH_SHORT).show();
         Call<List<Discount>> call = supportApi.getDiscounts(postDiscount, auth);
         call.enqueue(new Callback<List<Discount>>() {
             @Override
             public void onResponse(Call<List<Discount>> call, Response<List<Discount>> response) {
                    discountProducts = response.body();
-                    adapter = new DiscountRecyclerAdapter(discountProducts , getBaseContext());
-                    recyclerView.setAdapter(adapter);
+                   //discountProducts.add(new Discount(1,"deli","eleos","me",10,"ta API",1));
+                   adapter = new DiscountRecyclerAdapter(discountProducts , getBaseContext());
+                   recyclerView.setAdapter(adapter);
 
             }
 
@@ -96,29 +110,29 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         distanceBar = findViewById(R.id.distanceSeekBar);
         distanceText = findViewById(R.id.distanceTextView);
 
-        distanceText.setText(seekProgress + " m");
+        distanceText.setText(barProgress + " m");
 
         //TODO : make it start from 500 not from 0
         distanceBar.setMax(2000);
-        distanceBar.setProgress(seekProgress);
+        distanceBar.setProgress(barProgress);
 
         distanceBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                seekProgress = i;
-                distanceText.setText(seekProgress + " m");
+                barProgress = i;
+                distanceText.setText(barProgress + " m");
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
-                distanceText.setText(seekProgress + " m");
+                distanceText.setText(barProgress + " m");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                distanceText.setText(seekProgress + " m");
+                distanceText.setText(barProgress + " m");
             }
         });
     }

@@ -49,11 +49,14 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
+        //Discount Card
         //Discount discount = discountArrayList.get(position);
         holder.title.setText("Περιγραφή :" + discountArrayList.get(position).getShortDescription());
         holder.shop.setText("Κατάστημα :" + discountArrayList.get(position).getShopName());
-        holder.price.setText("Τιμή :" + String.valueOf(discountArrayList.get(position).getFinalPrice()) +" ");
-        //holder.image.setImageBitmap(discountArrayList.get(position).getProductImageUrl());
+        holder.price.setText("Τιμή :" + String.valueOf(discountArrayList.get(position).getFinalPrice())+"€");
+        //holder.image.setImageBitmap(discountArrayList.get(position).getProductImageUrl())
+
+
     }
 
     @Override
@@ -72,10 +75,13 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
             this.context = context;
             this.discountList = discountList;
             itemView.setOnClickListener(this);
+
+            //Discount Card
             title = itemView.findViewById(R.id.recyclerHeader);
             shop = itemView.findViewById(R.id.recyclerShop);
             price = itemView.findViewById(R.id.recyclerPrice);
             image = itemView.findViewById(R.id.recyclerImage);
+
         }
 
         @Override
@@ -83,13 +89,13 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
             int position = getAdapterPosition();
             Discount discount = this.discountList.get(position);
             Intent intent = new Intent(this.context,FullContentDiscount.class);
-            intent.putExtra("discount_Id",discount.getId());
+            intent.putExtra("discount_id",String.valueOf(discount.getId()));
             intent.putExtra("discount_image",discount.getProductImageUrl());
             intent.putExtra("discount_Category",discount.getCategory());
             intent.putExtra("discount_Description",discount.getShortDescription());
-            intent.putExtra("discount_Distance",discount.getDistance());
-            intent.putExtra("discount_Price",discount.getFinalPrice());
-            intent.putExtra("discount_Shop_Name",discount.getShopName());
+            intent.putExtra("discount_Distance",String.valueOf(discount.getDistance()));
+            intent.putExtra("discount_Price",String.valueOf(discount.getFinalPrice()));
+            intent.putExtra("discount_Shop_Name",String.valueOf(discount.getShopName()));
             this.context.startActivity(intent);
         }
     }

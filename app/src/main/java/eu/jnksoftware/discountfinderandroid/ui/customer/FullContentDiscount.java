@@ -24,11 +24,11 @@ public class FullContentDiscount extends AppCompatActivity {
         discountShopName = findViewById(R.id.discountShopName);
 
         discountImage.setImageResource(getIntent().getIntExtra("discount_image",00));
-        discountId.setText("Discount Id : " + getIntent().getStringExtra("discount_Id"));
+        discountId.setText("Discount Id : " + getIntent().getStringExtra("discount_id"));
         discountCategory.setText("Category : " + getIntent().getStringExtra("discount_Category"));
         discountDescription.setText("Description : " + getIntent().getStringExtra("discount_Description"));
-        discountDistance.setText("Distance : " + getIntent().getStringExtra("discount_Distance"));
-        discountPrice.setText("Price : " + getIntent().getStringExtra("discount_Price"));
+        discountDistance.setText("Distance : " + getIntent().getStringExtra("discount_Distance") +"m");
+        discountPrice.setText("Price : " + getIntent().getStringExtra("discount_Price") + "€");
         discountShopName.setText("Shop Name : " + getIntent().getStringExtra("discount_Shop_Name"));
     }
 }

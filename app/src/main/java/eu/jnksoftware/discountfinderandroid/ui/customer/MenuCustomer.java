@@ -1,6 +1,8 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -68,6 +70,8 @@ public class MenuCustomer extends AppCompatActivity {
                     Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
                     auth = userTokenResponse.getAccessToken();
                     intent.putExtra("auth", auth);
+                    intent.putExtra("latitude", geoLocation.getLatitude());
+                    intent.putExtra("longitude", geoLocation.getLongitude());
                     startActivity(intent);
 
                 } catch (Exception ex) {
