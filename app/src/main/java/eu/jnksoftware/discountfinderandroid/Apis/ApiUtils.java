@@ -1,7 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.Apis;
 
-import java.util.concurrent.TimeUnit;
-
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
 
