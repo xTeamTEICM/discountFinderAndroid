@@ -23,7 +23,24 @@
     <string name="category">Κατηγορία</string>
     <string name="price">Τιμή</string>
     <string name="Add">Προσθήκη</string>
-
+    <string name="myShops">Τα καταστηματα μου</string>
+    <string name="settings">ΡΥΘΜΙΣΕΙΣ</string>
+    <string name="enableSeller">Καταστηματάρχης</string>
+    <string name="searchDiscount">Ψαξε τωρα για νεες προσφορες</string>
+    <string name="myOffers">Οι προσφορές μου</string>
+    <string name="shop">Κατάστημα </string>
+    <string name="ShortDescription">Περιγραφη</string>
+    <string name="shopName">Μαγαζι</string>
+    <string name="Price">Τιμη</string>
+    <string name="giveShopName">Give shop name</string>
+    <string name="giveShopLocation">Give shop location</string>
+    <string name="giveShopDescription">Give shop description</string>
+    <string name="changeShopName">Change shop name</string>
+    <string name="changeShopLocation">Chane shop location</string>
+    <string name="changeShopDescription">Change shop description</string>
+    <string name="insert">INSERT</string>
+    <string name="update">UPDATE</string>
+    <string name="cancel">CANCEL</string>
     <!-- String arrays for spinners    -->
     <string-array name="categories">
         <item>Ρούχα</item>

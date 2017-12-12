@@ -5,41 +5,49 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import eu.jnksoftware.discountfinderandroid.Apis.LoginApi;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
+import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Login extends Activity {
-    private String email;
-    private String password;
-    EditText etEmail;
-    EditText etPassword;
     ProgressBar loadingBar;
     TextView loadingText;
     int loadingStatus = 0;
-
+    private EditText eMail;
+    private EditText password;
+    IuserService iuserService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        eMail= findViewById(R.id.loginEMailField);
+        password=findViewById(R.id.loginPasswordField);
+        iuserService= ApiUtils.getUserService();
+        String token = FirebaseInstanceId.getInstance().getToken();
 
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
-        etEmail = findViewById(R.id.loginEMailField);
-        etPassword = findViewById(R.id.loginPasswordField);
 
         TextView registerView = findViewById(R.id.loginRegisterBtn);
         registerView.setOnClickListener(registerBtnClick);
@@ -52,19 +60,11 @@ public class Login extends Activity {
         @Override
         public void onClick(final View loginView) {
 
-            email = etEmail.getText().toString();
-            password = etPassword.getText().toString();
-
-            Map<String, String> loginValues = new HashMap<>();
-            loginValues.put("username", email);
-            loginValues.put("password", password);
-
-
-            final JSONObject sendLogin = new JSONObject(loginValues);
-            LoginApi loginApi = new LoginApi();
-            loginApi.doLogin(Login.this, sendLogin);
-
-
+            UserTokenRequest userTokenRequest=new UserTokenRequest();
+            userTokenRequest.setUsername(eMail.getText().toString().trim());
+            userTokenRequest.setPassword(password.getText().toString().trim());
+            doLogin(userTokenRequest);
+          
             loadingBar.setVisibility(View.VISIBLE);
             loadingText.setVisibility(View.VISIBLE);
             loadingText.setText("Please Wait...");
@@ -79,6 +79,13 @@ public class Login extends Activity {
             Login.this.startActivity(new Intent(Login.this, Register.class));
         }
     };
+  
+    public void doLogin(final UserTokenRequest userTokenRequest){
+        Call<UserTokenResponse> call=iuserService.getTokenAcess(userTokenRequest);
+        call.enqueue(new Callback<UserTokenResponse>() {
+            @Override
+            public void onResponse(Call<UserTokenResponse> call, Response<UserTokenResponse> response) {
+                int statusCode=response.code();
 
     class aSyncTask extends AsyncTask<String, Integer, String> {
 
@@ -124,4 +131,36 @@ public class Login extends Activity {
     }
 }
 
+
+                if(response.isSuccessful())
+                {
+                    UserTokenResponse userTokenResponse=response.body();
+
+                    Gson user=new Gson();
+                    Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
+                    menuCustomer.putExtra("User", user.toJson(userTokenResponse));
+                    startActivity(menuCustomer);
+                   /* Log.d("MainActivity","onResponse:"+statusCode);
+                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
+                    Log.d("Login","onResponse:"+statusCode);
+                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(Login.this,MenuCustomer.class);
+                    */
+
+                }
+                else
+                {
+                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserTokenResponse> call, Throwable t) {
+                call.cancel();
+                Log.d("MaincActivity","onFailure"+t.getMessage());
+                Toast.makeText(Login.this,"Wrong!"+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}
 
