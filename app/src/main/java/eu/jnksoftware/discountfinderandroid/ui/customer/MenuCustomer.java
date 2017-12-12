@@ -45,19 +45,21 @@ public class MenuCustomer extends AppCompatActivity {
         about.setOnClickListener(aboutClick);
         Button settings = findViewById(R.id.settingsBtn);
         settings.setOnClickListener(settingsClick);
+
         Button myShops =  findViewById(R.id.showShopsButton);
         myShops.setOnClickListener(showShopsButtonClick);
         Button filtersBtn =  findViewById(R.id.filtersBtn);
         filtersBtn.setOnClickListener(filtersButtonClick);
         Button myDiscount = findViewById(R.id.showDiscountsBtn);
         myDiscount.setOnClickListener(discountClick);
-
     }
 
     private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
+            Gson user = new Gson();
+            intent.putExtra("User", user.toJson(userTokenResponse));
             startActivity(intent);
         }
     };

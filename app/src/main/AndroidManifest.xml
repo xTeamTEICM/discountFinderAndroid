@@ -31,6 +31,8 @@
         <activity android:name=".ui.general.Settings" />
         <activity android:name=".ui.customer.SellerShops" />
         <activity android:name=".ui.customer.DiscountCustomerRecyclerList" />
+        <activity android:name=".ui.customer.UpdateShop"></activity>
+        <activity android:name=".ui.customer.ViewStore"></activity>
         <activity android:name=".ui.customer.FullDiscount">
             <intent-filter>
                 <action android:name="FULLDISCOUNT" />
@@ -38,6 +40,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.customer.SellerAddShop" />
+        <activity android:name=".ui.customer.SellerAddDiscount"/>
 
         <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>
@@ -51,7 +55,16 @@
         </service>
         <service android:name=".services.GeoLocation" />
 
+
         <activity android:name=".ui.customer.FullContentDiscount"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/GOOGLE_MAPS_API_KEY" />
+
+        <activity
+            android:name=".services.ChooseStoreLocationActivity"
+            android:label="@string/title_activity_choose_store_location"></activity>
+      
     </application>
 
 </manifest>
