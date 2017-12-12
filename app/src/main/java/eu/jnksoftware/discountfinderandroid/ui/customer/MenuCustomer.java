@@ -1,16 +1,17 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.Discount;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
@@ -20,16 +21,16 @@ public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
     private UserTokenResponse userTokenResponse;
+    String auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
 
-
         Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Token :"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
 
         geoLocation = new GeoLocation(this);
 
@@ -68,8 +69,12 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(final View v) {
             if (geoLocation.getLocation() != null) {
                 try {
-                    // TODO : call discountAPI to take the nearest discounts
-                    MenuCustomer.this.startActivity(new Intent(MenuCustomer.this, DiscountCustomerRecyclerList.class));
+                    Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
+                    auth = userTokenResponse.getAccessToken();
+                    intent.putExtra("auth", auth);
+                    intent.putExtra("latitude", geoLocation.getLatitude());
+                    intent.putExtra("longitude", geoLocation.getLongitude());
+                    startActivity(intent);
 
                 } catch (Exception ex) {
                     Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();

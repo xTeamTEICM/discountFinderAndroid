@@ -6,48 +6,57 @@
     android:layout_height="90dp"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout">
 
-        <ImageView
-            android:id="@+id/recyclerImage"
-            android:layout_width="115dp"
-            android:layout_height="90dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:visibility="visible"
-            app:srcCompat="@drawable/about_icon_github"
-            tools:ignore="bitmap"
-            tools:layout_weight="10" />
         <TextView
             android:id="@+id/recyclerHeader"
-            android:layout_width="270dp"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:text="Περιγραφή : " />
+            android:layout_marginStart="8dp"
+            android:paddingHorizontal="3dp"
+            android:text="Περιγραφή : "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recyclerImage"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/recyclerShop"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_alignEnd="@+id/recyclerHeader"
-            android:layout_alignStart="@+id/recyclerHeader"
-            android:layout_below="@+id/recyclerHeader"
-            android:text="Κατάστημα : " />
+            android:layout_marginStart="8dp"
+            android:paddingHorizontal="3dp"
+            android:text="Κατάστημα : "
+            app:layout_constraintEnd_toEndOf="@+id/recyclerHeader"
+            app:layout_constraintStart_toEndOf="@+id/recyclerImage"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerHeader" />
 
         <TextView
             android:id="@+id/recyclerPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_alignEnd="@+id/recyclerShop"
-            android:layout_alignStart="@+id/recyclerShop"
-            android:layout_below="@+id/recyclerShop"
-            android:text="Τιμή : " />
+            android:layout_marginStart="8dp"
+            android:paddingHorizontal="3dp"
+            android:text="Τιμή : "
+            app:layout_constraintEnd_toEndOf="@+id/recyclerShop"
+            app:layout_constraintStart_toEndOf="@+id/recyclerImage"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerShop" />
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/recyclerImage"
+            android:layout_width="114dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/about_icon_github"
+            tools:ignore="bitmap"
+            tools:layout_weight="10" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
