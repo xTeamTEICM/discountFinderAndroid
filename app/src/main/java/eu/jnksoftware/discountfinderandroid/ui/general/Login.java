@@ -125,9 +125,9 @@ public class Login extends Activity {
 
         @Override
         protected String doInBackground(String... strings) {
-            for (loadingStatus=0; loadingStatus < 25; loadingStatus++) {
+            for (loadingStatus=0; loadingStatus < 50; loadingStatus++) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(80);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
 
@@ -135,7 +135,7 @@ public class Login extends Activity {
                 loadingBar.setProgress(loadingStatus);
                 publishProgress(loadingStatus);
             }
-            if (loadingStatus == 25) {
+            if (loadingStatus == 50) {
                 return "Connection Accomplished!!!";
             } else {
                 return "Connection Error...";
