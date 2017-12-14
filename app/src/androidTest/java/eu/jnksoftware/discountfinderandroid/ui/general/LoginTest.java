@@ -103,6 +103,15 @@ public class LoginTest {
         //check if welcome Text is displayed,then we are still in Login Activity
         onView(withId(R.id.loginWelcomeTxt)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void testLoadingBarAndLoadingText(){
+        onView(withId(R.id.loginBtn)).perform(click());
+        onView(withId(R.id.loadingBar)).check(matches(isDisplayed()));
+        onView(withId(R.id.loginBtn)).perform(click());
+        onView(withId(R.id.loadingText)).check(matches(isDisplayed()));
+    }
+
 /*
     @Test
     public void testGivenEmailAndPassword(){
