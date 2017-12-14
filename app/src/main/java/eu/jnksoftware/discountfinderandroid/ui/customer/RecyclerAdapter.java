@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 
@@ -54,7 +56,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         String auth;
 
         public MyViewHolder(View itemView, Context context, List<Shop> shops, String auth) {
-            super(itemView)
+            super(itemView);
              //DiscountRequestApi_Retrofit
             brandName = itemView.findViewById(R.id.categoryTextView);
 //

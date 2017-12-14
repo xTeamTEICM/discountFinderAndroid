@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
@@ -58,8 +56,8 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
                 int idpref;
                 idpref=discountPreferencesResponses.get(position).getId();
                 deletePref(idpref,auth);
-
-
+                discountPreferencesResponses.remove(position);
+                notifyDataSetChanged();
 
 
             }
@@ -98,6 +96,7 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Toast.makeText(mContext,"You Preference with "+id+" remove Succesfully",Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
