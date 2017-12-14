@@ -24,7 +24,7 @@ public class TestUserPreferences extends TestCase{
         public void testPostId() throws IOException
 
         {
-            IuserService s = ApiUtils.getUserMockService();
+            IuserService s = ApiUtils.getMockUserService();
             DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
             discountPreferencesRequest.setPrice("50");
             discountPreferencesRequest.setCategory("1");
@@ -40,7 +40,7 @@ public class TestUserPreferences extends TestCase{
     public void testPostCategory() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setCategory("1");
@@ -53,7 +53,7 @@ public class TestUserPreferences extends TestCase{
     public void testPostPrice() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setCategory("1");
@@ -66,7 +66,7 @@ public class TestUserPreferences extends TestCase{
     public void testPostTags() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setCategory("1");
@@ -79,7 +79,7 @@ public class TestUserPreferences extends TestCase{
     public void testGetid() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
         assertEquals("37", discountPreferencesResponse.get(0).getId().toString());
@@ -88,7 +88,7 @@ public class TestUserPreferences extends TestCase{
     public void testGetCategory() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
         assertEquals("1", discountPreferencesResponse.get(0).getCategory().toString());
@@ -97,7 +97,7 @@ public class TestUserPreferences extends TestCase{
     public void testGetUserid() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
         assertEquals("30", discountPreferencesResponse.get(0).getUserId().toString());
@@ -106,7 +106,7 @@ public class TestUserPreferences extends TestCase{
     public void testGetPrice() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
         assertEquals("50", discountPreferencesResponse.get(0).getPrice().toString());
@@ -116,7 +116,7 @@ public class TestUserPreferences extends TestCase{
     public void testGetTag() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
         assertEquals("Sample, Demo, App, Data", discountPreferencesResponse.get(0).getTags().toString());
@@ -126,7 +126,7 @@ public class TestUserPreferences extends TestCase{
     public void testGetImage() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
         assertEquals("http://img.youtube.com/", discountPreferencesResponse.get(0).getImage().toString());
@@ -135,7 +135,7 @@ public class TestUserPreferences extends TestCase{
     public void testGetCategoryTitle() throws IOException
 
     {
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
         assertEquals("Computer", discountPreferencesResponse.get(0).getCategoryTitle().toString());
@@ -149,7 +149,7 @@ public class TestUserPreferences extends TestCase{
         discountPreferencesRequest.setCategory("1");
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setTags("Demo,App,Data");
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
@@ -163,7 +163,7 @@ public class TestUserPreferences extends TestCase{
         discountPreferencesRequest.setCategory("1");
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setTags("Demo,App,Data");
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
@@ -177,7 +177,7 @@ public class TestUserPreferences extends TestCase{
         discountPreferencesRequest.setCategory("1");
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setTags("Demo,App,Data");
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
@@ -191,7 +191,7 @@ public class TestUserPreferences extends TestCase{
         discountPreferencesRequest.setCategory("1");
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setTags("Demo,App,Data");
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
@@ -205,7 +205,7 @@ public class TestUserPreferences extends TestCase{
         discountPreferencesRequest.setCategory("1");
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setTags("Demo,App,Data");
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
@@ -219,7 +219,7 @@ public class TestUserPreferences extends TestCase{
         discountPreferencesRequest.setCategory("1");
         discountPreferencesRequest.setPrice("50");
         discountPreferencesRequest.setTags("Demo,App,Data");
-        IuserService s = ApiUtils.getUserMockService();
+        IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
