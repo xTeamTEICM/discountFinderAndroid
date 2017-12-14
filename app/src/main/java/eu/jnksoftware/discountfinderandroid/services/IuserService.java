@@ -1,5 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
+import org.json.JSONArray;
+
 import java.util.List;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
@@ -13,8 +15,12 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 
 public interface IuserService {
@@ -24,20 +30,21 @@ public interface IuserService {
     @POST("register")
     Call<UserTokenResponse> register(@Body RegisterTokenRequest registerTokenRequest);
 
-    @PUT("requestedDiscount/3")
-    Call<DiscountPreferencesResponse> putDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesRequest);
+    @PUT("requestedDiscount/{id}")
+    Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
 
     @POST("requestedDiscount")
     Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesPostRequest,@Header("Authorization") String auth);
 
-    @GET("requestedDiscount/1")
-    Call<DiscountPreferencesResponse> getOneDiscountPreference();
+    @GET("requestedDiscount/")
+    Call<DiscountPreferencesResponse> getOneDiscountPreference(@Query("id")int id);
 
     @GET("requestedDiscount")
-    Call<DiscountPreferencesResponse>getDiscountsPreference();
+    Call<List<DiscountPreferencesResponse>>getDiscountsPreference(@Header("Authorization")String auth);
 
-    @DELETE("requestedDiscount/3")
-    Call<Void> deleteDiscountPreference();
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @DELETE("requestedDiscount/{id}")
+    Call<Void> deleteDiscountPreference(@Path("id") int id, @Header("Authorization")String auth);
 
     @GET("category")
     Call<List<Category>> fetchCategories();

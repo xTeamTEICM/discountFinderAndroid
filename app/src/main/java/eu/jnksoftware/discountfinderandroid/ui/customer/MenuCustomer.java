@@ -108,7 +108,7 @@ public class MenuCustomer extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Gson user=new Gson();
-            Intent userPreferences=new Intent(MenuCustomer.this,UserPreferences.class);
+            Intent userPreferences=new Intent(MenuCustomer.this,UserPreferenceList.class);
             userPreferences.putExtra("User", user.toJson(userTokenResponse));
             startActivity(userPreferences);
         }

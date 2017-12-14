@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,13 +24,14 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
+import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserPreferences extends AppCompatActivity {
+public class UserUpdatePreferences extends AppCompatActivity {
 
     private UserTokenResponse userTokenResponse;
     private int seekBarProgress = 0;
@@ -37,6 +39,8 @@ public class UserPreferences extends AppCompatActivity {
     private List<Category> categories = new ArrayList<>();
     private List<String> catTemp = new ArrayList<>();
     IuserService iuserService;
+    EditText tagUpdatePref;
+    EditText idUpdatePref;
     String accessToken;
     private ArrayAdapter<String> spinContentAdapter;
     private Spinner spinnerCat;
@@ -45,21 +49,24 @@ public class UserPreferences extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_preferences);
+        setContentView(R.layout.activity_user_update_preferences);
         String accessToken;
         iuserService= ApiUtils.getUserService();
-
+        idUpdatePref =findViewById(R.id.idPrefText);
+        tagUpdatePref=findViewById(R.id.tagPrefText);
         Gson user = new Gson();
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        Toast.makeText(UserPreferences.this, "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
         
         spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
-        spinContentAdapter = new ArrayAdapter<String>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
+        spinContentAdapter = new ArrayAdapter<String>(UserUpdatePreferences.this,android.R.layout.simple_list_item_1, catTemp);
         spinnerCat.getBackground().setAlpha(130);
         spinContentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCat.setAdapter(spinContentAdapter);
 
         fetchCategories();
+
+
 
         SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);
         showSeekProgress = (TextView) findViewById(R.id.tvSeekBarValue);
@@ -98,37 +105,35 @@ public class UserPreferences extends AppCompatActivity {
             DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
             discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
             discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
-            discountPreferencesRequest.setTags("Sample");
+            discountPreferencesRequest.setTags(tagUpdatePref.getText().toString().trim());
+            int idpref;
+            String s1;
+            s1=idUpdatePref.getText().toString();
+            idpref=Integer.parseInt(s1);
             String auth;
             auth="Bearer "+userTokenResponse.getAccessToken();
-            doUserPreference(discountPreferencesRequest,auth);
-            Toast.makeText(UserPreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(UserUpdatePreferences.this,auth,Toast.LENGTH_SHORT).show();
+            doUpdateUserPreference(idpref,discountPreferencesRequest,auth);
+
+            //Toast.makeText(UserUpdatePreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
         }
     };
 
-    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest,String auth) {
+    public void doUpdateUserPreference(final int id, final DiscountPreferencesRequest discountPreferencesRequest, String auth) {
 
-        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest,auth);
-            call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
-                @Override
-                public void onResponse(Call<DiscountPreferencesPostResponse> call, Response<DiscountPreferencesPostResponse> response) {
-                if(response.isSuccessful()){
-                    int statusCode=response.code();
-                    Log.d("UserPreferences","onResponse:"+statusCode);
-                    DiscountPreferencesPostResponse discountPreferencesPostResponse=response.body();
-                    Toast.makeText(UserPreferences.this,"Preference add "+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
+        Call<DiscountPreferencesResponse> call =iuserService.putDiscountPreferences(id,discountPreferencesRequest,auth);
+        call.enqueue(new Callback<DiscountPreferencesResponse>() {
+            @Override
+            public void onResponse(Call<DiscountPreferencesResponse> call, Response<DiscountPreferencesResponse> response) {
+                Toast.makeText(UserUpdatePreferences.this,"Η προτίμηση με id"+id+"Αλλαξε επιτυχως!",Toast.LENGTH_SHORT).show();
+            }
 
-                }
-                else
-                    Toast.makeText(UserPreferences.this, "ERROR", Toast.LENGTH_SHORT).show();
-                }
+            @Override
+            public void onFailure(Call<DiscountPreferencesResponse> call, Throwable t) {
 
-                @Override
-                public void onFailure(Call<DiscountPreferencesPostResponse> call, Throwable t) {
-                    call.cancel();
-                    Toast.makeText(UserPreferences.this,"Fail to connect with server",Toast.LENGTH_SHORT).show();
-                }
-            });
+            }
+        });
+
     }
 
     private void fetchCategories() {
@@ -136,18 +141,18 @@ public class UserPreferences extends AppCompatActivity {
         call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                UserPreferences.this.categories = response.body();
+                UserUpdatePreferences.this.categories = response.body();
                 List<String> temp = new ArrayList<>();
                 for(int i=0;i<categories.size();i++){
                     temp.add(categories.get(i).getTitle());
                 }
-                UserPreferences.this.catTemp.addAll(temp);
+                UserUpdatePreferences.this.catTemp.addAll(temp);
                 spinContentAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(UserPreferences.this, "Failed to fetch categories", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserUpdatePreferences.this, "Failed to fetch categories", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -156,7 +161,7 @@ public class UserPreferences extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(UserPreferences.this,UserPreferenceList.class);
+        Intent intent=new Intent(UserUpdatePreferences.this,UserPreferenceList.class);
         startActivity(intent);
     }
 }

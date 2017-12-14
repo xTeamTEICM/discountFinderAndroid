@@ -54,12 +54,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         String auth;
 
         public MyViewHolder(View itemView, Context context, List<Shop> shops, String auth) {
-            super(itemView);
+            super(itemView)
+             //DiscountRequestApi_Retrofit
+            brandName = itemView.findViewById(R.id.categoryTextView);
+//
             this.shops = shops;
             this.context = context;
             this.auth = auth;
             itemView.setOnClickListener(this);
             brandName = itemView.findViewById(R.id.shopNameTextView);
+// dev
         }
 /*
         public void bind(final Shop shop, final OnItemClickListener listener) {

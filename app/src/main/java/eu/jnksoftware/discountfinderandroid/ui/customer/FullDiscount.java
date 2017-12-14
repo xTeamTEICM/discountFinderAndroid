@@ -19,7 +19,7 @@ public class FullDiscount extends AppCompatActivity {
         String shopString="";
         String descriptionString="";
         String priceString="";
-        shopText=(TextView)findViewById(R.id.shopNameTextView);
+        shopText=(TextView)findViewById(R.id.categoryTextView);
         description=(TextView)findViewById(R.id.shortDescriptionTextView);
         price=(TextView)findViewById(R.id.priceTextView);
 
