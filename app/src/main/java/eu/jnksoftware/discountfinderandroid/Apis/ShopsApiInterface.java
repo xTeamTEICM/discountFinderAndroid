@@ -9,6 +9,7 @@ import eu.jnksoftware.discountfinderandroid.models.Shop;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -47,7 +48,8 @@ public interface ShopsApiInterface {
     @PUT("shop")
     Call<Void> updateShop(@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
 
-    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+
+    @FormUrlEncoded
     @POST("discount")
     Call<DiscountGet> addDiscount(@Body DiscountPost discountPost, @Header("Authorization") String auth);
 

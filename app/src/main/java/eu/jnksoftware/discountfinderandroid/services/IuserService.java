@@ -33,6 +33,7 @@ public interface IuserService {
     @PUT("requestedDiscount/{id}")
     Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
 
+
     @POST("requestedDiscount")
     Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesPostRequest,@Header("Authorization") String auth);
 
@@ -42,7 +43,7 @@ public interface IuserService {
     @GET("requestedDiscount")
     Call<List<DiscountPreferencesResponse>>getDiscountsPreference(@Header("Authorization")String auth);
 
-    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+
     @DELETE("requestedDiscount/{id}")
     Call<Void> deleteDiscountPreference(@Path("id") int id, @Header("Authorization")String auth);
 
