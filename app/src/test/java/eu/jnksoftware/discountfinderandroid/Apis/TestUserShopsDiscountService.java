@@ -13,17 +13,23 @@ import static org.junit.Assert.assertEquals;
 
 public class TestUserShopsDiscountService {
     ShopsApiInterface service = ApiUtils.getMockUserServiceShopsApi();
+    String auth="Bearer mock_access";
 
     @Test
     public void getSellerDiscountsTest() throws IOException {
 
         List<SellerDiscount> discounts = new ArrayList<>();
-        String auth="Bearer mock_access";
 
         discounts = service.getSellerDiscounts(auth).execute().body();
 
         assertEquals(6,discounts.size());
         assertEquals("pizza margarita",discounts.get(2).getDescription());
+    }
+
+    @Test
+    public void deleteSellerDiscountTest() throws IOException {
+        int pos = 3;
+        service.deleteSellerDiscount(3,auth).execute();
     }
 
 
