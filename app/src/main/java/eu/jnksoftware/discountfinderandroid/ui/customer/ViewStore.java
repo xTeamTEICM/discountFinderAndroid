@@ -142,7 +142,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
             String desc = discounts.get(viewHolder.getAdapterPosition()).getDescription();
 
             // backup the removed item for undo purpose
-            final SellerDiscount deletedItem = discounts.get(viewHolder.getAdapterPosition());
+            final SellerDiscount deletedDiscount = discounts.get(viewHolder.getAdapterPosition());
             final int deletedIndex = viewHolder.getAdapterPosition();
 
             // remove the item from recycler view
@@ -157,9 +157,9 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     // undo is selected, restore the deleted item
-                    myDiscountsAdapter.restoreDiscount(deletedItem, deletedIndex);
+                    myDiscountsAdapter.restoreDiscount(deletedDiscount, deletedIndex);
+                    myDiscountsAdapter.notifyItemInserted(deletedIndex);
                 }
             });
             snackbar.setActionTextColor(Color.YELLOW);
