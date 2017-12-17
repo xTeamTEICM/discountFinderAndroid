@@ -1,8 +1,5 @@
 package Apis;
 
-/**
- * Created by nikos on 10/12/2017.
- */
 
 import junit.framework.TestCase;
 

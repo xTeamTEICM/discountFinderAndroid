@@ -10,10 +10,6 @@ import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
-/**
- * Created by nikos on 1/12/2017.
- */
-
 public class TestUserService extends TestCase {
     @Test
     public void testTokenType() throws IOException

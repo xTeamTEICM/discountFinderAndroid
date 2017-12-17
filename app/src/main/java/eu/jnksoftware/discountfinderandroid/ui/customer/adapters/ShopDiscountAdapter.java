@@ -42,12 +42,10 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
 
     public void removeDiscount(int position){
         discounts.remove(position);
-        notifyItemRemoved(position);
     }
 
     public void restoreDiscount(SellerDiscount discount,int position){
         discounts.add(position,discount);
-        notifyItemInserted(position);
     }
 
     public int getDiscountId(int position){
