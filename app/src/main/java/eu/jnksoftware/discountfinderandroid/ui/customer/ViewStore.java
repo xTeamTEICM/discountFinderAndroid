@@ -38,7 +38,9 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     private List<SellerDiscount> discounts = new ArrayList<>();
     private ConstraintLayout layout;
 
-
+    public List<SellerDiscount> getDiscounts() {
+        return discounts;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +132,8 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
 
             @Override
             public void onFailure(Call<List<SellerDiscount>> call, Throwable t) {
-                Toast.makeText(ViewStore.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewStore.this, "Failed to load the discounts", Toast.LENGTH_SHORT).show();
+                call.cancel();
             }
         });
     }
