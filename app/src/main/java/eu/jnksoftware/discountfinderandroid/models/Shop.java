@@ -16,14 +16,6 @@ public class Shop {
         this.brandName = brandName;
         this.location = location;
     }
-    
-    private double calculateDistance(Location position) {
-        double distance;
-        double subtractionX = Math.abs(position.getLatitude() - location.getLatitude());
-        double subtractionY = Math.abs(position.getLongitude() - location.getLongitude());
-        distance = Math.sqrt((Math.pow(subtractionX, 2)) + (Math.pow(subtractionY, 2)));
-        return distance;
-    }
 
     public Uri getMapsUri() {
 

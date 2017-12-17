@@ -47,7 +47,7 @@ public class ChooseStoreLocationActivity extends FragmentActivity implements OnM
     }
 
     public void checkMarkers(LatLng latLng){
-        if (hasMarker == false) {
+        if (!hasMarker) {
             mMap.addMarker(createMarker(latLng));
             hasMarker = true;
         } else {

@@ -1,15 +1,14 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
-import org.json.JSONArray;
-
 import java.util.List;
+
 import eu.jnksoftware.discountfinderandroid.models.Category;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesResponse;
-import eu.jnksoftware.discountfinderandroid.models.RegisterTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -20,7 +19,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 
 public interface IuserService {

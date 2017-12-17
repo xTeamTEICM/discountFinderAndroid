@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.adapters;
 
 
 import android.content.Context;
@@ -17,8 +17,8 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 
 public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapter.DiscountViewHolder> {
-    Context context;
-    List<SellerDiscount> discounts;
+    private Context context;
+    private List<SellerDiscount> discounts;
 
     public ShopDiscountAdapter(Context context, List<SellerDiscount> discounts) {
         this.context = context;
@@ -28,8 +28,7 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
     @Override
     public ShopDiscountAdapter.DiscountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_discount_template,parent,false);
-        DiscountViewHolder discountViewHolder = new DiscountViewHolder(view,context);
-        return discountViewHolder;
+        return new DiscountViewHolder(view,context);
     }
 
     @Override

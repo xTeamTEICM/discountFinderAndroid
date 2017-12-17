@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
+import eu.jnksoftware.discountfinderandroid.ui.customer.shops.ViewStore;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
@@ -21,8 +22,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     private List<Shop> shopList = new ArrayList<>();
-    Context context;
-    String auth;
+    private Context context;
+    private String auth;
 
     public RecyclerAdapter(List<Shop> shopList,Context context,String auth){
         this.shopList = shopList;
@@ -33,8 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(view,context, shopList,auth);
-        return myViewHolder;
+        return new MyViewHolder(view,context, shopList,auth);
     }
 
     @Override

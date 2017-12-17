@@ -1,10 +1,7 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,26 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.Category;
-import eu.jnksoftware.discountfinderandroid.models.Discount;
-import retrofit2.Callback;
-import retrofit2.http.Url;
+import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
+import eu.jnksoftware.discountfinderandroid.ui.customer.discount.FullContentDiscount;
 
-/**
- *
- * Created by poz on 29/11/2017.
- *
- */
 
 public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecyclerAdapter.MyViewHolder> {
-    public List<Discount> discountArrayList = new ArrayList<>();
-    public Context context;
+    private List<Discount> discountArrayList = new ArrayList<>();
+    private Context context;
 
     public DiscountRecyclerAdapter(List<Discount> discountList , Context context) {
         this.discountArrayList = discountList;
@@ -42,8 +30,7 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_discount_items, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(view,context,discountArrayList);
-        return myViewHolder;
+        return new MyViewHolder(view,context,discountArrayList);
     }
 
     @Override

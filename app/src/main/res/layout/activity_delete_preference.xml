@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.DeletePreference">
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.DeletePreference">
 
     <Button
         android:id="@+id/dltBtn"

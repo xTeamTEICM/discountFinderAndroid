@@ -3,11 +3,6 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- *
- * Created by poz on 8/12/2017.
- *
- */
 
 public class PostDiscount {
 

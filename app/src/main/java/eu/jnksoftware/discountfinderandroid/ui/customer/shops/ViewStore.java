@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.shops;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +23,8 @@ import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerItemTouchHelper;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -123,7 +125,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
             @Override
             public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
                 discounts = response.body();
-                Toast.makeText(ViewStore.this,response.message() + "\nLoaded",Toast.LENGTH_SHORT);
+                Toast.makeText(ViewStore.this,response.message() + "\nLoaded",Toast.LENGTH_SHORT).show();
                 myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this,discounts);
                 myDiscountsRecycler.setAdapter(myDiscountsAdapter);
             }

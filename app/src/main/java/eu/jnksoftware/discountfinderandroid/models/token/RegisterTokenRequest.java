@@ -1,11 +1,8 @@
-package eu.jnksoftware.discountfinderandroid.models;
+package eu.jnksoftware.discountfinderandroid.models.token;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by nikos on 3/12/2017.
- */
 
 public class RegisterTokenRequest {
     @SerializedName("firstName")

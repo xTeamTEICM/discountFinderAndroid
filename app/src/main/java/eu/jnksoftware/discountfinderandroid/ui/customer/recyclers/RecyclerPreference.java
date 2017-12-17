@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.recyclers;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,15 +13,12 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesResponse;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by nikos on 9/12/2017.
- */
 
 public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.MyViewHolder>{
     private List<DiscountPreferencesResponse> discountPreferencesResponses;
@@ -44,7 +41,7 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         holder.tags.setText(discountPreferencesResponses.get(position).getTags());
         holder.price.setText(Integer.toString(discountPreferencesResponses.get(position).getPrice()));
@@ -54,15 +51,12 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
             @Override
             public void onClick(View view) {
                 int idpref;
-                idpref=discountPreferencesResponses.get(position).getId();
+                idpref=discountPreferencesResponses.get(holder.getAdapterPosition()).getId();
                 deletePref(idpref,auth);
-                discountPreferencesResponses.remove(position);
+                discountPreferencesResponses.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();
-
-
             }
         });
-
     }
 
     @Override

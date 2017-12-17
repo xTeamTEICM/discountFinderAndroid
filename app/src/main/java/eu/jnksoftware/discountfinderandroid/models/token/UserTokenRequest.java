@@ -1,12 +1,9 @@
-package eu.jnksoftware.discountfinderandroid.models;
+package eu.jnksoftware.discountfinderandroid.models.token;
 
-/**
- * Created by nikos on 1/12/2017.
- */
 
 public class UserTokenRequest {
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     public String getUsername() {
         return username;

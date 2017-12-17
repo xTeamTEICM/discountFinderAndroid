@@ -1,18 +1,14 @@
 package eu.jnksoftware.discountfinderandroid.Apis;
 
 import java.util.List;
-import eu.jnksoftware.discountfinderandroid.models.Discount;
+
+import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
-/**
- *
- * Created by poz on 6/12/2017.
- *
- */
 
 public interface DiscountsApiInterface {
 

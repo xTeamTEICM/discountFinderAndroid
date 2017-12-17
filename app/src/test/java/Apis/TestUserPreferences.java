@@ -12,11 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesResponse;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
 public class TestUserPreferences extends TestCase{

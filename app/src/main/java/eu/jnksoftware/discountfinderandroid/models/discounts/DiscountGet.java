@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.models;
+package eu.jnksoftware.discountfinderandroid.models.discounts;
 
 
 

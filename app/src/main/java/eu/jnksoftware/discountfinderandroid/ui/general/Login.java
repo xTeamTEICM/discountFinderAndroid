@@ -11,12 +11,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
+
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
@@ -80,9 +82,6 @@ public class Login extends Activity {
         call.enqueue(new Callback<UserTokenResponse>() {
             @Override
             public void onResponse(Call<UserTokenResponse> call, Response<UserTokenResponse> response) {
-                int statusCode=response.code();
-
-
                 if(response.isSuccessful())
                 {
                     UserTokenResponse userTokenResponse=response.body();

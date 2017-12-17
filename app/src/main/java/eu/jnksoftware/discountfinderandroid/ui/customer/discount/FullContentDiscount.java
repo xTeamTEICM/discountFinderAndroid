@@ -1,7 +1,7 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.discount;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +23,7 @@ public class FullContentDiscount extends AppCompatActivity {
         discountPrice = findViewById(R.id.discountPrice);
         discountShopName = findViewById(R.id.discountShopName);
 
-        discountImage.setImageResource(getIntent().getIntExtra("discount_image",00));
+        discountImage.setImageResource(getIntent().getIntExtra("discount_image",0));
         discountId.setText("Discount Id : " + getIntent().getStringExtra("discount_id"));
         discountCategory.setText("Category : " + getIntent().getStringExtra("discount_Category"));
         discountDescription.setText("Description : " + getIntent().getStringExtra("discount_Description"));

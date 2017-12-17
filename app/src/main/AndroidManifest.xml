@@ -26,24 +26,24 @@
         <activity android:name=".ui.general.Login" />
         <activity android:name=".ui.general.Register" />
         <activity android:name=".ui.customer.MenuCustomer" />
-        <activity android:name=".ui.customer.UserPreferences" />
+        <activity android:name=".ui.customer.userPreferences.UserPreferences" />
         <activity android:name=".ui.general.AboutUs" />
         <activity android:name=".ui.general.Settings" />
-        <activity android:name=".ui.customer.SellerShops" />
-        <activity android:name=".ui.customer.DiscountCustomerRecyclerList" />
-        <activity android:name=".ui.customer.UserPreferenceList" />
-        <activity android:name=".ui.customer.UserUpdatePreferences"/>
-        <activity android:name=".ui.customer.UpdateShop"></activity>
-        <activity android:name=".ui.customer.ViewStore"></activity>
-        <activity android:name=".ui.customer.FullDiscount">
+        <activity android:name=".ui.customer.shops.SellerShops" />
+        <activity android:name=".ui.customer.recyclers.DiscountCustomerRecyclerList" />
+        <activity android:name=".ui.customer.userPreferences.UserPreferenceList" />
+        <activity android:name=".ui.customer.userPreferences.UserUpdatePreferences"/>
+        <activity android:name=".ui.customer.shops.UpdateShop"></activity>
+        <activity android:name=".ui.customer.shops.ViewStore"></activity>
+        <activity android:name=".ui.customer.discount.FullDiscount">
             <intent-filter>
                 <action android:name="FULLDISCOUNT" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.customer.SellerAddShop" />
-        <activity android:name=".ui.customer.SellerAddDiscount"/>
+        <activity android:name=".ui.customer.shops.SellerAddShop" />
+        <activity android:name=".ui.customer.shops.SellerAddDiscount"/>
 
         <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>
@@ -56,8 +56,8 @@
             </intent-filter>
         </service>
         <service android:name=".services.GeoLocation" />
-        <activity android:name=".ui.customer.DeletePreference"></activity>
-        <activity android:name=".ui.customer.FullContentDiscount"></activity>
+        <activity android:name=".ui.customer.userPreferences.DeletePreference"></activity>
+        <activity android:name=".ui.customer.discount.FullContentDiscount"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/GOOGLE_MAPS_API_KEY" />
