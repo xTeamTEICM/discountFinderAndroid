@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -34,18 +35,18 @@ public class ShopDiscountAdapterTest {
     @Test
     public void removeDiscountTest(){
         adapter.removeDiscount(2);
-        assertThat(adapter.discounts.size(),is(2));
+        assertThat(adapter.getDiscounts().size(),is(2));
     }
 
     @Test
     public void restoreDiscountTest(){
         final int deletePosition = 2;
-        final SellerDiscount deletedDiscount = adapter.discounts.get(deletePosition);
+        final SellerDiscount deletedDiscount = adapter.getDiscounts().get(deletePosition);
 
         adapter.removeDiscount(deletePosition);
         adapter.restoreDiscount(deletedDiscount,deletePosition);
 
-        assertThat(adapter.discounts.get(2),is(deletedDiscount));
+        assertThat(adapter.getDiscounts().get(2),is(deletedDiscount));
     }
 
 

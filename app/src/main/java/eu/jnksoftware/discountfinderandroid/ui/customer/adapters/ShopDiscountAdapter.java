@@ -25,6 +25,10 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
         this.discounts = discounts;
     }
 
+    public List<SellerDiscount> getDiscounts() {
+        return discounts;
+    }
+
     @Override
     public ShopDiscountAdapter.DiscountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_discount_template,parent,false);
