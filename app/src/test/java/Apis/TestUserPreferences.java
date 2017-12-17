@@ -1,8 +1,5 @@
 package Apis;
 
-/**
- * Created by nikos on 10/12/2017.
- */
 
 import junit.framework.TestCase;
 
@@ -15,8 +12,6 @@ import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesResponse;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
 public class TestUserPreferences extends TestCase{
