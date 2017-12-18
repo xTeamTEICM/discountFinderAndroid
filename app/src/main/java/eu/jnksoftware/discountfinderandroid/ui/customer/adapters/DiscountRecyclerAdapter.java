@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.Discount;
+
+import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.ui.customer.discount.FullContentDiscount;
 
 
