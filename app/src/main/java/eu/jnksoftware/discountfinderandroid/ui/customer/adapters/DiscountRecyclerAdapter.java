@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -46,14 +48,9 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
         holder.title.setText("Περιγραφή :" + discountArrayList.get(position).getShortDescription());
         holder.shop.setText("Κατάστημα :" + discountArrayList.get(position).getShopName());
         holder.price.setText("Τιμή :" + String.valueOf(discountArrayList.get(position).getFinalPrice())+"€");
-/*        try{
-            Bitmap discountImage = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
-            holder.image.setImageBitmap(discountImage);
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }*/
+
+        Picasso.with(context).load(imageUrl).noPlaceholder().fit().into(holder.image);
+
     }
 
     @Override
