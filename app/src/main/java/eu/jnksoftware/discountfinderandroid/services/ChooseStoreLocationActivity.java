@@ -19,6 +19,7 @@ public class ChooseStoreLocationActivity extends FragmentActivity implements OnM
     private GoogleMap mMap;
     LatLng currentLatLng;
     boolean hasMarker = false;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
