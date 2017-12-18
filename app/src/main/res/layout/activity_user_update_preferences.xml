@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Grey50"
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserUpdatePreferences"
+    tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+        android:id="@+id/tvFindDiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:layout_marginTop="16dp"
+        android:text="Πρόσθεσε τα φίλτρα που θες"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/svFindDiscount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/svFindDiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFindDiscount">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/category"
+                android:textColor="@android:color/background_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:drawable/btn_dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCategory" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/price"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCategory" />
+
+            <TextView
+                android:id="@+id/tvSeekBarValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="93dp"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+            <SeekBar
+                android:id="@+id/seekBarPrice"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="320dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:max="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
+            <Button
+                android:id="@+id/btSavePreferences"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="66dp"
+                android:layout_marginStart="77dp"
+                android:layout_marginTop="50dp"
+                android:text="Αποθήκευση"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.391"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/seekBarPrice"
+                app:layout_constraintVertical_bias="0.798" />
+
+            <TextView
+                android:id="@+id/prefDescUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Βαλε το Id της προτιμησης που θες να αλλάξεις"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toTopOf="@+id/idPrefText"
+                app:layout_constraintEnd_toEndOf="@+id/tagPrefText"
+                app:layout_constraintStart_toStartOf="@+id/tagPrefText"
+                app:layout_constraintTop_toBottomOf="@+id/tagPrefText" />
+
+            <EditText
+                android:id="@+id/idPrefText"
+                android:layout_width="93dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/btSavePreferences"
+                app:layout_constraintEnd_toEndOf="@+id/prefDescUpdate"
+                app:layout_constraintStart_toStartOf="@+id/prefDescUpdate" />
+
+            <EditText
+                android:id="@+id/tagPrefText"
+                android:layout_width="231dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="222dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tagDesc"
+                app:layout_constraintStart_toStartOf="@+id/tagDesc" />
+
+            <TextView
+                android:id="@+id/tagDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Βαλε τα Tags που θελεις να  αλλάξεις"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="@+id/seekBarPrice"
+                app:layout_constraintStart_toStartOf="@+id/seekBarPrice"
+                app:layout_constraintTop_toBottomOf="@+id/seekBarPrice" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
