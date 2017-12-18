@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.shops;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +18,8 @@ import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

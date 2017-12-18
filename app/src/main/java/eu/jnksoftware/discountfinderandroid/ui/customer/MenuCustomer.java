@@ -1,20 +1,21 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.google.gson.Gson;
+
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.Discount;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
+import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
+import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
+import eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserPreferenceList;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
 
@@ -108,7 +109,7 @@ public class MenuCustomer extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Gson user=new Gson();
-            Intent userPreferences=new Intent(MenuCustomer.this,UserPreferences.class);
+            Intent userPreferences=new Intent(MenuCustomer.this,UserPreferenceList.class);
             userPreferences.putExtra("User", user.toJson(userTokenResponse));
             startActivity(userPreferences);
         }

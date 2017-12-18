@@ -6,14 +6,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-
-/**
- * Created by nikos on 1/12/2017.
- */
 
 public class TestUserService extends TestCase {
     @Test

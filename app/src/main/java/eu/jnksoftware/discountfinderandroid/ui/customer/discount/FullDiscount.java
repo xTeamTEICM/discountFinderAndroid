@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.discount;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +19,9 @@ public class FullDiscount extends AppCompatActivity {
         String shopString="";
         String descriptionString="";
         String priceString="";
-        shopText=(TextView)findViewById(R.id.shopNameTextView);
-        description=(TextView)findViewById(R.id.shortDescriptionTextView);
-        price=(TextView)findViewById(R.id.priceTextView);
+        shopText= findViewById(R.id.categoryTextView);
+        description= findViewById(R.id.shortDescriptionTextView);
+        price= findViewById(R.id.priceTextView);
 
         if(getIntent().getExtras()!=null){
             shopString = getIntent().getExtras().getString("shopName");

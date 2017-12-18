@@ -15,11 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.ui.customer.FullDiscount;
+import eu.jnksoftware.discountfinderandroid.ui.customer.discount.FullDiscount;
 
-/**
- * Created by makis on 23/11/2017.
- */
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override

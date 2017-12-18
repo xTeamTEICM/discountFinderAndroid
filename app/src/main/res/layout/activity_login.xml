@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/style"
+    android:background="@drawable/background_style"
     tools:context="eu.jnksoftware.discountfinderandroid.ui.general.Login"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="25dp">

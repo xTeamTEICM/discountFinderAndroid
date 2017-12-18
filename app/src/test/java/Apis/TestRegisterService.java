@@ -11,9 +11,8 @@ import org.junit.Test;
 import java.io.IOException;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.models.RegisterTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
 public class TestRegisterService extends TestCase {

@@ -7,6 +7,7 @@
     android:background="@drawable/style"
     tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.DiscountCustomerRecyclerList">
 
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

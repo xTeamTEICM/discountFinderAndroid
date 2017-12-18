@@ -19,6 +19,7 @@ public class ChooseStoreLocationActivity extends FragmentActivity implements OnM
     private GoogleMap mMap;
     LatLng currentLatLng;
     boolean hasMarker = false;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class ChooseStoreLocationActivity extends FragmentActivity implements OnM
     }
 
     public void checkMarkers(LatLng latLng){
-        if (hasMarker == false) {
+        if (!hasMarker) {
             mMap.addMarker(createMarker(latLng));
             hasMarker = true;
         } else {

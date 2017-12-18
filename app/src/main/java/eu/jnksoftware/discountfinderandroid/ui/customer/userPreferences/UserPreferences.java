@@ -1,6 +1,7 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,9 +21,9 @@ import java.util.List;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Category;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesPostResponse;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPreferencesRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,17 +53,17 @@ public class UserPreferences extends AppCompatActivity {
         userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
         Toast.makeText(UserPreferences.this, "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
         
-        spinnerCat = (Spinner) findViewById(R.id.spinnerCategory);
-        spinContentAdapter = new ArrayAdapter<String>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
+        spinnerCat = findViewById(R.id.spinnerCategory);
+        spinContentAdapter = new ArrayAdapter<>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
         spinnerCat.getBackground().setAlpha(130);
         spinContentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCat.setAdapter(spinContentAdapter);
 
         fetchCategories();
 
-        SeekBar seekBarPrice = (SeekBar) findViewById(R.id.seekBarPrice);
-        showSeekProgress = (TextView) findViewById(R.id.tvSeekBarValue);
-        Button savePrefButton = (Button) findViewById(R.id.btSavePreferences);
+        SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
+        showSeekProgress =  findViewById(R.id.tvSeekBarValue);
+        Button savePrefButton = findViewById(R.id.btSavePreferences);
         savePrefButton.setOnClickListener(savePrefClick);
 
         showSeekProgress.setText("Μέχρι "+seekBarProgress + " ευρώ");
@@ -93,7 +94,6 @@ public class UserPreferences extends AppCompatActivity {
     private final View.OnClickListener savePrefClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ;
             DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
             discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
             discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
@@ -152,4 +152,10 @@ public class UserPreferences extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(UserPreferences.this,UserPreferenceList.class);
+        startActivity(intent);
+    }
 }

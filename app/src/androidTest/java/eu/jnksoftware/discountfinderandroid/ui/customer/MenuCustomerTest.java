@@ -30,7 +30,7 @@ public class MenuCustomerTest {
         onView(withId(R.id.tvNewDiscounts)).check(matches(isDisplayed()));
         onView(withId(R.id.filtersBtn)).check(matches(isDisplayed()));
         onView(withId(R.id.settingsBtn)).check(matches(isDisplayed()));
-        onView(withId(R.id.showDiscountsButton)).check(matches(isDisplayed()));
+       // onView(withId(R.id.showDiscountsButton)).check(matches(isDisplayed()));
         onView(withId(R.id.aboutBtn)).check(matches(isDisplayed()));
         onView(withId(R.id.showShopsButton)).check(matches(isDisplayed()));
     }

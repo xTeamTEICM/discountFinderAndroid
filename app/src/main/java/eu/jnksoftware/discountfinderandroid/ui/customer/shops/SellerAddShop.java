@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.shops;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
 import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
@@ -23,10 +24,10 @@ public class SellerAddShop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_add_shop);
 
-        Button insertButton = (Button) findViewById(R.id.insertButton);
+        Button insertButton = findViewById(R.id.insertButton);
         insertButton.setOnClickListener(insertButtonClick);
 
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(cancelButtonClick);
 
         apiService = RestClient.getClient().create(ShopsApiInterface.class);

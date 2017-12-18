@@ -1,31 +1,31 @@
-package eu.jnksoftware.discountfinderandroid.models;
+package eu.jnksoftware.discountfinderandroid.models.discountPreferences;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by nikos on 1/12/2017.
- */
 
 public class DiscountPreferencesResponse {
     @SerializedName("id")
+@Expose
+private Integer id;
+    @SerializedName("userId")
     @Expose
-    private Integer id;
-    @SerializedName("userid")
-    @Expose
-    private Integer userid;
+    private Integer userId;
     @SerializedName("category")
     @Expose
-    private String category;
+    private Integer category;
     @SerializedName("price")
     @Expose
-    private String price;
+    private Integer price;
     @SerializedName("tags")
     @Expose
     private String tags;
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("categoryTitle")
+    @Expose
+    private String categoryTitle;
 
     public Integer getId() {
         return id;
@@ -35,27 +35,23 @@ public class DiscountPreferencesResponse {
         this.id = id;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
-
-    public String getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Integer category) {
         this.category = category;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -71,7 +67,8 @@ public class DiscountPreferencesResponse {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getCategoryTitle() {
+        return categoryTitle;
     }
+
 }

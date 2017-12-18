@@ -1,17 +1,10 @@
-package eu.jnksoftware.discountfinderandroid.models;
+package eu.jnksoftware.discountfinderandroid.models.discountPreferences;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by nikos on 1/12/2017.
- */
 
-public class DiscountPreferencesPostResponse {
-
-    @SerializedName("userid")
-    @Expose
-    private Integer userid;
+public class DiscountPreferencesRequest {
     @SerializedName("category")
     @Expose
     private String category;
@@ -21,17 +14,6 @@ public class DiscountPreferencesPostResponse {
     @SerializedName("tags")
     @Expose
     private String tags;
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
 
     public String getCategory() {
         return category;
@@ -57,11 +39,5 @@ public class DiscountPreferencesPostResponse {
         this.tags = tags;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }
+

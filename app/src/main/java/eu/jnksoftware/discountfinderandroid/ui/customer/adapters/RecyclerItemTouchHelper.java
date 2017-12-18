@@ -1,13 +1,10 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.adapters;
 
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-/**
- * Created by kostas on 11/12/2017.
- */
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerItemTouchHelperListener listener;

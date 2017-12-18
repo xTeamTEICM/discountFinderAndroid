@@ -1,11 +1,8 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
-/**
- * Created by kostas on 9/12/2017.
- */
 
 public class SellerDiscount {
-    int id;
+    private int id;
     private int shopId;
     private int category;
     private double originalPrice;

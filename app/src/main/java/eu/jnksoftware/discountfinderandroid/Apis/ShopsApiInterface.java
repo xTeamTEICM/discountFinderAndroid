@@ -2,10 +2,10 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.models.DiscountGet;
-import eu.jnksoftware.discountfinderandroid.models.DiscountPost;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
+import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
+import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;

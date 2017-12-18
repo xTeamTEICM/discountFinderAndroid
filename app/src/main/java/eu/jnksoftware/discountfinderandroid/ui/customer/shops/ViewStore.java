@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer;
+package eu.jnksoftware.discountfinderandroid.ui.customer.shops;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +23,8 @@ import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerItemTouchHelper;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,7 +40,9 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     private List<SellerDiscount> discounts = new ArrayList<>();
     private ConstraintLayout layout;
 
-
+    public List<SellerDiscount> getDiscounts() {
+        return discounts;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,14 +127,15 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
             @Override
             public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
                 discounts = response.body();
-                Toast.makeText(ViewStore.this,response.message() + "\nLoaded",Toast.LENGTH_SHORT);
+                Toast.makeText(ViewStore.this,response.message() + "\nLoaded",Toast.LENGTH_SHORT).show();
                 myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this,discounts);
                 myDiscountsRecycler.setAdapter(myDiscountsAdapter);
             }
 
             @Override
             public void onFailure(Call<List<SellerDiscount>> call, Throwable t) {
-                Toast.makeText(ViewStore.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewStore.this, "Failed to load the discounts", Toast.LENGTH_SHORT).show();
+                call.cancel();
             }
         });
     }
@@ -142,7 +147,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
             String desc = discounts.get(viewHolder.getAdapterPosition()).getDescription();
 
             // backup the removed item for undo purpose
-            final SellerDiscount deletedItem = discounts.get(viewHolder.getAdapterPosition());
+            final SellerDiscount deletedDiscount = discounts.get(viewHolder.getAdapterPosition());
             final int deletedIndex = viewHolder.getAdapterPosition();
 
             // remove the item from recycler view
@@ -157,9 +162,9 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     // undo is selected, restore the deleted item
-                    myDiscountsAdapter.restoreDiscount(deletedItem, deletedIndex);
+                    myDiscountsAdapter.restoreDiscount(deletedDiscount, deletedIndex);
+                    myDiscountsAdapter.notifyItemInserted(deletedIndex);
                 }
             });
             snackbar.setActionTextColor(Color.YELLOW);
