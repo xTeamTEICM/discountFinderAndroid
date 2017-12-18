@@ -1,5 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
+import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -11,13 +13,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.Location;
+import eu.jnksoftware.discountfinderandroid.ui.customer.SellerAddShop;
 
-public class ChooseStoreLocationActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     LatLng currentLatLng;
+    Location userLocation = new Location();
     boolean hasMarker = false;
-    
+    String auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +36,10 @@ public class ChooseStoreLocationActivity extends FragmentActivity implements OnM
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
-        double lat = getIntent().getDoubleExtra("lat", 100);
-        double lon = getIntent().getDoubleExtra("lon", 100);
-        currentLatLng = new LatLng(lat, lon);
+        userLocation.setLatitude(getIntent().getDoubleExtra("lat", 100));
+        userLocation.setLongitude(getIntent().getDoubleExtra("lon", 100));
+        auth = getIntent().getStringExtra("auth");
+        currentLatLng = new LatLng(userLocation.getLatitude(),userLocation.getLongitude());
         mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
         mMap.addCircle(customizeCircle(1000,currentLatLng));
@@ -41,6 +47,15 @@ public class ChooseStoreLocationActivity extends FragmentActivity implements OnM
             @Override
             public void onMapClick(LatLng latLng) {
                 checkMarkers(latLng);
+                Intent intent = getIntent();
+                intent.putExtra("storeLat",latLng.latitude);
+                intent.putExtra("storeLon",latLng.longitude);
+                intent.putExtra("lat",userLocation.getLatitude());
+                intent.putExtra("lon",userLocation.getLongitude());
+                intent.putExtra("auth",auth);
+                setResult(RESULT_OK,intent);
+                finish();
+                setResult(RESULT_CANCELED);
             }
         });
     }

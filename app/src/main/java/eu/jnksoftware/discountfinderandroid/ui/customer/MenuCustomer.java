@@ -59,6 +59,8 @@ public class MenuCustomer extends AppCompatActivity {
             Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
             Gson user = new Gson();
             intent.putExtra("User", user.toJson(userTokenResponse));
+            intent.putExtra("lat",geoLocation.getLatitude());
+            intent.putExtra("lon",geoLocation.getLongitude());
             startActivity(intent);
         }
     };
@@ -82,6 +84,7 @@ public class MenuCustomer extends AppCompatActivity {
     };
 
     private final View.OnClickListener aboutClick = new View.OnClickListener() {
+
         @Override
         public void onClick(final View v) {
             startActivity(new Intent(MenuCustomer.this, AboutUs.class));

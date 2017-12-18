@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.general.Main"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +60,7 @@
             android:value="@string/GOOGLE_MAPS_API_KEY" />
 
         <activity
-            android:name=".services.ChooseStoreLocationActivity"
+            android:name=".services.ChooseStoreLocation"
             android:label="@string/title_activity_choose_store_location"></activity>
       
     </application>

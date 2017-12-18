@@ -17,6 +17,7 @@ import java.util.List;
 import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
 import retrofit2.Call;
@@ -30,6 +31,9 @@ public class SellerShops extends AppCompatActivity {
     List<Shop> shops = new ArrayList<>();
     ShopsApiInterface apiService;
     String auth;
+
+    //rm this
+    Location userLocation = new Location();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,12 @@ public class SellerShops extends AppCompatActivity {
         addStore.setOnClickListener(addStoreButtonClick);
         Button refreshButton = findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(refreshButtonClick);
+        double lat = getIntent().getDoubleExtra("storeLat",-1);
+        double lon = getIntent().getDoubleExtra("storeLon",-1);
+
+        //got to remove this
+        userLocation.setLatitude(getIntent().getDoubleExtra("lat",-1));
+        userLocation.setLongitude(getIntent().getDoubleExtra("lon",-1));
 }
 
         private final View.OnClickListener refreshButtonClick = new View.OnClickListener() {
@@ -81,6 +91,8 @@ public class SellerShops extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(SellerShops.this,SellerAddShop.class);
             intent.putExtra("auth",auth);
+            intent.putExtra("lat",userLocation.getLatitude());
+            intent.putExtra("lon",userLocation.getLongitude());
             startActivity(intent);
         }
     };

@@ -42,6 +42,7 @@ public class Login extends Activity {
 
         TextView registerView = findViewById(R.id.loginRegisterBtn);
         registerView.setOnClickListener(registerBtnClick);
+        login.performClick();
     }
 
     private final View.OnClickListener loginBtnClick = new View.OnClickListener() {
