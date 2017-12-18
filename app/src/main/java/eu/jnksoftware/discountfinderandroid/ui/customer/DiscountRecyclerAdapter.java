@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,15 +50,20 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-
+        String imageUrl = "https://img.grouponcdn.com/deal/8DDtq5XRzVnLXEUnPHPd/p2-2048x1229/v1/c700x420.jpg";
         //Discount Card
         //Discount discount = discountArrayList.get(position);
         holder.title.setText("Περιγραφή :" + discountArrayList.get(position).getShortDescription());
         holder.shop.setText("Κατάστημα :" + discountArrayList.get(position).getShopName());
         holder.price.setText("Τιμή :" + String.valueOf(discountArrayList.get(position).getFinalPrice())+"€");
-        //holder.image.setImageBitmap(discountArrayList.get(position).getProductImageUrl())
-
-
+/*        try{
+            Bitmap discountImage = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
+            holder.image.setImageBitmap(discountImage);
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }*/
     }
 
     @Override

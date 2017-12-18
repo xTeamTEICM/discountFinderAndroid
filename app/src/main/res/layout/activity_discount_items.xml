@@ -3,60 +3,113 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:orientation="vertical">
+    android:layout_height="129dp"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="35dp">
 
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/recyclerHeader"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:paddingHorizontal="3dp"
-            android:text="Περιγραφή : "
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/recyclerImage"
-            app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardView15"
+            android:layout_width="130dp"
+            android:layout_height="110dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="11dp"
+            app:cardCornerRadius="30dp">
 
-        <TextView
-            android:id="@+id/recyclerShop"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:paddingHorizontal="3dp"
-            android:text="Κατάστημα : "
-            app:layout_constraintEnd_toEndOf="@+id/recyclerHeader"
-            app:layout_constraintStart_toEndOf="@+id/recyclerImage"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerHeader" />
 
-        <TextView
-            android:id="@+id/recyclerPrice"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:paddingHorizontal="3dp"
-            android:text="Τιμή : "
-            app:layout_constraintEnd_toEndOf="@+id/recyclerShop"
-            app:layout_constraintStart_toEndOf="@+id/recyclerImage"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerShop" />
+            <ImageView
+                android:id="@+id/recyclerImage"
+                android:layout_width="130dp"
+                android:layout_height="110dp"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"
+                android:layout_alignStart="@+id/cardView15"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/about_icon_github"
+                tools:ignore="bitmap"
+                tools:layout_weight="10" />
+        </android.support.v7.widget.CardView>
 
-        <ImageView
-            android:id="@+id/recyclerImage"
-            android:layout_width="114dp"
-            android:layout_height="90dp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/about_icon_github"
-            tools:ignore="bitmap"
-            tools:layout_weight="10" />
+        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardView12"
+            android:layout_width="195dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/cardView15"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="#192961"
+            app:cardCornerRadius="10dp">
 
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/recyclerHeader"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="3dp"
+                android:text="Περιγραφή : "
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/recyclerImage"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardView13"
+            android:layout_width="195dp"
+            android:layout_height="25dp"
+            android:layout_alignStart="@+id/cardView12"
+            android:layout_centerVertical="true"
+            app:cardBackgroundColor="#192961"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/recyclerShop"
+                android:layout_width="182dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="3dp"
+                android:text="Κατάστημα : "
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerHeader"
+                app:layout_constraintStart_toEndOf="@+id/recyclerImage"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerHeader" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardView16"
+            android:layout_width="195dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/cardView15"
+            android:layout_alignStart="@+id/cardView13"
+            app:cardBackgroundColor="#192961"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/recyclerPrice"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="3dp"
+                android:text="Τιμή : "
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="@+id/recyclerShop"
+                app:layout_constraintStart_toEndOf="@+id/recyclerImage"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerShop" />
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>
