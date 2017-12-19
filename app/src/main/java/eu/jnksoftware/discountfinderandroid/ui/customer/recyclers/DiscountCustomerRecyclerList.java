@@ -12,12 +12,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.DiscountsApiInterface;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.PostDiscount;
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.DiscountRecyclerAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +32,7 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private List<Discount> discountProducts = new ArrayList<>();
-    private DiscountsApiInterface supportApi;
+    private IuserService supportApi;
     private String auth;
     private double latitude ,longitude;
     private Location location = new Location();
@@ -53,7 +53,7 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         latitude = getIntent().getDoubleExtra("latitude", location.getLatitude());
         longitude = getIntent().getDoubleExtra("longitude",location.getLongitude());
 
-        supportApi = RestClient.getClient().create(DiscountsApiInterface.class);
+        supportApi = ApiUtils.getUserService();
 
         seekBarProgressCalc();
         fillDiscountProductsList();

@@ -7,17 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SellerAddDiscount extends AppCompatActivity {
-    ShopsApiInterface apiInterface;
+    private IuserService apiInterface;
     String auth;
     double startingPrice;
     double finalPrice;
@@ -33,7 +33,7 @@ public class SellerAddDiscount extends AppCompatActivity {
         Button myDiscount = findViewById(R.id.addMyDiscountButton);
         myDiscount.setOnClickListener(myDiscountClick);
 
-        apiInterface = RestClient.getClient().create(ShopsApiInterface.class);
+        apiInterface = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
     }
 

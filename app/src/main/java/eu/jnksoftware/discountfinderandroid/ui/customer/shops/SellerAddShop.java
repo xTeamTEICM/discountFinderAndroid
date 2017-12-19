@@ -8,16 +8,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SellerAddShop extends AppCompatActivity {
-    ShopsApiInterface apiService;
+    private IuserService apiService;
     String auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class SellerAddShop extends AppCompatActivity {
         Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(cancelButtonClick);
 
-        apiService = RestClient.getClient().create(ShopsApiInterface.class);
+        apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
     }
 

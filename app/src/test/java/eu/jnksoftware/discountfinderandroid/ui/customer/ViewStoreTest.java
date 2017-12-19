@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 
 public class ViewStoreTest {
 
-    ShopsApiInterface mockApiInterface = Mockito.mock(ShopsApiInterface.class);
+    IuserService mockApiInterface = Mockito.mock(IuserService.class);
     final Call<List<SellerDiscount>> mockCall = Mockito.mock(Call.class);
     List<SellerDiscount> mockCallDiscounts = new ArrayList<>();
     List<SellerDiscount> discounts = new ArrayList<>();

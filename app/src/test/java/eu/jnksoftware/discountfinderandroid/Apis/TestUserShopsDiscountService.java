@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestUserShopsDiscountService {
-    ShopsApiInterface service = ApiUtils.getMockUserServiceShopsApi();
+    IuserService service = ApiUtils.getMockUserService();
     String auth="Bearer mock_access";
 
     @Test
