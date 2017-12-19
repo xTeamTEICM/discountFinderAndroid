@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.RegisterTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,10 +32,10 @@ public class Register extends Activity {
         Button register = findViewById(R.id.registerBtn);
         iuserService= ApiUtils.getUserService();
         register.setOnClickListener(registerBtnClick);
-        eMail=(EditText)findViewById(R.id.eMailField);
-        firstName=(EditText)findViewById(R.id.firstNameField);
-        lastName=(EditText)findViewById(R.id.lastNameField);
-        password=(EditText)findViewById(R.id.passwordField);
+        eMail= findViewById(R.id.eMailField);
+        firstName= findViewById(R.id.firstNameField);
+        lastName= findViewById(R.id.lastNameField);
+        password= findViewById(R.id.passwordField);
     }
 
   
@@ -67,14 +67,10 @@ public class Register extends Activity {
 
                 if(response.isSuccessful())
                 {
-                    UserTokenResponse userTokenResponse=response.body();
-
                     Log.d("Register","onResponse:"+statusCode);
                     Toast.makeText(Register.this,""+response.message(),Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(Register.this,Login.class);
                     startActivity(intent);
-
-
                 }
                 else
                 {

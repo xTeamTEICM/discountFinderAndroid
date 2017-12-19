@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
 import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,7 +13,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Location;
-import eu.jnksoftware.discountfinderandroid.ui.customer.SellerAddShop;
 
 public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyCallback {
 
@@ -61,7 +59,7 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
     }
 
     public void checkMarkers(LatLng latLng){
-        if (hasMarker == false) {
+        if (!hasMarker) {
             mMap.addMarker(createMarker(latLng));
             hasMarker = true;
         } else {

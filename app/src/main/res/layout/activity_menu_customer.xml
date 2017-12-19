@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_style_menu_customer"
     tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/searchDiscount"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/widget_edittext_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,18 +23,22 @@
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/filters_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/settingsBtn"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/settings_icon"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/actionBar"
@@ -51,25 +56,34 @@
 
         <Button
             android:id="@+id/showDiscountsBtn"
-            style="@style/Widget.AppCompat.Button"
+            style="@style/Theme.AppCompat.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/myOffers"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="normal|bold"
+            android:theme="@style/MenuCustomerButtonStyle" />
 
         <Button
             android:id="@+id/aboutBtn"
-            style="@style/Widget.AppCompat.Button"
+            style="@style/Theme.AppCompat.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/about"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:theme="@style/MenuCustomerButtonStyle" />
     </LinearLayout>
 
     <Button
         android:id="@+id/showShopsButton"
+        style="@style/Theme.AppCompat.Light"
         android:layout_width="151dp"
         android:layout_height="59dp"
         android:layout_marginBottom="8dp"

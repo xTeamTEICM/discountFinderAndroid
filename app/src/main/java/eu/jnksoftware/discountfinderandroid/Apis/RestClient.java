@@ -3,9 +3,6 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by dito on 12/2/2017.
- */
 
 public class RestClient {
 

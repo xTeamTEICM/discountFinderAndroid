@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/style"
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.FullContentDiscount">
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.discount.FullContentDiscount">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView11"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="192dp"
+        android:background="@drawable/style"
+        app:cardBackgroundColor="#192361"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/discountDescription"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_above="@+id/discountPrice"
+                android:layout_centerHorizontal="true"
+                android:text="Discount : "
+                android:textAlignment="textStart"
+                android:textColor="@android:color/white"
+                tools:layout_editor_absoluteX="30dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+            <TextView
+                android:id="@+id/discountPrice"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="89dp"
+                android:text="Price : "
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="218dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView10"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="#11000110"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/discountImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription="Discount Image"
+                android:visibility="visible"
+                tools:layout_editor_absoluteX="92dp"
+                tools:layout_editor_absoluteY="16dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView9"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="#192961"
+        app:cardCornerRadius="35dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView11">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/discountId"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_above="@+id/discountShopName"
+                android:layout_centerHorizontal="true"
+                android:text="Discount Id : "
+                android:textColor="@android:color/white"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="401dp" />
+
+            <TextView
+                android:id="@+id/discountShopName"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_above="@+id/discountCategory"
+                android:layout_alignStart="@+id/discountId"
+                android:text="Shop Name : "
+                android:textColor="@android:color/white"
+                tools:layout_editor_absoluteX="27dp"
+                tools:layout_editor_absoluteY="455dp" />
+
+            <TextView
+                android:id="@+id/discountCategory"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_above="@+id/discountDistance"
+                android:layout_alignStart="@+id/discountShopName"
+                android:text="Category : "
+                android:textColor="@android:color/white"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="348dp" />
+
+            <TextView
+                android:id="@+id/discountDistance"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/discountCategory"
+                android:text="Distance : "
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="291dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView14"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/findDiscount"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/ic_pin_drop_black_24dp"
+                android:text="Find It"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

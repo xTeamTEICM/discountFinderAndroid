@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.FullDiscount">
+    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.discount.FullDiscount">
 
     <TextView
         android:id="@+id/shortDescriptionTextView"
@@ -16,13 +16,13 @@
         android:layout_marginTop="8dp"
         android:background="#DCDCDC"
         android:text="@string/ShortDescription"
-        app:layout_constraintBottom_toTopOf="@+id/shopNameTextView"
+        app:layout_constraintBottom_toTopOf="@+id/categoryTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/shopNameTextView"
+        android:id="@+id/categoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
