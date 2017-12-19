@@ -19,6 +19,8 @@ import retrofit2.Response;
 public class SellerAddShop extends AppCompatActivity {
     private IuserService apiService;
     String auth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

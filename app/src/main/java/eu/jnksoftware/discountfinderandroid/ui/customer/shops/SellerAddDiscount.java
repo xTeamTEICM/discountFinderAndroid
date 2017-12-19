@@ -1,5 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.shops;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -24,13 +25,14 @@ public class SellerAddDiscount extends AppCompatActivity {
     String description;
     int categoryId;
     String image;
+    private Button myDiscount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_add_discount);
 
-        Button myDiscount = findViewById(R.id.addMyDiscountButton);
+        myDiscount = findViewById(R.id.addMyDiscountButton);
         myDiscount.setOnClickListener(myDiscountClick);
 
         apiInterface = ApiUtils.getUserService();
