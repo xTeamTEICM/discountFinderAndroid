@@ -1,6 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class MenuCustomer extends AppCompatActivity {
     private GeoLocation geoLocation;
     private User user;
     String auth;
+    private boolean something;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class MenuCustomer extends AppCompatActivity {
         filtersBtn.setOnClickListener(filtersButtonClick);
         Button myDiscount = findViewById(R.id.showDiscountsBtn);
         myDiscount.setOnClickListener(discountClick);
+
+
     }
 
     private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {

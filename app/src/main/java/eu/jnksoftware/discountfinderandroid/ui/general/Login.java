@@ -2,6 +2,7 @@ package eu.jnksoftware.discountfinderandroid.ui.general;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
+import eu.jnksoftware.discountfinderandroid.services.MyFirebaseInstanceIDService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,9 +87,12 @@ public class Login extends Activity {
                 if(response.isSuccessful())
                 {
                     User userTokenResponse=response.body();
-
+                    SharedPreferences userData=getSharedPreferences("myData",MODE_PRIVATE);
+                    SharedPreferences.Editor editor= userData.edit();
                     Gson user=new Gson();
                     Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
+                    editor.putString("userData",user.toJson(userTokenResponse));
+                    editor.commit();
                     menuCustomer.putExtra("User", user.toJson(userTokenResponse));
                     startActivity(menuCustomer);
 

@@ -103,6 +103,12 @@ public interface IuserService {
     @DELETE("discount/{id}")
     Call<Void> deleteSellerDiscount(@Path("id") int id,@Header("Authorization") String auth);
 
+    //set the devicetoken for fcm notifications
+
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @POST("user/deviceToken")
+    Call<Void> registerFcmToken(@Body String token, @Header("Authorization")String auth);
+
 
 
 }
