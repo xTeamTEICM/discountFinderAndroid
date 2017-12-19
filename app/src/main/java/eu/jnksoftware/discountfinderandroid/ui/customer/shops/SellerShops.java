@@ -18,7 +18,7 @@ import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +41,7 @@ public class SellerShops extends AppCompatActivity {
         shopsRecyclerView.setLayoutManager(layoutManager);
         shopsRecyclerView.setHasFixedSize(true);
         Gson user = new Gson();
-        UserTokenResponse userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
+        User userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),User.class);
         auth = "Bearer " + userTokenResponse.getAccessToken();
 
         apiService = RestClient.getClient().create(ShopsApiInterface.class);

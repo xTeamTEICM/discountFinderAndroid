@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
 import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
@@ -22,7 +22,7 @@ import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
 public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
-    private UserTokenResponse userTokenResponse;
+    private User user;
     String auth;
 
     @Override
@@ -31,8 +31,8 @@ public class MenuCustomer extends AppCompatActivity {
         setContentView(R.layout.activity_menu_customer);
 
         Gson user = new Gson();
-        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        Toast.makeText(getApplicationContext(), "Token :"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+        this.user = user.fromJson(getIntent().getStringExtra("User"),User.class);
+        Toast.makeText(getApplicationContext(), "Token :"+ this.user.getTokenType(), Toast.LENGTH_LONG).show();
 
         geoLocation = new GeoLocation(this);
 
@@ -61,7 +61,7 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
             Gson user = new Gson();
-            intent.putExtra("User", user.toJson(userTokenResponse));
+            intent.putExtra("User", user.toJson(MenuCustomer.this.user));
             startActivity(intent);
         }
     };
@@ -72,7 +72,7 @@ public class MenuCustomer extends AppCompatActivity {
             if (geoLocation.getLocation() != null) {
                 try {
                     Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
-                    auth = userTokenResponse.getAccessToken();
+                    auth = user.getAccessToken();
                     intent.putExtra("auth", auth);
                     intent.putExtra("latitude", geoLocation.getLatitude());
                     intent.putExtra("longitude", geoLocation.getLongitude());
@@ -110,7 +110,7 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(View view) {
             Gson user=new Gson();
             Intent userPreferences=new Intent(MenuCustomer.this,UserPreferenceList.class);
-            userPreferences.putExtra("User", user.toJson(userTokenResponse));
+            userPreferences.putExtra("User", user.toJson(MenuCustomer.this.user));
             startActivity(userPreferences);
         }
     };

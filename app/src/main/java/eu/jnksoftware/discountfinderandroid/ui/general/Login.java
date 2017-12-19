@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
@@ -78,13 +78,13 @@ public class Login extends Activity {
 
 
     public void doLogin(final UserTokenRequest userTokenRequest){
-        Call<UserTokenResponse> call=iuserService.getTokenAcess(userTokenRequest);
-        call.enqueue(new Callback<UserTokenResponse>() {
+        Call<User> call=iuserService.getTokenAcess(userTokenRequest);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<UserTokenResponse> call, Response<UserTokenResponse> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful())
                 {
-                    UserTokenResponse userTokenResponse=response.body();
+                    User userTokenResponse=response.body();
 
                     Gson user=new Gson();
                     Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
@@ -100,7 +100,7 @@ public class Login extends Activity {
             }
 
             @Override
-            public void onFailure(Call<UserTokenResponse> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 call.cancel();
                 Log.d("MaincActivity","onFailure"+t.getMessage());
                 Toast.makeText(Login.this,"Wrong!"+t.getMessage(),Toast.LENGTH_SHORT).show();
