@@ -14,8 +14,4 @@ public class ApiUtils {
         return RetrofitClient.getClient(mockBaseUrl).create(IuserService.class);
     }
 
-    public static ShopsApiInterface getMockUserServiceShopsApi(){
-        return RetrofitClient.getClient(mockBaseUrl).create(ShopsApiInterface.class);
-    }
-
 }
