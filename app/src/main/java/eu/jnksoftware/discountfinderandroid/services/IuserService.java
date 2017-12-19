@@ -16,7 +16,7 @@ import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -31,10 +31,10 @@ import retrofit2.http.Query;
 
 public interface IuserService {
     @POST("login")
-    Call<UserTokenResponse> getTokenAcess(@Body UserTokenRequest userTokenRequest);
+    Call<User> getTokenAcess(@Body UserTokenRequest userTokenRequest);
 
     @POST("register")
-    Call<UserTokenResponse> register(@Body RegisterTokenRequest registerTokenRequest);
+    Call<User> register(@Body RegisterTokenRequest registerTokenRequest);
 
     @PUT("requestedDiscount/{id}")
     Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);

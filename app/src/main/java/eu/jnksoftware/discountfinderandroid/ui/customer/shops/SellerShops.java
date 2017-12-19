@@ -42,7 +42,7 @@ public class SellerShops extends AppCompatActivity {
         shopsRecyclerView.setLayoutManager(layoutManager);
         shopsRecyclerView.setHasFixedSize(true);
         Gson user = new Gson();
-        UserTokenResponse userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
+        User userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),User.class);
         auth = "Bearer " + userTokenResponse.getAccessToken();
 
         apiService = ApiUtils.getUserService();

@@ -23,7 +23,7 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class UserPreferences extends AppCompatActivity {
 
-    private UserTokenResponse userTokenResponse;
+    private User user;
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
@@ -50,8 +50,8 @@ public class UserPreferences extends AppCompatActivity {
         iuserService= ApiUtils.getUserService();
 
         Gson user = new Gson();
-        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        Toast.makeText(UserPreferences.this, "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+        this.user = user.fromJson(getIntent().getStringExtra("User"),User.class);
+        Toast.makeText(UserPreferences.this, "token"+ this.user.getTokenType(), Toast.LENGTH_LONG).show();
         
         spinnerCat = findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
@@ -99,7 +99,7 @@ public class UserPreferences extends AppCompatActivity {
             discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
             discountPreferencesRequest.setTags("Sample");
             String auth;
-            auth="Bearer "+userTokenResponse.getAccessToken();
+            auth="Bearer "+ user.getAccessToken();
             doUserPreference(discountPreferencesRequest,auth);
             Toast.makeText(UserPreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
         }

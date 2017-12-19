@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
 public class TestRegisterService extends TestCase {
@@ -27,8 +27,8 @@ public class TestRegisterService extends TestCase {
         registerTokenRequest.setEMail("nikos9@gmail.com");
         registerTokenRequest.setPassword("123455");
 
-        UserTokenResponse userTokenResponse = s.register(registerTokenRequest).execute().body();
-        assertEquals("Bearer",userTokenResponse.getTokenType());
+        User user = s.register(registerTokenRequest).execute().body();
+        assertEquals("Bearer", user.getTokenType());
 
     }
     @Test
@@ -42,8 +42,8 @@ public class TestRegisterService extends TestCase {
         registerTokenRequest.setEMail("nikos9@gmail.com");
         registerTokenRequest.setPassword("123455");
 
-        UserTokenResponse userTokenResponse = s.register(registerTokenRequest).execute().body();
-        assertEquals("mock_access",userTokenResponse.getAccessToken().toString());
+        User user = s.register(registerTokenRequest).execute().body();
+        assertEquals("mock_access", user.getAccessToken().toString());
 
     }
     @Test
@@ -57,8 +57,8 @@ public class TestRegisterService extends TestCase {
         registerTokenRequest.setEMail("nikos9@gmail.com");
         registerTokenRequest.setPassword("123455");
 
-        UserTokenResponse userTokenResponse = s.register(registerTokenRequest).execute().body();
-        assertEquals("mock_refresh",userTokenResponse.getRefreshToken().toString());
+        User user = s.register(registerTokenRequest).execute().body();
+        assertEquals("mock_refresh", user.getRefreshToken().toString());
 
     }
     @Test
@@ -72,8 +72,8 @@ public class TestRegisterService extends TestCase {
         registerTokenRequest.setEMail("nikos9@gmail.com");
         registerTokenRequest.setPassword("123455");
 
-        UserTokenResponse userTokenResponse = s.register(registerTokenRequest).execute().body();
-        assertEquals("7199",userTokenResponse.getExpiresIn().toString());
+        User user = s.register(registerTokenRequest).execute().body();
+        assertEquals("7199", user.getExpiresIn().toString());
 
     }
 

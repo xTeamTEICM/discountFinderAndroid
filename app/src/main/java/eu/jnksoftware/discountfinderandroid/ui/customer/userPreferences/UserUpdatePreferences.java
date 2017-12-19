@@ -23,7 +23,7 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class UserUpdatePreferences extends AppCompatActivity {
 
-    private UserTokenResponse userTokenResponse;
+    private User user;
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
@@ -53,8 +53,8 @@ public class UserUpdatePreferences extends AppCompatActivity {
         idUpdatePref =findViewById(R.id.idPrefText);
         tagUpdatePref=findViewById(R.id.tagPrefText);
         Gson user = new Gson();
-        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        Toast.makeText(getApplicationContext(), "token"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
+        this.user = user.fromJson(getIntent().getStringExtra("User"),User.class);
+        Toast.makeText(getApplicationContext(), "token"+ this.user.getTokenType(), Toast.LENGTH_LONG).show();
         
         spinnerCat = findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<>(UserUpdatePreferences.this,android.R.layout.simple_list_item_1, catTemp);
@@ -108,7 +108,7 @@ public class UserUpdatePreferences extends AppCompatActivity {
             s1=idUpdatePref.getText().toString();
             idpref=Integer.parseInt(s1);
             String auth;
-            auth="Bearer "+userTokenResponse.getAccessToken();
+            auth="Bearer "+ user.getAccessToken();
             //Toast.makeText(UserUpdatePreferences.this,auth,Toast.LENGTH_SHORT).show();
             doUpdateUserPreference(idpref,discountPreferencesRequest,auth);
 
