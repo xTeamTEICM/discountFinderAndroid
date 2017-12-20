@@ -6,11 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import org.w3c.dom.Text;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.Location;
+import eu.jnksoftware.discountfinderandroid.services.ChooseStoreLocation;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +22,9 @@ import retrofit2.Response;
 public class SellerAddShop extends AppCompatActivity {
     private IuserService apiService;
     String auth;
-
+    Location userLocation = new Location();
+    Location storeLocation = new Location();
+    private static final int requestCode = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +37,48 @@ public class SellerAddShop extends AppCompatActivity {
         Button cancelButton = findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(cancelButtonClick);
 
+        Button mapsButton = findViewById(R.id.mapsButton);
+        mapsButton.setOnClickListener(mapsClick);
+
+        apiService = RestClient.getClient().create(ShopsApiInterface.class);
         apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
+
+        double userLat = getIntent().getDoubleExtra("lat",-1);
+        double userLon = getIntent().getDoubleExtra("lon",-1);
+        userLocation.setLatitude(userLat);
+        userLocation.setLongitude(userLon);
+
+    }
+
+    private final View.OnClickListener mapsClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(SellerAddShop.this, ChooseStoreLocation.class);
+            intent.putExtra("lat",userLocation.getLatitude());
+            intent.putExtra("lon",userLocation.getLongitude());
+            intent.putExtra("auth",auth);
+            startActivityForResult(intent,requestCode);
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 & resultCode == RESULT_OK) {
+            storeLocation.setLatitude(data.getDoubleExtra("storeLat", -1));
+            storeLocation.setLongitude(data.getDoubleExtra("storeLon", -1));
+            TextView location = findViewById(R.id.shopMapsLocationTextView);
+            location.setText(data.getStringExtra("streetName"));
+        }
     }
 
     private void addShop(){
 
-        String[] pos;
         EditText shopNameEditText = findViewById(R.id.shopNameEditText);
-        EditText locationEditText = findViewById(R.id.shopLocationEditText);
         EditText descriptionEditText = findViewById(R.id.shopDescriptionEditText);
-        pos = locationEditText.getText().toString().split(" ");
         String shopName = shopNameEditText.getText().toString();
-        double lon = Double.parseDouble(pos[0]);
-        double lat =Double.parseDouble(pos[1]);
-        PostShop postShop = new PostShop(shopName,lon,lat);
+        PostShop postShop = new PostShop(shopName,storeLocation.getLatitude(),storeLocation.getLongitude());
         Call<Void> call = apiService.addShop(postShop,auth);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -61,17 +93,24 @@ public class SellerAddShop extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     private final View.OnClickListener insertButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             addShop();
+            finish();
         }
     };
 
     private final View.OnClickListener cancelButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-              SellerAddShop.this.startActivity(new Intent(SellerAddShop.this, SellerShops.class));
+            finish();
         }
     };
 

@@ -7,9 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
-
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
@@ -61,7 +59,9 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
             Gson user = new Gson();
-            intent.putExtra("User", user.toJson(MenuCustomer.this.user));
+            intent.putExtra("User", user.toJson(userTokenResponse));
+            intent.putExtra("lat",geoLocation.getLatitude());
+            intent.putExtra("lon",geoLocation.getLongitude());
             startActivity(intent);
         }
     };
@@ -89,6 +89,7 @@ public class MenuCustomer extends AppCompatActivity {
     };
 
     private final View.OnClickListener aboutClick = new View.OnClickListener() {
+
         @Override
         public void onClick(final View v) {
             startActivity(new Intent(MenuCustomer.this, AboutUs.class));

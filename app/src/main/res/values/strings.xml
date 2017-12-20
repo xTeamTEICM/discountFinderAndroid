@@ -35,7 +35,7 @@
     <string name="GOOGLE_MAPS_API_KEY">AIzaSyCnjNNPviOid3FOGAlKCZcjzD8IGrNX_B0</string>
     <string name="title_activity_choose_store_location">Map</string>
     <string name="giveShopName">Give shop name</string>
-    <string name="giveShopLocation">Give shop location</string>
+    <string name="chooseLocation">Choose shop location from maps</string>
     <string name="giveShopDescription">Give shop description</string>
     <string name="changeShopName">Change shop name</string>
     <string name="changeShopLocation">Chane shop location</string>
