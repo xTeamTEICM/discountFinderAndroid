@@ -1,14 +1,18 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,6 +51,16 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
         Button searchButton = findViewById(R.id.searchBtn);
         searchButton.setOnClickListener(searchClick);
         mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mMap.setMyLocationEnabled(true);
         initializeMapTypes();
         userLocation.setLatitude(getIntent().getDoubleExtra("lat", 100));
@@ -78,21 +92,24 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
             EditText searchEditText = findViewById(R.id.searchEditText);
             String searchLocation = searchEditText.getText().toString();
             List<Address> addresses = null;
-            if(searchLocation!=null || searchLocation.equals("")){
+            if(searchLocation!=null && !searchLocation.equals("")) {
                 Geocoder geocoder = new Geocoder(getBaseContext());
-                try{
-                    addresses = geocoder.getFromLocationName(searchLocation,1);
-                }
-                catch (IOException e){
+                try {
+                    addresses = geocoder.getFromLocationName(searchLocation, 1);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Address address = addresses.get(0);
-                LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-               // mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                checkMarkers(latLng);
-                addresses.remove(0);
+                if (addresses.isEmpty()) {
+                    Toast.makeText(ChooseStoreLocation.this,"There is no place with this name",Toast.LENGTH_SHORT).show();
+                } else {
+                    Address address = addresses.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                    checkMarkers(latLng);
+                    addresses.remove(0);
+                }
             }
+            else Toast.makeText(ChooseStoreLocation.this,"Insert a valid place",Toast.LENGTH_SHORT).show();
         }
     };
 
