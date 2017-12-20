@@ -21,7 +21,6 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import eu.jnksoftware.discountfinderandroid.services.MyFirebaseInstanceIDService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +52,22 @@ public class Login extends Activity {
 
         loadingText = findViewById(R.id.loadingText);
         loadingBar = findViewById(R.id.loadingBar);
+
+        SharedPreferences userData = getSharedPreferences("myData", MODE_PRIVATE);
+        if (userData.contains("userData")) {
+            String userToString = userData.getString("userData", "");
+            Gson userJson = new Gson();
+            User tempUser = userJson.fromJson(userToString, User.class);
+            Toast.makeText(Login.this, "wowooww"+tempUser.getTokenType(), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(Login.this,"paparia", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
     }
 
     private final View.OnClickListener loginBtnClick = new View.OnClickListener() {
@@ -113,6 +128,10 @@ public class Login extends Activity {
         });
     }
 
+
+
+
+
     private class aSyncTask extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -156,5 +175,6 @@ public class Login extends Activity {
         }
 
     }
+
 }
 

@@ -14,6 +14,7 @@ import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountP
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
@@ -107,7 +108,7 @@ public interface IuserService {
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @POST("user/deviceToken")
-    Call<Void> registerFcmToken(@Body String token, @Header("Authorization")String auth);
+    Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
 
 
 
