@@ -47,9 +47,7 @@ public class SellerShops extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         shopsRecyclerView.setLayoutManager(layoutManager);
         shopsRecyclerView.setHasFixedSize(true);
-        Gson user = new Gson();
-        User userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),User.class);
-        auth = "Bearer " + userTokenResponse.getAccessToken();
+        auth = getIntent().getStringExtra("auth");
 
         apiService = ApiUtils.getUserService();
         getUserShops();

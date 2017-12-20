@@ -11,6 +11,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
+import eu.jnksoftware.discountfinderandroid.Apis.RetrofitClient;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.services.ChooseStoreLocation;
@@ -40,7 +41,8 @@ public class SellerAddShop extends AppCompatActivity {
         Button mapsButton = findViewById(R.id.mapsButton);
         mapsButton.setOnClickListener(mapsClick);
 
-        apiService = RestClient.getClient().create(ShopsApiInterface.class);
+        ApiUtils apiUtils = new ApiUtils();
+        apiService = RetrofitClient.getClient(apiUtils.getBaseUrl()).create(IuserService.class);
         apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
 

@@ -14,4 +14,11 @@ public class ApiUtils {
         return RetrofitClient.getClient(mockBaseUrl).create(IuserService.class);
     }
 
+    public static String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public static String getMockBaseUrl() {
+        return mockBaseUrl;
+    }
 }

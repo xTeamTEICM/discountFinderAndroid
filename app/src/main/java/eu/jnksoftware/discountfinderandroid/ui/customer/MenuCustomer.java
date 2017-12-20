@@ -30,8 +30,7 @@ public class MenuCustomer extends AppCompatActivity {
 
         Gson user = new Gson();
         this.user = user.fromJson(getIntent().getStringExtra("User"),User.class);
-        Toast.makeText(getApplicationContext(), "Token :"+ this.user.getTokenType(), Toast.LENGTH_LONG).show();
-
+        auth = "Bearer " + this.user.getAccessToken();
         geoLocation = new GeoLocation(this);
 
         if (geoLocation.canGetLocation()) {
@@ -59,9 +58,10 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
             Gson user = new Gson();
-            intent.putExtra("User", user.toJson(userTokenResponse));
+            intent.putExtra("auth", auth);
             intent.putExtra("lat",geoLocation.getLatitude());
             intent.putExtra("lon",geoLocation.getLongitude());
+            intent.putExtra("User", user.toJson(user));
             startActivity(intent);
         }
     };
