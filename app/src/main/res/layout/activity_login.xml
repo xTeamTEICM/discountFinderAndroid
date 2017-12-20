@@ -37,7 +37,6 @@
                 android:hint="@string/e_mail"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
-                android:text="ardit@gmail.com"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +75,6 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="10dp"
-                android:text="dito123"
                 android:textAlignment="viewStart"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
@@ -159,5 +157,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_bias="0.764" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadingText"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="224dp"
+            android:layout_height="48dp"
+            android:background="#11000000"
+            android:text="@string/login"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_editor_absoluteY="452dp" />
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/startscreenlogo"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/loginWelcomeTxt"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
