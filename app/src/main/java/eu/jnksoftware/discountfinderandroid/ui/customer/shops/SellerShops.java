@@ -17,6 +17,7 @@ import java.util.List;
 import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
 import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerAdapter;
@@ -31,6 +32,11 @@ public class SellerShops extends AppCompatActivity {
     List<Shop> shops = new ArrayList<>();
     ShopsApiInterface apiService;
     String auth;
+
+    private static final int requestCode = 1;
+
+    //rm this
+    Location userLocation = new Location();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,12 @@ public class SellerShops extends AppCompatActivity {
         addStore.setOnClickListener(addStoreButtonClick);
         Button refreshButton = findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(refreshButtonClick);
+        double lat = getIntent().getDoubleExtra("storeLat",-1);
+        double lon = getIntent().getDoubleExtra("storeLon",-1);
+
+        //got to remove this
+        userLocation.setLatitude(getIntent().getDoubleExtra("lat",-1));
+        userLocation.setLongitude(getIntent().getDoubleExtra("lon",-1));
 }
 
         private final View.OnClickListener refreshButtonClick = new View.OnClickListener() {
@@ -82,8 +94,15 @@ public class SellerShops extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(SellerShops.this,SellerAddShop.class);
             intent.putExtra("auth",auth);
-            startActivity(intent);
+            intent.putExtra("lat",userLocation.getLatitude());
+            intent.putExtra("lon",userLocation.getLongitude());
+            startActivityForResult(intent,requestCode);
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getUserShops();
+    }
 }

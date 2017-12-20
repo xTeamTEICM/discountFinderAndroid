@@ -147,6 +147,7 @@ public class Login extends Activity {
             Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
             loadingBar.setVisibility(View.INVISIBLE);
             loadingText.setText(s);
+            loadingText.setVisibility(View.INVISIBLE);
         }
 
     }
