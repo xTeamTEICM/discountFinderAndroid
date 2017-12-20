@@ -1,5 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.shops;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,33 +8,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SellerAddDiscount extends AppCompatActivity {
-    ShopsApiInterface apiInterface;
+    private IuserService apiInterface;
     String auth;
     double startingPrice;
     double finalPrice;
     String description;
     int categoryId;
     String image;
+    private Button myDiscount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_add_discount);
 
-        Button myDiscount = findViewById(R.id.addMyDiscountButton);
+        myDiscount = findViewById(R.id.addMyDiscountButton);
         myDiscount.setOnClickListener(myDiscountClick);
 
-        apiInterface = RestClient.getClient().create(ShopsApiInterface.class);
+        apiInterface = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
     }
 

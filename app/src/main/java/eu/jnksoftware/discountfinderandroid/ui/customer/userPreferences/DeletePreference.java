@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,14 +20,14 @@ import retrofit2.Response;
 
 public class DeletePreference extends AppCompatActivity {
 
-    UserTokenResponse userTokenResponse;
+    User user;
     IuserService iuserService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_preference);
         final Gson user = new Gson();
-        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"), UserTokenResponse.class);
+        this.user = user.fromJson(getIntent().getStringExtra("User"), User.class);
         final EditText id=findViewById(R.id.idTxt);
         iuserService= ApiUtils.getUserService();
 
@@ -38,7 +38,7 @@ public class DeletePreference extends AppCompatActivity {
             public void onClick(View view) {
                 String auth;
 
-                auth="Bearer "+userTokenResponse.getAccessToken();
+                auth="Bearer "+ DeletePreference.this.user.getAccessToken();
                 int idpref;
                 String s1;
                 s1=id.getText().toString();

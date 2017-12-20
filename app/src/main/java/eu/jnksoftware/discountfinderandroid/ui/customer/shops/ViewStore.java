@@ -19,10 +19,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerItemTouchHelper;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
 import retrofit2.Call;
@@ -35,7 +35,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     private ShopDiscountAdapter myDiscountsAdapter;
     private String shopName;
     private int shopId;
-    ShopsApiInterface apiService;
+    private IuserService apiService;
     private String auth;
     private List<SellerDiscount> discounts = new ArrayList<>();
     private ConstraintLayout layout;
@@ -60,7 +60,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
         setUpRecycler();
 
 
-        apiService = RestClient.getClient().create(ShopsApiInterface.class);
+        apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
         shopName = getIntent().getStringExtra("shop");
         shopId = getIntent().getIntExtra("shopId",-1);

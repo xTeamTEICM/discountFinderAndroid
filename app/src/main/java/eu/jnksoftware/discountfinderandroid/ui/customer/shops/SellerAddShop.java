@@ -8,24 +8,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.w3c.dom.Text;
-
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.services.ChooseStoreLocation;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SellerAddShop extends AppCompatActivity {
-    ShopsApiInterface apiService;
+    private IuserService apiService;
     String auth;
-
-    //rm this
     Location userLocation = new Location();
     Location storeLocation = new Location();
     private static final int requestCode = 1;
@@ -45,6 +41,7 @@ public class SellerAddShop extends AppCompatActivity {
         mapsButton.setOnClickListener(mapsClick);
 
         apiService = RestClient.getClient().create(ShopsApiInterface.class);
+        apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
 
         double userLat = getIntent().getDoubleExtra("lat",-1);

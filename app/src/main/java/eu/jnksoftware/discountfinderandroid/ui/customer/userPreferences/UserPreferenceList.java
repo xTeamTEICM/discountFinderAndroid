@@ -15,7 +15,7 @@ import java.util.List;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.RecyclerPreference;
 import retrofit2.Call;
@@ -23,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserPreferenceList extends AppCompatActivity {
-    private UserTokenResponse userTokenResponse;
+    private User user;
    private RecyclerView recyclerView;
    private RecyclerView.LayoutManager layoutManager;
     private RecyclerPreference adapter;
@@ -39,10 +39,10 @@ public class UserPreferenceList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
          Gson user = new Gson();
-        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"), UserTokenResponse.class);
+        this.user = user.fromJson(getIntent().getStringExtra("User"), User.class);
         Button deletePreference=findViewById(R.id.deleteprefBtn);
         iuserService = ApiUtils.getUserService();
-        String auth="Bearer "+userTokenResponse.getAccessToken();
+        String auth="Bearer "+ this.user.getAccessToken();
         fetchUserPreferences(auth);
 
         deletePreference.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +51,7 @@ public class UserPreferenceList extends AppCompatActivity {
                 Gson user = new Gson();
 
                 Intent intent=new Intent(UserPreferenceList.this,DeletePreference.class);
-                intent.putExtra("User", user.toJson(userTokenResponse));
+                intent.putExtra("User", user.toJson(UserPreferenceList.this.user));
                 startActivity(intent);
             }
         });
@@ -65,7 +65,7 @@ public class UserPreferenceList extends AppCompatActivity {
           public void onClick(View view) {
           Gson user = new Gson();
               Intent userPreferences = new Intent(UserPreferenceList.this, UserPreferences.class);
-             userPreferences.putExtra("User", user.toJson(userTokenResponse));
+             userPreferences.putExtra("User", user.toJson(UserPreferenceList.this.user));
            startActivity(userPreferences);
             }
            });
@@ -76,7 +76,7 @@ public class UserPreferenceList extends AppCompatActivity {
        public void onClick(View view) {
            Gson user = new Gson();
            Intent userUpdatePreferences = new Intent(UserPreferenceList.this, UserUpdatePreferences.class);
-           userUpdatePreferences.putExtra("User", user.toJson(userTokenResponse));
+           userUpdatePreferences.putExtra("User", user.toJson(UserPreferenceList.this.user));
            startActivity(userUpdatePreferences);
        }
    });

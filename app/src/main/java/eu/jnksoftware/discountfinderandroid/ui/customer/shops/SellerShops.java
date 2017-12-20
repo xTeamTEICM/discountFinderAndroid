@@ -9,17 +9,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +31,7 @@ public class SellerShops extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     List<Shop> shops = new ArrayList<>();
-    ShopsApiInterface apiService;
+    private IuserService apiService;
     String auth;
 
     private static final int requestCode = 1;
@@ -47,10 +48,10 @@ public class SellerShops extends AppCompatActivity {
         shopsRecyclerView.setLayoutManager(layoutManager);
         shopsRecyclerView.setHasFixedSize(true);
         Gson user = new Gson();
-        UserTokenResponse userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
+        User userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),User.class);
         auth = "Bearer " + userTokenResponse.getAccessToken();
 
-        apiService = RestClient.getClient().create(ShopsApiInterface.class);
+        apiService = ApiUtils.getUserService();
         getUserShops();
         Button addStore = findViewById(R.id.addStoreButton);
         addStore.setOnClickListener(addStoreButtonClick);
