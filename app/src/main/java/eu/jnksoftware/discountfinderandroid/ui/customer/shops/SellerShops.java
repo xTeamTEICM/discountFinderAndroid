@@ -33,6 +33,8 @@ public class SellerShops extends AppCompatActivity {
     ShopsApiInterface apiService;
     String auth;
 
+    private static final int requestCode = 1;
+
     //rm this
     Location userLocation = new Location();
 
@@ -94,8 +96,13 @@ public class SellerShops extends AppCompatActivity {
             intent.putExtra("auth",auth);
             intent.putExtra("lat",userLocation.getLatitude());
             intent.putExtra("lon",userLocation.getLongitude());
-            startActivity(intent);
+            startActivityForResult(intent,requestCode);
         }
     };
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getUserShops();
+    }
 }

@@ -13,7 +13,7 @@
         android:layout_marginBottom="40dp"
         android:layout_marginEnd="50dp"
         android:layout_marginTop="10dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="?attr/colorAccent"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="?android:attr/colorAccent"
         android:text="@string/insert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cancelButton"
@@ -45,7 +45,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shopLocationEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/mapsButton" />
 
     <TextView
         android:id="@+id/shopLocationTextView"
@@ -54,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/giveShopLocation"
+        android:text="@string/chooseLocation"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,20 +72,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/shopLocationEditText"
-        android:layout_width="0dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shopLocationTextView" />
 
     <EditText
         android:id="@+id/shopNameEditText"
@@ -119,12 +105,25 @@
         android:id="@+id/mapsButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="50dp"
+        android:background="?attr/colorAccent"
         android:text="MAPS"
-        app:layout_constraintBottom_toTopOf="@+id/shopDescriptionTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shopLocationTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/shopNameEditText" />
+
+    <TextView
+        android:id="@+id/shopMapsLocationTextView"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/shopDescriptionTextView"
+        app:layout_constraintEnd_toStartOf="@+id/mapsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shopNameEditText" />
 
 </android.support.constraint.ConstraintLayout>
