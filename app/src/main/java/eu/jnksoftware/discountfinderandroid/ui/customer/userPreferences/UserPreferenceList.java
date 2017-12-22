@@ -40,21 +40,12 @@ public class UserPreferenceList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
          Gson user = new Gson();
         this.user = user.fromJson(getIntent().getStringExtra("User"), User.class);
-        Button deletePreference=findViewById(R.id.deleteprefBtn);
+
         iuserService = ApiUtils.getUserService();
         String auth="Bearer "+ this.user.getAccessToken();
         fetchUserPreferences(auth);
 
-        deletePreference.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Gson user = new Gson();
 
-                Intent intent=new Intent(UserPreferenceList.this,DeletePreference.class);
-                intent.putExtra("User", user.toJson(UserPreferenceList.this.user));
-                startActivity(intent);
-            }
-        });
 
 
 
