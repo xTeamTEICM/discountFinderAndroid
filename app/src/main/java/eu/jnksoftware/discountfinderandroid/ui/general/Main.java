@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 
+
 public class Main extends AppCompatActivity {
 
     private GeoLocation geoLocation;

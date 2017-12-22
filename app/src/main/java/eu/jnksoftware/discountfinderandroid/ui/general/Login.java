@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
@@ -34,6 +35,7 @@ public class Login extends Activity {
     private EditText eMail;
     private EditText password;
     IuserService iuserService;
+    //private User userFromPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,18 @@ public class Login extends Activity {
         loadingText = findViewById(R.id.loadingText);
         loadingBar = findViewById(R.id.loadingBar);
 
-        SharedPreferences userData = getSharedPreferences("myData", MODE_PRIVATE);
+
+        ManageSharePrefs.init(getApplicationContext());
+        User userFromPrefs = ManageSharePrefs.readUser( null);
+        if (userFromPrefs!=null){
+            Toast.makeText(Login.this, "wowooww"+userFromPrefs.getTokenType(), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(Login.this, "nothing", Toast.LENGTH_SHORT).show();
+        }
+
+
+       /* SharedPreferences userData = getSharedPreferences("myData", MODE_PRIVATE);
         if (userData.contains("userData")) {
             String userToString = userData.getString("userData", "");
             Gson userJson = new Gson();
@@ -63,7 +76,7 @@ public class Login extends Activity {
         else{
             Toast.makeText(Login.this,"paparia", Toast.LENGTH_SHORT).show();
         }
-
+*/
 
 
 

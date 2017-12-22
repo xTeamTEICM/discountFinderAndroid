@@ -21,6 +21,7 @@ import eu.jnksoftware.discountfinderandroid.models.token.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -108,7 +109,7 @@ public interface IuserService {
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @POST("user/deviceToken")
-    Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
+    Call<Void> registerFcmToken(@Body @Field("deviceTOken") String deviceToken, @Header("Authorization") String auth);
 
 
 
