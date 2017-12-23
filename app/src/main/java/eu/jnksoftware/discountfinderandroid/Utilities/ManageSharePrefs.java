@@ -60,8 +60,7 @@ public class ManageSharePrefs {
 
     public static String  readFcmTokenData(String defValue){
         String tempFcmData;
-
-        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        
         if (mSharedPref.contains("fcmUserDate")){
             tempFcmData = mSharedPref.getString("fcmUSerData", defValue);
         }
@@ -72,5 +71,5 @@ public class ManageSharePrefs {
         return tempFcmData;
 
     }
-    
+
 }
