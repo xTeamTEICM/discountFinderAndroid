@@ -14,12 +14,14 @@ import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountP
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -102,6 +104,12 @@ public interface IuserService {
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @DELETE("discount/{id}")
     Call<Void> deleteSellerDiscount(@Path("id") int id,@Header("Authorization") String auth);
+
+    //set the devicetoken for fcm notifications
+
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @POST("user/deviceToken")
+    Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
 
 
 

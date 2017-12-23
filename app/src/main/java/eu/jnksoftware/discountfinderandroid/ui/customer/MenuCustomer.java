@@ -8,29 +8,41 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.google.gson.Gson;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
 import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
 import eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserPreferenceList;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
-
 public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
-    private User user;
-    String auth;
-
+    private User tempuser;
+    private boolean something;
+    private IuserService iuserService;
+    private String auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
+        iuserService= ApiUtils.getUserService();
 
-        Gson user = new Gson();
-        this.user = user.fromJson(getIntent().getStringExtra("User"),User.class);
-        auth = "Bearer " + this.user.getAccessToken();
+
+       tempuser= ManageSharePrefs.readUser( null);
+        if (tempuser!=null){
+            Toast.makeText(getApplicationContext(), "Token :"+ tempuser.getTokenType(), Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(MenuCustomer.this, "nothing", Toast.LENGTH_SHORT).show();
+        }
+
+        auth = "Bearer " + tempuser.getAccessToken();
+
         geoLocation = new GeoLocation(this);
 
         if (geoLocation.canGetLocation()) {
@@ -51,6 +63,8 @@ public class MenuCustomer extends AppCompatActivity {
         filtersBtn.setOnClickListener(filtersButtonClick);
         Button myDiscount = findViewById(R.id.showDiscountsBtn);
         myDiscount.setOnClickListener(discountClick);
+
+
     }
 
     private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
@@ -61,7 +75,8 @@ public class MenuCustomer extends AppCompatActivity {
             intent.putExtra("auth", auth);
             intent.putExtra("lat",geoLocation.getLatitude());
             intent.putExtra("lon",geoLocation.getLongitude());
-            intent.putExtra("User", user.toJson(user));
+            intent.putExtra("User", user.toJson(tempuser));
+
             startActivity(intent);
         }
     };
@@ -72,7 +87,7 @@ public class MenuCustomer extends AppCompatActivity {
             if (geoLocation.getLocation() != null) {
                 try {
                     Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
-                    auth = user.getAccessToken();
+                    auth = tempuser.getAccessToken();
                     intent.putExtra("auth", auth);
                     intent.putExtra("latitude", geoLocation.getLatitude());
                     intent.putExtra("longitude", geoLocation.getLongitude());
@@ -111,7 +126,7 @@ public class MenuCustomer extends AppCompatActivity {
         public void onClick(View view) {
             Gson user=new Gson();
             Intent userPreferences=new Intent(MenuCustomer.this,UserPreferenceList.class);
-            userPreferences.putExtra("User", user.toJson(MenuCustomer.this.user));
+            userPreferences.putExtra("User", user.toJson(tempuser));
             startActivity(userPreferences);
         }
     };
@@ -146,4 +161,5 @@ public class MenuCustomer extends AppCompatActivity {
         }, 3000);
         doubleBackPressed = true;
     }
+
 }
