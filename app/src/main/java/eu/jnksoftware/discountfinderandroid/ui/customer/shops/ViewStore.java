@@ -102,6 +102,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
         public void onClick(View view) {
             Intent intent = new Intent(ViewStore.this,SellerAddDiscount.class);
             intent.putExtra("auth",auth);
+            intent.putExtra("shopId",shopId);
             startActivity(intent);
         }
     };
@@ -122,22 +123,24 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void getSellerDiscounts(){
-        Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(auth);
-        call.enqueue(new Callback<List<SellerDiscount>>() {
-            @Override
-            public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
-                discounts = response.body();
-                Toast.makeText(ViewStore.this,response.message() + "\nLoaded",Toast.LENGTH_SHORT).show();
-                myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this,discounts);
-                myDiscountsRecycler.setAdapter(myDiscountsAdapter);
-            }
+        if(this.shopId!=-1) {
+            Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,auth);
+            call.enqueue(new Callback<List<SellerDiscount>>() {
+                @Override
+                public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
+                    discounts = response.body();
+                    Toast.makeText(ViewStore.this, response.message() + "\nLoaded", Toast.LENGTH_SHORT).show();
+                    myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this, discounts);
+                    myDiscountsRecycler.setAdapter(myDiscountsAdapter);
+                }
 
-            @Override
-            public void onFailure(Call<List<SellerDiscount>> call, Throwable t) {
-                Toast.makeText(ViewStore.this, "Failed to load the discounts", Toast.LENGTH_SHORT).show();
-                call.cancel();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<SellerDiscount>> call, Throwable t) {
+                    Toast.makeText(ViewStore.this, "Failed to load the discounts", Toast.LENGTH_SHORT).show();
+                    call.cancel();
+                }
+            });
+        }
     }
 
     @Override
