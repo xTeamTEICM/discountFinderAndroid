@@ -16,12 +16,11 @@ import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -65,10 +64,6 @@ public interface IuserService {
     @DELETE("shop/{id}")
     Call<Void> deleteShop(@Path("id") int id, @Header("Authorization") String auth);
 
-    @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @GET("discount")
-    Call<List<SellerDiscount>> getSellerDiscounts(@Header("Authorization") String auth);
-
     @GET("shop")
     Call<List<Shop>> getShopsList();
 
@@ -99,7 +94,9 @@ public interface IuserService {
     @POST("discount")
     Call<DiscountGet> addDiscount(@Body DiscountPost discountPost, @Header("Authorization") String auth);
 
-
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @GET("user/shop/{id}/discounts")
+    Call<List<SellerDiscount>> getSellerDiscounts(@Path("id") int shopId,@Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @DELETE("discount/{id}")

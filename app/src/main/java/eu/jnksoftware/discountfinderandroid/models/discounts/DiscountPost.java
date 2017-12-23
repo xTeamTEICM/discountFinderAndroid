@@ -5,6 +5,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class DiscountPost {
+    @SerializedName("shopId")
+    @Expose
+    private int shopId;
+
     @SerializedName("category")
     @Expose
     private int category;
@@ -25,7 +29,8 @@ public class DiscountPost {
     @Expose
     private String image;
 
-    public DiscountPost(int category, double originalPrice, double currentPrice, String description, String image) {
+    public DiscountPost(int shopId ,int category, double originalPrice, double currentPrice, String description, String image) {
+        this.shopId = shopId;
         this.category = category;
         this.originalPrice = originalPrice;
         this.currentPrice = currentPrice;

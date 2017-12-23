@@ -1,12 +1,11 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.shops;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
@@ -19,24 +18,36 @@ import retrofit2.Response;
 
 public class SellerAddDiscount extends AppCompatActivity {
     private IuserService apiInterface;
-    String auth;
-    double startingPrice;
-    double finalPrice;
-    String description;
-    int categoryId;
-    String image;
+    private String auth;
+    private int shopId;
+    private double startPrice;
+    private double endPrice;
+    private String desc;
+    private int categoryId;
+    private String image;
     private Button myDiscount;
+    private Button choosePhoto;
+    private EditText startingPrice;
+    private EditText finalPrice;
+    private EditText description;
+    private int PICK_IMAGE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_add_discount);
 
-        myDiscount = findViewById(R.id.addMyDiscountButton);
-        myDiscount.setOnClickListener(myDiscountClick);
-
         apiInterface = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
+        shopId = getIntent().getIntExtra("shopId",-1);
+
+        myDiscount = findViewById(R.id.addMyDiscountButton);
+        myDiscount.setOnClickListener(myDiscountClick);
+        choosePhoto = findViewById(R.id.choosePhotoButton);
+        choosePhoto.setOnClickListener(choosePhotoClick);
+        startingPrice = findViewById(R.id.etStartingPrice);
+        finalPrice = findViewById(R.id.etFinalPrice);
+        description = findViewById(R.id.etDescription);
     }
 
     private View.OnClickListener myDiscountClick = new View.OnClickListener() {
@@ -47,13 +58,22 @@ public class SellerAddDiscount extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener choosePhotoClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent showGallery = new Intent();
+            showGallery.setType("image/*");
+            showGallery.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(showGallery,"Select discount picture"),PICK_IMAGE_REQUEST);
+        }
+    };
+
     public void addDiscount(){
-        DiscountPost discountPost = new DiscountPost(categoryId,startingPrice,finalPrice,description,image);
+        DiscountPost discountPost = new DiscountPost(shopId,categoryId,startPrice,endPrice,desc,image);
         Call<DiscountGet> call = apiInterface.addDiscount(discountPost,auth);
         call.enqueue(new Callback<DiscountGet>() {
             @Override
             public void onResponse(Call<DiscountGet> call, Response<DiscountGet> response) {
-                Toast.makeText(SellerAddDiscount.this, response.message() + "\nDiscount Added", Toast.LENGTH_SHORT).show();
                 if(response.message().equals("OK")) finish();
             }
 
@@ -65,13 +85,9 @@ public class SellerAddDiscount extends AppCompatActivity {
     }
 
     public void getDiscountValues(){
-        EditText startingPrice = findViewById(R.id.etStartingPrice);
-        EditText finalPrice = findViewById(R.id.etFinalPrice);
-        EditText description = findViewById(R.id.etDescription);
-
-        this.startingPrice = Double.parseDouble(startingPrice.getText().toString());
-        this.finalPrice = Double.parseDouble(finalPrice.getText().toString());
-        this.description = description.getText().toString();
+        this.startPrice = Double.parseDouble(startingPrice.getText().toString());
+        this.endPrice = Double.parseDouble(finalPrice.getText().toString());
+        this.desc = description.getText().toString();
         this.categoryId = 1;
         this.image = "img.google.gr";
     }
