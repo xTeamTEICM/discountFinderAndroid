@@ -23,7 +23,6 @@ public class MenuCustomer extends AppCompatActivity {
 
     private GeoLocation geoLocation;
     private User tempuser;
-    private boolean something;
     private IuserService iuserService;
     private String auth;
     @Override
