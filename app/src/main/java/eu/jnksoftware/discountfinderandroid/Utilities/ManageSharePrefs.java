@@ -16,9 +16,7 @@ import eu.jnksoftware.discountfinderandroid.models.token.User;
 public class ManageSharePrefs {
 
     private static SharedPreferences mSharedPref;
-    public static final String NAME = "NAME";
-    public static final String AGE = "AGE";
-    public static final String IS_SELECT = "IS_SELECT";
+
 
     private ManageSharePrefs()
     {
@@ -74,35 +72,5 @@ public class ManageSharePrefs {
         return tempFcmData;
 
     }
-
-    public static boolean read(String key, boolean defValue) {
-        return mSharedPref.getBoolean(key, defValue);
-
-    }
-
-    public static void write(String key, boolean value) {
-        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
-        prefsEditor.putBoolean(key, value);
-        prefsEditor.commit();
-    }
-
-    public static Integer read(String key, int defValue) {
-        return mSharedPref.getInt(key, defValue);
-    }
-
-    public static void write(String key, Integer value) {
-        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
-        prefsEditor.putInt(key, value).commit();
-    }
-
-   /* SharedPreferences userData = getSharedPreferences("myData", MODE_PRIVATE);
-        if (userData.contains("userData")) {
-        String userToString = userData.getString("userData", "");
-        Gson userJson = new Gson();
-        User tempUser = userJson.fromJson(userToString, User.class);
-        Toast.makeText(Login.this, "wowooww"+tempUser.getTokenType(), Toast.LENGTH_SHORT).show();
-    }
-        else{
-        Toast.makeText(Login.this,"paparia", Toast.LENGTH_SHORT).show();
-    }*/
+    
 }
