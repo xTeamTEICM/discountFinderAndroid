@@ -2,7 +2,6 @@ package eu.jnksoftware.discountfinderandroid.ui.general;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +12,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
+import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
+import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
@@ -35,16 +37,15 @@ public class Login extends Activity {
     private EditText eMail;
     private EditText password;
     IuserService iuserService;
-    //private User userFromPrefs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        eMail= findViewById(R.id.loginEMailField);
-        password=findViewById(R.id.loginPasswordField);
-        iuserService= ApiUtils.getUserService();
-        String token = FirebaseInstanceId.getInstance().getToken();
+        eMail = findViewById(R.id.loginEMailField);
+        password = findViewById(R.id.loginPasswordField);
+        iuserService = ApiUtils.getUserService();
 
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(loginBtnClick);
@@ -54,31 +55,16 @@ public class Login extends Activity {
 
         loadingText = findViewById(R.id.loadingText);
         loadingBar = findViewById(R.id.loadingBar);
-
-
         ManageSharePrefs.init(getApplicationContext());
-        User userFromPrefs = ManageSharePrefs.readUser( null);
-        if (userFromPrefs!=null){
-            Toast.makeText(Login.this, "wowooww"+userFromPrefs.getTokenType(), Toast.LENGTH_SHORT).show();
-        }
-        else{
+
+
+
+        User userFromPrefs = ManageSharePrefs.readUser(null);
+        if (userFromPrefs != null) {
+            Toast.makeText(Login.this, "wowooww" + userFromPrefs.getTokenType(), Toast.LENGTH_SHORT).show();
+        } else {
             Toast.makeText(Login.this, "nothing", Toast.LENGTH_SHORT).show();
         }
-
-
-       /* SharedPreferences userData = getSharedPreferences("myData", MODE_PRIVATE);
-        if (userData.contains("userData")) {
-            String userToString = userData.getString("userData", "");
-            Gson userJson = new Gson();
-            User tempUser = userJson.fromJson(userToString, User.class);
-            Toast.makeText(Login.this, "wowooww"+tempUser.getTokenType(), Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(Login.this,"paparia", Toast.LENGTH_SHORT).show();
-        }
-*/
-
-
 
 
     }
@@ -87,7 +73,7 @@ public class Login extends Activity {
         @Override
         public void onClick(final View loginView) {
 
-            UserTokenRequest userTokenRequest=new UserTokenRequest();
+            UserTokenRequest userTokenRequest = new UserTokenRequest();
             userTokenRequest.setUsername(eMail.getText().toString().trim());
             userTokenRequest.setPassword(password.getText().toString().trim());
             doLogin(userTokenRequest);
@@ -107,42 +93,45 @@ public class Login extends Activity {
     };
 
 
-    public void doLogin(final UserTokenRequest userTokenRequest){
-        Call<User> call=iuserService.getTokenAcess(userTokenRequest);
+    public void doLogin(final UserTokenRequest userTokenRequest) {
+        Call<User> call = iuserService.getTokenAcess(userTokenRequest);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful())
-                {
-                    User userTokenResponse=response.body();
-                    SharedPreferences userData=getSharedPreferences("myData",MODE_PRIVATE);
-                    SharedPreferences.Editor editor= userData.edit();
-                    Gson user=new Gson();
+                if (response.isSuccessful()) {
+                    String fcmTokenDataString;
+                    User userTokenResponse = response.body();
+                    String auth = userTokenResponse.getTokenType() + " " + userTokenResponse.getAccessToken();
                     Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
-                    editor.putString("userData",user.toJson(userTokenResponse));
-                    editor.commit();
-                    menuCustomer.putExtra("User", user.toJson(userTokenResponse));
-                    startActivity(menuCustomer);
 
-
-                }
-                else
-                {
-                    Toast.makeText(Login.this,""+response.message(),Toast.LENGTH_SHORT).show();
+                    fcmTokenDataString = ManageSharePrefs.readFcmTokenData("");
+                    if (userTokenResponse.getAccessToken().equals(fcmTokenDataString)) {
+                        startActivity(menuCustomer);
+                    } else {
+                        ManageSharePrefs.writeUser(userTokenResponse);
+                        FcmToken token = new FcmToken(FirebaseInstanceId.getInstance().getToken());
+                        //String auth = userTokenResponse.getTokenType() + " " + userTokenResponse.getAccessToken();
+                        HttpCall httpCall = new HttpCall();
+                        int statusCode;
+                        statusCode = httpCall.setFcmToken(token, auth);
+                        if (statusCode == 200) {
+                            ManageSharePrefs.writeFcmTokenData(userTokenResponse.getAccessToken());
+                        }
+                        startActivity(menuCustomer);
+                    }
+                } else {
+                    Toast.makeText(Login.this, "" + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 call.cancel();
-                Log.d("MaincActivity","onFailure"+t.getMessage());
-                Toast.makeText(Login.this,"Wrong!"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                Log.d("MaincActivity", "onFailure" + t.getMessage());
+                Toast.makeText(Login.this, "Wrong!" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-
 
 
     private class aSyncTask extends AsyncTask<String, Integer, String> {
@@ -155,7 +144,7 @@ public class Login extends Activity {
 
         @Override
         protected String doInBackground(String... strings) {
-            for (loadingStatus=0; loadingStatus < 50; loadingStatus++) {
+            for (loadingStatus = 0; loadingStatus < 50; loadingStatus++) {
                 try {
                     Thread.sleep(80);
                 } catch (InterruptedException e) {

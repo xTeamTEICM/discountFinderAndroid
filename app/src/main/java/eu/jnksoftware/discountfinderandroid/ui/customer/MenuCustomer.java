@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
@@ -20,6 +21,7 @@ import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustom
 import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
 import eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserPreferenceList;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
+import eu.jnksoftware.discountfinderandroid.ui.general.Login;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,9 +40,14 @@ public class MenuCustomer extends AppCompatActivity {
         setContentView(R.layout.activity_menu_customer);
         iuserService= ApiUtils.getUserService();
 
-        Gson user = new Gson();
-        tempuser = user.fromJson(getIntent().getStringExtra("User"),User.class);
-        Toast.makeText(getApplicationContext(), "Token :"+ tempuser.getTokenType(), Toast.LENGTH_LONG).show();
+
+       tempuser= ManageSharePrefs.readUser( null);
+        if (tempuser!=null){
+            Toast.makeText(getApplicationContext(), "Token :"+ tempuser.getTokenType(), Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(MenuCustomer.this, "nothing", Toast.LENGTH_SHORT).show();
+        }
 
 
         geoLocation = new GeoLocation(this);

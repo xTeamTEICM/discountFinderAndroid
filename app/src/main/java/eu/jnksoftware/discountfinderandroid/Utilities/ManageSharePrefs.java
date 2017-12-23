@@ -42,14 +42,37 @@ public class ManageSharePrefs {
             tempUser=null;
         }
 
-
         return tempUser;
     }
 
-    public static void write(String key, String value) {
+    public static void writeUser(User user) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
-        prefsEditor.putString(key, value);
+        Gson userJson=new Gson();
+        String userString = userJson.toJson(user);
+        prefsEditor.putString("userData", userString);
         prefsEditor.commit();
+    }
+
+    public static void writeFcmTokenData(String fcmData){
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString("fcmUSerData", fcmData);
+        prefsEditor.commit();
+
+    }
+
+    public static String  readFcmTokenData(String defValue){
+        String tempFcmData;
+
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        if (mSharedPref.contains("fcmUserDate")){
+            tempFcmData = mSharedPref.getString("fcmUSerData", defValue);
+        }
+        else{
+            tempFcmData=" ";
+        }
+
+        return tempFcmData;
+
     }
 
     public static boolean read(String key, boolean defValue) {

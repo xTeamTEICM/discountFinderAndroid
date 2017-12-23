@@ -109,7 +109,7 @@ public interface IuserService {
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @POST("user/deviceToken")
-    Call<Void> registerFcmToken(@Body @Field("deviceTOken") String deviceToken, @Header("Authorization") String auth);
+    Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
 
 
 
