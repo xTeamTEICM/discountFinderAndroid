@@ -64,8 +64,16 @@ public class SellerAddDiscount extends AppCompatActivity {
     private View.OnClickListener myDiscountClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            getDiscountValues();
-            addDiscount();
+            DiscountPost discountPost=new DiscountPost();
+            image=imageToString();
+            discountPost.setImageBase(image);
+            discountPost.setImageTitle("TestPhoto1");
+            discountPost.setShopId(shopId);
+            discountPost.setCurrentPrice(Double.parseDouble(finalPrice.getText().toString().trim()));
+            discountPost.setOriginalPrice(Double.parseDouble(startingPrice.getText().toString().trim()));
+            discountPost.setDescription(description.getText().toString());
+            discountPost.setCategory(2);
+            addDiscount(discountPost);
         }
     };
 
@@ -86,16 +94,14 @@ public class SellerAddDiscount extends AppCompatActivity {
             Uri path=data.getData();
             try {
                 discountPhoto= MediaStore.Images.Media.getBitmap(getContentResolver(),path);
-                //kanei resize,as figei i photo komple sto back kai to ftiaxnoume
-//                discountImageView.setImageBitmap(discountPhoto);
+                discountImageView.setImageBitmap(discountPhoto);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void addDiscount(){
-        DiscountPost discountPost = new DiscountPost(shopId,categoryId,startPrice,endPrice,desc,image);
+    public void addDiscount(DiscountPost discountPost){
         Call<DiscountGet> call = apiInterface.addDiscount(discountPost,auth);
         call.enqueue(new Callback<DiscountGet>() {
             @Override
@@ -117,11 +123,5 @@ public class SellerAddDiscount extends AppCompatActivity {
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
     }
 
-    public void getDiscountValues(){
-        this.startPrice = Double.parseDouble(startingPrice.getText().toString());
-        this.endPrice = Double.parseDouble(finalPrice.getText().toString());
-        this.desc = description.getText().toString();
-        this.categoryId = 1;
-        this.image = imageToString();
-    }
+
 }
