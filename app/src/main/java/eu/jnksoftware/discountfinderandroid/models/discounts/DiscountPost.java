@@ -34,6 +34,7 @@ public class DiscountPost {
     private String imageTitle;
 
     public int getShopId() {
+
         return shopId;
     }
 

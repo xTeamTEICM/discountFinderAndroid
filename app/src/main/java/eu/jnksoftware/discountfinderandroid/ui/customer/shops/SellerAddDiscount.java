@@ -64,6 +64,7 @@ public class SellerAddDiscount extends AppCompatActivity {
     private View.OnClickListener myDiscountClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
             DiscountPost discountPost=new DiscountPost();
             image=imageToString();
             discountPost.setImageBase(image);
