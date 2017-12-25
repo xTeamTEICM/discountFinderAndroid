@@ -112,9 +112,9 @@ public interface IuserService {
     Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
 
     //set the location of USer
-    @Headers({("Content-Type:application/json"),("Accept:application/x-www-form-urlencoded")})
+    @Headers({("Content-Type:application/json"),("Accept:application/application/json")})
     @PUT("updateUserLocation")
-    Call<Void> setUserLocation(@Body String rawData, @Header("Authorization") String auth);
+    Call<Void> setUserLocation(@Body Location location, @Header("Authorization") String auth);
 
 
 

@@ -34,7 +34,7 @@ public class MenuCustomer extends AppCompatActivity {
     private HttpCall httpCall;
     private Location myLocation;
     String locationResponse;
-    String rawData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +59,7 @@ public class MenuCustomer extends AppCompatActivity {
             myLocation=new Location(geoLocation.getLongitude(),geoLocation.getLatitude());
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + myLocation.getLatPos() + "\nLong: " + myLocation.getLogPos(), Toast.LENGTH_LONG).show();
         }
-        JSONObject paramObject = new JSONObject();
+       /* JSONObject paramObject = new JSONObject();
         try {
             paramObject.put("logPos", myLocation.getLogPos());
             paramObject.put("latPos", myLocation.getLatPos());
@@ -67,10 +67,10 @@ public class MenuCustomer extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+*/
 
         httpCall=new HttpCall();
-        locationResponse=httpCall.setUserLocation(paramObject.toString(),auth);
+        locationResponse=httpCall.setUserLocation(myLocation,auth);
         Toast.makeText(getApplicationContext(), "location response: "+locationResponse, Toast.LENGTH_LONG).show();
 
         Button about = findViewById(R.id.aboutBtn);

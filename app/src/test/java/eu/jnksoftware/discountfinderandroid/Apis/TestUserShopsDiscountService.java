@@ -13,8 +13,7 @@ import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import static org.junit.Assert.assertEquals;
 
 public class TestUserShopsDiscountService {
-
-    /*IuserService service = ApiUtils.getMockUserService();
+  /*  IuserService service = ApiUtils.getMockUserService();
     String auth="Bearer mock_access";
 
     @Test
@@ -22,7 +21,7 @@ public class TestUserShopsDiscountService {
 
         List<SellerDiscount> discounts = new ArrayList<>();
 
-        discounts = service.getSellerDiscounts(1,auth).execute().body();
+        discounts = service.getSellerDiscounts(auth).execute().body();
 
         assertEquals(6,discounts.size());
         assertEquals("pizza margarita",discounts.get(2).getDescription());
@@ -33,6 +32,6 @@ public class TestUserShopsDiscountService {
         int pos = 3;
         service.deleteSellerDiscount(3,auth).execute();
     }
-*/
 
+*/
 }
