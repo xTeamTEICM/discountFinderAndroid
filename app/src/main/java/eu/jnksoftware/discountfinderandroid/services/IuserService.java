@@ -6,6 +6,7 @@ import eu.jnksoftware.discountfinderandroid.Apis.PostDiscount;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
 import eu.jnksoftware.discountfinderandroid.Apis.UpdatePostShop;
 import eu.jnksoftware.discountfinderandroid.models.Category;
+import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
@@ -21,6 +22,8 @@ import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -107,6 +110,11 @@ public interface IuserService {
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @POST("user/deviceToken")
     Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
+
+    //set the location of USer
+    @Headers({("Content-Type:application/json"),("Accept:application/x-www-form-urlencoded")})
+    @PUT("updateUserLocation")
+    Call<Void> setUserLocation(@Body String rawData, @Header("Authorization") String auth);
 
 
 

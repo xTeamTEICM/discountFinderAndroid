@@ -38,7 +38,7 @@ public class ViewStoreTest {
     @Test
     public void getSellerDiscountsTest() {
 
-        Mockito.when(mockApiInterface.getSellerDiscounts("")).thenReturn(mockCall);
+        Mockito.when(mockApiInterface.getSellerDiscounts(1,"")).thenReturn(mockCall);
 
         Mockito.doAnswer(new Answer() {
             @Override
@@ -50,7 +50,7 @@ public class ViewStoreTest {
             }
         }).when(mockCall).enqueue(any(Callback.class));
 
-        Call<List<SellerDiscount>> call = mockApiInterface.getSellerDiscounts("");
+        Call<List<SellerDiscount>> call = mockApiInterface.getSellerDiscounts(1,"");
         call.enqueue(new Callback<List<SellerDiscount>>() {
             @Override
             public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {

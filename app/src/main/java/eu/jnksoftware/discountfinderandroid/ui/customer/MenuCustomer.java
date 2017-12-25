@@ -8,9 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
+import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
+import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
@@ -25,6 +31,10 @@ public class MenuCustomer extends AppCompatActivity {
     private User tempuser;
     private IuserService iuserService;
     private String auth;
+    private HttpCall httpCall;
+    private Location myLocation;
+    String locationResponse;
+    String rawData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +56,22 @@ public class MenuCustomer extends AppCompatActivity {
 
         if (geoLocation.canGetLocation()) {
 
-            double latitude = geoLocation.getLatitude();
-            double longitude = geoLocation.getLongitude();
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            myLocation=new Location(geoLocation.getLongitude(),geoLocation.getLatitude());
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + myLocation.getLatPos() + "\nLong: " + myLocation.getLogPos(), Toast.LENGTH_LONG).show();
         }
+        JSONObject paramObject = new JSONObject();
+        try {
+            paramObject.put("logPos", myLocation.getLogPos());
+            paramObject.put("latPos", myLocation.getLatPos());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        httpCall=new HttpCall();
+        locationResponse=httpCall.setUserLocation(paramObject.toString(),auth);
+        Toast.makeText(getApplicationContext(), "location response: "+locationResponse, Toast.LENGTH_LONG).show();
 
         Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);

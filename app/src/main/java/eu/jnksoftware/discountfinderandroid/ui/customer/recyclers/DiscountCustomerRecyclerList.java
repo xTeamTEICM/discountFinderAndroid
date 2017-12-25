@@ -50,8 +50,8 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         auth = "Bearer " + getIntent().getStringExtra("auth");
-        latitude = getIntent().getDoubleExtra("latitude", location.getLatitude());
-        longitude = getIntent().getDoubleExtra("longitude",location.getLongitude());
+        latitude = getIntent().getDoubleExtra("latitude", location.getLatPos());
+        longitude = getIntent().getDoubleExtra("longitude",location.getLogPos());
 
         supportApi = ApiUtils.getUserService();
 

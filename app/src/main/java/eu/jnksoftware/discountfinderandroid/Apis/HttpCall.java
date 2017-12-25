@@ -2,6 +2,7 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 
 import android.widget.Toast;
 
+import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
@@ -36,4 +37,28 @@ public class HttpCall {
         });
         return statusCode[0];
     }
+
+    public String setUserLocation(String rawData , String auth){
+        final String[] responseString = {""};
+        Call<Void> call =iuserService.setUserLocation(rawData, auth);
+        call.enqueue(new Callback<Void>() {
+
+            @Override
+            public void onResponse(retrofit2.Call<Void> call, Response<Void> response) {
+
+                if (response.isSuccessful()){
+                responseString[0] ="200";
+                }
+
+            }
+
+
+            @Override
+            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+            }
+
+        });
+        return responseString[0];
+    }
+
 }

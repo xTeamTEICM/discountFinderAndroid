@@ -1,38 +1,38 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Location {
-    private double latitude;
-    private double longitude;
+    @SerializedName("logPos")
+    @Expose
+    private double logPos;
+    @SerializedName("latPos")
+    @Expose
+    private double latPos;
 
     public Location() {
-        latitude = 0;
-        longitude = 0;
     }
 
-    public Location(android.location.Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+    public Location(double logPos, double latPos) {
+        this.logPos = logPos;
+        this.latPos = latPos;
     }
 
-    public Location(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public double getLogPos() {
+        return logPos;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public void setLogPos(double logPos) {
+        this.logPos = logPos;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public double getLatPos() {
+        return latPos;
     }
 
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLatPos(double latPos) {
+        this.latPos = latPos;
     }
 }
