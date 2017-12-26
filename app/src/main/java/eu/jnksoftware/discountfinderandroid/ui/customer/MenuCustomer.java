@@ -17,6 +17,7 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
 import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
@@ -30,6 +31,7 @@ public class MenuCustomer extends AppCompatActivity {
     private IuserService iuserService;
     private String auth;
     private Location myLocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,15 @@ public class MenuCustomer extends AppCompatActivity {
             Toast.makeText(MenuCustomer.this, "nothing", Toast.LENGTH_SHORT).show();
         }
 
-        myLocation=ManageSharePrefs.readLocation("");
+        myLocation =ManageSharePrefs.readLocation("");
+        if (myLocation==null) {
+            Toast.makeText(getApplicationContext(), "No location ", Toast.LENGTH_LONG).show();
+            GeoLocation myGeoloc =new GeoLocation();
+            myLocation.setLogPos(myGeoloc.getLongitude());
+            myLocation.setLatPos(myGeoloc.getLatitude());
+        }
+        ManageSharePrefs.writeLocation(myLocation);
+
 
         Button about = findViewById(R.id.aboutBtn);
         about.setOnClickListener(aboutClick);
@@ -80,15 +90,11 @@ public class MenuCustomer extends AppCompatActivity {
     private final View.OnClickListener discountClick = new View.OnClickListener() {
         @Override
         public void onClick(final View v) {
-            if (ManageSharePrefs.readLocation("") != null) {
-                try {
-                    Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
-                    startActivity(intent);
 
-                } catch (Exception ex) {
-                    Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            if (ManageSharePrefs.readLocation("") != null){
+            Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
+            startActivity(intent);
 
-                }
             } else {
                 Toast.makeText(MenuCustomer.this, "We don't have your location yet !", Toast.LENGTH_SHORT).show();
             }

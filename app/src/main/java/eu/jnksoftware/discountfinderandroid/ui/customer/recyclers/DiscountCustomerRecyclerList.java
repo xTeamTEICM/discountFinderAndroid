@@ -19,6 +19,7 @@ import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.DiscountRecyclerAdapter;
 import retrofit2.Call;
@@ -56,7 +57,7 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         user= ManageSharePrefs.readUser("");
         auth=user.getTokenType()+" "+user.getAccessToken();
 
-        MyLocation =ManageSharePrefs.readLocation("");
+
 
         supportApi = ApiUtils.getUserService();
 
