@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
+import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 
 
@@ -66,6 +67,29 @@ public class ManageSharePrefs {
 
         return tempFcmData;
 
+    }
+
+    public static void writeLocation(Location location) {
+        Gson userJson = new Gson();
+        String locationToString = userJson.toJson(location);
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putString("userLocation", locationToString);
+        prefsEditor.commit();
+
+    }
+
+    public static Location readLocation(String defValue) {
+        Location myTempLocation;
+
+        if (mSharedPref.contains("userLocation")) {
+            String locationToString = mSharedPref.getString("userLocation", defValue);
+            Gson userJson = new Gson();
+            myTempLocation = userJson.fromJson(locationToString, Location.class);
+        } else {
+            myTempLocation = null;
+        }
+
+        return myTempLocation;
     }
 
 }

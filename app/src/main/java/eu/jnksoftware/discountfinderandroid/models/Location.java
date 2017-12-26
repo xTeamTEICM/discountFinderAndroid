@@ -35,4 +35,5 @@ public class Location {
     public void setLatPos(double latPos) {
         this.latPos = latPos;
     }
+
 }

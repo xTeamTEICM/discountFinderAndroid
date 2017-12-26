@@ -15,8 +15,10 @@ import java.util.List;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.PostDiscount;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.DiscountRecyclerAdapter;
 import retrofit2.Call;
@@ -33,9 +35,10 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private List<Discount> discountProducts = new ArrayList<>();
     private IuserService supportApi;
-    private String auth;
+    private User user;
     private double latitude ,longitude;
-    private Location location = new Location();
+    private Location MyLocation;
+    String auth;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -49,9 +52,11 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        auth = "Bearer " + getIntent().getStringExtra("auth");
-        latitude = getIntent().getDoubleExtra("latitude", location.getLatPos());
-        longitude = getIntent().getDoubleExtra("longitude",location.getLogPos());
+
+        user= ManageSharePrefs.readUser("");
+        auth=user.getTokenType()+" "+user.getAccessToken();
+
+        MyLocation =ManageSharePrefs.readLocation("");
 
         supportApi = ApiUtils.getUserService();
 
