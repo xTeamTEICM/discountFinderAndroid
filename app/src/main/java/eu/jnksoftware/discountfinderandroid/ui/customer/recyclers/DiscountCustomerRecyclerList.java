@@ -34,7 +34,7 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
     private List<Discount> discountProducts = new ArrayList<>();
     private IuserService supportApi;
     private String auth;
-    private double latitude ,longitude;
+    private double latitude, longitude;
     private Location location = new Location();
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         auth = "Bearer " + getIntent().getStringExtra("auth");
         latitude = getIntent().getDoubleExtra("latitude", location.getLatPos());
-        longitude = getIntent().getDoubleExtra("longitude",location.getLogPos());
+        longitude = getIntent().getDoubleExtra("longitude", location.getLogPos());
 
         supportApi = ApiUtils.getUserService();
 
@@ -71,15 +71,16 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
         latitude = 23.551294;
 
         final PostDiscount postDiscount = new PostDiscount(longitude, latitude, 1500);
-        Toast.makeText(DiscountCustomerRecyclerList.this, "Longitude :" + String.valueOf(longitude)  + "\n Latitude :" + String.valueOf(latitude), Toast.LENGTH_SHORT).show();
+        Toast.makeText(DiscountCustomerRecyclerList.this, "Longitude :" + String.valueOf(longitude) + "\n Latitude :" + String.valueOf(latitude), Toast.LENGTH_SHORT).show();
         Call<List<Discount>> call = supportApi.getDiscounts(postDiscount, auth);
         call.enqueue(new Callback<List<Discount>>() {
             @Override
             public void onResponse(Call<List<Discount>> call, Response<List<Discount>> response) {
-                   discountProducts = response.body();
-                   //discountProducts.add(new Discount(1,"deli","eleos","me",10,"ta API",1));
-                   adapter = new DiscountRecyclerAdapter(discountProducts , getBaseContext());
-                   recyclerView.setAdapter(adapter);
+                discountProducts = response.body();
+                String imageUrl = "https://img.grouponcdn.com/deal/8DDtq5XRzVnLXEUnPHPd/p2-2048x1229/v1/c700x420.jpg";
+                discountProducts.add(new Discount(1, "name", "hello", "name", 160, imageUrl, 1));
+                adapter = new DiscountRecyclerAdapter(discountProducts, getBaseContext());
+                recyclerView.setAdapter(adapter);
 
             }
 
@@ -90,7 +91,6 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
             }
         });
     }
-
 
 
     public void seekBarProgressCalc() {

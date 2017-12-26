@@ -1,13 +1,17 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.discount;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import eu.jnksoftware.discountfinderandroid.R;
 
 public class FullContentDiscount extends AppCompatActivity {
+    Context context;
     ImageView discountImage;
     TextView discountId,discountCategory,discountDescription,discountDistance,discountPrice,discountShopName;
 
@@ -23,7 +27,8 @@ public class FullContentDiscount extends AppCompatActivity {
         discountPrice = findViewById(R.id.discountPrice);
         discountShopName = findViewById(R.id.discountShopName);
 
-        discountImage.setImageResource(getIntent().getIntExtra("discount_image",0));
+
+        Picasso.with(context).load(getIntent().getStringExtra("discount_image")).noPlaceholder().fit().into(discountImage);
         discountId.setText("Discount Id : " + getIntent().getStringExtra("discount_id"));
         discountCategory.setText("Category : " + getIntent().getStringExtra("discount_Category"));
         discountDescription.setText("Description : " + getIntent().getStringExtra("discount_Description"));
