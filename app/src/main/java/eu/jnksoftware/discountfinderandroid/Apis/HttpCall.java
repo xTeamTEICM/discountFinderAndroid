@@ -1,11 +1,11 @@
 package eu.jnksoftware.discountfinderandroid.Apis;
 
-import android.widget.Toast;
-
-import com.google.gson.Gson;
+import android.util.Log;
 
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
+import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,6 +58,30 @@ public class HttpCall {
 
         });
         return responseString[0];
+    }
+    public boolean doRegister( RegisterTokenRequest registerTokenRequest){
+        final boolean[] register = new boolean[1];
+        Call<User> call=iuserService.register(registerTokenRequest);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                int statusCode=response.code();
+                if(response.isSuccessful()) {
+                    register[0] = true;
+                }
+                else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+
+
+            }
+        });
+  return register[0];
     }
 
 }

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
+import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
@@ -25,6 +26,7 @@ public class Register extends Activity {
     private EditText firstName;
     private EditText lastName;
     IuserService iuserService;
+    HttpCall httpCall=new HttpCall();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class Register extends Activity {
         password= findViewById(R.id.passwordField);
     }
 
-  
+
     private final View.OnClickListener registerBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(final View reg) {
@@ -49,7 +51,16 @@ public class Register extends Activity {
                 registerTokenRequest.setFirstName(firstName.getText().toString().trim());
                 registerTokenRequest.setLastName(lastName.getText().toString().trim());
                 registerTokenRequest.setPassword(password.getText().toString().trim());
-                doRegister(registerTokenRequest);
+
+                if(httpCall.doRegister(registerTokenRequest)!=true){
+                    Toast.makeText(Register.this,"Success!!",Toast.LENGTH_SHORT).show();
+                  Intent intent=new Intent(Register.this,Login.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(Register.this,"ERROR!!",Toast.LENGTH_SHORT).show();
+
+                }
 
 
 
@@ -57,34 +68,6 @@ public class Register extends Activity {
 
         }
     };
-    public void doRegister(final RegisterTokenRequest registerTokenRequest){
-        Call<User> call=iuserService.register(registerTokenRequest);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                int statusCode=response.code();
 
-
-                if(response.isSuccessful())
-                {
-                    Log.d("Register","onResponse:"+statusCode);
-                    Toast.makeText(Register.this,""+response.message(),Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(Register.this,Login.class);
-                    startActivity(intent);
-                }
-                else
-                {
-                    Toast.makeText(Register.this,""+response.message(),Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                call.cancel();
-                Log.d("MaincActivity","onFailure"+t.getMessage());
-                Toast.makeText(Register.this,"Wrong!"+t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
    
 }
