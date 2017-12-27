@@ -47,6 +47,18 @@ public class HttpCall {
 
             @Override
             public void onResponse(retrofit2.Call<Void> call, Response<Void> response) {
+                int statuscode;
+
+                do {
+                    statuscode = response.code();
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }while (statuscode==0);
+
+
                 responseString[0] ="ok";
 
             }
