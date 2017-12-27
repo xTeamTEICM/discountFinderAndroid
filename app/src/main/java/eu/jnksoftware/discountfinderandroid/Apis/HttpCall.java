@@ -4,8 +4,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,27 +42,24 @@ public class HttpCall {
         return statusCode[0];
     }
 
-    public String setUserLocation(Location location, String auth){
-        final String[] responseString = new String[1];
+    public int setUserLocation(Location location, String auth){
+        final int[] statuscode = new int[1];
+        ;
         Call<Void> call =iuserService.setUserLocation(location, auth);
         call.enqueue(new Callback<Void>() {
 
             @Override
             public void onResponse(retrofit2.Call<Void> call, Response<Void> response) {
-                int statuscode;
+
 
                 do {
-                    statuscode = response.code();
+                    statuscode[0] = response.code();
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }while (statuscode==0);
-
-
-                responseString[0] ="ok";
-
+                }while (statuscode[0] ==0);
             }
 
 
@@ -69,7 +68,33 @@ public class HttpCall {
             }
 
         });
-        return responseString[0];
+        return statuscode[0];
+    }
+
+    public void refreshToken(){
+        String refresh_token=" ";
+        User tempUser= ManageSharePrefs.readUser("");
+        if (tempUser!=null){
+            refresh_token=tempUser.getRefreshToken();
+        }
+        Call<User> call =iuserService.refreshAccessToken(refresh_token);
+        call.enqueue(new Callback<User>() {
+
+            @Override
+            public void onResponse(retrofit2.Call<User> call, Response<User> response) {
+                int statusCode =response.code();
+                if (response.isSuccessful()){
+                    User user=response.body();
+                    ManageSharePrefs.writeUser(user);
+                }
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<User> call, Throwable t) {
+            }
+
+        });
+
     }
 
 }

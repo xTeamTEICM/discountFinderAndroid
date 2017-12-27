@@ -150,7 +150,7 @@ public class GeoLocation extends Service implements LocationListener {
         if (tempuser!=null) {
             eu.jnksoftware.discountfinderandroid.models.Location myLocation = new eu.jnksoftware.discountfinderandroid.models.Location(location.getLongitude(), location.getLatitude());
             HttpCall httpCall = new HttpCall();
-            String codesesponse = httpCall.setUserLocation(myLocation, tempuser.getTokenType() + " " + tempuser.getAccessToken());
+            int codesesponse = httpCall.setUserLocation(myLocation, tempuser.getTokenType() + " " + tempuser.getAccessToken());
             ManageSharePrefs.writeLocation(myLocation);
         }
         this.location = location;

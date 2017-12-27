@@ -116,6 +116,9 @@ public interface IuserService {
     @PUT("updateUserLocation")
     Call<Void> setUserLocation(@Body Location location, @Header("Authorization") String auth);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @POST("refresh")
+    Call<User> refreshAccessToken(@Field("refresh_token")String refresh_token);
 
 
 }
