@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.w3c.dom.Text;
+
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
 import eu.jnksoftware.discountfinderandroid.Apis.RetrofitClient;
@@ -48,8 +48,8 @@ public class SellerAddShop extends AppCompatActivity {
 
         double userLat = getIntent().getDoubleExtra("lat",-1);
         double userLon = getIntent().getDoubleExtra("lon",-1);
-        userLocation.setLatitude(userLat);
-        userLocation.setLongitude(userLon);
+        userLocation.setLatPos(userLat);
+        userLocation.setLogPos(userLon);
 
     }
 
@@ -57,8 +57,8 @@ public class SellerAddShop extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(SellerAddShop.this, ChooseStoreLocation.class);
-            intent.putExtra("lat",userLocation.getLatitude());
-            intent.putExtra("lon",userLocation.getLongitude());
+            intent.putExtra("lat",userLocation.getLatPos());
+            intent.putExtra("lon",userLocation.getLogPos());
             intent.putExtra("auth",auth);
             startActivityForResult(intent,requestCode);
         }
@@ -68,8 +68,8 @@ public class SellerAddShop extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 & resultCode == RESULT_OK) {
-            storeLocation.setLatitude(data.getDoubleExtra("storeLat", -1));
-            storeLocation.setLongitude(data.getDoubleExtra("storeLon", -1));
+            storeLocation.setLatPos(data.getDoubleExtra("storeLat", -1));
+            storeLocation.setLogPos(data.getDoubleExtra("storeLon", -1));
             TextView location = findViewById(R.id.shopMapsLocationTextView);
             location.setText(data.getStringExtra("streetName"));
         }
@@ -80,7 +80,7 @@ public class SellerAddShop extends AppCompatActivity {
         EditText shopNameEditText = findViewById(R.id.shopNameEditText);
         EditText descriptionEditText = findViewById(R.id.shopDescriptionEditText);
         String shopName = shopNameEditText.getText().toString();
-        PostShop postShop = new PostShop(shopName,storeLocation.getLatitude(),storeLocation.getLongitude());
+        PostShop postShop = new PostShop(shopName,storeLocation.getLatPos(),storeLocation.getLogPos());
         Call<Void> call = apiService.addShop(postShop,auth);
         call.enqueue(new Callback<Void>() {
             @Override

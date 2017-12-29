@@ -12,6 +12,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
+
 
 public class GeoLocation extends Service implements LocationListener {
 
@@ -23,8 +27,8 @@ public class GeoLocation extends Service implements LocationListener {
     private double latitude;
     private double longitude;
 
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BW_UPDATES = 1000; // 1 minute
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 50; // update after 50meters update
+    private static final long MIN_TIME_BW_UPDATES = 0; // don't update with time interval
 
     private LocationManager locationManager;
 
@@ -140,7 +144,17 @@ public class GeoLocation extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+
+        User tempuser;
+        tempuser= ManageSharePrefs.readUser( null);
+        if (tempuser!=null) {
+            eu.jnksoftware.discountfinderandroid.models.Location myLocation = new eu.jnksoftware.discountfinderandroid.models.Location(location.getLongitude(), location.getLatitude());
+            HttpCall httpCall = new HttpCall();
+            String codesesponse = httpCall.setUserLocation(myLocation, tempuser.getTokenType() + " " + tempuser.getAccessToken());
+            ManageSharePrefs.writeLocation(myLocation);
+        }
         this.location = location;
+
     }
 
 

@@ -18,7 +18,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -63,10 +62,10 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
         }
         mMap.setMyLocationEnabled(true);
         initializeMapTypes();
-        userLocation.setLatitude(getIntent().getDoubleExtra("lat", 100));
-        userLocation.setLongitude(getIntent().getDoubleExtra("lon", 100));
+        userLocation.setLogPos(getIntent().getDoubleExtra("lat", 100));
+        userLocation.setLatPos(getIntent().getDoubleExtra("lon", 100));
         auth = getIntent().getStringExtra("auth");
-        currentLatLng = new LatLng(userLocation.getLatitude(),userLocation.getLongitude());
+        currentLatLng = new LatLng(userLocation.getLogPos(),userLocation.getLatPos());
         mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -77,8 +76,8 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
                 intent.putExtra("streetName",getStreetName(getBaseContext(),latLng));
                 intent.putExtra("storeLat",latLng.latitude);
                 intent.putExtra("storeLon",latLng.longitude);
-                intent.putExtra("lat",userLocation.getLatitude());
-                intent.putExtra("lon",userLocation.getLongitude());
+                intent.putExtra("lat",userLocation.getLatPos());
+                intent.putExtra("lon",userLocation.getLogPos());
                 intent.putExtra("auth",auth);
                 setResult(RESULT_OK,intent);
                 finish();

@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.Api;
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +16,6 @@ import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
-import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerAdapter;
 import retrofit2.Call;
@@ -59,8 +55,8 @@ public class SellerShops extends AppCompatActivity {
         double lon = getIntent().getDoubleExtra("storeLon",-1);
 
         //got to remove this
-        userLocation.setLatitude(getIntent().getDoubleExtra("lat",-1));
-        userLocation.setLongitude(getIntent().getDoubleExtra("lon",-1));
+        userLocation.setLatPos(getIntent().getDoubleExtra("lat",-1));
+        userLocation.setLogPos(getIntent().getDoubleExtra("lon",-1));
 }
 
         private final View.OnClickListener refreshButtonClick = new View.OnClickListener() {
@@ -93,8 +89,8 @@ public class SellerShops extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(SellerShops.this,SellerAddShop.class);
             intent.putExtra("auth",auth);
-            intent.putExtra("lat",userLocation.getLatitude());
-            intent.putExtra("lon",userLocation.getLongitude());
+            intent.putExtra("lat",userLocation.getLatPos());
+            intent.putExtra("lon",userLocation.getLogPos());
             startActivityForResult(intent,requestCode);
         }
     };

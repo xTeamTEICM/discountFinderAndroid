@@ -10,14 +10,15 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.DiscountRecyclerAdapter;
 import retrofit2.Call;
@@ -34,9 +35,10 @@ public class DiscountCustomerRecyclerList extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private List<Discount> discountProducts = new ArrayList<>();
     private IuserService supportApi;
-    private String auth;
+    private User user;
     private double latitude ,longitude;
-    private Location location = new Location();
+    private Location MyLocation;
+    String auth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +61,9 @@ public class DiscountCustomerRecyclerList extends Fragment {
         latitude = getArguments().getDouble("lat");
         longitude = getArguments().getDouble("lon");
 
+//FROM MERGE,WHAT TO KEEP
+//         user= ManageSharePrefs.readUser("");
+//         auth=user.getTokenType()+" "+user.getAccessToken();
         supportApi = ApiUtils.getUserService();
 
         seekBarProgressCalc();
