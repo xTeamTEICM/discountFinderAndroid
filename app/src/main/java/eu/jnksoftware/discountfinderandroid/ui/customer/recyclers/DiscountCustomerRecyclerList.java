@@ -1,19 +1,18 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.recyclers;
 
-
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.Apis.PostDiscount;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
@@ -27,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DiscountCustomerRecyclerList extends AppCompatActivity {
+public class DiscountCustomerRecyclerList extends Fragment {
     private int barProgress = 0;
     private SeekBar distanceBar;
     private TextView distanceText;
@@ -41,68 +40,60 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
     private Location MyLocation;
     String auth;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
+        return inflater.inflate(R.layout.activity_discount_customer_recycler_list,container,false);
+    }
 
-        super.onCreate(savedInstanceState);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        distanceBar = findViewById(R.id.distanceSeekBar);
-        distanceText = findViewById(R.id.distanceTextView);
+        distanceBar = getView().findViewById(R.id.distanceSeekBar);
+        distanceText = getView().findViewById(R.id.distanceTextView);
+        recyclerView = getView().findViewById(R.id.recyclerView);
 
-        setContentView(R.layout.activity_discount_customer_recycler_list);
-        recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        auth = getArguments().getString("auth");
+        latitude = getArguments().getDouble("lat");
+        longitude = getArguments().getDouble("lon");
 
-        user= ManageSharePrefs.readUser("");
-        auth=user.getTokenType()+" "+user.getAccessToken();
-
-
-
+//FROM MERGE,WHAT TO KEEP
+//         user= ManageSharePrefs.readUser("");
+//         auth=user.getTokenType()+" "+user.getAccessToken();
         supportApi = ApiUtils.getUserService();
 
         seekBarProgressCalc();
         fillDiscountProductsList();
     }
 
+
     private void fillDiscountProductsList() {
-        /*Category category = new Category("1", "1");
-        discountProducts.add(new Discount(1, category, "Pc", "Tech", 100, "https://www.cyberpowerpc.com/images/cs/smraidmax/blk_400.png", 500));
-        adapter = new DiscountRecyclerAdapter(discountProducts);
-        recyclerView.setAdapter(adapter);*/
-
-
-        //Location for discounts : logPos = 41.088535 , latPos = 23.551294 & distanceInMeters = barProgress
         longitude = 41.088535;
         latitude = 23.551294;
-
-        final PostDiscount postDiscount = new PostDiscount(longitude, latitude, 1500);
-        Toast.makeText(DiscountCustomerRecyclerList.this, "Longitude :" + String.valueOf(longitude)  + "\n Latitude :" + String.valueOf(latitude), Toast.LENGTH_SHORT).show();
-        Call<List<Discount>> call = supportApi.getDiscounts(postDiscount, auth);
+        int distance = 15000;
+        Call<List<Discount>> call = supportApi.getDiscounts(distance, auth);
         call.enqueue(new Callback<List<Discount>>() {
             @Override
             public void onResponse(Call<List<Discount>> call, Response<List<Discount>> response) {
                    discountProducts = response.body();
-                   //discountProducts.add(new Discount(1,"deli","eleos","me",10,"ta API",1));
-                   adapter = new DiscountRecyclerAdapter(discountProducts , getBaseContext());
+                   adapter = new DiscountRecyclerAdapter(discountProducts , getContext());
                    recyclerView.setAdapter(adapter);
 
             }
 
             @Override
             public void onFailure(Call<List<Discount>> call, Throwable t) {
-                Toast.makeText(DiscountCustomerRecyclerList.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 t.getLocalizedMessage();
             }
         });
     }
 
-
-
     public void seekBarProgressCalc() {
-        distanceBar = findViewById(R.id.distanceSeekBar);
-        distanceText = findViewById(R.id.distanceTextView);
-
         distanceText.setText(barProgress + " m");
 
         //TODO : make it start from 500 not from 0
@@ -129,4 +120,5 @@ public class DiscountCustomerRecyclerList extends AppCompatActivity {
             }
         });
     }
+
 }
