@@ -91,6 +91,7 @@ public interface IuserService {
     @PUT("shop")
     Call<Void> updateShop(@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
 
+
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @POST("discount")
     Call<DiscountGet> addDiscount(@Body DiscountPost discountPost, @Header("Authorization") String auth);
