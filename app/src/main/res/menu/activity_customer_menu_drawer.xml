@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="AΡΧΙΚΗ" />
+        <item
+            android:id="@+id/nav_offers"
+            android:icon="@drawable/ic_menu_offers"
+            android:title="ΠΡΟΣΦΟΡΕΣ"
+            />
+        <item
+            android:id="@+id/nav_preferences"
+            android:icon="@drawable/ic_menu_preferences"
+            android:title="ΠΡΟΤΙΜΗΣΕΙΣ" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="ΡΥΘΜΙΣΕΙΣ" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="ABOUT US" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_logout"
+                android:title="ΑΠΟΣΥΝΔΕΣΗ" />
+        </menu>
+    </item>
+
+</menu>

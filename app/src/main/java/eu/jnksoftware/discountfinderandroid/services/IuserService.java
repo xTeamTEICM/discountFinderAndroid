@@ -2,7 +2,6 @@ package eu.jnksoftware.discountfinderandroid.services;
 
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.PostDiscount;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
 import eu.jnksoftware.discountfinderandroid.Apis.UpdatePostShop;
 import eu.jnksoftware.discountfinderandroid.models.Category;
@@ -56,9 +55,8 @@ public interface IuserService {
     @GET("category")
     Call<List<Category>> fetchCategories();
 
-    @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @POST("/api/user/findDiscounts")
-    Call<List<Discount>> getDiscounts(@Body PostDiscount postDiscount, @Header("Authorization") String auth);
+    @GET("/api/discount/find/{distance}")
+    Call<List<Discount>> getDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @DELETE("shop/{id}")

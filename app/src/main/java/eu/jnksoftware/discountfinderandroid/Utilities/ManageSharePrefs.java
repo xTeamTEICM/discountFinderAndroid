@@ -9,10 +9,6 @@ import com.google.gson.Gson;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 
 
-/**
- * Created by makis on 21/12/2017.
- */
-
 public class ManageSharePrefs {
 
     private static SharedPreferences mSharedPref;

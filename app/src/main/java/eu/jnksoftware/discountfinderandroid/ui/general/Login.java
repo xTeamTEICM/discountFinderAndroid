@@ -12,19 +12,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
+import eu.jnksoftware.discountfinderandroid.CustomerMenu;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -102,9 +100,10 @@ public class Login extends Activity {
                     String fcmTokenDataString;
                     User userTokenResponse = response.body();
                     String auth = userTokenResponse.getTokenType() + " " + userTokenResponse.getAccessToken();
-                    Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
+                    Intent menuCustomer = new Intent(Login.this, CustomerMenu.class);
 
                     fcmTokenDataString = ManageSharePrefs.readFcmTokenData("");
+                    menuCustomer.putExtra("email",eMail.getText().toString());
                     if (userTokenResponse.getAccessToken().equals(fcmTokenDataString)) {
                         startActivity(menuCustomer);
                     } else {
