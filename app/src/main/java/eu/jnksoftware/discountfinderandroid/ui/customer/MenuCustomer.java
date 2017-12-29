@@ -30,6 +30,7 @@ public class MenuCustomer extends Fragment {
     private Button myShops;
     private Button filtersBtn;
     private Button myDiscount;
+    private GeoLocation geoLocation;
 
     @Nullable
     @Override
