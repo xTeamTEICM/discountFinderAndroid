@@ -14,6 +14,7 @@ import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountP
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
@@ -21,8 +22,6 @@ import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -60,6 +59,9 @@ public interface IuserService {
 
     @GET("/api/discount/find/{distance}")
     Call<List<Discount>> getDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
+
+    @GET("/api/discount/top/{distance}")
+    Call<List<TopDiscount>> getTopDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @DELETE("shop/{id}")

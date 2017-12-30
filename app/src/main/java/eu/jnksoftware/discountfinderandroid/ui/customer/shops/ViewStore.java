@@ -114,7 +114,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     };
 
     private void deleteShop() {
-        Call<Void> call = apiService.deleteShop(shopId, user.getAccessToken());
+        Call<Void> call = apiService.deleteShop(shopId,"Bearer "+user.getAccessToken());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -130,7 +130,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
 
     public void getSellerDiscounts(){
         if(this.shopId!=-1) {
-            Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,user.getAccessToken());
+            Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,"Bearer "+user.getAccessToken());
             call.enqueue(new Callback<List<SellerDiscount>>() {
                 @Override
                 public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
@@ -182,7 +182,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void deleteSellerDiscount(int id){
-        Call<Void> call = apiService.deleteSellerDiscount(id,user.getAccessToken());
+        Call<Void> call = apiService.deleteSellerDiscount(id,"Bearer "+user.getAccessToken());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

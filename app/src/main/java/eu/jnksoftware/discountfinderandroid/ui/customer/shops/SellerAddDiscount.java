@@ -11,14 +11,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,6 +30,7 @@ import retrofit2.Response;
 public class SellerAddDiscount extends AppCompatActivity {
     private IuserService apiInterface;
     private String auth;
+    private User user;
     private int shopId;
     private double startPrice;
     private double endPrice;
@@ -34,6 +38,7 @@ public class SellerAddDiscount extends AppCompatActivity {
     private int categoryId;
     private String image;
     private Button myDiscount;
+    private Long   tsLong;
     private Button choosePhoto;
     private Bitmap discountPhoto;
     private ImageView discountImageView;
@@ -48,9 +53,10 @@ public class SellerAddDiscount extends AppCompatActivity {
         setContentView(R.layout.activity_seller_add_discount);
 
         apiInterface = ApiUtils.getUserService();
-        auth = getIntent().getStringExtra("auth");
-        shopId = getIntent().getIntExtra("shopId",-1);
+        user = ManageSharePrefs.readUser(null);
 
+        shopId = getIntent().getIntExtra("shopId",-1);
+        tsLong = System.currentTimeMillis()/1000;
         myDiscount = findViewById(R.id.addMyDiscountButton);
         myDiscount.setOnClickListener(myDiscountClick);
         choosePhoto = findViewById(R.id.choosePhotoButton);
@@ -67,8 +73,9 @@ public class SellerAddDiscount extends AppCompatActivity {
 
             DiscountPost discountPost=new DiscountPost();
             image=imageToString();
+
             discountPost.setImageBase(image);
-            discountPost.setImageTitle("TestPhoto1");
+            discountPost.setImageTitle(tsLong.toString());
             discountPost.setShopId(shopId);
             discountPost.setCurrentPrice(Double.parseDouble(finalPrice.getText().toString().trim()));
             discountPost.setOriginalPrice(Double.parseDouble(startingPrice.getText().toString().trim()));
@@ -103,7 +110,7 @@ public class SellerAddDiscount extends AppCompatActivity {
     }
 
     public void addDiscount(DiscountPost discountPost){
-        Call<DiscountGet> call = apiInterface.addDiscount(discountPost,auth);
+        Call<DiscountGet> call = apiInterface.addDiscount(discountPost,"Bearer "+user.getAccessToken());
         call.enqueue(new Callback<DiscountGet>() {
             @Override
             public void onResponse(Call<DiscountGet> call, Response<DiscountGet> response) {
