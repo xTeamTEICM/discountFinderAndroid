@@ -20,7 +20,7 @@ public class TestUserService extends TestCase {
         userTokenRequest.setUsername("n@gmail.com");
         userTokenRequest.setPassword("123455");
 
-        User user = s.getTokenAcess(userTokenRequest).execute().body();
+        User user = s.getTokenAccess(userTokenRequest).execute().body();
         assertEquals("Bearer", user.getTokenType().toString());
     }
     public void testAccesType() throws IOException{
@@ -29,7 +29,7 @@ public class TestUserService extends TestCase {
         userTokenRequest.setUsername("n@gmail.com");
         userTokenRequest.setPassword("123455");
 
-        User user = s.getTokenAcess(userTokenRequest).execute().body();
+        User user = s.getTokenAccess(userTokenRequest).execute().body();
         assertEquals("mock_access", user.getAccessToken().toString());
     }
     public void testExpiresIn() throws IOException{
@@ -38,7 +38,7 @@ public class TestUserService extends TestCase {
         userTokenRequest.setUsername("n@gmail.com");
         userTokenRequest.setPassword("123455");
 
-        User user = s.getTokenAcess(userTokenRequest).execute().body();
+        User user = s.getTokenAccess(userTokenRequest).execute().body();
         assertEquals("7199", user.getExpiresIn().toString());
     }
     public void testRefreshToken() throws IOException{
@@ -47,7 +47,7 @@ public class TestUserService extends TestCase {
         userTokenRequest.setUsername("n@gmail.com");
         userTokenRequest.setPassword("123455");
 
-        User user = s.getTokenAcess(userTokenRequest).execute().body();
+        User user = s.getTokenAccess(userTokenRequest).execute().body();
         assertEquals("mock_refresh", user.getRefreshToken().toString());
     }
 }

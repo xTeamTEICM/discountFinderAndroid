@@ -56,7 +56,10 @@ public class CustomerMenu extends AppCompatActivity
         auth = "Bearer " + user.getAccessToken();
         location = new GeoLocation(this);
 
+        Bundle bundle = new Bundle();
+        bundle.putString("auth", auth);
         MenuCustomer customerFragment = new MenuCustomer();
+        customerFragment.setArguments(bundle);
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.customerMenuConstraintLayout,customerFragment
                 ,customerFragment.getTag())
@@ -69,7 +72,6 @@ public class CustomerMenu extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-//            super.onBackPressed();
             checkDoubleBackPress();
         }
     }
