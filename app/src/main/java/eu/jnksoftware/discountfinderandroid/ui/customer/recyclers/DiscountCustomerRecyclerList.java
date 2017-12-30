@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 
 public class DiscountCustomerRecyclerList extends Fragment {
-    private int barProgress = 0;
+    private int barProgress = 15000;
     private SeekBar distanceBar;
     private TextView distanceText;
     private RecyclerView recyclerView;
@@ -36,8 +36,6 @@ public class DiscountCustomerRecyclerList extends Fragment {
     private List<Discount> discountProducts = new ArrayList<>();
     private IuserService supportApi;
     private User user;
-    private double latitude ,longitude;
-    private Location MyLocation;
     String auth;
 
     @Override
@@ -58,12 +56,6 @@ public class DiscountCustomerRecyclerList extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         auth = getArguments().getString("auth");
-        latitude = getArguments().getDouble("lat");
-        longitude = getArguments().getDouble("lon");
-
-//FROM MERGE,WHAT TO KEEP
-//         user= ManageSharePrefs.readUser("");
-//         auth=user.getTokenType()+" "+user.getAccessToken();
         supportApi = ApiUtils.getUserService();
 
         seekBarProgressCalc();
@@ -72,10 +64,7 @@ public class DiscountCustomerRecyclerList extends Fragment {
 
 
     private void fillDiscountProductsList() {
-        longitude = 41.088535;
-        latitude = 23.551294;
-        int distance = 15000;
-        Call<List<Discount>> call = supportApi.getDiscounts(distance, auth);
+        Call<List<Discount>> call = supportApi.getDiscounts(15000, auth);
         call.enqueue(new Callback<List<Discount>>() {
             @Override
             public void onResponse(Call<List<Discount>> call, Response<List<Discount>> response) {
@@ -117,6 +106,22 @@ public class DiscountCustomerRecyclerList extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 distanceText.setText(barProgress + " m");
+                Call<List<Discount>> call = supportApi.getDiscounts(barProgress, auth);
+                call.enqueue(new Callback<List<Discount>>() {
+                    @Override
+                    public void onResponse(Call<List<Discount>> call, Response<List<Discount>> response) {
+                        discountProducts = response.body();
+                        adapter = new DiscountRecyclerAdapter(discountProducts , getContext());
+                        recyclerView.setAdapter(adapter);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Discount>> call, Throwable t) {
+                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+                        t.getLocalizedMessage();
+                    }
+                });
             }
         });
     }

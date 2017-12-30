@@ -11,10 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 
 public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapter.DiscountViewHolder> {
     private Context context;
@@ -38,7 +41,7 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
     @Override
     public void onBindViewHolder(ShopDiscountAdapter.DiscountViewHolder holder, int position) {
         holder.title.setText(discounts.get(position).getDescription());
-//        holder.image.setImageBitmap(discounts.get(position).getImage());
+        Picasso.with(context).load(discounts.get(position).getImage()).into(holder.image);
         holder.price.setText("Τιμή " + Integer.toString((int) discounts.get(position).getCurrentPrice()));
         holder.percentage.setText("Έκπτωση " + Integer.toString((int) discounts.get(position).getDiscountPercent()) + "%");
         holder.category.setText("Κατηγορία: " + Integer.toString(discounts.get(position).getCategory()));

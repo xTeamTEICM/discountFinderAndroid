@@ -9,13 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerAdapter;
 import retrofit2.Call;
@@ -29,6 +33,7 @@ public class SellerShops extends AppCompatActivity {
     List<Shop> shops = new ArrayList<>();
     private IuserService apiService;
     String auth;
+    User user;
 
     private static final int requestCode = 1;
 
@@ -43,7 +48,15 @@ public class SellerShops extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         shopsRecyclerView.setLayoutManager(layoutManager);
         shopsRecyclerView.setHasFixedSize(true);
-        auth = getIntent().getStringExtra("auth");
+
+
+
+
+
+         user = ManageSharePrefs.readUser(null);
+        auth=user.getAccessToken();
+
+
 
         apiService = ApiUtils.getUserService();
         getUserShops();
@@ -67,13 +80,13 @@ public class SellerShops extends AppCompatActivity {
         };
 
     private void getUserShops(){
-        Call<List<Shop>> call = apiService.getUserShops(auth);
+        Call<List<Shop>> call = apiService.getShopsList();
         call.enqueue(new Callback<List<Shop>>() {
             @Override
             public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
             {
                 shops = response.body();
-                adapter = new RecyclerAdapter(shops,SellerShops.this,auth);
+                adapter = new RecyclerAdapter(shops,SellerShops.this,user.getAccessToken());
                 shopsRecyclerView.setAdapter(adapter);
             }
 

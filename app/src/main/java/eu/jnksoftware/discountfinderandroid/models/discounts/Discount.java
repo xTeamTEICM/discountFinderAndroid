@@ -2,30 +2,34 @@ package eu.jnksoftware.discountfinderandroid.models.discounts;
 
 public class Discount {
 
-    private  int id;
+    private  int discountId;
     private String category;
     private String shortDescription;
     private String shopName;
     private float finalPrice;
-    private String productImageUrl;
+    private String productImageURL;
     private double distance;
+    private double shopLatPos;
+    private double shopLogPos;
 
-    public Discount(int id , String category, String shortDescription, String shopName, float finalPrice, String productImageUrl,double distance) {
-        this.id = id;
+    public Discount(int discountId , String category, String shortDescription, String shopName, float finalPrice, String productImageURL,double distance, double shopLogPos, double shopLatPos) {
+        this.discountId = discountId;
         this.category = category;
         this.shortDescription = shortDescription;
         this.shopName = shopName;
         this.finalPrice = finalPrice;
-        this.productImageUrl = productImageUrl;
+        this.productImageURL = productImageURL;
         this.distance = distance;
+        this.shopLatPos = shopLatPos;
+        this.shopLogPos = shopLogPos;
     }
 
-    public int getId() {
-        return id;
+    public int getDiscountId() {
+        return discountId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setid(int id) {
+        this.discountId = discountId;
     }
 
     public String getShortDescription() {
@@ -52,12 +56,12 @@ public class Discount {
         this.finalPrice = finalPrice;
     }
 
-    public String getProductImageUrl() {
-        return productImageUrl;
+    public String getProductImageURL() {
+        return productImageURL;
     }
 
-    public void setProductImageUrl(String productImage) {
-        this.productImageUrl = productImageUrl;
+    public void setProductImageURL(String productImage) {
+        this.productImageURL = productImageURL;
     }
 
     public String getCategory() {
@@ -74,5 +78,13 @@ public class Discount {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public double getShopLatPos() {
+        return shopLatPos;
+    }
+
+    public double getShopLogPos() {
+        return shopLogPos;
     }
 }
