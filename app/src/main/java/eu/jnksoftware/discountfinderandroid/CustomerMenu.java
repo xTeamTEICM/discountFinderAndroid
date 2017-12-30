@@ -106,7 +106,10 @@ public class CustomerMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            Bundle bundle = new Bundle();
+            bundle.putString("auth", auth);
             MenuCustomer customerFragment = new MenuCustomer();
+            customerFragment.setArguments(bundle);
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.customerMenuConstraintLayout,customerFragment
                     ,customerFragment.getTag())
