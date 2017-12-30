@@ -65,8 +65,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
 
         apiService = ApiUtils.getUserService();
         user = ManageSharePrefs.readUser(null);
-        auth=user.getAccessToken();
-        Toast.makeText(ViewStore.this,user.getAccessToken(),Toast.LENGTH_SHORT).show();
+        
 
         shopName = getIntent().getStringExtra("shop");
         shopId = getIntent().getIntExtra("shopId",-1);
@@ -114,7 +113,8 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     };
 
     private void deleteShop() {
-        Call<Void> call = apiService.deleteShop(shopId,"Bearer "+user.getAccessToken());
+        auth="Bearer "+user.getAccessToken();
+        Call<Void> call = apiService.deleteShop(shopId,auth);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -129,8 +129,9 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void getSellerDiscounts(){
+        auth="Bearer "+user.getAccessToken();
         if(this.shopId!=-1) {
-            Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,"Bearer "+user.getAccessToken());
+            Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,auth);
             call.enqueue(new Callback<List<SellerDiscount>>() {
                 @Override
                 public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
@@ -182,7 +183,8 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void deleteSellerDiscount(int id){
-        Call<Void> call = apiService.deleteSellerDiscount(id,"Bearer "+user.getAccessToken());
+        auth="Bearer "+user.getAccessToken();
+        Call<Void> call = apiService.deleteSellerDiscount(id,auth);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
