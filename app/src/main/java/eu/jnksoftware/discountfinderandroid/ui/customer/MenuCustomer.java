@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
-import android.app.ActivityManager;
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
