@@ -65,7 +65,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
 
         apiService = ApiUtils.getUserService();
         user = ManageSharePrefs.readUser(null);
-        
+
 
         shopName = getIntent().getStringExtra("shop");
         shopId = getIntent().getIntExtra("shopId",-1);
