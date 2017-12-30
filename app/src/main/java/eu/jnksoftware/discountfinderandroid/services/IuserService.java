@@ -22,6 +22,7 @@ import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -33,7 +34,7 @@ import retrofit2.http.Query;
 
 public interface IuserService {
     @POST("login")
-    Call<User> getTokenAcess(@Body UserTokenRequest userTokenRequest);
+    Call<User> getTokenAccess(@Body UserTokenRequest userTokenRequest);
 
     @POST("register")
     Call<User> register(@Body RegisterTokenRequest registerTokenRequest);
