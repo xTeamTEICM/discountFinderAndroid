@@ -1,35 +1,34 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
-import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
-import eu.jnksoftware.discountfinderandroid.models.Location;
-import eu.jnksoftware.discountfinderandroid.models.token.User;
-import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
+import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.TopDiscountAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MenuCustomer extends Fragment {
 
-    private User tempuser;
     private IuserService iuserService;
     private String auth;
-    private Button about;
-    private Button settings;
-    private Button myShops;
-    private Button filtersBtn;
-    private Button myDiscount;
+    private RecyclerView topDiscountsRecycler;
+    private TopDiscountAdapter topDiscountAdapter;
+    private List<TopDiscount> topDiscounts;
 
     @Nullable
     @Override
@@ -41,9 +40,11 @@ public class MenuCustomer extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        auth = getArguments().getString("auth");
+        topDiscountsRecycler = view.findViewById(R.id.topDiscountsRecyclerView);
         iuserService= ApiUtils.getUserService();
-        tempuser= ManageSharePrefs.readUser( null);
-        geoLocation = new GeoLocation(getContext());
+//        tempuser= ManageSharePrefs.readUser( null);
+//        Geolocation geoLocation = new GeoLocation(getContext());
 // SEE WHATS WITH THIS,FROM MERGE
 //        tempuser= ManageSharePrefs.readUser( null);
 //         myLocation =ManageSharePrefs.readLocation("");
@@ -54,69 +55,37 @@ public class MenuCustomer extends Fragment {
 //             myLocation.setLatPos(myGeoloc.getLatitude());
 //         }
 //         ManageSharePrefs.writeLocation(myLocation);
-
-        about = view.findViewById(R.id.aboutBtn);
-//        about.setOnClickListener(aboutClick);
-        settings = view.findViewById(R.id.settingsBtn);
-//        settings.setOnClickListener(settingsClick);
-
-        myShops =  view.findViewById(R.id.showShopsButton);
-        myShops.setOnClickListener(showShopsButtonClick);
-        filtersBtn =  view.findViewById(R.id.filtersBtn);
-//        filtersBtn.setOnClickListener(filtersButtonClick);
-        myDiscount = view.findViewById(R.id.showDiscountsBtn);
-        myDiscount.setOnClickListener(discountClick);
-
-
+        setUpRecycler();
+        topDiscounts = new ArrayList<>();
+        getTopDiscounts();
     }
 
-    private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        }
-    };
+    public void setUpRecycler(){
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        topDiscountsRecycler.setLayoutManager(manager);
+        topDiscountsRecycler.setItemAnimator(new DefaultItemAnimator());
+//        topDiscountsRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        topDiscountsRecycler.setHasFixedSize(true);
+    }
 
-    private final View.OnClickListener discountClick = new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
+    public void getTopDiscounts(){
+        Call<List<TopDiscount>> call = iuserService.getTopDiscounts(15000,auth);
+        call.enqueue(new Callback<List<TopDiscount>>() {
+            @Override
+            public void onResponse(Call<List<TopDiscount>> call, Response<List<TopDiscount>> response) {
+                if(response.body()!=null) {
+                    topDiscounts = response.body();
+                    TopDiscountAdapter adapter = new TopDiscountAdapter(getContext(), topDiscounts);
+                    topDiscountsRecycler.setAdapter(adapter);
+                }
+            }
 
-            //TODO REMOVE
-        }
-    };
+            @Override
+            public void onFailure(Call<List<TopDiscount>> call, Throwable t) {
 
-    private final View.OnClickListener aboutClick = new View.OnClickListener() {
-
-        @Override
-        public void onClick(final View v) {
-//             startActivity(new Intent(MenuCustomer.this, AboutUs.class));
-        }
-    };
-
-    private final View.OnClickListener settingsClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-//             Button button = findViewById(R.id.showShopsButton);
-//             Intent intent = new Intent(MenuCustomer.this, Settings.class);
-//             intent.putExtra("isSellerEnabled", button.isShown());
-//             startActivity(intent);
-        }
-    };
-
-    private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-//             Gson user=new Gson();
-//             Intent userPreferences=new Intent(MenuCustomer.this,UserPreferenceList.class);
-//             userPreferences.putExtra("User", user.toJson(tempuser));
-//             startActivity(userPreferences);
-        }
-    };
-
-    private final View.OnClickListener shopClick = new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
-            //startActivity(new Intent(MenuCustomer.this, AboutUs.class));
-        }
-    };
+            }
+        });
+    }
 
 }
