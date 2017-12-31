@@ -153,11 +153,8 @@ public class CustomerMenu extends AppCompatActivity
         }
         else if(id == R.id.nav_shops)
         {
-            SellerShops sellerShops=new SellerShops();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.customerMenuConstraintLayout,sellerShops
-                    ,sellerShops.getTag())
-                    .commit();
+
+            startActivity(new Intent(getBaseContext(), SellerShops.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
