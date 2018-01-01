@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 
 
 public class ManageSharePrefs {
@@ -87,5 +88,47 @@ public class ManageSharePrefs {
 
         return myTempLocation;
     }
+
+    public static UserTokenRequest readUserAccount(String defValue) {
+        UserTokenRequest userTokenRequest;
+        if (mSharedPref.contains("userAccount")) {
+            String userAccountToString = mSharedPref.getString("userAccount", defValue);
+            Gson userAccountJson = new Gson();
+            userTokenRequest = userAccountJson.fromJson(userAccountToString, UserTokenRequest.class);
+        } else {
+            userTokenRequest = null;
+        }
+
+        return userTokenRequest;
+    }
+
+    public static void writeUserAccount(UserTokenRequest userTokenRequest) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        Gson userAccountJson = new Gson();
+        String userAccountToString = userAccountJson.toJson(userTokenRequest);
+        prefsEditor.putString("userData", userAccountToString );
+        prefsEditor.commit();
+    }
+
+    public static boolean readIsUserSeller(Boolean defValue) {
+        Boolean isSeller;
+        if (mSharedPref.contains("userIsSeller")) {
+            isSeller = mSharedPref.getBoolean("userAccount", defValue);
+            Gson userAccountJson = new Gson();
+
+        } else {
+            isSeller=false;
+        }
+
+        return isSeller;
+    }
+
+    public static void writeIsUser(Boolean value) {
+        SharedPreferences.Editor prefsEditor = mSharedPref.edit();
+        prefsEditor.putBoolean("userIsSeller", value );
+        prefsEditor.commit();
+    }
+
+
 
 }

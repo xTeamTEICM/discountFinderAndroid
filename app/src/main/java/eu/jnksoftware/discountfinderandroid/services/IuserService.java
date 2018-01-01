@@ -110,7 +110,7 @@ public interface IuserService {
     //set the devicetoken for fcm notifications
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @POST("user/deviceToken")
+    @PUT("user/deviceToken")
     Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
 
     //set the location of USer
