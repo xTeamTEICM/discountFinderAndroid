@@ -21,6 +21,7 @@ import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
+import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
 import eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserPreferenceList;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
@@ -149,6 +150,11 @@ public class CustomerMenu extends AppCompatActivity
         }
           else if(id == R.id.nav_logout) {
 
+        }
+        else if(id == R.id.nav_shops)
+        {
+
+            startActivity(new Intent(getBaseContext(), SellerShops.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

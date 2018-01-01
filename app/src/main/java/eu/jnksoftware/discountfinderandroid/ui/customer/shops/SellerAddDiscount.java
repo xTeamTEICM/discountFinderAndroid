@@ -55,6 +55,7 @@ public class SellerAddDiscount extends AppCompatActivity {
         apiInterface = ApiUtils.getUserService();
         user = ManageSharePrefs.readUser(null);
 
+
         shopId = getIntent().getIntExtra("shopId",-1);
         tsLong = System.currentTimeMillis()/1000;
         myDiscount = findViewById(R.id.addMyDiscountButton);
@@ -110,10 +111,12 @@ public class SellerAddDiscount extends AppCompatActivity {
     }
 
     public void addDiscount(DiscountPost discountPost){
-        Call<DiscountGet> call = apiInterface.addDiscount(discountPost,"Bearer "+user.getAccessToken());
+        auth="Bearer "+user.getAccessToken();
+        Call<DiscountGet> call = apiInterface.addDiscount(discountPost,auth);
         call.enqueue(new Callback<DiscountGet>() {
             @Override
             public void onResponse(Call<DiscountGet> call, Response<DiscountGet> response) {
+
                 if(response.message().equals("OK")) finish();
             }
 
