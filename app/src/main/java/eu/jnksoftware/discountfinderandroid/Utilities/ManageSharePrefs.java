@@ -114,8 +114,6 @@ public class ManageSharePrefs {
         Boolean isSeller;
         if (mSharedPref.contains("userIsSeller")) {
             isSeller = mSharedPref.getBoolean("userAccount", defValue);
-            Gson userAccountJson = new Gson();
-
         } else {
             isSeller=false;
         }
