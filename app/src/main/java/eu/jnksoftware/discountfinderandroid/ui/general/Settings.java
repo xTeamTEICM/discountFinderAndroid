@@ -6,14 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.Switch;
 
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 
 public class Settings extends Fragment {
 
     private Button backButton;
-    private CheckBox sellerCheckBox;
+    private Switch isSellerSwitch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,22 +25,22 @@ public class Settings extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*backButton = view.findViewById(R.id.backButton);
+        backButton = view.findViewById(R.id.settingsBackButton);
         backButton.setOnClickListener(backButtonClick);
-
-        boolean isEnabled = getIntent().getBooleanExtra("isSellerEnabled",false);
-        if(isEnabled){
-            sellerCheckBox.setChecked(true);
-        }
-        else{
-            sellerCheckBox.setChecked(false);
-        }*/
+        isSellerSwitch = view.findViewById(R.id.switchSettingsIsSeller);
+//        TODO add this line when readIsUser works
+//        isSellerSwitch.setChecked(ManageSharePrefs.readIsUserSeller(false));
     }
-//
-//    private final View.OnClickListener backButtonClick = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//
-//        }
-//    };
+
+    View.OnClickListener backButtonClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            boolean b = isSellerSwitch.isChecked();
+            ManageSharePrefs.writeIsUser(b);
+        }
+
+    };
+
+
+
 }
