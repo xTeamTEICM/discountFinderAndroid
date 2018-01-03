@@ -20,6 +20,7 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
@@ -40,18 +41,17 @@ public class UserPreferences extends AppCompatActivity {
     String accessToken;
     private ArrayAdapter<String> spinContentAdapter;
     private Spinner spinnerCat;
+    private String auth;
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_preferences);
-        String accessToken;
         iuserService= ApiUtils.getUserService();
+        user = ManageSharePrefs.readUser(null);
 
-        Gson user = new Gson();
-        this.user = user.fromJson(getIntent().getStringExtra("User"),User.class);
-        Toast.makeText(UserPreferences.this, "token"+ this.user.getTokenType(), Toast.LENGTH_LONG).show();
+
         
         spinnerCat = findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
@@ -98,15 +98,15 @@ public class UserPreferences extends AppCompatActivity {
             discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
             discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
             discountPreferencesRequest.setTags("Sample");
-            String auth;
-            auth="Bearer "+ user.getAccessToken();
-            doUserPreference(discountPreferencesRequest,auth);
+
+
+            doUserPreference(discountPreferencesRequest);
             Toast.makeText(UserPreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
         }
     };
 
-    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest,String auth) {
-
+    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest) {
+        auth="Bearer "+user.getAccessToken();
         Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
                 @Override
@@ -155,7 +155,7 @@ public class UserPreferences extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent=new Intent(UserPreferences.this,UserPreferenceList.class);
+        Intent intent = new Intent(UserPreferences.this, UserPreferenceList.class);
         startActivity(intent);
     }
 }

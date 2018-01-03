@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
@@ -42,18 +44,16 @@ public class UserPreferenceList extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        user = ManageSharePrefs.readUser(null);
+        iuserService= ApiUtils.getUserService();
         recyclerView= view.findViewById(R.id.userPreferenceRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        layoutManager=new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         addPreference = view.findViewById(R.id.userPreferencesBtn);
         addPreference.setOnClickListener(addPreferenceClick);
-
-        Gson user = new Gson();
-        this.user = user.fromJson(getArguments().getString("user"), User.class);
-        iuserService = ApiUtils.getUserService();
-        auth = getArguments().getString("auth");
-        fetchUserPreferences(auth);
+        Toast.makeText(getActivity(),"Bearer "+user.getAccessToken(),Toast.LENGTH_SHORT).show();
+        fetchUserPreferences("Bearer "+user.getAccessToken());
     }
 
 /*
@@ -72,18 +72,20 @@ public class UserPreferenceList extends Fragment {
     private View.OnClickListener addPreferenceClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Gson user = new Gson();
-            Intent userPreferences = new Intent(getContext(), UserPreferences.class);
-            userPreferences.putExtra("User", user.toJson(UserPreferenceList.this.user));
-            startActivity(userPreferences);
+
+            Intent userPreferences = new Intent(getActivity(), UserPreferences.class);
+            getActivity().startActivity(userPreferences);
+
         }
     };
 
     public void fetchUserPreferences(final String auth) {
+
         Call<List<DiscountPreferencesResponse>> disc=iuserService.getDiscountsPreference(auth);
         disc.enqueue(new Callback<List<DiscountPreferencesResponse>>() {
             @Override
             public void onResponse(Call<List<DiscountPreferencesResponse>> call, Response<List<DiscountPreferencesResponse>> response) {
+                Toast.makeText(getActivity(),"DOULEUI",Toast.LENGTH_SHORT).show();
                 discountPreferencesResponses=response.body();
                 adapter=new RecyclerPreference(discountPreferencesResponses, getContext(),auth);
                 recyclerView.setAdapter(adapter);
@@ -91,7 +93,7 @@ public class UserPreferenceList extends Fragment {
 
             @Override
             public void onFailure(Call<List<DiscountPreferencesResponse>> call, Throwable t) {
-
+            Toast.makeText(getActivity(),"DEN DOULEUI",Toast.LENGTH_SHORT).show();
             }
         });
     }

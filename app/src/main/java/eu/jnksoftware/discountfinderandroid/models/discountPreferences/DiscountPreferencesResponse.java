@@ -20,9 +20,7 @@ private Integer id;
     @SerializedName("tags")
     @Expose
     private String tags;
-    @SerializedName("image")
-    @Expose
-    private String image;
+
     @SerializedName("categoryTitle")
     @Expose
     private String categoryTitle;
@@ -63,9 +61,7 @@ private Integer id;
         this.tags = tags;
     }
 
-    public String getImage() {
-        return image;
-    }
+
 
     public String getCategoryTitle() {
         return categoryTitle;
