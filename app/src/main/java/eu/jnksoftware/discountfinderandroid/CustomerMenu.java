@@ -51,7 +51,7 @@ public class CustomerMenu extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        boolean isSellerChecked = ManageSharePrefs.readIsUserSeller(false);
+        boolean isSellerChecked = ManageSharePrefs.readUserIsSeller(false);
         MenuItem item = navigationView.getMenu().getItem(2);
         item.setVisible(isSellerChecked);
 

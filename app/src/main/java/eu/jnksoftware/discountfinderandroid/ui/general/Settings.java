@@ -36,7 +36,7 @@ public class Settings extends Fragment {
         @Override
         public void onClick(View view) {
             boolean b = isSellerSwitch.isChecked();
-            ManageSharePrefs.writeIsUser(b);
+            ManageSharePrefs.writeUserIsSeller(b);
         }
 
     };
