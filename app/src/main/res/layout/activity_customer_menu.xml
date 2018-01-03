@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/cast_expanded_controller_progress_text_color"
+        android:background="@color/lightBackgroundColor"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_customer_menu"
         app:menu="@menu/activity_customer_menu_drawer" />

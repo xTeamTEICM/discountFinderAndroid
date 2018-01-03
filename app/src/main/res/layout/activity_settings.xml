@@ -24,9 +24,10 @@
     <Button
         android:id="@+id/settingsBackButton"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +39,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
         android:text="@string/enableSeller"
-        android:textSize="24sp"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
 
@@ -47,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toEndOf="@+id/tvSettingsIsSellerSwitch"
         app:layout_constraintTop_toBottomOf="@+id/settingsTextView" />
 
@@ -58,7 +59,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="27dp"
         android:text="Ειδοποιήσεις εφαρμογής"
-        android:textSize="24sp"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSettingsIsSellerSwitch" />
 
@@ -67,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintStart_toEndOf="@+id/tvSettingsPushNotificationsSwitch"
         app:layout_constraintTop_toBottomOf="@+id/switchSettingsIsSeller" />
 </android.support.constraint.ConstraintLayout>

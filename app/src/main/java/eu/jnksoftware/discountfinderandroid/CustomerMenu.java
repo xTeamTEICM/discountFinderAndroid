@@ -21,6 +21,7 @@ import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
+import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
 import eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserPreferenceList;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
@@ -51,7 +52,7 @@ public class CustomerMenu extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        boolean isSellerChecked = ManageSharePrefs.readIsUserSeller(false);
+        boolean isSellerChecked = ManageSharePrefs.readUserIsSeller(false);
         MenuItem item = navigationView.getMenu().getItem(2);
         item.setVisible(isSellerChecked);
 
@@ -132,6 +133,15 @@ public class CustomerMenu extends AppCompatActivity
                     ,discountsFragment.getTag())
                     .commit();
 
+        }else if (id ==  R.id.nav_seller_shops){
+            Bundle bundle = new Bundle();
+            bundle.putString("auth", auth);
+            SellerShops sellerShopsFragment= new SellerShops();
+            sellerShopsFragment.setArguments(bundle);
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.customerMenuConstraintLayout,sellerShopsFragment
+                    ,sellerShopsFragment.getTag())
+                    .commit();
         } else if (id == R.id.nav_preferences) {
             Bundle bundle = new Bundle();
             bundle.putString("auth", auth);
@@ -141,13 +151,10 @@ public class CustomerMenu extends AppCompatActivity
             manager.beginTransaction().replace(R.id.customerMenuConstraintLayout,preferenceFragment
                     ,preferenceFragment.getTag())
                     .commit();
-
-        } else if (id == R.id.nav_settings) {
-            Settings settingsFragment = new Settings();
-            FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().replace(R.id.customerMenuConstraintLayout,settingsFragment
-                    ,settingsFragment.getTag())
-                    .commit();
+        }
+        //show form with intent
+        else if (id == R.id.nav_settings) {
+            startActivity(new Intent(getBaseContext(),Settings.class));
         } else if(id == R.id.nav_about){
             startActivity(new Intent(getBaseContext(), AboutUs.class));
         }

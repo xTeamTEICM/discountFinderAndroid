@@ -29,7 +29,7 @@
         <activity android:name=".ui.general.Register" />
         <activity android:name=".ui.customer.userPreferences.UserPreferences" />
         <activity android:name=".ui.general.AboutUs" />
-        <activity android:name=".ui.customer.shops.SellerShops" />
+        <activity android:name=".ui.general.Settings"/>
         <activity android:name=".ui.customer.userPreferences.UserUpdatePreferences" />
         <activity android:name=".ui.customer.shops.UpdateShop" />
         <activity android:name=".ui.customer.shops.ViewStore" />
