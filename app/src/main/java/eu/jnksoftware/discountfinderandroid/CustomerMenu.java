@@ -21,7 +21,6 @@ import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
 import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
-import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
 import eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserPreferenceList;
 import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
 import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
@@ -52,6 +51,9 @@ public class CustomerMenu extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        boolean isSellerChecked = ManageSharePrefs.readIsUserSeller(false);
+        MenuItem item = navigationView.getMenu().getItem(2);
+        item.setVisible(isSellerChecked);
 
         user = ManageSharePrefs.readUser( null);
         auth = "Bearer " + user.getAccessToken();
@@ -84,6 +86,7 @@ public class CustomerMenu extends AppCompatActivity
         navHeaderEmail = findViewById(R.id.tvNavHeaderUserEmail);
         navHeaderName = findViewById(R.id.tvNavHeaderUserName);
         setUpNavHeaderInfo(getIntent().getStringExtra("email"),"Kostas");
+
         return true;
     }
 
@@ -150,11 +153,6 @@ public class CustomerMenu extends AppCompatActivity
         }
           else if(id == R.id.nav_logout) {
 
-        }
-        else if(id == R.id.nav_shops)
-        {
-
-            startActivity(new Intent(getBaseContext(), SellerShops.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
