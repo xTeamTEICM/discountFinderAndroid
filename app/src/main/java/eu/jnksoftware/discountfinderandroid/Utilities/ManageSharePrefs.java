@@ -110,10 +110,10 @@ public class ManageSharePrefs {
         prefsEditor.commit();
     }
 
-    public static boolean readIsUserSeller(Boolean defValue) {
+    public static boolean readUserIsSeller(Boolean defValue) {
         Boolean isSeller;
         if (mSharedPref.contains("userIsSeller")) {
-            isSeller = mSharedPref.getBoolean("userAccount", defValue);
+            isSeller = mSharedPref.getBoolean("userIsSeller", defValue);
         } else {
             isSeller=false;
         }
@@ -121,7 +121,7 @@ public class ManageSharePrefs {
         return isSeller;
     }
 
-    public static void writeIsUser(Boolean value) {
+    public static void writeUserIsSeller(Boolean value) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         prefsEditor.putBoolean("userIsSeller", value );
         prefsEditor.commit();
