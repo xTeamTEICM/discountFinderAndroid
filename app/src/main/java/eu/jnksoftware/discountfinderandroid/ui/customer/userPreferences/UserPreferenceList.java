@@ -93,7 +93,7 @@ public class UserPreferenceList extends Fragment {
 
             @Override
             public void onFailure(Call<List<DiscountPreferencesResponse>> call, Throwable t) {
-            Toast.makeText(getActivity(),"DEN DOULEUI",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"DEN DOULEUI"+t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }

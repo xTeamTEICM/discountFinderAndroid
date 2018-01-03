@@ -44,7 +44,7 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         holder.tags.setText(discountPreferencesResponses.get(position).getTags());
-        holder.price.setText(Integer.toString(discountPreferencesResponses.get(position).getPrice()));
+        holder.price.setText(Float.toString(discountPreferencesResponses.get(position).getPrice()));
         holder.categoryTitle.setText(discountPreferencesResponses.get(position).getCategoryTitle());
         holder.id.setText(Integer.toString(discountPreferencesResponses.get(position).getId()));
         holder.delete.setOnClickListener(new View.OnClickListener() {

@@ -10,10 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.TopDiscountAdapter;
@@ -41,6 +44,7 @@ public class MenuCustomer extends Fragment {
         auth = getArguments().getString("auth");
         topDiscountsRecycler = view.findViewById(R.id.topDiscountsRecyclerView);
         iuserService= ApiUtils.getUserService();
+
 // SEE WHATS WITH THIS,FROM MERGE
 //         myLocation =ManageSharePrefs.readLocation("");
 //         if (myLocation==null) {

@@ -48,6 +48,7 @@ public interface IuserService {
     @GET("requestedDiscount/")
     Call<DiscountPreferencesResponse> getOneDiscountPreference(@Query("id")int id);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @GET("requestedDiscount")
     Call<List<DiscountPreferencesResponse>>getDiscountsPreference(@Header("Authorization")String auth);
 

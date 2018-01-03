@@ -90,6 +90,10 @@ dependencies {
     compile 'com.google.firebase:firebase-ads:11.6.0'
     compile 'com.google.android.gms:play-services:11.6.0'
 
+    //mock server
+    androidTestCompile 'com.squareup.retrofit2:retrofit-mock:2.3.0'
+    androidTestCompile ('com.squareup.okhttp:mockwebserver:2.7.0')
+
 }
 
 static def getDate() {
