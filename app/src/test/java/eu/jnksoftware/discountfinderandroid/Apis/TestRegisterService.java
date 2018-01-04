@@ -11,7 +11,6 @@ import org.junit.Test;
 import java.io.IOException;
 
 
-import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
@@ -21,13 +20,13 @@ public class TestRegisterService extends TestCase {
 
     {
         IuserService s = ApiUtils.getMockUserService();
-        RegisterTokenRequest registerTokenRequest=new RegisterTokenRequest();
-        registerTokenRequest.setLastName("Delis");
-        registerTokenRequest.setFirstName("Nikos");
-        registerTokenRequest.setEMail("nikos9@gmail.com");
-        registerTokenRequest.setPassword("123455");
+        String email="nikos@gmail.com";
+        String fname="nikos";
+        String lname="delis";
+        String pass="123456";
 
-        User user = s.register(registerTokenRequest).execute().body();
+
+        User user = s.register(fname,lname,email,pass).execute().body();
         assertEquals("Bearer", user.getTokenType());
 
     }
@@ -36,13 +35,13 @@ public class TestRegisterService extends TestCase {
 
     {
         IuserService s = ApiUtils.getMockUserService();
-        RegisterTokenRequest registerTokenRequest=new RegisterTokenRequest();
-        registerTokenRequest.setLastName("Delis");
-        registerTokenRequest.setFirstName("Nikos");
-        registerTokenRequest.setEMail("nikos9@gmail.com");
-        registerTokenRequest.setPassword("123455");
+        String email="nikos@gmail.com";
+        String fname="nikos";
+        String lname="delis";
+        String pass="123456";
 
-        User user = s.register(registerTokenRequest).execute().body();
+
+        User user = s.register(fname,lname,email,pass).execute().body();
         assertEquals("mock_access", user.getAccessToken().toString());
 
     }
@@ -51,13 +50,13 @@ public class TestRegisterService extends TestCase {
 
     {
         IuserService s = ApiUtils.getMockUserService();
-        RegisterTokenRequest registerTokenRequest=new RegisterTokenRequest();
-        registerTokenRequest.setLastName("Delis");
-        registerTokenRequest.setFirstName("Nikos");
-        registerTokenRequest.setEMail("nikos9@gmail.com");
-        registerTokenRequest.setPassword("123455");
+        String email="nikos@gmail.com";
+        String fname="nikos";
+        String lname="delis";
+        String pass="123456";
 
-        User user = s.register(registerTokenRequest).execute().body();
+
+        User user = s.register(fname,lname,email,pass).execute().body();
         assertEquals("mock_refresh", user.getRefreshToken().toString());
 
     }
@@ -66,13 +65,13 @@ public class TestRegisterService extends TestCase {
 
     {
         IuserService s = ApiUtils.getMockUserService();
-        RegisterTokenRequest registerTokenRequest=new RegisterTokenRequest();
-        registerTokenRequest.setLastName("Delis");
-        registerTokenRequest.setFirstName("Nikos");
-        registerTokenRequest.setEMail("nikos9@gmail.com");
-        registerTokenRequest.setPassword("123455");
+        String email="nikos@gmail.com";
+        String fname="nikos";
+        String lname="delis";
+        String pass="123456";
 
-        User user = s.register(registerTokenRequest).execute().body();
+
+        User user = s.register(fname,lname,email,pass).execute().body();
         assertEquals("7199", user.getExpiresIn().toString());
 
     }

@@ -16,7 +16,6 @@ import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
-import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
@@ -43,9 +42,11 @@ public class MockUserService implements IuserService {
     }
 
     @Override
-    public Call<User> register(RegisterTokenRequest registerTokenRequest) {
+    public Call<User> register(String firstName, String lastName, String eMail, String password) {
         return null;
     }
+
+
 
     @Override
     public Call<DiscountPreferencesResponse> putDiscountPreferences(int id, DiscountPreferencesRequest discountPreferencesRequest, String auth) {

@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
@@ -24,6 +23,10 @@ public class Register extends Activity {
     private EditText password;
     private EditText firstName;
     private EditText lastName;
+    private String mail;
+    private String fName;
+    private String lName;
+    private String pass;
     IuserService iuserService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +47,12 @@ public class Register extends Activity {
         public void onClick(final View reg) {
 
 
-                RegisterTokenRequest registerTokenRequest=new RegisterTokenRequest();
-                registerTokenRequest.setEMail(eMail.getText().toString().trim());
-                registerTokenRequest.setFirstName(firstName.getText().toString().trim());
-                registerTokenRequest.setLastName(lastName.getText().toString().trim());
-                registerTokenRequest.setPassword(password.getText().toString().trim());
-                doRegister(registerTokenRequest);
+
+                fName=firstName.getText().toString().trim();
+                lName=lastName.getText().toString().trim();
+                mail=eMail.getText().toString().trim();
+                pass=password.getText().toString().trim();
+                doRegister(fName,lName,mail,pass);
 
 
 
@@ -57,8 +60,8 @@ public class Register extends Activity {
 
         }
     };
-    public void doRegister(final RegisterTokenRequest registerTokenRequest){
-        Call<User> call=iuserService.register(registerTokenRequest);
+    public void doRegister(String fName,String lName,String mail,String pass){
+        Call<User> call=iuserService.register(fName,lName,mail,pass);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

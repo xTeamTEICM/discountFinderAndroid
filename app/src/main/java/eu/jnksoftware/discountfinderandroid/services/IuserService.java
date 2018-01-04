@@ -16,7 +16,6 @@ import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
-import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -37,8 +36,9 @@ public interface IuserService {
     @POST("login")
     Call<User> login(@Field("username")String username,@Field("password")String password);
 
+    @FormUrlEncoded
     @POST("register")
-    Call<User> register(@Body RegisterTokenRequest registerTokenRequest);
+    Call<User> register(@Field("firstName")String firstName,@Field("lastName")String lastName,@Field("eMail")String eMail,@Field("password")String password);
 
     @PUT("requestedDiscount/{id}")
     Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
