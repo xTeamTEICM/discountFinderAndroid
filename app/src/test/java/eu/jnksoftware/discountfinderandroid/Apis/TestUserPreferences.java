@@ -104,7 +104,7 @@ public class TestUserPreferences extends TestCase{
         IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
-        assertEquals("50", discountPreferencesResponse.get(0).getPrice().toString());
+        assertEquals("50.0", Float.toString( discountPreferencesResponse.get(0).getPrice()));
     }
 
     @Test
@@ -117,15 +117,6 @@ public class TestUserPreferences extends TestCase{
         assertEquals("Sample, Demo, App, Data", discountPreferencesResponse.get(0).getTags().toString());
     }
 
-    @Test
-    public void testGetImage() throws IOException
-
-    {
-        IuserService s = ApiUtils.getMockUserService();
-        String auth="Bearer mock_access";
-        List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
-        assertEquals("http://img.youtube.com/", discountPreferencesResponse.get(0).getImage().toString());
-    }
     @Test
     public void testGetCategoryTitle() throws IOException
 
@@ -162,7 +153,7 @@ public class TestUserPreferences extends TestCase{
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
-        assertEquals("50", discountPreferencesResponse.getPrice().toString());
+        assertEquals("50.0",Float.toString(discountPreferencesResponse.getPrice()));
     }
     @Test
     public void testPutTags() throws IOException
@@ -206,7 +197,7 @@ public class TestUserPreferences extends TestCase{
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
         assertEquals("1", discountPreferencesResponse.getUserId().toString());
     }
-    @Test
+    /*@Test
     public void testPutImage() throws IOException
 
     {
@@ -219,7 +210,7 @@ public class TestUserPreferences extends TestCase{
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
         assertEquals("http://img.youtube.com/", discountPreferencesResponse.getImage().toString());
-    }
+    }*/
 
 
 
