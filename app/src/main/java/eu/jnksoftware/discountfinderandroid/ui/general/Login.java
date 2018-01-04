@@ -21,7 +21,6 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +34,8 @@ public class Login extends Activity {
     private EditText eMail;
     private EditText password;
     IuserService iuserService;
+    private String username;
+    private String pass;
 
 
     @Override
@@ -73,11 +74,13 @@ public class Login extends Activity {
         @Override
         public void onClick(final View loginView) {
             int response;
-            UserTokenRequest userTokenRequest = new UserTokenRequest(eMail.getText().toString().trim(),
-                    password.getText().toString().trim());
+
+            username=eMail.getText().toString();
+            pass=password.getText().toString();
+
            /* userTokenRequest.setUsername(eMail.getText().toString().trim());
             userTokenRequest.setPassword(password.getText().toString().trim());*/
-            doLogin(userTokenRequest);
+            doLogin(username,pass);
             loadingBar.setVisibility(View.VISIBLE);
             loadingText.setVisibility(View.VISIBLE);
             loadingText.setText("Please Wait...");
@@ -94,10 +97,10 @@ public class Login extends Activity {
     };
 
 
-    public void doLogin(final UserTokenRequest userTokenRequest) {
+    public void doLogin(String username,String password) {
 
 
-        Call<User> call = iuserService.getTokenAccess(userTokenRequest);
+        Call<User> call = iuserService.login(username,password);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {

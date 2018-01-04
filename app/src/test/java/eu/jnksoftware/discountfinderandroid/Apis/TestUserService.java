@@ -1,21 +1,14 @@
 package eu.jnksoftware.discountfinderandroid.Apis;
 
-import android.app.Instrumentation;
-import android.test.InstrumentationTestCase;
-
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import java.io.IOException;
-
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.services.MockUserService;
 import okhttp3.OkHttpClient;
-import okhttp3.Response;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -44,12 +37,10 @@ public class TestUserService extends TestCase {
     }
     @Test
     public void testLogin() throws Exception{
-        UserTokenRequest userTokenRequest=new UserTokenRequest();
-        userTokenRequest.setUsername("Nikos");
-        userTokenRequest.setPassword("123456");
+
         BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
         IuserService mockService=new MockUserService(delegate);
-        Call<User> caluser=mockService.getTokenAccess(userTokenRequest);
+        Call<User> caluser=mockService.login("nikos","123456");
         retrofit2.Response<User> userResponse=caluser.execute();
 
         Assert.assertEquals("access",userResponse.body().getAccessToken());

@@ -18,11 +18,11 @@ import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -33,8 +33,9 @@ import retrofit2.http.Query;
 
 
 public interface IuserService {
+    @FormUrlEncoded
     @POST("login")
-    Call<User> getTokenAccess(@Body UserTokenRequest userTokenRequest);
+    Call<User> login(@Field("username")String username,@Field("password")String password);
 
     @POST("register")
     Call<User> register(@Body RegisterTokenRequest registerTokenRequest);

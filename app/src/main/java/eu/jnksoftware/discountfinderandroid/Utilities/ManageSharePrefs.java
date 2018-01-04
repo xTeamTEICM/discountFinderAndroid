@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 
 
 public class ManageSharePrefs {
@@ -89,7 +88,7 @@ public class ManageSharePrefs {
         return myTempLocation;
     }
 
-    public static UserTokenRequest readUserAccount(String defValue) {
+   /* public static UserTokenRequest readUserAccount(String defValue) {
         UserTokenRequest userTokenRequest;
         if (mSharedPref.contains("userAccount")) {
             String userAccountToString = mSharedPref.getString("userAccount", defValue);
@@ -100,15 +99,15 @@ public class ManageSharePrefs {
         }
 
         return userTokenRequest;
-    }
+    }*/
 
-    public static void writeUserAccount(UserTokenRequest userTokenRequest) {
+   /* public static void writeUserAccount(UserTokenRequest userTokenRequest) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         Gson userAccountJson = new Gson();
         String userAccountToString = userAccountJson.toJson(userTokenRequest);
         prefsEditor.putString("userData", userAccountToString );
         prefsEditor.commit();
-    }
+    }*/
 
     public static boolean readUserIsSeller(Boolean defValue) {
         Boolean isSeller;

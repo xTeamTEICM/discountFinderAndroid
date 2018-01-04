@@ -18,7 +18,6 @@ import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
 import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
@@ -32,14 +31,15 @@ public class MockUserService implements IuserService {
     public MockUserService(BehaviorDelegate<IuserService> service){
         this.delegate=service;
     }
+
     @Override
-    public Call<User> getTokenAccess(UserTokenRequest userTokenRequest) {
+    public Call<User> login(String username, String password) {
         User user=new User();
         user.setAccessToken("access");
         user.setExpiresIn(5100);
         user.setRefreshToken("5100");
         user.setTokenType("Bearer");
-        return delegate.returningResponse(user).getTokenAccess(userTokenRequest);
+        return delegate.returningResponse(user).login(username,password);
     }
 
     @Override
