@@ -44,6 +44,7 @@ public class UserPreferenceList extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         user = ManageSharePrefs.readUser(null);
         iuserService= ApiUtils.getUserService();
         recyclerView= view.findViewById(R.id.userPreferenceRecycler);
@@ -52,11 +53,16 @@ public class UserPreferenceList extends Fragment {
         recyclerView.setHasFixedSize(true);
         addPreference = view.findViewById(R.id.userPreferencesBtn);
         addPreference.setOnClickListener(addPreferenceClick);
-        Toast.makeText(getActivity(),"Bearer "+user.getAccessToken(),Toast.LENGTH_SHORT).show();
+
         fetchUserPreferences("Bearer "+user.getAccessToken());
     }
 
-/*
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchUserPreferences("Bearer "+user.getAccessToken());
+    }
+   /*
    Button updatePreference=findViewById(R.id.updateprefBtn);
    updatePreference.setOnClickListener(new View.OnClickListener() {
        @Override
@@ -85,7 +91,7 @@ public class UserPreferenceList extends Fragment {
         disc.enqueue(new Callback<List<DiscountPreferencesResponse>>() {
             @Override
             public void onResponse(Call<List<DiscountPreferencesResponse>> call, Response<List<DiscountPreferencesResponse>> response) {
-                Toast.makeText(getActivity(),"DOULEUI",Toast.LENGTH_SHORT).show();
+
                 discountPreferencesResponses=response.body();
                 adapter=new RecyclerPreference(discountPreferencesResponses, getContext(),auth);
                 recyclerView.setAdapter(adapter);
@@ -93,9 +99,10 @@ public class UserPreferenceList extends Fragment {
 
             @Override
             public void onFailure(Call<List<DiscountPreferencesResponse>> call, Throwable t) {
-            Toast.makeText(getActivity(),"DEN DOULEUI"+t.getMessage(),Toast.LENGTH_LONG).show();
+
             }
         });
     }
 
-    }
+
+}

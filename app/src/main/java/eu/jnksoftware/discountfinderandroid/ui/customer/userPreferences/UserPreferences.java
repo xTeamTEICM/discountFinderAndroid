@@ -1,6 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences;
 
 import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class UserPreferences extends AppCompatActivity {
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
+
     private List<String> catTemp = new ArrayList<>();
     IuserService iuserService;
     String accessToken;
@@ -63,6 +66,7 @@ public class UserPreferences extends AppCompatActivity {
 
         SeekBar seekBarPrice = findViewById(R.id.seekBarPrice);
         showSeekProgress =  findViewById(R.id.tvSeekBarValue);
+
         Button savePrefButton = findViewById(R.id.btSavePreferences);
         savePrefButton.setOnClickListener(savePrefClick);
 
@@ -152,10 +156,7 @@ public class UserPreferences extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(UserPreferences.this, UserPreferenceList.class);
-        startActivity(intent);
-    }
+
+
+
 }

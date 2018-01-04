@@ -55,8 +55,10 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
                 deletePref(idpref,auth);
                 discountPreferencesResponses.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();
+
             }
         });
+
     }
 
     @Override
@@ -99,6 +101,8 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
             }
         });
     }
+
+
 
 
 }
