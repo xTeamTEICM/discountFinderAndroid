@@ -104,7 +104,7 @@ public class TestUserPreferences extends TestCase{
         IuserService s = ApiUtils.getMockUserService();
         String auth="Bearer mock_access";
         List<DiscountPreferencesResponse> discountPreferencesResponse=  s.getDiscountsPreference(auth).execute().body();
-        assertEquals("50", Float.toString( discountPreferencesResponse.get(0).getPrice()));
+        assertEquals("50.0", Float.toString( discountPreferencesResponse.get(0).getPrice()));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class TestUserPreferences extends TestCase{
         String auth="Bearer mock_access";
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
-        assertEquals("50",Float.toString(discountPreferencesResponse.getPrice()));
+        assertEquals("50.0",Float.toString(discountPreferencesResponse.getPrice()));
     }
     @Test
     public void testPutTags() throws IOException
