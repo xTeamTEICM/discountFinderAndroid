@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
@@ -75,6 +76,22 @@ public class TestUserService extends TestCase {
         Assert.assertEquals("1",putPreferenceResponse.body().getId().toString());
 
         Assert.assertEquals("tag",putPreferenceResponse.body().getTags());
+    }
+
+    @Test
+    public void testPostPreferences() throws Exception{
+        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
+        discountPreferencesRequest.setPrice("140");
+        discountPreferencesRequest.setCategory("shoes");
+        discountPreferencesRequest.setTags("tag");
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<DiscountPreferencesPostResponse> postPreference=mockService.postDiscountPreferences(discountPreferencesRequest,"auth");
+        retrofit2.Response<DiscountPreferencesPostResponse> postPreferenceResponse=postPreference.execute();
+        Assert.assertEquals("shoes",postPreferenceResponse.body().getCategory());
+        Assert.assertEquals("1",postPreferenceResponse.body().getId().toString());
+        Assert.assertEquals("40",postPreferenceResponse.body().getPrice());
+        Assert.assertEquals("tag",postPreferenceResponse.body().getTags());
     }
 
 

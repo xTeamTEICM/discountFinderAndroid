@@ -65,7 +65,16 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<DiscountPreferencesPostResponse> postDiscountPreferences(DiscountPreferencesRequest discountPreferencesPostRequest, String auth) {
-        return null;
+        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
+        discountPreferencesRequest.setPrice("40");
+        discountPreferencesRequest.setCategory("shoes");
+        discountPreferencesRequest.setTags("tag");
+        DiscountPreferencesPostResponse discountPreferencesPostResponse=new DiscountPreferencesPostResponse();
+        discountPreferencesPostResponse.setCategory("shoes");
+        discountPreferencesPostResponse.setPrice("40");
+        discountPreferencesPostResponse.setId(1);
+        discountPreferencesPostResponse.setTags("tag");
+        return delegate.returningResponse(discountPreferencesPostResponse).postDiscountPreferences(discountPreferencesRequest,auth);
     }
 
     @Override
