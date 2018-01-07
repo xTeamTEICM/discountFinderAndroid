@@ -43,19 +43,38 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<User> register(String firstName, String lastName, String eMail, String password) {
-        return null;
+        User user=new User();
+        user.setTokenType("Bearer");
+        user.setRefreshToken("refresh");
+        user.setAccessToken("access");
+        user.setExpiresIn(5000);
+        return delegate.returningResponse(user).register(firstName,lastName,eMail,password);
     }
 
 
 
     @Override
     public Call<DiscountPreferencesResponse> putDiscountPreferences(int id, DiscountPreferencesRequest discountPreferencesRequest, String auth) {
-        return null;
+        DiscountPreferencesResponse discountPreferencesResponse=new DiscountPreferencesResponse();
+        discountPreferencesResponse.setCategory(1);
+        discountPreferencesResponse.setId(1);
+        discountPreferencesResponse.setPrice(40);
+        discountPreferencesResponse.setTags("tag");
+        return delegate.returningResponse(discountPreferencesResponse).putDiscountPreferences(id,discountPreferencesRequest,auth);
     }
 
     @Override
     public Call<DiscountPreferencesPostResponse> postDiscountPreferences(DiscountPreferencesRequest discountPreferencesPostRequest, String auth) {
-        return null;
+        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
+        discountPreferencesRequest.setPrice("40");
+        discountPreferencesRequest.setCategory("shoes");
+        discountPreferencesRequest.setTags("tag");
+        DiscountPreferencesPostResponse discountPreferencesPostResponse=new DiscountPreferencesPostResponse();
+        discountPreferencesPostResponse.setCategory("shoes");
+        discountPreferencesPostResponse.setPrice("40");
+        discountPreferencesPostResponse.setId(1);
+        discountPreferencesPostResponse.setTags("tag");
+        return delegate.returningResponse(discountPreferencesPostResponse).postDiscountPreferences(discountPreferencesRequest,auth);
     }
 
     @Override
