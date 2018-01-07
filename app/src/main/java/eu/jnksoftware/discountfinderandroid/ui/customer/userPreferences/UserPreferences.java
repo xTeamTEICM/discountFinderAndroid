@@ -45,6 +45,7 @@ public class UserPreferences extends AppCompatActivity {
     private ArrayAdapter<String> spinContentAdapter;
     private Spinner spinnerCat;
     private String auth;
+    private EditText tags;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -53,6 +54,7 @@ public class UserPreferences extends AppCompatActivity {
         setContentView(R.layout.activity_user_preferences);
         iuserService= ApiUtils.getUserService();
         user = ManageSharePrefs.readUser(null);
+        tags=findViewById(R.id.textTag);
 
 
         
@@ -101,7 +103,7 @@ public class UserPreferences extends AppCompatActivity {
             DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
             discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
             discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
-            discountPreferencesRequest.setTags("Sample");
+            discountPreferencesRequest.setTags(tags.getText().toString());
 
 
             doUserPreference(discountPreferencesRequest);

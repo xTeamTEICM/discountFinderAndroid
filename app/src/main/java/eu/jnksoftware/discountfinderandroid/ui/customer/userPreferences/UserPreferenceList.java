@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -56,6 +58,8 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
         recyclerView= view.findViewById(R.id.userPreferenceRecycler);
         layoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setHasFixedSize(true);
         addPreference = view.findViewById(R.id.userPreferencesBtn);
         addPreference.setOnClickListener(addPreferenceClick);

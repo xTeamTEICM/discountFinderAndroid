@@ -83,14 +83,13 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
     public int getItemCount() {
        return discountPreferencesResponses.size();
     }
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
        // Button delete;
         TextView id;
         TextView price;
         Context context;
-        LinearLayout foregroundView;
-        RelativeLayout backgroundView;
-
+        LinearLayout foregroundViewPreference;
+        RelativeLayout backgroundViewPreference;
         TextView tags;
         TextView categoryTitle;
 
@@ -101,13 +100,19 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
             price=itemView.findViewById(R.id.priceText);
             tags=itemView.findViewById(R.id.tagsTextView);
             this.context = context;
-            foregroundView = itemView.findViewById(R.id.foreground_view_userpref);
-            backgroundView = itemView.findViewById(R.id.background_view_userpref);
             categoryTitle=itemView.findViewById(R.id.categoryTextView);
+            foregroundViewPreference = itemView.findViewById(R.id.foreground_view_userpref);
+            backgroundViewPreference = itemView.findViewById(R.id.background_view_userpref);
+
+            itemView.setOnClickListener(this);
 
 
         }
 
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 
 
