@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.Apis;
+package eu.jnksoftware.discountfinderandroid;
 
 /**
  * Created by nikos on 10/12/2017.
@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
