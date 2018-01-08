@@ -16,13 +16,11 @@ private Integer id;
     private Integer category;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private float price;
     @SerializedName("tags")
     @Expose
     private String tags;
-    @SerializedName("image")
-    @Expose
-    private String image;
+
     @SerializedName("categoryTitle")
     @Expose
     private String categoryTitle;
@@ -47,7 +45,7 @@ private Integer id;
         this.category = category;
     }
 
-    public Integer getPrice() {
+    public float getPrice() {
         return price;
     }
 
@@ -63,9 +61,7 @@ private Integer id;
         this.tags = tags;
     }
 
-    public String getImage() {
-        return image;
-    }
+
 
     public String getCategoryTitle() {
         return categoryTitle;

@@ -1,148 +1,91 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
+import java.util.ArrayList;
+import java.util.List;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenResponse;
-import eu.jnksoftware.discountfinderandroid.services.GeoLocation;
-import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.DiscountCustomerRecyclerList;
-import eu.jnksoftware.discountfinderandroid.ui.customer.shops.SellerShops;
-import eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.UserPreferenceList;
-import eu.jnksoftware.discountfinderandroid.ui.general.AboutUs;
-import eu.jnksoftware.discountfinderandroid.ui.general.Settings;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
+import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.TopDiscountAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class MenuCustomer extends AppCompatActivity {
+public class MenuCustomer extends Fragment {
 
-    private GeoLocation geoLocation;
-    private UserTokenResponse userTokenResponse;
-    String auth;
+    private IuserService iuserService;
+    private String auth;
+    private RecyclerView topDiscountsRecycler;
+    private TopDiscountAdapter topDiscountAdapter;
+    private List<TopDiscount> topDiscounts;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_customer);
-
-        Gson user = new Gson();
-        userTokenResponse = user.fromJson(getIntent().getStringExtra("User"),UserTokenResponse.class);
-        Toast.makeText(getApplicationContext(), "Token :"+userTokenResponse.getTokenType(), Toast.LENGTH_LONG).show();
-
-        geoLocation = new GeoLocation(this);
-
-        if (geoLocation.canGetLocation()) {
-
-            double latitude = geoLocation.getLatitude();
-            double longitude = geoLocation.getLongitude();
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-        }
-
-        Button about = findViewById(R.id.aboutBtn);
-        about.setOnClickListener(aboutClick);
-        Button settings = findViewById(R.id.settingsBtn);
-        settings.setOnClickListener(settingsClick);
-
-        Button myShops =  findViewById(R.id.showShopsButton);
-        myShops.setOnClickListener(showShopsButtonClick);
-        Button filtersBtn =  findViewById(R.id.filtersBtn);
-        filtersBtn.setOnClickListener(filtersButtonClick);
-        Button myDiscount = findViewById(R.id.showDiscountsBtn);
-        myDiscount.setOnClickListener(discountClick);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_menu_customer,container,false);
     }
 
-    private final View.OnClickListener showShopsButtonClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MenuCustomer.this, SellerShops.class);
-            Gson user = new Gson();
-            intent.putExtra("User", user.toJson(userTokenResponse));
-            startActivity(intent);
-        }
-    };
-
-    private final View.OnClickListener discountClick = new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
-            if (geoLocation.getLocation() != null) {
-                try {
-                    Intent intent=new Intent(MenuCustomer.this,DiscountCustomerRecyclerList.class);
-                    auth = userTokenResponse.getAccessToken();
-                    intent.putExtra("auth", auth);
-                    intent.putExtra("latitude", geoLocation.getLatitude());
-                    intent.putExtra("longitude", geoLocation.getLongitude());
-                    startActivity(intent);
-
-                } catch (Exception ex) {
-                    Toast.makeText(MenuCustomer.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            } else {
-                Toast.makeText(MenuCustomer.this, "We don't have your location yet !", Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
-
-    private final View.OnClickListener aboutClick = new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
-            startActivity(new Intent(MenuCustomer.this, AboutUs.class));
-        }
-    };
-
-    private final View.OnClickListener settingsClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Button button = findViewById(R.id.showShopsButton);
-            Intent intent = new Intent(MenuCustomer.this, Settings.class);
-            intent.putExtra("isSellerEnabled", button.isShown());
-            startActivity(intent);
-        }
-    };
-
-    private final View.OnClickListener filtersButtonClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Gson user=new Gson();
-            Intent userPreferences=new Intent(MenuCustomer.this,UserPreferenceList.class);
-            userPreferences.putExtra("User", user.toJson(userTokenResponse));
-            startActivity(userPreferences);
-        }
-    };
-
-    private final View.OnClickListener shopClick = new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
-            startActivity(new Intent(MenuCustomer.this, AboutUs.class));
-        }
-    };
-
-    boolean doubleBackPressed = false;
     @Override
-    public void onBackPressed() {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        auth = getArguments().getString("auth");
+        topDiscountsRecycler = view.findViewById(R.id.topDiscountsRecyclerView);
+        iuserService= ApiUtils.getUserService();
 
-        if (doubleBackPressed) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-            System.exit(0);
-        }doubleBackPressed = true;
+// SEE WHATS WITH THIS,FROM MERGE
+//         myLocation =ManageSharePrefs.readLocation("");
+//         if (myLocation==null) {
+//             Toast.makeText(getApplicationContext(), "No location ", Toast.LENGTH_LONG).show();
+//             GeoLocation myGeoloc =new GeoLocation();
+//             myLocation.setLogPos(myGeoloc.getLongitude());
+//             myLocation.setLatPos(myGeoloc.getLatitude());
+//         }
+//         ManageSharePrefs.writeLocation(myLocation);
+        setUpRecycler();
+        topDiscounts = new ArrayList<>();
+        getTopDiscounts();
+    }
 
-        Toast.makeText(MenuCustomer.this,"Please press BACK again to exit",Toast.LENGTH_LONG).show();
-        new Handler().postDelayed(new Runnable(){
+    public void setUpRecycler(){
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        topDiscountsRecycler.setLayoutManager(manager);
+        topDiscountsRecycler.setItemAnimator(new DefaultItemAnimator());
+//        topDiscountsRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        topDiscountsRecycler.setHasFixedSize(true);
+    }
+
+
+    public void getTopDiscounts(){
+        Call<List<TopDiscount>> call = iuserService.getTopDiscounts(15000,auth);
+        call.enqueue(new Callback<List<TopDiscount>>() {
             @Override
-            public void run(){
-                doubleBackPressed = false;
+            public void onResponse(Call<List<TopDiscount>> call, Response<List<TopDiscount>> response) {
+                if(response.body()!=null) {
+                    topDiscounts = response.body();
+                    TopDiscountAdapter adapter = new TopDiscountAdapter(getContext(), topDiscounts);
+                    topDiscountsRecycler.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TopDiscount>> call, Throwable t) {
 
             }
-        }, 3000);
-        doubleBackPressed = true;
+        });
     }
+
 }

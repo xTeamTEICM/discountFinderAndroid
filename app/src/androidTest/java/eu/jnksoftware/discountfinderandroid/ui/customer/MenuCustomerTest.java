@@ -18,7 +18,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 public class MenuCustomerTest {
 
-    @Rule
+    /*@Rule
     public ActivityTestRule<MenuCustomer> menuCustomerActivityTestRule = new ActivityTestRule<>(MenuCustomer.class);
 
     @Before
@@ -51,5 +51,5 @@ public class MenuCustomerTest {
     @After
     public void tearDown() throws Exception {
     }
-
+*/
 }

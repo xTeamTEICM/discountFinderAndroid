@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,20 +36,24 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
         this.auth=auth;
     }
 
+    public List<DiscountPreferencesResponse> getDiscountPreferencesResponses() {
+        return discountPreferencesResponses;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_preference_list,parent,false);
-    return new MyViewHolder(view);
+    return new MyViewHolder(view,mContext);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
 
         holder.tags.setText(discountPreferencesResponses.get(position).getTags());
-        holder.price.setText(Integer.toString(discountPreferencesResponses.get(position).getPrice()));
+        holder.price.setText(Float.toString(discountPreferencesResponses.get(position).getPrice()));
         holder.categoryTitle.setText(discountPreferencesResponses.get(position).getCategoryTitle());
         holder.id.setText(Integer.toString(discountPreferencesResponses.get(position).getId()));
-        holder.delete.setOnClickListener(new View.OnClickListener() {
+      /*  holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int idpref;
@@ -55,50 +61,63 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
                 deletePref(idpref,auth);
                 discountPreferencesResponses.remove(holder.getAdapterPosition());
                 notifyDataSetChanged();
+
             }
-        });
+        }); */
+
     }
+    public void removeDiscount(int position){
+        discountPreferencesResponses.remove(position);
+    }
+
+    public void restoreDiscount(DiscountPreferencesResponse discount,int position){
+        discountPreferencesResponses.add(position,discount);
+    }
+    public int getDiscountId(int position){
+        return discountPreferencesResponses.get(position).getId();
+    }
+
+
 
     @Override
     public int getItemCount() {
        return discountPreferencesResponses.size();
     }
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        Button delete;
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+       // Button delete;
         TextView id;
         TextView price;
+        Context context;
+        LinearLayout foregroundViewPreference;
+        RelativeLayout backgroundViewPreference;
         TextView tags;
         TextView categoryTitle;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(View itemView,Context context) {
             super(itemView);
-            delete=itemView.findViewById(R.id.openStoreButton);
+            //delete=itemView.findViewById(R.id.openStoreButton);
             id=itemView.findViewById(R.id.idPref);
             price=itemView.findViewById(R.id.priceText);
             tags=itemView.findViewById(R.id.tagsTextView);
+            this.context = context;
             categoryTitle=itemView.findViewById(R.id.categoryTextView);
+            foregroundViewPreference = itemView.findViewById(R.id.foreground_view_userpref);
+            backgroundViewPreference = itemView.findViewById(R.id.background_view_userpref);
+
+            itemView.setOnClickListener(this);
 
 
         }
 
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 
-    public void deletePref(final int id, String auth)
-    {   iuserService= ApiUtils.getUserService();
-        Call<Void> delete=iuserService.deleteDiscountPreference(id,auth);
-        delete.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(mContext,"You Preference with "+id+" remove Succesfully",Toast.LENGTH_SHORT).show();
 
-            }
 
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
 
-            }
-        });
-    }
 
 
 }

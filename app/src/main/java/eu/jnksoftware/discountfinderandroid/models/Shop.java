@@ -19,8 +19,8 @@ public class Shop {
 
     public Uri getMapsUri() {
 
-        Double Latitude = location.getLatitude();
-        Double Longitude = location.getLongitude();
+        Double Latitude = location.getLatPos();
+        Double Longitude = location.getLogPos();
         String labelLocation = "x-Team Sample : " + ownerId;
 
         return Uri.parse(

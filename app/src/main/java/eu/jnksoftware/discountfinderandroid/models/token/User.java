@@ -4,7 +4,7 @@ package eu.jnksoftware.discountfinderandroid.models.token;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserTokenResponse {
+public class User {
 
     @SerializedName("token_type")
     @Expose
@@ -43,4 +43,11 @@ public class UserTokenResponse {
         return refreshToken;
     }
 
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }

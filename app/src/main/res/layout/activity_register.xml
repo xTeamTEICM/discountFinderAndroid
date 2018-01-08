@@ -13,90 +13,190 @@
         android:id="@+id/welcomeTxt"
         android:layout_width="373dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:text="@string/registerCustomerMsg"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/cardView4"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.181" />
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/registerBtn"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTxt">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="#11000000"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="#11000000"
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/firstNameField"
-                android:layout_width="match_parent"
+                android:background="#11000000"
+                android:layout_width="250dp"
                 android:layout_height="43dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:hint="@string/firstName"
                 android:inputType="textPersonName"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColorHint="@android:color/white"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="0dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="#11000000"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="25dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/lastNameField"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="43dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:hint="@string/lastName"
                 android:inputType="textPersonName"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColorHint="@android:color/white"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="416dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView6"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        app:cardBackgroundColor="#11000000"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="25dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/eMailField"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="43dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:hint="@string/e_mail"
                 android:inputType="textEmailAddress"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
+                android:textColorHint="@android:color/white"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="172dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView7"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="108dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="#11000000"
+        app:layout_constraintBottom_toTopOf="@+id/cardView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <EditText
 
                 android:id="@+id/passwordField"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="45dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white" />
-        </LinearLayout>
-    </ScrollView>
+                android:textColorHint="@android:color/white"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="209dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
 
-    <Button
-        android:id="@+id/registerBtn"
-        android:layout_width="150dp"
-        android:layout_height="49dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp"
-        android:text="@string/register"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView8"
+        android:layout_width="152dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/registerBtn"
+            android:layout_width="150dp"
+            android:layout_height="49dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="8dp"
+            android:background="#11000000"
+            android:text="@string/register"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="#FFFFFF"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1" />
+    </android.support.v7.widget.CardView>
 
 
 </android.support.constraint.ConstraintLayout>

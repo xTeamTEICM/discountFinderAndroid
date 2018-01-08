@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +13,9 @@
         android:icon="@drawable/startscreenlogo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/startscreenlogo"
+        android:theme="@style/AppTheme"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        >
         <activity
             android:name=".ui.general.Main"
             android:theme="@style/SplashTheme">
@@ -25,16 +27,12 @@
         </activity>
         <activity android:name=".ui.general.Login" />
         <activity android:name=".ui.general.Register" />
-        <activity android:name=".ui.customer.MenuCustomer" />
         <activity android:name=".ui.customer.userPreferences.UserPreferences" />
         <activity android:name=".ui.general.AboutUs" />
-        <activity android:name=".ui.general.Settings" />
-        <activity android:name=".ui.customer.shops.SellerShops" />
-        <activity android:name=".ui.customer.recyclers.DiscountCustomerRecyclerList" />
-        <activity android:name=".ui.customer.userPreferences.UserPreferenceList" />
-        <activity android:name=".ui.customer.userPreferences.UserUpdatePreferences"/>
-        <activity android:name=".ui.customer.shops.UpdateShop"></activity>
-        <activity android:name=".ui.customer.shops.ViewStore"></activity>
+        <activity android:name=".ui.general.Settings"/>
+        <activity android:name=".ui.customer.userPreferences.UserUpdatePreferences" />
+        <activity android:name=".ui.customer.shops.UpdateShop" />
+        <activity android:name=".ui.customer.shops.ViewStore" />
         <activity android:name=".ui.customer.discount.FullDiscount">
             <intent-filter>
                 <action android:name="FULLDISCOUNT" />
@@ -43,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.customer.shops.SellerAddShop" />
-        <activity android:name=".ui.customer.shops.SellerAddDiscount"/>
+        <activity android:name=".ui.customer.shops.SellerAddDiscount" />
 
         <service android:name=".services.MyFirebaseInstanceIDService">
             <intent-filter>
@@ -56,15 +54,21 @@
             </intent-filter>
         </service>
         <service android:name=".services.GeoLocation" />
-        <activity android:name=".ui.customer.userPreferences.DeletePreference"></activity>
-        <activity android:name=".ui.customer.discount.FullContentDiscount"></activity>
+
+        <activity android:name=".ui.customer.userPreferences.DeletePreference" />
+        <activity android:name=".ui.customer.discount.FullContentDiscount" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/GOOGLE_MAPS_API_KEY" />
 
         <activity
-            android:name=".services.ChooseStoreLocationActivity"
-            android:label="@string/title_activity_choose_store_location"></activity>
+            android:name=".services.ChooseStoreLocation"
+            android:label="@string/title_activity_choose_store_location" />
+        <activity
+            android:name=".CustomerMenu"
+            android:label="@string/title_activity_customer_menu"
+            ></activity>
     </application>
 
 </manifest>

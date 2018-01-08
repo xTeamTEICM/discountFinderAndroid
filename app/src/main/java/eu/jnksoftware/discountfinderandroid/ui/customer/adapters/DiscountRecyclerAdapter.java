@@ -9,10 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
+
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.ui.customer.discount.FullContentDiscount;
 
@@ -35,15 +42,13 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-
+        String imageURL = "https://img.grouponcdn.com/deal/8DDtq5XRzVnLXEUnPHPd/p2-2048x1229/v1/c700x420.jpg";
         //Discount Card
         //Discount discount = discountArrayList.get(position);
         holder.title.setText("Περιγραφή :" + discountArrayList.get(position).getShortDescription());
         holder.shop.setText("Κατάστημα :" + discountArrayList.get(position).getShopName());
-        holder.price.setText("Τιμή :" + String.valueOf(discountArrayList.get(position).getFinalPrice())+"€");
-        //holder.image.setImageBitmap(discountArrayList.get(position).getProductImageUrl())
-
-
+        holder.price.setText("Τιμή :" + String.valueOf(discountArrayList.get(position).getFinalPrice())+" €");
+        Picasso.with(context).load(discountArrayList.get(position).getProductImageURL()).noPlaceholder().fit().into(holder.image);
     }
 
     @Override
@@ -76,8 +81,8 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
             int position = getAdapterPosition();
             Discount discount = this.discountList.get(position);
             Intent intent = new Intent(this.context,FullContentDiscount.class);
-            intent.putExtra("discount_id",String.valueOf(discount.getId()));
-            intent.putExtra("discount_image",discount.getProductImageUrl());
+            intent.putExtra("discount_id",String.valueOf(discount.getDiscountId()));
+            intent.putExtra("discount_image",discount.getProductImageURL());
             intent.putExtra("discount_Category",discount.getCategory());
             intent.putExtra("discount_Description",discount.getShortDescription());
             intent.putExtra("discount_Distance",String.valueOf(discount.getDistance()));

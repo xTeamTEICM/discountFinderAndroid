@@ -8,17 +8,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.UpdatePostShop;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdateShop extends AppCompatActivity {
 
-    ShopsApiInterface apiService;
+    private IuserService apiService;
     String auth;
 
     @Override
@@ -26,7 +26,7 @@ public class UpdateShop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_shop);
 
-        apiService = RestClient.getClient().create(ShopsApiInterface.class);
+        apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
 
         Button update = findViewById(R.id.updateButton);

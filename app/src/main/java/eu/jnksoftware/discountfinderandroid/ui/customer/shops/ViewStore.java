@@ -19,10 +19,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.RestClient;
-import eu.jnksoftware.discountfinderandroid.Apis.ShopsApiInterface;
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerItemTouchHelper;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
 import retrofit2.Call;
@@ -35,8 +37,9 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     private ShopDiscountAdapter myDiscountsAdapter;
     private String shopName;
     private int shopId;
-    ShopsApiInterface apiService;
+    private IuserService apiService;
     private String auth;
+    private User user;
     private List<SellerDiscount> discounts = new ArrayList<>();
     private ConstraintLayout layout;
 
@@ -60,8 +63,10 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
         setUpRecycler();
 
 
-        apiService = RestClient.getClient().create(ShopsApiInterface.class);
-        auth = getIntent().getStringExtra("auth");
+        apiService = ApiUtils.getUserService();
+        user = ManageSharePrefs.readUser(null);
+
+
         shopName = getIntent().getStringExtra("shop");
         shopId = getIntent().getIntExtra("shopId",-1);
         textView.setText(shopName);
@@ -102,12 +107,14 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
         public void onClick(View view) {
             Intent intent = new Intent(ViewStore.this,SellerAddDiscount.class);
             intent.putExtra("auth",auth);
+            intent.putExtra("shopId",shopId);
             startActivity(intent);
         }
     };
 
     private void deleteShop() {
-        Call<Void> call = apiService.deleteShop(shopId, auth);
+        auth="Bearer "+user.getAccessToken();
+        Call<Void> call = apiService.deleteShop(shopId,auth);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -122,22 +129,25 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void getSellerDiscounts(){
-        Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(auth);
-        call.enqueue(new Callback<List<SellerDiscount>>() {
-            @Override
-            public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
-                discounts = response.body();
-                Toast.makeText(ViewStore.this,response.message() + "\nLoaded",Toast.LENGTH_SHORT).show();
-                myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this,discounts);
-                myDiscountsRecycler.setAdapter(myDiscountsAdapter);
-            }
+        auth="Bearer "+user.getAccessToken();
+        if(this.shopId!=-1) {
+            Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,auth);
+            call.enqueue(new Callback<List<SellerDiscount>>() {
+                @Override
+                public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
+                    discounts = response.body();
+                    Toast.makeText(ViewStore.this, response.message() + "\nLoaded", Toast.LENGTH_SHORT).show();
+                    myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this, discounts);
+                    myDiscountsRecycler.setAdapter(myDiscountsAdapter);
+                }
 
-            @Override
-            public void onFailure(Call<List<SellerDiscount>> call, Throwable t) {
-                Toast.makeText(ViewStore.this, "Failed to load the discounts", Toast.LENGTH_SHORT).show();
-                call.cancel();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<SellerDiscount>> call, Throwable t) {
+                    Toast.makeText(ViewStore.this, "Failed to load the discounts", Toast.LENGTH_SHORT).show();
+                    call.cancel();
+                }
+            });
+        }
     }
 
     @Override
@@ -173,6 +183,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void deleteSellerDiscount(int id){
+        auth="Bearer "+user.getAccessToken();
         Call<Void> call = apiService.deleteSellerDiscount(id,auth);
         call.enqueue(new Callback<Void>() {
             @Override
