@@ -31,10 +31,8 @@ import eu.jnksoftware.discountfinderandroid.models.Location;
 public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    LatLng currentLatLng;
-    Location userLocation = new Location();
+    private LatLng currentLatLng;
     boolean hasMarker = false;
-    String auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +60,9 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
         }
         mMap.setMyLocationEnabled(true);
         initializeMapTypes();
-        userLocation.setLogPos(getIntent().getDoubleExtra("lat", 100));
-        userLocation.setLatPos(getIntent().getDoubleExtra("lon", 100));
-        auth = getIntent().getStringExtra("auth");
-        currentLatLng = new LatLng(userLocation.getLogPos(),userLocation.getLatPos());
+        currentLatLng = new LatLng(getIntent().getDoubleExtra("lat",100)
+                ,getIntent().getDoubleExtra("lon",100));
+
         mMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -73,16 +70,34 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
             public void onMapClick(LatLng latLng) {
                 checkMarkers(latLng);
                 Intent intent = getIntent();
+                String cityName = findCity(latLng);
                 intent.putExtra("streetName",getStreetName(getBaseContext(),latLng));
                 intent.putExtra("storeLat",latLng.latitude);
                 intent.putExtra("storeLon",latLng.longitude);
-                intent.putExtra("lat",userLocation.getLatPos());
-                intent.putExtra("lon",userLocation.getLogPos());
-                intent.putExtra("auth",auth);
+                intent.putExtra("cityName",cityName);
                 setResult(RESULT_OK,intent);
                 finish();
             }
         });
+    }
+
+    private String findCity(LatLng latLng){
+        Address address;
+        String cityName = "Unknown city";
+        double lat = latLng.latitude;
+        double lon = latLng.longitude;
+        Geocoder geocoder = new Geocoder(getBaseContext());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(lat,lon,1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        address = addresses.get(0);
+        if (address!=null && address.getLocality()!= null) {
+            cityName = address.getLocality();
+        }
+        return cityName;
     }
 
     private final View.OnClickListener searchClick = new View.OnClickListener() {
@@ -121,7 +136,6 @@ public class ChooseStoreLocation extends FragmentActivity implements OnMapReadyC
         else{
             sateliteButton.setText("Satelite");
         }
-
     }
 
     private final View.OnClickListener sateliteClickListener = new View.OnClickListener() {

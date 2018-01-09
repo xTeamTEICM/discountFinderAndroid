@@ -23,17 +23,46 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SellerShops extends AppCompatActivity {
-    RecyclerView shopsRecyclerView;
-    RecyclerView.Adapter adapter;
-    RecyclerView.LayoutManager layoutManager;
-    List<Shop> shops = new ArrayList<>();
+    private RecyclerView shopsRecyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Shop> shops = new ArrayList<>();
     private IuserService apiService;
-    String auth;
-
+    private String auth;
     private static final int requestCode = 1;
+    private Location userLocation = new Location();
 
-    //rm this
-    Location userLocation = new Location();
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
+    public Location getUserLocation() {
+        return userLocation;
+    }
+
+    public void setUserLocation(Location userLocation) {
+        this.userLocation = userLocation;
+    }
+
+    public List<Shop> getShops() {
+        return shops;
+    }
+
+    public void setShops(List<Shop> shops) {
+        this.shops = shops;
+    }
+
+    public IuserService getApiService() {
+        return apiService;
+    }
+
+    public void setApiService(IuserService apiService) {
+        this.apiService = apiService;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +72,13 @@ public class SellerShops extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         shopsRecyclerView.setLayoutManager(layoutManager);
         shopsRecyclerView.setHasFixedSize(true);
-        auth = getIntent().getStringExtra("auth");
-
+        auth = "Bearer " + getIntent().getStringExtra("auth");
         apiService = ApiUtils.getUserService();
         getUserShops();
         Button addStore = findViewById(R.id.addStoreButton);
         addStore.setOnClickListener(addStoreButtonClick);
         Button refreshButton = findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(refreshButtonClick);
-        double lat = getIntent().getDoubleExtra("storeLat",-1);
-        double lon = getIntent().getDoubleExtra("storeLon",-1);
-
-        //got to remove this
         userLocation.setLatPos(getIntent().getDoubleExtra("lat",-1));
         userLocation.setLogPos(getIntent().getDoubleExtra("lon",-1));
 }
@@ -66,15 +90,16 @@ public class SellerShops extends AppCompatActivity {
             }
         };
 
-    private void getUserShops(){
+        public void getUserShops(){
         Call<List<Shop>> call = apiService.getUserShops(auth);
         call.enqueue(new Callback<List<Shop>>() {
             @Override
-            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
-            {
-                shops = response.body();
-                adapter = new RecyclerAdapter(shops,SellerShops.this,auth);
-                shopsRecyclerView.setAdapter(adapter);
+            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
+                if(response.body()!=null){
+                    shops = response.body();
+                    adapter = new RecyclerAdapter(shops, SellerShops.this, auth);
+                    shopsRecyclerView.setAdapter(adapter);
+                }
             }
 
             @Override

@@ -32,21 +32,20 @@ public class MenuCustomer extends AppCompatActivity {
     private String auth;
     private Location myLocation;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_customer);
         iuserService= ApiUtils.getUserService();
 
-
-       tempuser= ManageSharePrefs.readUser( null);
+        tempuser= ManageSharePrefs.readUser( null);
         if (tempuser!=null){
             Toast.makeText(getApplicationContext(), "Token :"+ tempuser.getTokenType(), Toast.LENGTH_LONG).show();
         }
         else{
             Toast.makeText(MenuCustomer.this, "nothing", Toast.LENGTH_SHORT).show();
         }
+        auth = tempuser.getAccessToken();
 
         myLocation =ManageSharePrefs.readLocation("");
         if (myLocation==null) {
@@ -137,6 +136,7 @@ public class MenuCustomer extends AppCompatActivity {
     };
 
     boolean doubleBackPressed = false;
+
     @Override
     public void onBackPressed() {
 

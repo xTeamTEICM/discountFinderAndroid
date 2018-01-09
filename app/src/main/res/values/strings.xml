@@ -36,7 +36,7 @@
     <string name="title_activity_choose_store_location">Map</string>
     <string name="giveShopName">Give shop name</string>
     <string name="chooseLocation">Choose shop location from maps</string>
-    <string name="giveShopDescription">Give shop description</string>
+    <string name="shopCity">Shop city</string>
     <string name="changeShopName">Change shop name</string>
     <string name="changeShopLocation">Chane shop location</string>
     <string name="changeShopDescription">Change shop description</string>

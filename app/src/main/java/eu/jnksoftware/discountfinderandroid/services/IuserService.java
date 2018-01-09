@@ -67,18 +67,6 @@ public interface IuserService {
     @DELETE("shop/{id}")
     Call<Void> deleteShop(@Path("id") int id, @Header("Authorization") String auth);
 
-    @GET("shop")
-    Call<List<Shop>> getShopsList();
-
-    @GET ("shop/")
-    Call<List<Shop>> getShopWithId(@Query("id") int id);
-
-    @GET ("user/shop")
-    Call<List<Shop>> getUserShops();
-
-    @GET ("user/shop/")
-    Call<List<Shop>> getUserShopWithId(@Query("id") int id);
-
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @GET ("user/shop/")
     Call<List<Shop>> getUserShops(@Header("Authorization") String auth);
