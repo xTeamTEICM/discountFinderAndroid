@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -17,7 +16,6 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
-import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 
 public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapter.DiscountViewHolder> {
     private Context context;
@@ -69,7 +67,6 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
         ImageView image;
         Context context;
         LinearLayout foregroundView;
-        RelativeLayout backgroundView;
 
         public DiscountViewHolder(View itemView,Context context) {
             super(itemView);
@@ -80,7 +77,6 @@ public class ShopDiscountAdapter extends RecyclerView.Adapter<ShopDiscountAdapte
             image = itemView.findViewById(R.id.offerItemImage);
             this.context = context;
             foregroundView = itemView.findViewById(R.id.foreground_view);
-            backgroundView = itemView.findViewById(R.id.background_view);
             itemView.setOnClickListener(this);
         }
 

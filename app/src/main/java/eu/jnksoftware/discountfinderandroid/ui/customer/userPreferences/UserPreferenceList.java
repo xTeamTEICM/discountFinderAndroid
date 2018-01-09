@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -13,9 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -34,7 +33,6 @@ import retrofit2.Response;
 public class UserPreferenceList extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener{
     private User user;
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private RecyclerPreference adapter;
     private IuserService iuserService;
     private List<DiscountPreferencesResponse> discountPreferencesResponses ;
@@ -53,15 +51,18 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
         //layout=view.findViewById(R.id.userpreferencesConst);
         user = ManageSharePrefs.readUser(null);
         iuserService= ApiUtils.getUserService();
-        recyclerView= view.findViewById(R.id.userPreferenceRecycler);
-        layoutManager=new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = view.findViewById(R.id.userPreferenceRecycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setHasFixedSize(true);
         addPreference = view.findViewById(R.id.userPreferencesBtn);
         addPreference.setOnClickListener(addPreferenceClick);
+        auth = getArguments().getString("auth");
 
-        fetchUserPreferences("Bearer "+user.getAccessToken());
+        fetchUserPreferences(auth);
 
+        //atach the touch helper to recycler view
         ItemTouchHelper.SimpleCallback itemTouchHelper= new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(recyclerView);
     }
@@ -69,7 +70,7 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
     @Override
     public void onResume() {
         super.onResume();
-        fetchUserPreferences("Bearer "+user.getAccessToken());
+        fetchUserPreferences(auth);
     }
    /*
    Button updatePreference=findViewById(R.id.updateprefBtn);
@@ -102,7 +103,7 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
             public void onResponse(Call<List<DiscountPreferencesResponse>> call, Response<List<DiscountPreferencesResponse>> response) {
 
                 discountPreferencesResponses=response.body();
-                adapter=new RecyclerPreference(discountPreferencesResponses, getContext(),auth);
+                adapter=new RecyclerPreference(getContext(),discountPreferencesResponses);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -122,18 +123,18 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
             final int deletedIndex = viewHolder.getAdapterPosition();
 
             int pos = viewHolder.getAdapterPosition();
-            deletePref(adapter.getDiscountId(pos));
-            adapter.removeDiscount(pos);
+            deletePref(adapter.getPreferenceId(pos));
+            adapter.removePreference(pos);
             adapter.notifyItemRemoved(pos);
 
             adapter.notifyDataSetChanged();
             Snackbar snackbar = Snackbar
-                    .make(layout, catTitle + " removed from your shop!", Snackbar.LENGTH_LONG);
+                    .make(layout, catTitle + " removed from your preferences!", Snackbar.LENGTH_LONG);
             snackbar.setAction("UNDO", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // undo is selected, restore the deleted item
-                    adapter.restoreDiscount(deletedDiscount, deletedIndex);
+                    adapter.restorePreference(deletedDiscount, deletedIndex);
                     adapter.notifyItemInserted(deletedIndex);
                 }
             });
