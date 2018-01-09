@@ -1,36 +1,29 @@
-package eu.jnksoftware.discountfinderandroid.ui.customer.recyclers;
+package eu.jnksoftware.discountfinderandroid.ui.customer.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.MyViewHolder>{
+public class DiscountPreferenceAdapter extends RecyclerView.Adapter<DiscountPreferenceAdapter.MyViewHolder>{
     private List<DiscountPreferencesResponse> discountPreferencesResponses;
     private Context mContext;
     private String auth;
     private IuserService iuserService;
-    private RecyclerPreference recyclerPreference;
+    private DiscountPreferenceAdapter discountPreferenceAdapter;
 
 
-    public RecyclerPreference(List<DiscountPreferencesResponse> discountPreferencesResponses, Context mContext,String auth) {
+    public DiscountPreferenceAdapter(List<DiscountPreferencesResponse> discountPreferencesResponses, Context mContext, String auth) {
         this.discountPreferencesResponses = discountPreferencesResponses;
         this.mContext = mContext;
         this.auth=auth;
@@ -53,18 +46,6 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
         holder.price.setText(Float.toString(discountPreferencesResponses.get(position).getPrice()));
         holder.categoryTitle.setText(discountPreferencesResponses.get(position).getCategoryTitle());
         holder.id.setText(Integer.toString(discountPreferencesResponses.get(position).getId()));
-      /*  holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int idpref;
-                idpref=discountPreferencesResponses.get(holder.getAdapterPosition()).getId();
-                deletePref(idpref,auth);
-                discountPreferencesResponses.remove(holder.getAdapterPosition());
-                notifyDataSetChanged();
-
-            }
-        }); */
-
     }
     public void removeDiscount(int position){
         discountPreferencesResponses.remove(position);
@@ -83,13 +64,13 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
     public int getItemCount() {
        return discountPreferencesResponses.size();
     }
+
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
        // Button delete;
         TextView id;
         TextView price;
         Context context;
-        LinearLayout foregroundViewPreference;
-        RelativeLayout backgroundViewPreference;
+        LinearLayout foregroundView;
         TextView tags;
         TextView categoryTitle;
 
@@ -101,8 +82,7 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
             tags=itemView.findViewById(R.id.tagsTextView);
             this.context = context;
             categoryTitle=itemView.findViewById(R.id.categoryTextView);
-            foregroundViewPreference = itemView.findViewById(R.id.foreground_view_userpref);
-            backgroundViewPreference = itemView.findViewById(R.id.background_view_userpref);
+            foregroundView = itemView.findViewById(R.id.foreground_view_userpref);
 
             itemView.setOnClickListener(this);
 
