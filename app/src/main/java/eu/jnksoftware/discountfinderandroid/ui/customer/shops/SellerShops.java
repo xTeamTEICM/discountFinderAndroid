@@ -27,16 +27,33 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SellerShops extends Fragment {
-    RecyclerView shopsRecyclerView;
-    RecyclerView.Adapter adapter;
-    RecyclerView.LayoutManager layoutManager;
-    List<Shop> shops = new ArrayList<>();
+public class SellerShops extends AppCompatActivity {
+    private RecyclerView shopsRecyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private List<Shop> shops = new ArrayList<>();
     private IuserService apiService;
-    String auth;
-    User user;
+    private String auth;
+    private User user;
 
     private static final int requestCode = 1;
+    private Location userLocation = new Location();
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
+    public Location getUserLocation() {
+        return userLocation;
+    }
+
+    public void setUserLocation(Location userLocation) {
+        this.userLocation = userLocation;
+    }
 
     @Nullable
     @Override
@@ -52,7 +69,6 @@ public class SellerShops extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         shopsRecyclerView.setLayoutManager(layoutManager);
         shopsRecyclerView.setHasFixedSize(true);
-
         user = ManageSharePrefs.readUser(null);
         auth= getArguments().getString("auth");
         apiService = ApiUtils.getUserService();
@@ -61,9 +77,10 @@ public class SellerShops extends Fragment {
         addStore.setOnClickListener(addStoreButtonClick);
         Button refreshButton = view.findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(refreshButtonClick);
+        userLocation.setLatPos(getIntent().getDoubleExtra("lat",-1));
+        userLocation.setLogPos(getIntent().getDoubleExtra("lon",-1));
+        }
     }
-
-
         private final View.OnClickListener refreshButtonClick = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,15 +88,16 @@ public class SellerShops extends Fragment {
             }
         };
 
-    private void getUserShops(){
-        Call<List<Shop>> call = apiService.getShopsList();
+        private void getUserShops(){
+        Call<List<Shop>> call = apiService.getUserShops(auth);
         call.enqueue(new Callback<List<Shop>>() {
             @Override
-            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response)
-            {
-                shops = response.body();
-                adapter = new RecyclerAdapter(shops,getContext(),user.getAccessToken());
-                shopsRecyclerView.setAdapter(adapter);
+            public void onResponse(Call<List<Shop>> call, Response<List<Shop>> response) {
+                if(response.body()!=null){
+                    shops = response.body();
+                    adapter = new RecyclerAdapter(shops, SellerShops.this, auth);
+                    shopsRecyclerView.setAdapter(adapter);
+                }
             }
 
             @Override
