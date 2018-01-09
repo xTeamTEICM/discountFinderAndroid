@@ -10,8 +10,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
+import eu.jnksoftware.discountfinderandroid.services.IuserService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.MyViewHolder>{
@@ -32,8 +37,8 @@ public class RecyclerPreference extends RecyclerView.Adapter<RecyclerPreference.
     }
 
     @Override
-    public RecyclerPreference.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_preference_list,parent,false);
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+       View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item_preference_list,parent,false);
         return new RecyclerPreference.MyViewHolder (view);
     }
 
