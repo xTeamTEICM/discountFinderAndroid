@@ -21,7 +21,9 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerItemTouchHelper;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
@@ -37,6 +39,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     private int shopId;
     private IuserService apiService;
     private String auth;
+    private User user;
     private List<SellerDiscount> discounts = new ArrayList<>();
     private ConstraintLayout layout;
 
@@ -61,7 +64,9 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
 
 
         apiService = ApiUtils.getUserService();
-        auth = getIntent().getStringExtra("auth");
+        user = ManageSharePrefs.readUser(null);
+
+
         shopName = getIntent().getStringExtra("shop");
         shopId = getIntent().getIntExtra("shopId",-1);
         textView.setText(shopName);
@@ -108,7 +113,8 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     };
 
     private void deleteShop() {
-        Call<Void> call = apiService.deleteShop(shopId, auth);
+        auth="Bearer "+user.getAccessToken();
+        Call<Void> call = apiService.deleteShop(shopId,auth);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -123,6 +129,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void getSellerDiscounts(){
+        auth="Bearer "+user.getAccessToken();
         if(this.shopId!=-1) {
             Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,auth);
             call.enqueue(new Callback<List<SellerDiscount>>() {
@@ -176,6 +183,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
     }
 
     public void deleteSellerDiscount(int id){
+        auth="Bearer "+user.getAccessToken();
         Call<Void> call = apiService.deleteSellerDiscount(id,auth);
         call.enqueue(new Callback<Void>() {
             @Override

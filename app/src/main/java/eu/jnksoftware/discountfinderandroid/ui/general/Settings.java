@@ -4,34 +4,36 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 
 public class Settings extends AppCompatActivity {
 
+    private Button backButton;
+    private Switch isSellerSwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        super.onCreate(savedInstanceState);
 
-        Button backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.settingsBackButton);
         backButton.setOnClickListener(backButtonClick);
-
-        CheckBox sellerCheckBox = findViewById(R.id.sellerCheckBox);
-        boolean isEnabled = getIntent().getBooleanExtra("isSellerEnabled",false);
-        if(isEnabled){
-            sellerCheckBox.setChecked(true);
-        }
-        else{
-            sellerCheckBox.setChecked(false);
-        }
+        isSellerSwitch = findViewById(R.id.switchSettingsIsSeller);
+        isSellerSwitch.setChecked(ManageSharePrefs.readUserIsSeller(false));
     }
 
-    private final View.OnClickListener backButtonClick = new View.OnClickListener() {
+    View.OnClickListener backButtonClick = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
+            ManageSharePrefs.writeUserIsSeller(isSellerSwitch.isChecked());
+            Toast.makeText(getBaseContext(), "You have to restart the application for changes to be applied", Toast.LENGTH_LONG).show();
             finish();
         }
+
     };
+
 }

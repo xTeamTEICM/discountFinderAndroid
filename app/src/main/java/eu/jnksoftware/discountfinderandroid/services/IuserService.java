@@ -2,7 +2,6 @@ package eu.jnksoftware.discountfinderandroid.services;
 
 import java.util.List;
 
-import eu.jnksoftware.discountfinderandroid.Apis.PostDiscount;
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
 import eu.jnksoftware.discountfinderandroid.Apis.UpdatePostShop;
 import eu.jnksoftware.discountfinderandroid.models.Category;
@@ -15,10 +14,9 @@ import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountP
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
-import eu.jnksoftware.discountfinderandroid.models.token.RegisterTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -34,11 +32,13 @@ import retrofit2.http.Query;
 
 
 public interface IuserService {
+    @FormUrlEncoded
     @POST("login")
-    Call<User> getTokenAcess(@Body UserTokenRequest userTokenRequest);
+    Call<User> login(@Field("username")String username,@Field("password")String password);
 
+    @FormUrlEncoded
     @POST("register")
-    Call<User> register(@Body RegisterTokenRequest registerTokenRequest);
+    Call<User> register(@Field("firstName")String firstName,@Field("lastName")String lastName,@Field("eMail")String eMail,@Field("password")String password);
 
     @PUT("requestedDiscount/{id}")
     Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
@@ -49,6 +49,7 @@ public interface IuserService {
     @GET("requestedDiscount/")
     Call<DiscountPreferencesResponse> getOneDiscountPreference(@Query("id")int id);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @GET("requestedDiscount")
     Call<List<DiscountPreferencesResponse>>getDiscountsPreference(@Header("Authorization")String auth);
 
@@ -59,9 +60,11 @@ public interface IuserService {
     @GET("category")
     Call<List<Category>> fetchCategories();
 
-    @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @POST("/api/user/findDiscounts")
-    Call<List<Discount>> getDiscounts(@Body PostDiscount postDiscount, @Header("Authorization") String auth);
+    @GET("/api/discount/find/{distance}")
+    Call<List<Discount>> getDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
+
+    @GET("/api/discount/top/{distance}")
+    Call<List<TopDiscount>> getTopDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @DELETE("shop/{id}")
@@ -81,6 +84,7 @@ public interface IuserService {
     @PUT("shop")
     Call<Void> updateShop(@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
 
+
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @POST("discount")
     Call<DiscountGet> addDiscount(@Body DiscountPost discountPost, @Header("Authorization") String auth);
@@ -96,7 +100,7 @@ public interface IuserService {
     //set the devicetoken for fcm notifications
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @POST("user/deviceToken")
+    @PUT("user/deviceToken")
     Call<Void> registerFcmToken(@Body FcmToken deviceToken, @Header("Authorization") String auth);
 
     //set the location of USer
@@ -104,6 +108,9 @@ public interface IuserService {
     @PUT("updateUserLocation")
     Call<Void> setUserLocation(@Body Location location, @Header("Authorization") String auth);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @POST("refresh")
+    Call<User> refreshAccessToken(@Field("refresh_token")String refresh_token);
 
 
 }

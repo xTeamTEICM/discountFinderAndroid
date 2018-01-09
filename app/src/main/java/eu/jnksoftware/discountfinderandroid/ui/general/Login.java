@@ -12,19 +12,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
+import eu.jnksoftware.discountfinderandroid.CustomerMenu;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
-import eu.jnksoftware.discountfinderandroid.models.token.UserTokenRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +34,8 @@ public class Login extends Activity {
     private EditText eMail;
     private EditText password;
     IuserService iuserService;
+    private String username;
+    private String pass;
 
 
     @Override
@@ -45,8 +44,8 @@ public class Login extends Activity {
         setContentView(R.layout.activity_login);
         eMail = findViewById(R.id.loginEMailField);
         password = findViewById(R.id.loginPasswordField);
-        eMail.setText("makis@teicm.gr");
-        password.setText("test1234");
+        eMail.setText("user@jnksoftware.eu");
+        password.setText("myPassword");
         iuserService = ApiUtils.getUserService();
 
         Button login = findViewById(R.id.loginBtn);
@@ -74,11 +73,14 @@ public class Login extends Activity {
     private final View.OnClickListener loginBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(final View loginView) {
+            int response;
 
-            UserTokenRequest userTokenRequest = new UserTokenRequest();
-            userTokenRequest.setUsername(eMail.getText().toString().trim());
-            userTokenRequest.setPassword(password.getText().toString().trim());
-            doLogin(userTokenRequest);
+            username=eMail.getText().toString();
+            pass=password.getText().toString();
+
+           /* userTokenRequest.setUsername(eMail.getText().toString().trim());
+            userTokenRequest.setPassword(password.getText().toString().trim());*/
+            doLogin(username,pass);
             loadingBar.setVisibility(View.VISIBLE);
             loadingText.setVisibility(View.VISIBLE);
             loadingText.setText("Please Wait...");
@@ -95,27 +97,30 @@ public class Login extends Activity {
     };
 
 
-    public void doLogin(final UserTokenRequest userTokenRequest) {
-        Call<User> call = iuserService.getTokenAcess(userTokenRequest);
+    public void doLogin(String username,String password) {
+
+
+        Call<User> call = iuserService.login(username,password);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    String fcmTokenDataString;
-                    User userTokenResponse = response.body();
-                    String auth = userTokenResponse.getTokenType() + " " + userTokenResponse.getAccessToken();
-                    Intent menuCustomer = new Intent(Login.this, MenuCustomer.class);
 
-                    fcmTokenDataString = ManageSharePrefs.readFcmTokenData("");
+                    User userTokenResponse = response.body();
+
+                    Intent menuCustomer = new Intent(Login.this, CustomerMenu.class);
+                    menuCustomer.putExtra("email",eMail.getText().toString());
+
+                    String fcmTokenDataString = ManageSharePrefs.readFcmTokenData("");
+
                     if (userTokenResponse.getAccessToken().equals(fcmTokenDataString)) {
                         startActivity(menuCustomer);
                     } else {
                         ManageSharePrefs.writeUser(userTokenResponse);
                         FcmToken token = new FcmToken(FirebaseInstanceId.getInstance().getToken());
-                        //String auth = userTokenResponse.getTokenType() + " " + userTokenResponse.getAccessToken();
                         HttpCall httpCall = new HttpCall();
                         int statusCode;
-                        statusCode = httpCall.setFcmToken(token, auth);
+                        statusCode = httpCall.setFcmToken(token, userTokenResponse.getTokenType() + " " + userTokenResponse.getAccessToken());
                         if (statusCode == 200) {
                             ManageSharePrefs.writeFcmTokenData(userTokenResponse.getAccessToken());
                         }
@@ -124,15 +129,17 @@ public class Login extends Activity {
                 } else {
                     Toast.makeText(Login.this, "" + response.message(), Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 call.cancel();
-                Log.d("MaincActivity", "onFailure" + t.getMessage());
+                Log.d("MainActivity", "onFailure" + t.getMessage());
                 Toast.makeText(Login.this, "Wrong!" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 
