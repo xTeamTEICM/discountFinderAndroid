@@ -25,13 +25,13 @@ import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerItemTouchHelper;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountItemTouchHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener{
+public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouchHelper.RecyclerItemTouchHelperListener{
 
     private RecyclerView myDiscountsRecycler;
     private ShopDiscountAdapter myDiscountsAdapter;
@@ -74,7 +74,7 @@ public class ViewStore extends AppCompatActivity implements RecyclerItemTouchHel
         getSellerDiscounts();
 
         //atach the touch helper to recycler view
-        ItemTouchHelper.SimpleCallback itemTouchHelper= new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
+        ItemTouchHelper.SimpleCallback itemTouchHelper= new ShopDiscountItemTouchHelper(0,ItemTouchHelper.LEFT,this);
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(myDiscountsRecycler);
 
     }

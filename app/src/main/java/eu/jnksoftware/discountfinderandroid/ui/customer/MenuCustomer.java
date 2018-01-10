@@ -31,13 +31,13 @@ public class MenuCustomer extends Fragment {
     private RecyclerView topDiscountsRecycler;
     private TopDiscountAdapter topDiscountAdapter;
     private List<TopDiscount> topDiscounts;
-
+  
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.activity_menu_customer,container,false);
     }
-
+  
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -64,7 +64,7 @@ public class MenuCustomer extends Fragment {
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         topDiscountsRecycler.setLayoutManager(manager);
         topDiscountsRecycler.setItemAnimator(new DefaultItemAnimator());
-//        topDiscountsRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+//      topDiscountsRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         topDiscountsRecycler.setHasFixedSize(true);
     }
 

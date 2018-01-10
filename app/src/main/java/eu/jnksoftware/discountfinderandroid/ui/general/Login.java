@@ -37,7 +37,6 @@ public class Login extends Activity {
     private String username;
     private String pass;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

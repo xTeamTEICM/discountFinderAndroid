@@ -22,9 +22,9 @@ import retrofit2.Response;
 
 public class SellerAddShop extends AppCompatActivity {
     private IuserService apiService;
-    String auth;
-    Location userLocation = new Location();
-    Location storeLocation = new Location();
+    private String auth;
+    private Location userLocation = new Location();
+    private Location storeLocation = new Location();
     private static final int requestCode = 1;
 
     @Override
@@ -72,13 +72,14 @@ public class SellerAddShop extends AppCompatActivity {
             storeLocation.setLogPos(data.getDoubleExtra("storeLon", -1));
             TextView location = findViewById(R.id.shopMapsLocationTextView);
             location.setText(data.getStringExtra("streetName"));
+            TextView desctiprion = findViewById(R.id.shopCityEditText);
+            desctiprion.setText(data.getStringExtra("cityName"));
         }
     }
 
     private void addShop(){
 
         EditText shopNameEditText = findViewById(R.id.shopNameEditText);
-        EditText descriptionEditText = findViewById(R.id.shopDescriptionEditText);
         String shopName = shopNameEditText.getText().toString();
         PostShop postShop = new PostShop(shopName,storeLocation.getLatPos(),storeLocation.getLogPos());
         Call<Void> call = apiService.addShop(postShop,auth);
