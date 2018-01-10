@@ -2,22 +2,6 @@ package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
-import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 
 
 public class ViewStoreTest {
@@ -65,6 +49,7 @@ public class ViewStoreTest {
 //
 //        assertEquals(mockCallDiscounts,discounts);
 //    }
+
 
 
 }

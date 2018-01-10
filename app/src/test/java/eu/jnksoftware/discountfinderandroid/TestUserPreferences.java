@@ -1,4 +1,4 @@
-package eu.jnksoftware.discountfinderandroid.Apis;
+package eu.jnksoftware.discountfinderandroid;
 
 
 import junit.framework.TestCase;
