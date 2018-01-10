@@ -6,10 +6,10 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 
-public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
+public class DiscountPreferenceItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerItemTouchHelperListener listener;
 
-    public RecyclerItemTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener) {
+    public DiscountPreferenceItemTouchHelper(int dragDirs, int swipeDirs, RecyclerItemTouchHelperListener listener) {
         super(dragDirs, swipeDirs);
         this.listener = listener;
     }
@@ -22,7 +22,7 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
         if (viewHolder != null) {
-            final View foregroundView = ((ShopDiscountAdapter.DiscountViewHolder) viewHolder).foregroundView;
+            final View foregroundView = ((DiscountPreferenceAdapter.MyViewHolder) viewHolder).foregroundView;
 
             getDefaultUIUtil().onSelected(foregroundView);
         }
@@ -32,14 +32,14 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     public void onChildDrawOver(Canvas c, RecyclerView recyclerView,
                                 RecyclerView.ViewHolder viewHolder, float dX, float dY,
                                 int actionState, boolean isCurrentlyActive) {
-        final View foregroundView = ((ShopDiscountAdapter.DiscountViewHolder) viewHolder).foregroundView;
+        final View foregroundView = ((DiscountPreferenceAdapter.MyViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
                 actionState, isCurrentlyActive);
     }
 
     @Override
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        final View foregroundView = ((ShopDiscountAdapter.DiscountViewHolder) viewHolder).foregroundView;
+        final View foregroundView = ((DiscountPreferenceAdapter.MyViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().clearView(foregroundView);
     }
 
@@ -47,7 +47,7 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     public void onChildDraw(Canvas c, RecyclerView recyclerView,
                             RecyclerView.ViewHolder viewHolder, float dX, float dY,
                             int actionState, boolean isCurrentlyActive) {
-        final View foregroundView = ((ShopDiscountAdapter.DiscountViewHolder) viewHolder).foregroundView;
+        final View foregroundView = ((DiscountPreferenceAdapter.MyViewHolder) viewHolder).foregroundView;
 
         getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
                 actionState, isCurrentlyActive);

@@ -15,9 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -27,17 +24,17 @@ import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerItemTouchHelper;
-import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.RecyclerPreference;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.DiscountPreferenceAdapter;
+import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.DiscountPreferenceItemTouchHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserPreferenceList extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener{
+public class UserPreferenceList extends Fragment implements DiscountPreferenceItemTouchHelper.RecyclerItemTouchHelperListener{
     private User user;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerPreference adapter;
+    private DiscountPreferenceAdapter adapter;
     private IuserService iuserService;
     private List<DiscountPreferencesResponse> discountPreferencesResponses ;
     private String auth;
@@ -55,6 +52,7 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
         //layout=view.findViewById(R.id.userpreferencesConst);
         user = ManageSharePrefs.readUser(null);
         iuserService= ApiUtils.getUserService();
+        layout = view.findViewById(R.id.userpreferencesConst);
         recyclerView= view.findViewById(R.id.userPreferenceRecycler);
         layoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -63,17 +61,17 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
         recyclerView.setHasFixedSize(true);
         addPreference = view.findViewById(R.id.userPreferencesBtn);
         addPreference.setOnClickListener(addPreferenceClick);
+        auth = getArguments().getString("auth");
+        fetchUserPreferences();
 
-        fetchUserPreferences("Bearer "+user.getAccessToken());
-
-        ItemTouchHelper.SimpleCallback itemTouchHelper= new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
+        ItemTouchHelper.SimpleCallback itemTouchHelper= new DiscountPreferenceItemTouchHelper(0,ItemTouchHelper.LEFT,this);
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(recyclerView);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        fetchUserPreferences("Bearer "+user.getAccessToken());
+        fetchUserPreferences();
     }
    /*
    Button updatePreference=findViewById(R.id.updateprefBtn);
@@ -98,7 +96,7 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
         }
     };
 
-    public void fetchUserPreferences(final String auth) {
+    public void fetchUserPreferences() {
 
         Call<List<DiscountPreferencesResponse>> disc=iuserService.getDiscountsPreference(auth);
         disc.enqueue(new Callback<List<DiscountPreferencesResponse>>() {
@@ -106,7 +104,7 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
             public void onResponse(Call<List<DiscountPreferencesResponse>> call, Response<List<DiscountPreferencesResponse>> response) {
 
                 discountPreferencesResponses=response.body();
-                adapter=new RecyclerPreference(discountPreferencesResponses, getContext(),auth);
+                adapter=new DiscountPreferenceAdapter(discountPreferencesResponses, getContext(),auth);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -120,7 +118,7 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-        if (viewHolder instanceof RecyclerPreference.MyViewHolder){
+        if (viewHolder instanceof DiscountPreferenceAdapter.MyViewHolder){
             String catTitle = discountPreferencesResponses.get(viewHolder.getAdapterPosition()).getCategoryTitle();
             final DiscountPreferencesResponse deletedDiscount=discountPreferencesResponses.get(viewHolder.getAdapterPosition());
             final int deletedIndex = viewHolder.getAdapterPosition();
@@ -147,7 +145,7 @@ public class UserPreferenceList extends Fragment implements RecyclerItemTouchHel
     }
 
     public void deletePref( int id)
-    {   auth="Bearer "+user.getAccessToken();
+    {
         iuserService= ApiUtils.getUserService();
         Call<Void> delete=iuserService.deleteDiscountPreference(id,auth);
         delete.enqueue(new Callback<Void>() {
