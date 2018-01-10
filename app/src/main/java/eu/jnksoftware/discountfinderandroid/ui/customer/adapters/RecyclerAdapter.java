@@ -58,7 +58,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         public MyViewHolder(View itemView, Context context, List<Shop> shops, String auth) {
             super(itemView);
              //DiscountRequestApi_Retrofit
-            brandName = itemView.findViewById(R.id.categoryTextView);
+//            brandName = itemView.findViewById(R.id.categoryTextView);
 //
             this.shops = shops;
             this.context = context;
