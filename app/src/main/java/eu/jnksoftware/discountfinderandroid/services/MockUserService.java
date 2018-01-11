@@ -9,7 +9,6 @@ import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
-import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
@@ -63,10 +62,7 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<DiscountPreferencesPostResponse> postDiscountPreferences(String category, String price, String tags, String auth) {
-        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-        discountPreferencesRequest.setPrice("40");
-        discountPreferencesRequest.setCategory("shoes");
-        discountPreferencesRequest.setTags("tag");
+
         DiscountPreferencesPostResponse discountPreferencesPostResponse=new DiscountPreferencesPostResponse();
         discountPreferencesPostResponse.setCategory("shoes");
         discountPreferencesPostResponse.setPrice("40");
@@ -77,10 +73,7 @@ public class MockUserService implements IuserService {
 
 
 
-    @Override
-    public Call<DiscountPreferencesResponse> getOneDiscountPreference(int id) {
-        return null;
-    }
+   
 
     @Override
     public Call<List<DiscountPreferencesResponse>> getDiscountsPreference(String auth) {
