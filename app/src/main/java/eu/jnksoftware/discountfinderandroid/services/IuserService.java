@@ -117,7 +117,8 @@ public interface IuserService {
 
     //set the location of USer
     @Headers({("Content-Type:application/json"),("Accept:application/application/json")})
-    @PUT("updateUserLocation")
+    @PUT("user/deviceLocation")
+
     Call<Void> setUserLocation(@Body Location location, @Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})

@@ -26,15 +26,18 @@ public class ManageSharePrefs {
 
     public static User readUser(String defValue) {
         User tempUser;
-        if (mSharedPref.contains("userData")) {
-            String userToString = mSharedPref.getString("userData", defValue);
-            Gson userJson = new Gson();
-            tempUser = userJson.fromJson(userToString, User.class);
-        } else {
-            tempUser = null;
-        }
+        if(mSharedPref!=null) {
+            if (mSharedPref.contains("userData")) {
+                String userToString = mSharedPref.getString("userData", defValue);
+                Gson userJson = new Gson();
+                tempUser = userJson.fromJson(userToString, User.class);
+            } else {
+                tempUser = null;
+            }
 
-        return tempUser;
+            return tempUser;
+        }
+        else return null;
     }
 
     public static void writeUser(User user) {

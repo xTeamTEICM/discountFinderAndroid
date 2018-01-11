@@ -11,10 +11,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +32,7 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_discount_items, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_discount_items, parent, false);
         return new MyViewHolder(view,context,discountArrayList);
     }
 
