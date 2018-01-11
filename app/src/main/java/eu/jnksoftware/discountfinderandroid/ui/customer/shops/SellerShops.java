@@ -123,7 +123,7 @@ public class SellerShops extends Fragment {
     private final View.OnClickListener addStoreButtonClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getContext(),SellerAddShop.class);
+            Intent intent = new Intent(getActivity(),SellerAddShop.class);
             intent.putExtra("auth",auth);
 //            intent.putExtra("lat",userLocation.getLatPos());
 //            intent.putExtra("lon",userLocation.getLogPos());
