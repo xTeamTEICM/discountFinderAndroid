@@ -47,8 +47,7 @@ public interface IuserService {
     @POST("requestedDiscount")
     Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Field("category")String category,@Field("price") String price,@Field("tags")String tags,@Header("Authorization") String auth);
 
-    @GET("requestedDiscount/")
-    Call<DiscountPreferencesResponse> getOneDiscountPreference(@Query("id")int id);
+
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @GET("requestedDiscount")

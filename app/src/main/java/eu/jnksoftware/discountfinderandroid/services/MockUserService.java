@@ -73,10 +73,7 @@ public class MockUserService implements IuserService {
 
 
 
-    @Override
-    public Call<DiscountPreferencesResponse> getOneDiscountPreference(int id) {
-        return null;
-    }
+   
 
     @Override
     public Call<List<DiscountPreferencesResponse>> getDiscountsPreference(String auth) {
