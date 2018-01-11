@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
+import eu.jnksoftware.discountfinderandroid.ui.customer.recyclers.RecyclerPreference;
+
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private RecyclerItemTouchHelperListener listener;
@@ -25,6 +27,10 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
             final View foregroundView = ((ShopDiscountAdapter.DiscountViewHolder) viewHolder).foregroundView;
 
             getDefaultUIUtil().onSelected(foregroundView);
+
+
+
+
         }
     }
 
@@ -35,12 +41,21 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         final View foregroundView = ((ShopDiscountAdapter.DiscountViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX, dY,
                 actionState, isCurrentlyActive);
+
+
+
+
+
     }
 
     @Override
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         final View foregroundView = ((ShopDiscountAdapter.DiscountViewHolder) viewHolder).foregroundView;
         getDefaultUIUtil().clearView(foregroundView);
+
+
+
+
     }
 
     @Override
@@ -51,6 +66,8 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
         getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX, dY,
                 actionState, isCurrentlyActive);
+
+
     }
 
     @Override
