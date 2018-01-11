@@ -67,6 +67,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             brandName = itemView.findViewById(R.id.shopNameTextView);
 // dev
         }
+
 /*
         public void bind(final Shop shop, final OnItemClickListener listener) {
             this.itemView.setOnClickListener(new View.OnClickListener() {

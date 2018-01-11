@@ -52,7 +52,7 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<DiscountPreferencesResponse> putDiscountPreferences(int id, String category, String price, String tags, String auth) {
-        DiscountPreferencesResponse discountPreferencesResponse=new DiscountPreferencesResponse();
+        DiscountPreferencesResponse discountPreferencesResponse=new DiscountPreferencesResponse(1,1,1,40,"tag","shoe");
         discountPreferencesResponse.setCategory(1);
         discountPreferencesResponse.setId(1);
         discountPreferencesResponse.setPrice(40);
@@ -73,7 +73,7 @@ public class MockUserService implements IuserService {
 
 
 
-   
+
 
     @Override
     public Call<List<DiscountPreferencesResponse>> getDiscountsPreference(String auth) {
