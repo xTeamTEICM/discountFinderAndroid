@@ -21,7 +21,6 @@ import java.util.List;
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.models.Category;
-import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
@@ -102,10 +101,7 @@ public class UserUpdatePreferences extends AppCompatActivity {
     private final View.OnClickListener savePrefClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-            discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
-            discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
-            discountPreferencesRequest.setTags(tagUpdatePref.getText().toString().trim());
+
             category=String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId());
             price=String.valueOf(seekBarProgress);
             tags=tagUpdatePref.getText().toString().trim();
