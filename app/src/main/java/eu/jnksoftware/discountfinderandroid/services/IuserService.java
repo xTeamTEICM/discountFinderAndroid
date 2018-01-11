@@ -40,11 +40,13 @@ public interface IuserService {
     @POST("register")
     Call<User> register(@Field("firstName")String firstName,@Field("lastName")String lastName,@Field("eMail")String eMail,@Field("password")String password);
 
+    @FormUrlEncoded
     @PUT("requestedDiscount/{id}")
-    Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
+    Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Field("category")String category,@Field("price") String price,@Field("tags")String tags,@Header("Authorization") String auth);
 
+    @FormUrlEncoded
     @POST("requestedDiscount")
-    Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesPostRequest,@Header("Authorization") String auth);
+    Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Field("category")String category,@Field("price") String price,@Field("tags")String tags,@Header("Authorization") String auth);
 
     @GET("requestedDiscount/")
     Call<DiscountPreferencesResponse> getOneDiscountPreference(@Query("id")int id);

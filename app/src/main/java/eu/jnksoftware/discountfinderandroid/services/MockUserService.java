@@ -51,20 +51,18 @@ public class MockUserService implements IuserService {
         return delegate.returningResponse(user).register(firstName,lastName,eMail,password);
     }
 
-
-
     @Override
-    public Call<DiscountPreferencesResponse> putDiscountPreferences(int id, DiscountPreferencesRequest discountPreferencesRequest, String auth) {
+    public Call<DiscountPreferencesResponse> putDiscountPreferences(int id, String category, String price, String tags, String auth) {
         DiscountPreferencesResponse discountPreferencesResponse=new DiscountPreferencesResponse();
         discountPreferencesResponse.setCategory(1);
         discountPreferencesResponse.setId(1);
         discountPreferencesResponse.setPrice(40);
         discountPreferencesResponse.setTags("tag");
-        return delegate.returningResponse(discountPreferencesResponse).putDiscountPreferences(id,discountPreferencesRequest,auth);
+        return delegate.returningResponse(discountPreferencesResponse).putDiscountPreferences(id,category,price,tags,auth);
     }
 
     @Override
-    public Call<DiscountPreferencesPostResponse> postDiscountPreferences(DiscountPreferencesRequest discountPreferencesPostRequest, String auth) {
+    public Call<DiscountPreferencesPostResponse> postDiscountPreferences(String category, String price, String tags, String auth) {
         DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
         discountPreferencesRequest.setPrice("40");
         discountPreferencesRequest.setCategory("shoes");
@@ -74,8 +72,10 @@ public class MockUserService implements IuserService {
         discountPreferencesPostResponse.setPrice("40");
         discountPreferencesPostResponse.setId(1);
         discountPreferencesPostResponse.setTags("tag");
-        return delegate.returningResponse(discountPreferencesPostResponse).postDiscountPreferences(discountPreferencesRequest,auth);
+        return delegate.returningResponse(discountPreferencesPostResponse).postDiscountPreferences(category,price,tags,auth);
     }
+
+
 
     @Override
     public Call<DiscountPreferencesResponse> getOneDiscountPreference(int id) {

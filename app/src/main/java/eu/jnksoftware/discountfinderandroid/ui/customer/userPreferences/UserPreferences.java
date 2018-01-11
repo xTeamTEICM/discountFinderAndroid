@@ -38,7 +38,9 @@ public class UserPreferences extends AppCompatActivity {
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
-
+    private String cat;
+    private String price;
+    private String tag;
     private List<String> catTemp = new ArrayList<>();
     IuserService iuserService;
     String accessToken;
@@ -100,20 +102,20 @@ public class UserPreferences extends AppCompatActivity {
     private final View.OnClickListener savePrefClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-            discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
-            discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
-            discountPreferencesRequest.setTags(tags.getText().toString());
+
+            cat=String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId());
+            price=String.valueOf(seekBarProgress);
+            tag=tags.getText().toString();
 
 
-            doUserPreference(discountPreferencesRequest);
-            Toast.makeText(UserPreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
+            doUserPreference(cat,price,tag);
+            Toast.makeText(UserPreferences.this, cat, Toast.LENGTH_SHORT).show();
         }
     };
 
-    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest) {
+    public void doUserPreference(String category,String price,String tags) {
         auth="Bearer "+user.getAccessToken();
-        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest,auth);
+        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(category,price,tags,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
                 @Override
                 public void onResponse(Call<DiscountPreferencesPostResponse> call, Response<DiscountPreferencesPostResponse> response) {

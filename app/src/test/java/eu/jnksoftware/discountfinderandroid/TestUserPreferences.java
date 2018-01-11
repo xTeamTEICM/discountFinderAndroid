@@ -14,7 +14,7 @@ import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountP
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 
-public class TestUserPreferences extends TestCase{
+/*public class TestUserPreferences extends TestCase{
         @Test
         public void testPostId() throws IOException
 
@@ -210,11 +210,11 @@ public class TestUserPreferences extends TestCase{
         int id=1;
         DiscountPreferencesResponse discountPreferencesResponse= s.putDiscountPreferences(id,discountPreferencesRequest,auth).execute().body();
         assertEquals("http://img.youtube.com/", discountPreferencesResponse.getImage().toString());
-    }*/
+    }
 
 
 
 
 
 
-}
+}*/

@@ -64,13 +64,13 @@ public class TestUserService extends TestCase {
     }
     @Test
     public void testPutPreferences() throws Exception{
-        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-        discountPreferencesRequest.setPrice("140");
-        discountPreferencesRequest.setCategory("shoes");
-        discountPreferencesRequest.setTags("tag");
+
+        String category="shoes";
+        String price="140";
+        String tags="tag";
         BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
         IuserService mockService=new MockUserService(delegate);
-        Call<DiscountPreferencesResponse> putPreference=mockService.putDiscountPreferences(1,discountPreferencesRequest,"auth");
+        Call<DiscountPreferencesResponse> putPreference=mockService.putDiscountPreferences(1,category,price,tags,"auth");
         retrofit2.Response<DiscountPreferencesResponse> putPreferenceResponse=putPreference.execute();
         Assert.assertEquals("1",putPreferenceResponse.body().getCategory().toString());
         Assert.assertEquals("1",putPreferenceResponse.body().getId().toString());
@@ -80,13 +80,12 @@ public class TestUserService extends TestCase {
 
     @Test
     public void testPostPreferences() throws Exception{
-        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-        discountPreferencesRequest.setPrice("140");
-        discountPreferencesRequest.setCategory("shoes");
-        discountPreferencesRequest.setTags("tag");
+        String category="shoes";
+        String price="40";
+        String tags="tag";
         BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
         IuserService mockService=new MockUserService(delegate);
-        Call<DiscountPreferencesPostResponse> postPreference=mockService.postDiscountPreferences(discountPreferencesRequest,"auth");
+        Call<DiscountPreferencesPostResponse> postPreference=mockService.postDiscountPreferences(category,price,tags,"auth");
         retrofit2.Response<DiscountPreferencesPostResponse> postPreferenceResponse=postPreference.execute();
         Assert.assertEquals("shoes",postPreferenceResponse.body().getCategory());
         Assert.assertEquals("1",postPreferenceResponse.body().getId().toString());
