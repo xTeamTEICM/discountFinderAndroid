@@ -42,6 +42,11 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
     private User user;
     private List<SellerDiscount> discounts = new ArrayList<>();
     private ConstraintLayout layout;
+    private TextView errorTextView;
+
+    public void setDiscounts(List<SellerDiscount> discountList){
+        this.discounts = discountList;
+    }
 
     public List<SellerDiscount> getDiscounts() {
         return discounts;
@@ -54,6 +59,7 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
 
         layout = findViewById(R.id.viewStoreConstraintLayout);
         TextView textView = findViewById(R.id.storeInfos);
+        errorTextView = findViewById(R.id.viewStoreErrorTextView);
         Button settings = findViewById(R.id.settingsButton);
         settings.setOnClickListener(settingsClick);
         Button delete = findViewById(R.id.deleteButton);
@@ -136,14 +142,18 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
                 @Override
                 public void onResponse(Call<List<SellerDiscount>> call, Response<List<SellerDiscount>> response) {
                     discounts = response.body();
-                    Toast.makeText(ViewStore.this, response.message() + "\nLoaded", Toast.LENGTH_SHORT).show();
-                    myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this, discounts);
-                    myDiscountsRecycler.setAdapter(myDiscountsAdapter);
+                    if(discounts.size()!=0){
+                        Toast.makeText(ViewStore.this, "Your Discounts are Loaded", Toast.LENGTH_SHORT).show();
+                        myDiscountsAdapter = new ShopDiscountAdapter(ViewStore.this, discounts);
+                        myDiscountsRecycler.setAdapter(myDiscountsAdapter);
+                    }
+                    else{
+                        errorTextView.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<List<SellerDiscount>> call, Throwable t) {
-                    Toast.makeText(ViewStore.this, "Failed to load the discounts", Toast.LENGTH_SHORT).show();
                     call.cancel();
                 }
             });

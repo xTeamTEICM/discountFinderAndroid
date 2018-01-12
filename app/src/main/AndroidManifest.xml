@@ -55,7 +55,6 @@
         </service>
         <service android:name=".services.GeoLocation" />
 
-        <activity android:name=".ui.customer.userPreferences.DeletePreference" />
         <activity android:name=".ui.customer.discount.FullContentDiscount" />
 
         <meta-data

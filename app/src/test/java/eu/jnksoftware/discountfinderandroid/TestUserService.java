@@ -5,14 +5,17 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
-import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
+import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.services.MockUserService;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import retrofit2.mock.BehaviorDelegate;
@@ -64,13 +67,13 @@ public class TestUserService extends TestCase {
     }
     @Test
     public void testPutPreferences() throws Exception{
-        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-        discountPreferencesRequest.setPrice("140");
-        discountPreferencesRequest.setCategory("shoes");
-        discountPreferencesRequest.setTags("tag");
+
+        String category="shoes";
+        String price="140";
+        String tags="tag";
         BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
         IuserService mockService=new MockUserService(delegate);
-        Call<DiscountPreferencesResponse> putPreference=mockService.putDiscountPreferences(1,discountPreferencesRequest,"auth");
+        Call<DiscountPreferencesResponse> putPreference=mockService.putDiscountPreferences(1,category,price,tags,"auth");
         retrofit2.Response<DiscountPreferencesResponse> putPreferenceResponse=putPreference.execute();
         Assert.assertEquals("1",putPreferenceResponse.body().getCategory().toString());
         Assert.assertEquals("1",putPreferenceResponse.body().getId().toString());
@@ -80,19 +83,50 @@ public class TestUserService extends TestCase {
 
     @Test
     public void testPostPreferences() throws Exception{
-        DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-        discountPreferencesRequest.setPrice("140");
-        discountPreferencesRequest.setCategory("shoes");
-        discountPreferencesRequest.setTags("tag");
+        String category="shoes";
+        String price="40";
+        String tags="tag";
         BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
         IuserService mockService=new MockUserService(delegate);
-        Call<DiscountPreferencesPostResponse> postPreference=mockService.postDiscountPreferences(discountPreferencesRequest,"auth");
+        Call<DiscountPreferencesPostResponse> postPreference=mockService.postDiscountPreferences(category,price,tags,"auth");
         retrofit2.Response<DiscountPreferencesPostResponse> postPreferenceResponse=postPreference.execute();
         Assert.assertEquals("shoes",postPreferenceResponse.body().getCategory());
         Assert.assertEquals("1",postPreferenceResponse.body().getId().toString());
         Assert.assertEquals("40",postPreferenceResponse.body().getPrice());
         Assert.assertEquals("tag",postPreferenceResponse.body().getTags());
     }
+
+    @Test
+    public void testgetPreferences() throws Exception{
+
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<List<DiscountPreferencesResponse>> getPreference=mockService.getDiscountsPreference("auth");
+        Response<List<DiscountPreferencesResponse>> getPreferenceResponse=getPreference.execute();
+        Assert.assertEquals("tag1",getPreferenceResponse.body().get(0).getTags());
+        Assert.assertEquals("1",getPreferenceResponse.body().get(0).getId().toString());
+        Assert.assertEquals("1",getPreferenceResponse.body().get(0).getCategory().toString());
+        Assert.assertEquals("1",getPreferenceResponse.body().get(0).getUserId().toString());
+        Assert.assertEquals("shoe",getPreferenceResponse.body().get(0).getCategoryTitle());
+
+    }
+
+    @Test
+    public  void testGetDiscounts() throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<List<Discount>> testDiscount=mockService.getDiscounts(1000,"auth");
+        Response<List<Discount>> getDiscounts =testDiscount.execute();
+        Assert.assertEquals(1,getDiscounts.body().get(0).getDiscountId());
+        Assert.assertEquals("food",getDiscounts.body().get(0).getCategory());
+        Assert.assertEquals("food",getDiscounts.body().get(0).getShortDescription());
+        Assert.assertEquals("Pizza",getDiscounts.body().get(0).getShopName());
+        Assert.assertEquals("image",getDiscounts.body().get(0).getProductImageURL());
+        Assert.assertEquals(43.27,getDiscounts.body().get(0).getShopLatPos());
+        Assert.assertEquals(23.88,getDiscounts.body().get(0).getShopLogPos());
+
+    }
+
 
 
 }

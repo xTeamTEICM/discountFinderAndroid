@@ -34,4 +34,14 @@ public class LocationTest {
         assertEquals(100,test.getLogPos(),1);
     }
 
+    @Test
+    public void blankConstructor() throws Exception {
+        Location test = new Location();
+        test.setLogPos(80);
+        test.setLatPos(44.58);
+        assertEquals(80,test.getLogPos(),1);
+        assertEquals(44.58,test.getLatPos(),1);
+
+    }
+
 }
