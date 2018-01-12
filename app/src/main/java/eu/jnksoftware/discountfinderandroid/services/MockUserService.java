@@ -115,26 +115,6 @@ public class MockUserService implements IuserService {
     }
 
     @Override
-    public Call<List<Shop>> getShopsList() {
-        return null;
-    }
-
-    @Override
-    public Call<List<Shop>> getShopWithId(int id) {
-        return null;
-    }
-
-    @Override
-    public Call<List<Shop>> getUserShops() {
-        return null;
-    }
-
-    @Override
-    public Call<List<Shop>> getUserShopWithId(int id) {
-        return null;
-    }
-
-    @Override
     public Call<List<Shop>> getUserShops(String auth) {
         return null;
     }
