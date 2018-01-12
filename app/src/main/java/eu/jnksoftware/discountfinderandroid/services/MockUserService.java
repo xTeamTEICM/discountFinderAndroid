@@ -1,5 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
@@ -77,7 +79,13 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<List<DiscountPreferencesResponse>> getDiscountsPreference(String auth) {
-        return null;
+        List<DiscountPreferencesResponse> preferencesResponses=new ArrayList<>();
+        Collections.addAll(preferencesResponses,new DiscountPreferencesResponse(1,1,1,40,"tag1","shoe")
+                ,new DiscountPreferencesResponse(2,2,2,30,"tag2","coffe")
+                ,new DiscountPreferencesResponse(3,3,3,20,"tag3","pc"));
+
+       return delegate.returningResponse(preferencesResponses).getDiscountsPreference(auth);
+
     }
 
     @Override

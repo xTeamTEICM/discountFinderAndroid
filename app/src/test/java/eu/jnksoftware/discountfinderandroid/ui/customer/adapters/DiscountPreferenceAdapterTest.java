@@ -35,7 +35,7 @@ public class DiscountPreferenceAdapterTest {
 
         adapter = new DiscountPreferenceAdapter(preferencesResponses,mContext,"auth");
     }
- 
+
 
 
     @Test
