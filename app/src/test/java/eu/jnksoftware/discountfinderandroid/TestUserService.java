@@ -9,6 +9,7 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
+import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.services.MockUserService;
@@ -109,6 +110,23 @@ public class TestUserService extends TestCase {
         Assert.assertEquals("shoe",getPreferenceResponse.body().get(0).getCategoryTitle());
 
     }
+
+    @Test
+    public  void testGetDiscounts() throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<List<Discount>> testDiscount=mockService.getDiscounts(1000,"auth");
+        Response<List<Discount>> getDiscounts =testDiscount.execute();
+        Assert.assertEquals(1,getDiscounts.body().get(0).getDiscountId());
+        Assert.assertEquals("food",getDiscounts.body().get(0).getCategory());
+        Assert.assertEquals("food",getDiscounts.body().get(0).getShortDescription());
+        Assert.assertEquals("Pizza",getDiscounts.body().get(0).getShopName());
+        Assert.assertEquals("image",getDiscounts.body().get(0).getProductImageURL());
+        Assert.assertEquals(43.27,getDiscounts.body().get(0).getShopLatPos());
+        Assert.assertEquals(23.88,getDiscounts.body().get(0).getShopLogPos());
+
+    }
+
 
 
 }
