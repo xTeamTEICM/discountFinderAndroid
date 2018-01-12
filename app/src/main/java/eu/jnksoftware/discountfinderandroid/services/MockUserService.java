@@ -21,10 +21,6 @@ import eu.jnksoftware.discountfinderandroid.models.token.User;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
-/**
- * Created by nikos on 4/1/2018.
- */
-
 public class MockUserService implements IuserService {
     private final BehaviorDelegate<IuserService> delegate;
 
@@ -81,7 +77,7 @@ public class MockUserService implements IuserService {
     public Call<List<DiscountPreferencesResponse>> getDiscountsPreference(String auth) {
         List<DiscountPreferencesResponse> preferencesResponses=new ArrayList<>();
         Collections.addAll(preferencesResponses,new DiscountPreferencesResponse(1,1,1,40,"tag1","shoe")
-                ,new DiscountPreferencesResponse(2,2,2,30,"tag2","coffe")
+                ,new DiscountPreferencesResponse(2,2,2,30,"tag2","coffee")
                 ,new DiscountPreferencesResponse(3,3,3,20,"tag3","pc"));
 
        return delegate.returningResponse(preferencesResponses).getDiscountsPreference(auth);
@@ -100,7 +96,12 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<List<Discount>> getDiscounts(int distance, String auth) {
-        return null;
+        List<Discount> testDiscounts=new ArrayList<>();
+        Collections.addAll(testDiscounts,new Discount(1,"food","food","Pizza",10,"image",200,23.88,43.27)
+                ,new Discount(2,"pc","AlienWare","PcStation",950,"image2",590,23.27,22.88)
+                ,new Discount(3,"pc","Hp","PcStation",450,"image3",320,53.27,10.88));
+
+        return delegate.returningResponse(testDiscounts).getDiscounts(1000,auth);
     }
 
     @Override
