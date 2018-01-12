@@ -25,6 +25,15 @@ private Integer id;
     @Expose
     private String categoryTitle;
 
+    public DiscountPreferencesResponse(Integer id, Integer userId, Integer category, float price, String tags, String categoryTitle) {
+        this.id = id;
+        this.userId = userId;
+        this.category = category;
+        this.price = price;
+        this.tags = tags;
+        this.categoryTitle = categoryTitle;
+    }
+
     public Integer getId() {
         return id;
     }
