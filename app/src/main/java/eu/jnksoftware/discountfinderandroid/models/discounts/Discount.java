@@ -29,7 +29,7 @@ public class Discount {
     }
 
     public void setid(int id) {
-        this.discountId = discountId;
+        this.discountId = id;
     }
 
     public String getShortDescription() {
