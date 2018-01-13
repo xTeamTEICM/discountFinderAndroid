@@ -146,7 +146,8 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<Void> registerFcmToken(FcmToken deviceToken, String auth) {
-        return null;
+
+        return delegate.returningResponse(null).registerFcmToken(deviceToken,auth);
     }
 
     @Override
