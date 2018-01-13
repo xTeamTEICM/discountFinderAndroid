@@ -40,13 +40,12 @@ public class HttpCallTest {
         RecordedRequest request1 = server.takeRequest();
         assertEquals("/user/deviceToken", request1.getPath());
         assertEquals("PUT", request1.getMethod());
-        server.shutdown();
 
 
 
     }
 
-    @Test
+  /*  @Test
     public void setUserLocation() throws Exception {
         MockWebServer server;
         server = new MockWebServer();
@@ -69,7 +68,7 @@ public class HttpCallTest {
         assertEquals("/user/deviceLocation", request1.getPath());
         assertEquals("PUT", request1.getMethod());
         server.shutdown();
-    }
+    }*/
 
 }
 
