@@ -21,7 +21,7 @@ public class ManageSharePrefs {
 
     public static void init(Context context) {
         if (mSharedPref == null)
-            mSharedPref = context.getSharedPreferences(context.getPackageName(), Activity.MODE_PRIVATE);
+            mSharedPref = context.getSharedPreferences("UserPrefs", Activity.MODE_PRIVATE);
     }
 
     public static User readUser(String defValue) {

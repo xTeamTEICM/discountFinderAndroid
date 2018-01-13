@@ -152,11 +152,17 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<Void> setUserLocation(Location location, String auth) {
-        return null;
+        return delegate.returningResponse(null).setUserLocation(location,auth);
     }
 
     @Override
     public Call<User> refreshAccessToken(String refresh_token) {
-        return null;
+        User user=new User();
+        user.setTokenType("Bearer");
+        user.setRefreshToken("refresh");
+        user.setAccessToken("access");
+        user.setExpiresIn(5000);
+        return delegate.returningResponse(user).refreshAccessToken("refresh_token");
+
     }
 }
