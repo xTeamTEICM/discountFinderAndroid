@@ -55,7 +55,7 @@ public class UserPreferences extends AppCompatActivity {
         tags=findViewById(R.id.textTag);
 
 
-        
+
         spinnerCat = findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
         spinnerCat.getBackground().setAlpha(130);
@@ -103,9 +103,16 @@ public class UserPreferences extends AppCompatActivity {
             price=String.valueOf(seekBarProgress);
             tag=tags.getText().toString();
 
+            if (validate(seekBarProgress)){
+                doUserPreference(cat,price,tag);
+            }
+            else{
+                Toast.makeText(UserPreferences.this, "FAIL", Toast.LENGTH_SHORT).show();
+            }
 
-            doUserPreference(cat,price,tag);
-            Toast.makeText(UserPreferences.this, cat, Toast.LENGTH_SHORT).show();
+
+
+
         }
     };
 
@@ -155,6 +162,16 @@ public class UserPreferences extends AppCompatActivity {
 
         });
     }
+    private Boolean validate(int catr){
+
+         if((catr<=0)){
+             return false;
+         }
+         return true;
+
+    }
+
+
 
 
 

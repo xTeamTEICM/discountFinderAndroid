@@ -1,26 +1,15 @@
 package eu.jnksoftware.discountfinderandroid.test;
 
-import android.support.test.rule.ActivityTestRule;
-import android.test.InstrumentationTestCase;
 import android.test.mock.MockContext;
 
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
+
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
-import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
-import eu.jnksoftware.discountfinderandroid.services.IuserService;
-import eu.jnksoftware.discountfinderandroid.ui.general.Main;
-
-import static org.junit.Assert.*;
+import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * Created by makis on 1/1/2018.
