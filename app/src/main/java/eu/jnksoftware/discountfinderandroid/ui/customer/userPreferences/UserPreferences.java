@@ -116,7 +116,7 @@ public class UserPreferences extends AppCompatActivity {
         }
     };
 
-    public void doUserPreference(String category,String price,String tags) {
+    private void doUserPreference(String category,String price,String tags) {
         auth="Bearer "+user.getAccessToken();
         Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(category,price,tags,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
