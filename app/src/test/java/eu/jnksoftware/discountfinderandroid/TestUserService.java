@@ -77,7 +77,7 @@ public class TestUserService extends TestCase {
         retrofit2.Response<DiscountPreferencesResponse> putPreferenceResponse=putPreference.execute();
         Assert.assertEquals("1",putPreferenceResponse.body().getCategory().toString());
         Assert.assertEquals("1",putPreferenceResponse.body().getId().toString());
-
+        Assert.assertEquals("40.0",Float.toString(putPreferenceResponse.body().getPrice()));
         Assert.assertEquals("tag",putPreferenceResponse.body().getTags());
     }
 
@@ -108,6 +108,7 @@ public class TestUserService extends TestCase {
         Assert.assertEquals("1",getPreferenceResponse.body().get(0).getCategory().toString());
         Assert.assertEquals("1",getPreferenceResponse.body().get(0).getUserId().toString());
         Assert.assertEquals("shoe",getPreferenceResponse.body().get(0).getCategoryTitle());
+        Assert.assertEquals("40.0",Float.toString(getPreferenceResponse.body().get(0).getPrice()));
 
     }
 

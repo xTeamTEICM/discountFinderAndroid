@@ -126,7 +126,7 @@ public class UserPreferences extends AppCompatActivity {
                     int statusCode=response.code();
                     Log.d("UserPreferences","onResponse:"+statusCode);
                     DiscountPreferencesPostResponse discountPreferencesPostResponse=response.body();
-                    Toast.makeText(UserPreferences.this,"Preference add "+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPreferences.this,"Preference add ",Toast.LENGTH_SHORT).show();
 
                 }
                 else
