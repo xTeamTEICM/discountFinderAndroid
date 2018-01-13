@@ -36,8 +36,5 @@ public class UserUpdatePreferencesTest {
         onView(withId(R.id.tagDesc)).check(matches(isDisplayed()));
         onView(withId(R.id.prefDescUpdate)).check(matches(isDisplayed()));
 
-
-
-
     }
 }

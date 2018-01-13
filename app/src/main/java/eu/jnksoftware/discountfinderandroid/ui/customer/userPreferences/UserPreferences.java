@@ -162,7 +162,7 @@ public class UserPreferences extends AppCompatActivity {
 
         });
     }
-    private Boolean validate(int catr){
+    public Boolean validate(int catr){
 
          if((catr<=0)){
              return false;
