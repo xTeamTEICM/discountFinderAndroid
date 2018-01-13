@@ -5,16 +5,12 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
-import eu.jnksoftware.discountfinderandroid.Apis.HttpCall;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.token.FcmToken;
+import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.services.MockUserService;
 import okhttp3.OkHttpClient;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -50,7 +46,53 @@ public class HttpCallTest extends TestCase {
 
     }
 
+
     @Test
+    public void testFcmToken() throws Exception {
+
+        BehaviorDelegate<IuserService> delegate = mockRetrofit.create(IuserService.class);
+        IuserService mockService = new MockUserService(delegate);
+        FcmToken token = new FcmToken("fcmtoken");
+        String auth = "Bearer_mock";
+        Call<Void> call = mockService.registerFcmToken(token, auth);
+        retrofit2.Response<Void> response = call.execute();
+
+        Assert.assertEquals(200, response.code());
+
+    }
+
+    @Test
+    public void testDeviceLocation() throws Exception {
+
+        BehaviorDelegate<IuserService> delegate = mockRetrofit.create(IuserService.class);
+        IuserService mockService = new MockUserService(delegate);
+        Location location = new Location(47.477, 77.444);
+        String auth = "Bearer_mock";
+        Call<Void> call = mockService.setUserLocation(location, auth);
+        retrofit2.Response<Void> responseTestDeviceLocation = call.execute();
+
+        Assert.assertEquals(200, responseTestDeviceLocation.code());
+
+    }
+
+    @Test
+    public void testRefreshToken() throws Exception {
+
+        BehaviorDelegate<IuserService> delegate = mockRetrofit.create(IuserService.class);
+        IuserService mockService = new MockUserService(delegate);
+        Call<User> call = mockService.refreshAccessToken("refresh_token");
+        retrofit2.Response<User> responseTestDeviceLocation = call.execute();
+
+        Assert.assertEquals(200, responseTestDeviceLocation.code());
+    }
+
+
+
+
+
+}
+
+/* @Test
     public void setFcmToken() throws Exception {
         MockWebServer server;
         server = new MockWebServer();
@@ -96,20 +138,4 @@ public class HttpCallTest extends TestCase {
         assertEquals("/user/deviceLocation", request1.getPath());
         assertEquals("PUT", request1.getMethod());
         server.shutdown();
-    }
-
-
-    @Test
-    public void testLogin() throws Exception {
-
-        BehaviorDelegate<IuserService> delegate = mockRetrofit.create(IuserService.class);
-        IuserService mockService = new MockUserService(delegate);
-        FcmToken token = new FcmToken("fcmtoken");
-        String auth = "Bearer_mock";
-        Call<Void> call = mockService.registerFcmToken(token, auth);
-        retrofit2.Response<Void> response = call.execute();
-
-        Assert.assertEquals(200, response.code());
-
-    }
-}
+    }*/
