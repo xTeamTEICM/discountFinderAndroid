@@ -1,8 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences;
 
 import android.annotation.SuppressLint;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +12,6 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +34,6 @@ public class UserPreferences extends AppCompatActivity {
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
-
     private List<String> catTemp = new ArrayList<>();
     IuserService iuserService;
     String accessToken;
@@ -136,7 +131,7 @@ public class UserPreferences extends AppCompatActivity {
             });
     }
 
-    private void fetchCategories() {
+    public void fetchCategories() {
         Call<List<Category>> call = iuserService.fetchCategories();
         call.enqueue(new Callback<List<Category>>() {
             @Override

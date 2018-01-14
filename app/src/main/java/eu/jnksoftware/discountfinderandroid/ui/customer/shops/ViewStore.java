@@ -71,6 +71,7 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
 
         apiService = ApiUtils.getUserService();
         user = ManageSharePrefs.readUser(null);
+        auth = getIntent().getStringExtra("auth");
 
 
         shopName = getIntent().getStringExtra("shop");
@@ -119,7 +120,6 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
     };
 
     private void deleteShop() {
-        auth="Bearer "+user.getAccessToken();
         Call<Void> call = apiService.deleteShop(shopId,auth);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -135,7 +135,6 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
     }
 
     public void getSellerDiscounts(){
-        auth="Bearer "+user.getAccessToken();
         if(this.shopId!=-1) {
             Call<List<SellerDiscount>> call = apiService.getSellerDiscounts(shopId,auth);
             call.enqueue(new Callback<List<SellerDiscount>>() {
@@ -193,7 +192,6 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
     }
 
     public void deleteSellerDiscount(int id){
-        auth="Bearer "+user.getAccessToken();
         Call<Void> call = apiService.deleteSellerDiscount(id,auth);
         call.enqueue(new Callback<Void>() {
             @Override

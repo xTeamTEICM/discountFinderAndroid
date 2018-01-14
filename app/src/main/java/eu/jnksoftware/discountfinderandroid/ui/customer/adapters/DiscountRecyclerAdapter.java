@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.R;
-
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.ui.customer.discount.FullContentDiscount;
 
@@ -38,7 +37,6 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        String imageURL = "https://img.grouponcdn.com/deal/8DDtq5XRzVnLXEUnPHPd/p2-2048x1229/v1/c700x420.jpg";
         //Discount Card
         //Discount discount = discountArrayList.get(position);
         holder.title.setText("Περιγραφή :" + discountArrayList.get(position).getShortDescription());
