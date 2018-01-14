@@ -90,8 +90,7 @@ public class SellerShops extends Fragment {
         addStore.setOnClickListener(addStoreButtonClick);
         Button refreshButton = view.findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(refreshButtonClick);
-        //userLocation.setLatPos(().etDoubleExtra("lat",-1));
-       // userLocation.setLogPos(getIntent().getDoubleExtra("lon",-1));
+        userLocation = ManageSharePrefs.readLocation(" ");
         }
 
         private final View.OnClickListener refreshButtonClick = new View.OnClickListener() {
@@ -125,8 +124,8 @@ public class SellerShops extends Fragment {
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(),SellerAddShop.class);
             intent.putExtra("auth",auth);
-//            intent.putExtra("lat",userLocation.getLatPos());
-//            intent.putExtra("lon",userLocation.getLogPos());
+            intent.putExtra("lat",userLocation.getLatPos());
+            intent.putExtra("lon",userLocation.getLogPos());
             startActivityForResult(intent,requestCode);
         }
     };

@@ -14,11 +14,11 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="80dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="#00897B"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateShopDescriptionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/updateShopLocationEditText" />
 
     <Button
         android:id="@+id/updateButton"
@@ -27,22 +27,9 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="#00897B"
         android:text="@string/update"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateShopDescriptionEditText" />
-
-    <TextView
-        android:id="@+id/updateShopDescriptionTextView"
-        android:layout_width="336dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/changeShopDescription"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateShopLocationEditText" />
 
@@ -54,7 +41,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/changeShopLocation"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateShopNameEditText" />
@@ -67,7 +54,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/changeShopName"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +68,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateShopLocationTextView" />
@@ -95,24 +82,10 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateShopNameTextView" />
-
-    <EditText
-        android:id="@+id/updateShopDescriptionEditText"
-        android:layout_width="336dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateShopDescriptionTextView" />
 
 
 </android.support.constraint.ConstraintLayout>
