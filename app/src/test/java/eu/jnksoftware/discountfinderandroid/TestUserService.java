@@ -1,15 +1,27 @@
 package eu.jnksoftware.discountfinderandroid;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
+import eu.jnksoftware.discountfinderandroid.Apis.PostShop;
+import eu.jnksoftware.discountfinderandroid.Apis.UpdatePostShop;
+import eu.jnksoftware.discountfinderandroid.models.Category;
+import eu.jnksoftware.discountfinderandroid.models.Location;
+import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
+import eu.jnksoftware.discountfinderandroid.models.Shop;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
+import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
+import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
+import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.services.MockUserService;
@@ -125,6 +137,128 @@ public class TestUserService extends TestCase {
         Assert.assertEquals("image",getDiscounts.body().get(0).getProductImageURL());
         Assert.assertEquals(43.27,getDiscounts.body().get(0).getShopLatPos());
         Assert.assertEquals(23.88,getDiscounts.body().get(0).getShopLogPos());
+
+    }
+
+    @Test
+    public void testDeleteDiscountPreference() throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<Void> call = mockService.deleteDiscountPreference(1,"auth");
+        retrofit2.Response<Void> deletePreferenceResponse=call.execute();
+        Assert.assertEquals(200, deletePreferenceResponse.code());
+
+
+    }
+    @Test
+    public void testFetchCategories() throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<List<Category>> categoryCall=mockService.fetchCategories();
+        Response<List<Category>> getCategory=categoryCall.execute();
+        Assert.assertEquals("1",getCategory.body().get(0).getId());
+        Assert.assertEquals("title1",getCategory.body().get(0).getTitle());
+    }
+
+    @Test
+    public void testTopDiscount() throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<List<TopDiscount>> topDiscountCall=mockService.getTopDiscounts(1,"auth");
+        Response<List<TopDiscount>> getTopDiscount=topDiscountCall.execute();
+        Assert.assertEquals("short",getTopDiscount.body().get(0).getShortDescription());
+        Assert.assertEquals("image1",getTopDiscount.body().get(0).getProductImage());
+    }
+
+    @Test
+    public void testDeleteShop() throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<Void> deleteShopCall=mockService.deleteShop(1,"auth");
+        retrofit2.Response<Void> deleteShopPreference=deleteShopCall.execute();
+        Assert.assertEquals(200,deleteShopPreference.code());
+    }
+    @Test
+    public void testgetUserShop()throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<List<Shop>> getUserShopCall=mockService.getUserShops("auth");
+        Response<List<Shop>> getUserShopCallPreference=getUserShopCall.execute();
+        Assert.assertEquals(1,getUserShopCallPreference.body().get(0).getId());
+        Assert.assertEquals("brand1",getUserShopCallPreference.body().get(0).getBrandName());
+        Assert.assertEquals(1,getUserShopCallPreference.body().get(0).getOwnerId());
+        Assert.assertEquals("12.0",Double.toString(getUserShopCallPreference.body().get(0).getLocation().getLatPos()));
+        Assert.assertEquals("10.0",Double.toString(getUserShopCallPreference.body().get(0).getLocation().getLogPos()));
+
+    }
+    @Test
+    public void testaddShop()throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        PostShop postShop=new PostShop("brand",10,10);
+        Call<Void> calladdShop = mockService.addShop(postShop,"auth");
+        retrofit2.Response<Void> addShopeResponse=calladdShop.execute();
+        Assert.assertEquals(200,addShopeResponse.code());
+
+    }
+
+    @Test
+    public void testupdateShop()throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        UpdatePostShop updatepostShop=new UpdatePostShop(1,"brand",1,1);
+        Call<Void> callupdateShop = mockService.updateShop(updatepostShop,"auth");
+        retrofit2.Response<Void> addShopeResponse=callupdateShop.execute();
+        Assert.assertEquals(200,addShopeResponse.code());
+
+    }
+    @Test
+    public void testAddDiscount() throws IOException {
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        DiscountPost discountPost=new DiscountPost();
+        discountPost.setCategory(1);
+        discountPost.setDescription("desc");
+        discountPost.setOriginalPrice(19);
+        discountPost.setCategory(1);
+        discountPost.setCurrentPrice(3);
+        discountPost.setShopId(1);
+        discountPost.setImageTitle("image");
+        discountPost.setImageBase("image");
+        Call<DiscountGet> calladddiscount = mockService.addDiscount(discountPost,"auth");
+        retrofit2.Response<DiscountGet> addShopeResponse=calladddiscount.execute();
+        Assert.assertEquals(1,addShopeResponse.body().getCategory());
+        Assert.assertEquals(20,addShopeResponse.body().getCurrentPrice());
+        Assert.assertEquals(1,addShopeResponse.body().getId());
+        Assert.assertEquals("desc",addShopeResponse.body().getDescription());
+        Assert.assertEquals("image",addShopeResponse.body().getImage());
+        Assert.assertEquals(40,addShopeResponse.body().getOriginalPrice());
+        Assert.assertEquals(1,addShopeResponse.body().getShopId());
+
+
+    }
+
+    @Test
+    public void testGetSellerDiscount() throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<List<SellerDiscount>> getSellerDiscountCall=mockService.getSellerDiscounts(1,"auth");
+        Response<List<SellerDiscount>> getSellerDiscountCallPreference=getSellerDiscountCall.execute();
+        Assert.assertEquals(1,getSellerDiscountCallPreference.body().get(0).getCategory());
+        Assert.assertEquals("40.0",Double.toString(getSellerDiscountCallPreference.body().get(0).getCurrentPrice()));
+        Assert.assertEquals("30.0",Double.toString(getSellerDiscountCallPreference.body().get(0).getOriginalPrice()));
+        Assert.assertEquals(1,getSellerDiscountCallPreference.body().get(0).getShopId());
+        Assert.assertEquals("desc",getSellerDiscountCallPreference.body().get(0).getDescription());
+        Assert.assertEquals("image",getSellerDiscountCallPreference.body().get(0).getImage());
+
+    }
+    @Test
+    public void testdeleteSellerDiscount()throws Exception{
+        BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
+        IuserService mockService=new MockUserService(delegate);
+        Call<Void> calldeleteeShop = mockService.deleteSellerDiscount(1,"auth");
+        retrofit2.Response<Void> adddeleteSellerPreference=calldeleteeShop.execute();
+        Assert.assertEquals(200,adddeleteSellerPreference.code());
 
     }
 

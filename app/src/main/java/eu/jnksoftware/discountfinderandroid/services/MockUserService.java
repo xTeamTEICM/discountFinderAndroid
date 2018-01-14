@@ -86,12 +86,14 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<Void> deleteDiscountPreference(int id, String auth) {
-        return null;
+        return delegate.returningResponse(null).deleteDiscountPreference(id,auth);
     }
 
     @Override
     public Call<List<Category>> fetchCategories() {
-        return null;
+         List<Category> testCategory=new ArrayList<>();
+        Collections.addAll(testCategory,new Category("1","title1"));
+        return delegate.returningResponse(testCategory).fetchCategories();
     }
 
     @Override
@@ -106,42 +108,59 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<List<TopDiscount>> getTopDiscounts(int distance, String auth) {
-        return null;
+        List<TopDiscount> topDiscounts=new ArrayList<>();
+        Collections.addAll(topDiscounts,new TopDiscount("short","image1"));
+        return delegate.returningResponse(topDiscounts).getTopDiscounts(distance,auth);
     }
 
     @Override
     public Call<Void> deleteShop(int id, String auth) {
-        return null;
+        return delegate.returningResponse(null).deleteShop(id,auth);
     }
 
     @Override
     public Call<List<Shop>> getUserShops(String auth) {
-        return null;
+        Location location=new Location();
+        location.setLatPos(12);
+        location.setLogPos(10);
+        List<Shop> testShops=new ArrayList<>();
+        Collections.addAll(testShops,new Shop(1,1,"brand1",location));
+        return delegate.returningResponse(testShops).getUserShops(auth);
     }
 
     @Override
     public Call<Void> addShop(PostShop postShop, String auth) {
-        return null;
+        return delegate.returningResponse(null).addShop(postShop,auth);
     }
 
     @Override
     public Call<Void> updateShop(UpdatePostShop updatePostShop, String auth) {
-        return null;
+        return delegate.returningResponse(null).updateShop(updatePostShop,auth);
     }
 
     @Override
     public Call<DiscountGet> addDiscount(DiscountPost discountPost, String auth) {
-        return null;
+        DiscountGet discountGet=new DiscountGet();
+        discountGet.setCategory(1);
+        discountGet.setCurrentPrice(20);
+        discountGet.setDescription("desc");
+        discountGet.setId(1);
+        discountGet.setImage("image");
+        discountGet.setOriginalPrice(40);
+        discountGet.setShopId(1);
+        return delegate.returningResponse(discountGet).addDiscount(discountPost,auth);
     }
 
     @Override
     public Call<List<SellerDiscount>> getSellerDiscounts(int shopId, String auth) {
-        return null;
+        List<SellerDiscount> sellerTestDiscount=new ArrayList<>();
+        Collections.addAll(sellerTestDiscount,new SellerDiscount(1,1,30,40,"desc","image"));
+        return delegate.returningResponse(sellerTestDiscount).getSellerDiscounts(shopId,auth);
     }
 
     @Override
     public Call<Void> deleteSellerDiscount(int id, String auth) {
-        return null;
+        return delegate.returningResponse(null).deleteSellerDiscount(id,auth);
     }
 
     @Override

@@ -19,6 +19,14 @@ public class SellerDiscount {
         this.image = image;
     }
 
+    public int getShopId() {
+        return shopId;
+    }
+
+    public double getOriginalPrice() {
+        return originalPrice;
+    }
+
     public int getId(){ return id; }
 
     public int getCategory() {
