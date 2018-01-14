@@ -13,6 +13,7 @@ import eu.jnksoftware.discountfinderandroid.R;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -56,9 +57,9 @@ public class RegisterTest {
     }
 
     @Test
-    public void checkBlankEmail(){
+    public void checkBlankEmail() {
         onView(withId(R.id.firstNameField)).perform(clearText(),typeText(firstName));
-        onView(withId(R.id.lastNameField)).perform(clearText(),typeText(lastName));
+        onView(withId(R.id.lastNameField)).perform(clearText(),typeText(lastName),closeSoftKeyboard());
         onView(withId(R.id.eMailField)).perform(clearText(),typeText(""));
         onView(withId(R.id.passwordField)).perform(clearText(),typeText(password));
         Espresso.closeSoftKeyboard();
