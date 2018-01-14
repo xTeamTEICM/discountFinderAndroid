@@ -1,5 +1,7 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
+import android.support.v7.app.ActionBarDrawerToggle;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -133,7 +135,7 @@ public class MockUserService implements IuserService {
 
     @Override
     public Call<Void> updateShop(int id,UpdatePostShop updatePostShop, String auth) {
-        return null;
+        return delegate.returningResponse(null).updateShop(id,updatePostShop,auth);
     }
 
     @Override
