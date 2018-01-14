@@ -207,7 +207,7 @@ public class TestUserService extends TestCase {
         BehaviorDelegate<IuserService>delegate=mockRetrofit.create(IuserService.class);
         IuserService mockService=new MockUserService(delegate);
         UpdatePostShop updatepostShop=new UpdatePostShop(1,"brand",1,1);
-        Call<Void> callupdateShop = mockService.updateShop(updatepostShop,"auth");
+        Call<Void> callupdateShop = mockService.updateShop(1,updatepostShop,"auth");
         retrofit2.Response<Void> addShopeResponse=callupdateShop.execute();
         Assert.assertEquals(200,addShopeResponse.code());
 
