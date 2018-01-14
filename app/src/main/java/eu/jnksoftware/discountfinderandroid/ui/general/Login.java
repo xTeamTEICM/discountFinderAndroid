@@ -43,8 +43,8 @@ public class Login extends Activity {
         setContentView(R.layout.activity_login);
         eMail = findViewById(R.id.loginEMailField);
         password = findViewById(R.id.loginPasswordField);
-        eMail.setText("user@jnksoftware.eu");
-        password.setText("myPassword");
+//        eMail.setText("user@jnksoftware.eu");
+//        password.setText("myPassword");
         iuserService = ApiUtils.getUserService();
 
         Button login = findViewById(R.id.loginBtn);

@@ -8,6 +8,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import eu.jnksoftware.discountfinderandroid.R;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
@@ -22,9 +23,9 @@ public class LoginTest {
     @Rule
     public ActivityTestRule<Login> loginActivityTestRule = new ActivityTestRule<>(Login.class);
 
-    private String validEmail = "kostas@gmail.com";
+    private String validEmail = "user@jnksoftware.eu";
     private String emptyEmail = "";
-    private String password = "kostas123";
+    private String password = "myPassword";
     private String emptyPassword = "";
     //
 
@@ -104,13 +105,13 @@ public class LoginTest {
         onView(withId(R.id.loginWelcomeTxt)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void testLoadingBarAndLoadingText(){
-        onView(withId(R.id.loginBtn)).perform(click());
-        onView(withId(R.id.loadingBar)).check(matches(isDisplayed()));
-        onView(withId(R.id.loginBtn)).perform(click());
-        onView(withId(R.id.loadingText)).check(matches(isDisplayed()));
-    }
+//    @Test
+//    public void testLoadingBarAndLoadingText(){
+//        onView(withId(R.id.loginBtn)).perform(click());
+//        onView(withId(R.id.loadingBar)).check(matches(isDisplayed()));
+//        onView(withId(R.id.loginBtn)).perform(click());
+//        onView(withId(R.id.loadingText)).check(matches(isDisplayed()));
+//    }
 
 /*
     @Test
