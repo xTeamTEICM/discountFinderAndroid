@@ -38,7 +38,7 @@
     <string name="chooseLocation">Choose shop location from maps</string>
     <string name="shopCity">Shop city</string>
     <string name="changeShopName">Change shop name</string>
-    <string name="changeShopLocation">Chane shop location</string>
+    <string name="changeShopLocation">Change shop location</string>
     <string name="changeShopDescription">Change shop description</string>
     <string name="insert">INSERT</string>
     <string name="update">UPDATE</string>
