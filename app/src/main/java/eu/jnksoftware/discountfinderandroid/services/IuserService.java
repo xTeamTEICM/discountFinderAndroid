@@ -82,8 +82,8 @@ public interface IuserService {
 
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @PUT("shop")
-    Call<Void> updateShop(@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
+    @PUT("shop//{id}")
+    Call<Void> updateShop(@Path("id") int id,@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
 
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})

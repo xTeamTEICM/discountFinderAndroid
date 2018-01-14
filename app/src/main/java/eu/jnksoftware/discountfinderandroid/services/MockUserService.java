@@ -69,10 +69,6 @@ public class MockUserService implements IuserService {
         return delegate.returningResponse(discountPreferencesPostResponse).postDiscountPreferences(category,price,tags,auth);
     }
 
-
-
-
-
     @Override
     public Call<List<DiscountPreferencesResponse>> getDiscountsPreference(String auth) {
         List<DiscountPreferencesResponse> preferencesResponses=new ArrayList<>();
@@ -125,7 +121,7 @@ public class MockUserService implements IuserService {
     }
 
     @Override
-    public Call<Void> updateShop(UpdatePostShop updatePostShop, String auth) {
+    public Call<Void> updateShop(int id,UpdatePostShop updatePostShop, String auth) {
         return null;
     }
 

@@ -28,7 +28,6 @@ public class UpdateShop extends AppCompatActivity {
 
         apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
-
         Button update = findViewById(R.id.updateButton);
         update.setOnClickListener(updateClickListener);
         Button cancel = findViewById(R.id.cancelUpdateButton);
@@ -40,14 +39,12 @@ public class UpdateShop extends AppCompatActivity {
         public void onClick(View v) {
             EditText name = findViewById(R.id.updateShopNameEditText);
             EditText location = findViewById(R.id.updateShopLocationEditText);
-            EditText description = findViewById(R.id.updateShopDescriptionEditText);
             String[] pos;
             pos = location.getText().toString().split(" ");
             String shopName = name.getText().toString();
-            String shopDesciption = description.getText().toString();
             double lat =Double.parseDouble(pos[0]);
             double lon = Double.parseDouble(pos[1]);
-            updateShop(shopName,lat,lon,shopDesciption);
+            updateShop(shopName,lat,lon);
         }
     };
 
@@ -58,10 +55,10 @@ public class UpdateShop extends AppCompatActivity {
         }
     };
 
-    private final void updateShop(String brandName,double lat,double lon, String shopDescription){
+    private final void updateShop(String brandName,double lat,double lon){
         int id = getIntent().getIntExtra("shopId",-1);
         UpdatePostShop updatePostShop = new UpdatePostShop(id,brandName,lat,lon);
-        Call<Void> call = apiService.updateShop(updatePostShop,auth);
+        Call<Void> call = apiService.updateShop(id,updatePostShop,auth);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
