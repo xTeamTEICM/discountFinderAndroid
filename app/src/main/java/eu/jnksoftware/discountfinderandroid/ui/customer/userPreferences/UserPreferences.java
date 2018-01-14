@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences;
 
 import android.annotation.SuppressLint;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -141,7 +140,7 @@ public class UserPreferences extends AppCompatActivity {
             });
     }
 
-    private void fetchCategories() {
+    public void fetchCategories() {
         Call<List<Category>> call = iuserService.fetchCategories();
         call.enqueue(new Callback<List<Category>>() {
             @Override
