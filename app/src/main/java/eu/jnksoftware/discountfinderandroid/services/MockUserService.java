@@ -101,7 +101,9 @@ public class MockUserService implements IuserService {
         List<Discount> testDiscounts=new ArrayList<>();
         Collections.addAll(testDiscounts,new Discount(1,"food","food","Pizza",10,"image",200,23.88,43.27)
                 ,new Discount(2,"pc","AlienWare","PcStation",950,"image2",590,23.27,22.88)
-                ,new Discount(3,"pc","Hp","PcStation",450,"image3",320,53.27,10.88));
+                ,new Discount(3,"pc","AlienWare","PcStation",550,"image3",122,43.27,27.88)
+                ,new Discount(4,"workstation","asus","PcStation",350,"image4",190,43.27,62.88)
+                ,new Discount(5,"pc","Hp","PcStation",450,"image5",320,53.27,10.88));
 
         return delegate.returningResponse(testDiscounts).getDiscounts(1000,auth);
     }

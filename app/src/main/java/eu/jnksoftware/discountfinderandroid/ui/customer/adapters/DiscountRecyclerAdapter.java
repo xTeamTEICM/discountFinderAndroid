@@ -82,6 +82,8 @@ public class DiscountRecyclerAdapter extends RecyclerView.Adapter<DiscountRecycl
             intent.putExtra("discount_Distance",String.valueOf(discount.getDistance()));
             intent.putExtra("discount_Price",String.valueOf(discount.getFinalPrice()));
             intent.putExtra("discount_Shop_Name",String.valueOf(discount.getShopName()));
+            intent.putExtra("discount_Lat",String.valueOf(discount.getShopLatPos()));
+            intent.putExtra("discount_Log",String.valueOf(discount.getShopLogPos()));
             this.context.startActivity(intent);
         }
     }
