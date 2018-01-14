@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences;
 
 import android.annotation.SuppressLint;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -116,7 +115,7 @@ public class UserPreferences extends AppCompatActivity {
         }
     };
 
-    public void doUserPreference(String category,String price,String tags) {
+    private void doUserPreference(String category,String price,String tags) {
         auth="Bearer "+user.getAccessToken();
         Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(category,price,tags,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
@@ -126,7 +125,7 @@ public class UserPreferences extends AppCompatActivity {
                     int statusCode=response.code();
                     Log.d("UserPreferences","onResponse:"+statusCode);
                     DiscountPreferencesPostResponse discountPreferencesPostResponse=response.body();
-                    Toast.makeText(UserPreferences.this,"Preference add "+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPreferences.this,"Preference add ",Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -141,7 +140,7 @@ public class UserPreferences extends AppCompatActivity {
             });
     }
 
-    private void fetchCategories() {
+    public void fetchCategories() {
         Call<List<Category>> call = iuserService.fetchCategories();
         call.enqueue(new Callback<List<Category>>() {
             @Override
@@ -162,7 +161,7 @@ public class UserPreferences extends AppCompatActivity {
 
         });
     }
-    private Boolean validate(int catr){
+    public Boolean validate(int catr){
 
          if((catr<=0)){
              return false;

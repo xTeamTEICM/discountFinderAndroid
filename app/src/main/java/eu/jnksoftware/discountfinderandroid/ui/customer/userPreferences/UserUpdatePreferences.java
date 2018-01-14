@@ -116,13 +116,13 @@ public class UserUpdatePreferences extends AppCompatActivity {
         }
     };
 
-    public void doUpdateUserPreference(final int id, String cat,String price,String tags) {
+    private void doUpdateUserPreference(final int id, String cat,String price,String tags) {
 
         Call<DiscountPreferencesResponse> call =iuserService.putDiscountPreferences(id,cat,price,tags,"Bearer "+user.getAccessToken());
         call.enqueue(new Callback<DiscountPreferencesResponse>() {
             @Override
             public void onResponse(Call<DiscountPreferencesResponse> call, Response<DiscountPreferencesResponse> response) {
-                Toast.makeText(UserUpdatePreferences.this,"Η προτίμηση με id"+id+"Αλλαξε επιτυχως!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserUpdatePreferences.this,"Η προτίμηση με id "+id+" Αλλαξε επιτυχως!",Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -8,17 +8,22 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
+import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
@@ -45,6 +50,10 @@ public class SellerAddDiscount extends AppCompatActivity {
     private EditText startingPrice;
     private EditText finalPrice;
     private EditText description;
+    private Spinner spinnerCat;
+    private List<Category> categories = new ArrayList<>();
+    private ArrayAdapter<String> spinContentAdapter;
+    private List<String> catTemp = new ArrayList<>();
     private int PICK_IMAGE_REQUEST = 1;
 
     @Override
@@ -54,7 +63,7 @@ public class SellerAddDiscount extends AppCompatActivity {
 
         apiInterface = ApiUtils.getUserService();
         user = ManageSharePrefs.readUser(null);
-
+        auth = getIntent().getStringExtra("auth");
 
         shopId = getIntent().getIntExtra("shopId",-1);
         tsLong = System.currentTimeMillis()/1000;
@@ -66,6 +75,12 @@ public class SellerAddDiscount extends AppCompatActivity {
         finalPrice = findViewById(R.id.etFinalPrice);
         description = findViewById(R.id.etDescription);
         discountImageView = findViewById(R.id.newDiscountImage);
+        spinnerCat = findViewById(R.id.categorySpin);
+        spinContentAdapter = new ArrayAdapter<>(getBaseContext(),android.R.layout.simple_list_item_1, catTemp);
+        spinnerCat.getBackground().setAlpha(130);
+        spinContentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCat.setAdapter(spinContentAdapter);
+        fetchCategories();
     }
 
     private View.OnClickListener myDiscountClick = new View.OnClickListener() {
@@ -81,7 +96,7 @@ public class SellerAddDiscount extends AppCompatActivity {
             discountPost.setCurrentPrice(Double.parseDouble(finalPrice.getText().toString().trim()));
             discountPost.setOriginalPrice(Double.parseDouble(startingPrice.getText().toString().trim()));
             discountPost.setDescription(description.getText().toString());
-            discountPost.setCategory(2);
+            discountPost.setCategory(Integer.parseInt(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
             addDiscount(discountPost);
         }
     };
@@ -111,7 +126,6 @@ public class SellerAddDiscount extends AppCompatActivity {
     }
 
     public void addDiscount(DiscountPost discountPost){
-        auth="Bearer "+user.getAccessToken();
         Call<DiscountGet> call = apiInterface.addDiscount(discountPost,auth);
         call.enqueue(new Callback<DiscountGet>() {
             @Override
@@ -132,6 +146,28 @@ public class SellerAddDiscount extends AppCompatActivity {
         discountPhoto.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream);
         byte[] imgByte=byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+    public void fetchCategories() {
+        Call<List<Category>> call = apiInterface.fetchCategories();
+        call.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                categories = response.body();
+                List<String> temp = new ArrayList<>();
+                for(int i=0;i<categories.size();i++){
+                    temp.add(categories.get(i).getTitle());
+                }
+                catTemp.addAll(temp);
+                spinContentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
+                Toast.makeText(SellerAddDiscount.this, "Connection error!", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 
 

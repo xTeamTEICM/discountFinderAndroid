@@ -97,7 +97,7 @@ public class UserPreferenceList extends Fragment implements DiscountPreferenceIt
         }
     };
 
-    public void fetchUserPreferences() {
+    private void fetchUserPreferences() {
 
         Call<List<DiscountPreferencesResponse>> disc=iuserService.getDiscountsPreference(auth);
         disc.enqueue(new Callback<List<DiscountPreferencesResponse>>() {
@@ -145,7 +145,7 @@ public class UserPreferenceList extends Fragment implements DiscountPreferenceIt
         }
     }
 
-    public void deletePref( int id)
+    private void deletePref( int id)
     {
         iuserService= ApiUtils.getUserService();
         Call<Void> delete=iuserService.deleteDiscountPreference(id,auth);

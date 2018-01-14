@@ -16,6 +16,9 @@ public class Shop {
         this.location = location;
     }
 
+    public int getOwnerId() {
+        return ownerId;
+    }
 
     public int getId() {
         return id;
