@@ -39,6 +39,7 @@ public class UserPreferenceList extends Fragment implements DiscountPreferenceIt
     private List<DiscountPreferencesResponse> discountPreferencesResponses ;
     private String auth;
     private Button addPreference;
+   private Button updatePreference;
     private ConstraintLayout layout;
 
     @Override
@@ -59,6 +60,8 @@ public class UserPreferenceList extends Fragment implements DiscountPreferenceIt
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setHasFixedSize(true);
+        updatePreference=view.findViewById(R.id.updateprefBtn);
+        updatePreference.setOnClickListener(uppref);
         addPreference = view.findViewById(R.id.userPreferencesBtn);
         addPreference.setOnClickListener(addPreferenceClick);
         auth = getArguments().getString("auth");
@@ -73,18 +76,16 @@ public class UserPreferenceList extends Fragment implements DiscountPreferenceIt
         super.onResume();
         fetchUserPreferences();
     }
-   /*
-   Button updatePreference=findViewById(R.id.updateprefBtn);
-   updatePreference.setOnClickListener(new View.OnClickListener() {
+
+
+
+   private View.OnClickListener uppref=new View.OnClickListener() {
        @Override
        public void onClick(View view) {
-           Gson user = new Gson();
-           Intent userUpdatePreferences = new Intent(UserPreferenceList.this, UserUpdatePreferences.class);
-           userUpdatePreferences.putExtra("User", user.toJson(UserPreferenceList.this.user));
-           startActivity(userUpdatePreferences);
+           Intent userUpdatePreference=new Intent(getActivity(),UserUpdatePreferences.class);
+           getActivity().startActivity(userUpdatePreference);
        }
-   });
-   */
+   };
 
     private View.OnClickListener addPreferenceClick = new View.OnClickListener() {
         @Override
@@ -96,7 +97,7 @@ public class UserPreferenceList extends Fragment implements DiscountPreferenceIt
         }
     };
 
-    public void fetchUserPreferences() {
+    private void fetchUserPreferences() {
 
         Call<List<DiscountPreferencesResponse>> disc=iuserService.getDiscountsPreference(auth);
         disc.enqueue(new Callback<List<DiscountPreferencesResponse>>() {
@@ -144,7 +145,7 @@ public class UserPreferenceList extends Fragment implements DiscountPreferenceIt
         }
     }
 
-    public void deletePref( int id)
+    private void deletePref( int id)
     {
         iuserService= ApiUtils.getUserService();
         Call<Void> delete=iuserService.deleteDiscountPreference(id,auth);

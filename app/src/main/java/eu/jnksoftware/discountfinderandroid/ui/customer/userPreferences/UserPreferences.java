@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences;
 
 import android.annotation.SuppressLint;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -55,7 +54,7 @@ public class UserPreferences extends AppCompatActivity {
         tags=findViewById(R.id.textTag);
 
 
-        
+
         spinnerCat = findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
         spinnerCat.getBackground().setAlpha(130);
@@ -103,13 +102,20 @@ public class UserPreferences extends AppCompatActivity {
             price=String.valueOf(seekBarProgress);
             tag=tags.getText().toString();
 
+            if (validate(seekBarProgress)){
+                doUserPreference(cat,price,tag);
+            }
+            else{
+                Toast.makeText(UserPreferences.this, "FAIL", Toast.LENGTH_SHORT).show();
+            }
 
-            doUserPreference(cat,price,tag);
-            Toast.makeText(UserPreferences.this, cat, Toast.LENGTH_SHORT).show();
+
+
+
         }
     };
 
-    public void doUserPreference(String category,String price,String tags) {
+    private void doUserPreference(String category,String price,String tags) {
         auth="Bearer "+user.getAccessToken();
         Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(category,price,tags,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
@@ -119,7 +125,7 @@ public class UserPreferences extends AppCompatActivity {
                     int statusCode=response.code();
                     Log.d("UserPreferences","onResponse:"+statusCode);
                     DiscountPreferencesPostResponse discountPreferencesPostResponse=response.body();
-                    Toast.makeText(UserPreferences.this,"Preference add "+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPreferences.this,"Preference add ",Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -134,7 +140,7 @@ public class UserPreferences extends AppCompatActivity {
             });
     }
 
-    private void fetchCategories() {
+    public void fetchCategories() {
         Call<List<Category>> call = iuserService.fetchCategories();
         call.enqueue(new Callback<List<Category>>() {
             @Override
@@ -155,6 +161,16 @@ public class UserPreferences extends AppCompatActivity {
 
         });
     }
+    public Boolean validate(int catr){
+
+         if((catr<=0)){
+             return false;
+         }
+         return true;
+
+    }
+
+
 
 
 

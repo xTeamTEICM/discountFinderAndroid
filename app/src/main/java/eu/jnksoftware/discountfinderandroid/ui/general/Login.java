@@ -43,8 +43,8 @@ public class Login extends Activity {
         setContentView(R.layout.activity_login);
         eMail = findViewById(R.id.loginEMailField);
         password = findViewById(R.id.loginPasswordField);
-        eMail.setText("user@jnksoftware.eu");
-        password.setText("myPassword");
+//        eMail.setText("user@jnksoftware.eu");
+//        password.setText("myPassword");
         iuserService = ApiUtils.getUserService();
 
         Button login = findViewById(R.id.loginBtn);
@@ -154,7 +154,7 @@ public class Login extends Activity {
         protected String doInBackground(String... strings) {
             for (loadingStatus = 0; loadingStatus < 50; loadingStatus++) {
                 try {
-                    Thread.sleep(80);
+                    Thread.sleep(200);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
 
@@ -162,8 +162,8 @@ public class Login extends Activity {
                 loadingBar.setProgress(loadingStatus);
                 publishProgress(loadingStatus);
             }
-            if (loadingStatus == 50) {
-                return "Connection Accomplished!!!";
+            if (loadingStatus == 200) {
+                return "Please wait...!";
             } else {
                 return "Connection Error...";
             }
@@ -178,10 +178,10 @@ public class Login extends Activity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_SHORT).show();
             loadingBar.setVisibility(View.INVISIBLE);
-            loadingText.setText(s);
-            loadingText.setVisibility(View.INVISIBLE);
+            loadingText.setText("Connection Problem,\nPlease Try Again!");
+            loadingText.setVisibility(View.VISIBLE);
         }
 
     }

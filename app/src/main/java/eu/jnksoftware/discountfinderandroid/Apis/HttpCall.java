@@ -31,9 +31,12 @@ public class HttpCall {
 
             @Override
             public void onResponse(retrofit2.Call<Void> call, Response<Void> response) {
-                statusCode[0] =response.code();
+                if (response.isSuccessful()) {
+                    statusCode[0] = response.code();
+                } else {
+                    statusCode[0] = 500;
+                }
             }
-
             @Override
             public void onFailure(retrofit2.Call<Void> call, Throwable t) {
             }
@@ -44,7 +47,7 @@ public class HttpCall {
 
     public int setUserLocation(Location location, String auth){
         final int[] statuscode = new int[1];
-        ;
+
         Call<Void> call =iuserService.setUserLocation(location, auth);
         call.enqueue(new Callback<Void>() {
 
