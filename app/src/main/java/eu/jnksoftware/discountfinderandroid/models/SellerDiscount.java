@@ -21,16 +21,8 @@ public class SellerDiscount {
 
     public int getId(){ return id; }
 
-    public int getShopId() {
-        return shopId;
-    }
-
     public int getCategory() {
         return category;
-    }
-
-    public double getOriginalPrice() {
-        return originalPrice;
     }
 
     public double getCurrentPrice() {

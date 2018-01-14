@@ -27,7 +27,7 @@ import retrofit2.Response;
 
 
 public class DiscountCustomerRecyclerList extends Fragment {
-    private int barProgress = 15000;
+    private int barProgress = 500;
     private SeekBar distanceBar;
     private TextView distanceText;
     private RecyclerView recyclerView;
@@ -64,7 +64,7 @@ public class DiscountCustomerRecyclerList extends Fragment {
 
 
     private void fillDiscountProductsList() {
-        Call<List<Discount>> call = supportApi.getDiscounts(15000, auth);
+        Call<List<Discount>> call = supportApi.getDiscounts(barProgress, auth);
         call.enqueue(new Callback<List<Discount>>() {
             @Override
             public void onResponse(Call<List<Discount>> call, Response<List<Discount>> response) {

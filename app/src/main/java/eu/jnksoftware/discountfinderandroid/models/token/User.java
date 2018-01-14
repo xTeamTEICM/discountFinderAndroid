@@ -23,6 +23,16 @@ public class User {
         return tokenType;
     }
 
+    public User() {
+    }
+
+    public User(String tokenType, Integer expiresIn, String accessToken, String refreshToken) {
+        this.tokenType = tokenType;
+        this.expiresIn = expiresIn;
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+    }
+
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
     }

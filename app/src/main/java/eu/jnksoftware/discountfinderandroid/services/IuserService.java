@@ -9,7 +9,6 @@ import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
-import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.discounts.Discount;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
@@ -40,14 +39,15 @@ public interface IuserService {
     @POST("register")
     Call<User> register(@Field("firstName")String firstName,@Field("lastName")String lastName,@Field("eMail")String eMail,@Field("password")String password);
 
+    @FormUrlEncoded
     @PUT("requestedDiscount/{id}")
-    Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Body DiscountPreferencesRequest discountPreferencesRequest,@Header("Authorization") String auth);
+    Call<DiscountPreferencesResponse> putDiscountPreferences(@Path("id")int id,@Field("category")String category,@Field("price") String price,@Field("tags")String tags,@Header("Authorization") String auth);
 
+    @FormUrlEncoded
     @POST("requestedDiscount")
-    Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Body DiscountPreferencesRequest discountPreferencesPostRequest,@Header("Authorization") String auth);
+    Call<DiscountPreferencesPostResponse> postDiscountPreferences(@Field("category")String category,@Field("price") String price,@Field("tags")String tags,@Header("Authorization") String auth);
 
-    @GET("requestedDiscount/")
-    Call<DiscountPreferencesResponse> getOneDiscountPreference(@Query("id")int id);
+
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @GET("requestedDiscount")
@@ -70,17 +70,6 @@ public interface IuserService {
     @DELETE("shop/{id}")
     Call<Void> deleteShop(@Path("id") int id, @Header("Authorization") String auth);
 
-    @GET("shop")
-    Call<List<Shop>> getShopsList();
-
-    @GET ("shop/")
-    Call<List<Shop>> getShopWithId(@Query("id") int id);
-
-    @GET ("user/shop")
-    Call<List<Shop>> getUserShops();
-
-    @GET ("user/shop/")
-    Call<List<Shop>> getUserShopWithId(@Query("id") int id);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @GET ("user/shop/")
@@ -117,7 +106,8 @@ public interface IuserService {
 
     //set the location of USer
     @Headers({("Content-Type:application/json"),("Accept:application/application/json")})
-    @PUT("updateUserLocation")
+    @PUT("user/deviceLocation")
+
     Call<Void> setUserLocation(@Body Location location, @Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})

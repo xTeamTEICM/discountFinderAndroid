@@ -20,8 +20,8 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
+import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Category;
-import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesResponse;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
@@ -36,6 +36,9 @@ public class UserUpdatePreferences extends AppCompatActivity {
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
     private List<String> catTemp = new ArrayList<>();
+    private String category;
+    private String price;
+    private String tags;
     IuserService iuserService;
     EditText tagUpdatePref;
     EditText idUpdatePref;
@@ -52,9 +55,8 @@ public class UserUpdatePreferences extends AppCompatActivity {
         iuserService= ApiUtils.getUserService();
         idUpdatePref =findViewById(R.id.idPrefText);
         tagUpdatePref=findViewById(R.id.tagPrefText);
-        Gson user = new Gson();
-        this.user = user.fromJson(getIntent().getStringExtra("User"),User.class);
-        Toast.makeText(getApplicationContext(), "token"+ this.user.getTokenType(), Toast.LENGTH_LONG).show();
+
+        user= ManageSharePrefs.readUser(null);
         
         spinnerCat = findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<>(UserUpdatePreferences.this,android.R.layout.simple_list_item_1, catTemp);
@@ -99,30 +101,28 @@ public class UserUpdatePreferences extends AppCompatActivity {
     private final View.OnClickListener savePrefClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-            discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
-            discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
-            discountPreferencesRequest.setTags(tagUpdatePref.getText().toString().trim());
+
+            category=String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId());
+            price=String.valueOf(seekBarProgress);
+            tags=tagUpdatePref.getText().toString().trim();
             int idpref;
             String s1;
             s1=idUpdatePref.getText().toString();
             idpref=Integer.parseInt(s1);
-            String auth;
-            auth="Bearer "+ user.getAccessToken();
-            //Toast.makeText(UserUpdatePreferences.this,auth,Toast.LENGTH_SHORT).show();
-            doUpdateUserPreference(idpref,discountPreferencesRequest,auth);
+
+            doUpdateUserPreference(idpref,category,price,tags);
 
             //Toast.makeText(UserUpdatePreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
         }
     };
 
-    public void doUpdateUserPreference(final int id, final DiscountPreferencesRequest discountPreferencesRequest, String auth) {
+    private void doUpdateUserPreference(final int id, String cat,String price,String tags) {
 
-        Call<DiscountPreferencesResponse> call =iuserService.putDiscountPreferences(id,discountPreferencesRequest,auth);
+        Call<DiscountPreferencesResponse> call =iuserService.putDiscountPreferences(id,cat,price,tags,"Bearer "+user.getAccessToken());
         call.enqueue(new Callback<DiscountPreferencesResponse>() {
             @Override
             public void onResponse(Call<DiscountPreferencesResponse> call, Response<DiscountPreferencesResponse> response) {
-                Toast.makeText(UserUpdatePreferences.this,"Η προτίμηση με id"+id+"Αλλαξε επιτυχως!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserUpdatePreferences.this,"Η προτίμηση με id "+id+" Αλλαξε επιτυχως!",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -155,10 +155,5 @@ public class UserUpdatePreferences extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=new Intent(UserUpdatePreferences.this,UserPreferenceList.class);
-        startActivity(intent);
-    }
+
 }

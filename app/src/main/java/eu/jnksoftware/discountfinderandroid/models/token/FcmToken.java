@@ -20,7 +20,4 @@ public class FcmToken {
         return deviceToken;
     }
 
-    public void setDeviceToken(String deviceToken) {
-        this.deviceToken = deviceToken;
-    }
 }
