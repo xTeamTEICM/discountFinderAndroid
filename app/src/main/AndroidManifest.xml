@@ -15,8 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/startscreenlogo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-                 Android:debuggable="false">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".ui.general.Main"
             android:theme="@style/SplashTheme">
