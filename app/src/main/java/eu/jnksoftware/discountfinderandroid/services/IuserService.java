@@ -63,6 +63,7 @@ public interface IuserService {
     @GET("discount/find/{distance}")
     Call<List<Discount>> getDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
     @GET("discount/top/{distance}")
     Call<List<TopDiscount>> getTopDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
