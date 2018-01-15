@@ -1,8 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.Apis;
 
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
@@ -13,9 +10,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by makis on 21/12/2017.
- */
 
 public class HttpCall {
     private IuserService iuserService;
@@ -30,7 +24,7 @@ public class HttpCall {
         call.enqueue(new Callback<Void>() {
 
             @Override
-            public void onResponse(retrofit2.Call<Void> call, Response<Void> response) {
+            public void onResponse(retrofit2.Call<Void> call, Response<Void> response) throws NullPointerException {
                 if (response.isSuccessful()) {
                     statusCode[0] = response.code();
                 } else {

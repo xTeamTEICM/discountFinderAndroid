@@ -3,9 +3,6 @@ package eu.jnksoftware.discountfinderandroid.models.token;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by makis on 21/12/2017.
- */
 
 public class FcmToken {
     @SerializedName("deviceToken")

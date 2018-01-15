@@ -5,11 +5,9 @@ public class TopDiscount {
     private String shopName;
     private String category;
     private String shortDescription;
-    private int finalPrice;
+    private double finalPrice;
     private String productImageURL;
     private int discountId;
-    private double shopLatPos;
-    private double shopLogPos;
 
     public TopDiscount(String shortDescription, String productImage) {
         this.shortDescription = shortDescription;
@@ -21,6 +19,26 @@ public class TopDiscount {
     }
 
     public String getProductImage() {
+        return productImageURL;
+    }
+
+    public int getDiscountId() {
+        return discountId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public String getProductImageURL() {
         return productImageURL;
     }
 }

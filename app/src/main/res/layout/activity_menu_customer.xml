@@ -8,7 +8,7 @@
     tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.MenuCustomer">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/menuCustomerLogoImage"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginEnd="70dp"
@@ -29,36 +29,36 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/menuCustomerLogoImage">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/menuCustomerDiscountsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:background="@layout/round_button_settings"
             android:text="ΠΡΟΣΦΟΡΕΣ"
-            android:textColor="@color/primaryTextColor"/>
+            android:textColor="@color/primaryTextColor" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/menuCustomerPreferenceButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:background="@layout/round_button_settings"
             android:text="ΠΡΟΤΙΜΗΣΕΙΣ"
-            android:textColor="@color/primaryTextColor"/>
+            android:textColor="@color/primaryTextColor" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/menuCustomerAboutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@layout/round_button_settings"
             android:text="ΣΧΕΤΙΚΑ"
-            android:textColor="@color/primaryTextColor"/>
+            android:textColor="@color/primaryTextColor" />
     </LinearLayout>
 
     <LinearLayout

@@ -27,7 +27,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 
 public interface IuserService {
@@ -60,10 +59,11 @@ public interface IuserService {
     @GET("category")
     Call<List<Category>> fetchCategories();
 
-    @GET("/api/discount/find/{distance}")
+    @GET("discount/find/{distance}")
     Call<List<Discount>> getDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
-    @GET("/api/discount/top/{distance}")
+    @Headers({("Content-Type:application/json"),("Accept:application/json")})
+    @GET("discount/top/{distance}")
     Call<List<TopDiscount>> getTopDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
@@ -82,8 +82,8 @@ public interface IuserService {
 
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})
-    @PUT("shop")
-    Call<Void> updateShop(@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
+    @PUT("shop/{id}")
+    Call<Void> updateShop(@Path("id") int id,@Body UpdatePostShop updatePostShop, @Header("Authorization") String auth);
 
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})

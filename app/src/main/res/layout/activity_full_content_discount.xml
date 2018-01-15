@@ -30,7 +30,7 @@
                 android:layout_height="40dp"
                 android:layout_above="@+id/discountPrice"
                 android:layout_centerHorizontal="true"
-                android:text="Discount : "
+                android:text="@string/discount"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/white"
                 tools:layout_editor_absoluteX="30dp"
@@ -43,9 +43,10 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="89dp"
-                android:text="Price : "
+                android:text="@string/price "
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
+                android:visibility="invisible"
                 tools:layout_editor_absoluteX="42dp"
                 tools:layout_editor_absoluteY="218dp" />
         </RelativeLayout>
@@ -75,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:contentDescription="Discount Image"
+                android:contentDescription="@string/image"
                 android:visibility="visible"
                 tools:layout_editor_absoluteX="92dp"
                 tools:layout_editor_absoluteY="16dp" />
@@ -109,6 +110,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="Discount Id : "
                 android:textColor="@android:color/white"
+                android:visibility="invisible"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="401dp" />
 
@@ -120,6 +122,7 @@
                 android:layout_alignStart="@+id/discountId"
                 android:text="Shop Name : "
                 android:textColor="@android:color/white"
+                android:visibility="invisible"
                 tools:layout_editor_absoluteX="27dp"
                 tools:layout_editor_absoluteY="455dp" />
 
@@ -131,6 +134,7 @@
                 android:layout_alignStart="@+id/discountShopName"
                 android:text="Category : "
                 android:textColor="@android:color/white"
+                android:visibility="invisible"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="348dp" />
 
@@ -143,6 +147,7 @@
                 android:text="Distance : "
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
+                android:visibility="invisible"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="291dp" />
         </RelativeLayout>

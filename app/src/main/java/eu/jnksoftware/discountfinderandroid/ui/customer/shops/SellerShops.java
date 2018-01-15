@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Location;
 import eu.jnksoftware.discountfinderandroid.models.Shop;
-import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.RecyclerAdapter;
 import retrofit2.Call;
@@ -90,8 +88,7 @@ public class SellerShops extends Fragment {
         addStore.setOnClickListener(addStoreButtonClick);
         Button refreshButton = view.findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(refreshButtonClick);
-        //userLocation.setLatPos(().etDoubleExtra("lat",-1));
-       // userLocation.setLogPos(getIntent().getDoubleExtra("lon",-1));
+        userLocation = ManageSharePrefs.readLocation(" ");
         }
 
         private final View.OnClickListener refreshButtonClick = new View.OnClickListener() {
@@ -125,8 +122,8 @@ public class SellerShops extends Fragment {
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(),SellerAddShop.class);
             intent.putExtra("auth",auth);
-//            intent.putExtra("lat",userLocation.getLatPos());
-//            intent.putExtra("lon",userLocation.getLogPos());
+            intent.putExtra("lat",userLocation.getLatPos());
+            intent.putExtra("lon",userLocation.getLogPos());
             startActivityForResult(intent,requestCode);
         }
     };

@@ -41,8 +41,7 @@ public class SellerAddShop extends AppCompatActivity {
         Button mapsButton = findViewById(R.id.mapsButton);
         mapsButton.setOnClickListener(mapsClick);
 
-        ApiUtils apiUtils = new ApiUtils();
-        apiService = RetrofitClient.getClient(apiUtils.getBaseUrl()).create(IuserService.class);
+        apiService = RetrofitClient.getClient(ApiUtils.getBaseUrl()).create(IuserService.class);
         apiService = ApiUtils.getUserService();
         auth = getIntent().getStringExtra("auth");
 

@@ -34,8 +34,6 @@ public class Login extends Activity {
     private EditText eMail;
     private EditText password;
     IuserService iuserService;
-    private String username;
-    private String pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +41,7 @@ public class Login extends Activity {
         setContentView(R.layout.activity_login);
         eMail = findViewById(R.id.loginEMailField);
         password = findViewById(R.id.loginPasswordField);
-//        eMail.setText("user@jnksoftware.eu");
-//        password.setText("myPassword");
+
         iuserService = ApiUtils.getUserService();
 
         Button login = findViewById(R.id.loginBtn);
@@ -57,29 +54,15 @@ public class Login extends Activity {
         loadingBar = findViewById(R.id.loadingBar);
         ManageSharePrefs.init(getApplicationContext());
 
-
-
-        User userFromPrefs = ManageSharePrefs.readUser(null);
-        if (userFromPrefs != null) {
-            Toast.makeText(Login.this, "wowooww" + userFromPrefs.getTokenType(), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(Login.this, "nothing", Toast.LENGTH_SHORT).show();
-        }
-
-
     }
 
     private final View.OnClickListener loginBtnClick = new View.OnClickListener() {
         @Override
         public void onClick(final View loginView) {
-            int response;
 
-            username=eMail.getText().toString();
-            pass=password.getText().toString();
-
-           /* userTokenRequest.setUsername(eMail.getText().toString().trim());
-            userTokenRequest.setPassword(password.getText().toString().trim());*/
-            doLogin(username,pass);
+            String username = eMail.getText().toString();
+            String pass = password.getText().toString();
+            doLogin(username, pass);
             loadingBar.setVisibility(View.VISIBLE);
             loadingText.setVisibility(View.VISIBLE);
             loadingText.setText("Please Wait...");
@@ -178,7 +161,6 @@ public class Login extends Activity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            //Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_SHORT).show();
             loadingBar.setVisibility(View.INVISIBLE);
             loadingText.setText("Connection Problem,\nPlease Try Again!");
             loadingText.setVisibility(View.VISIBLE);

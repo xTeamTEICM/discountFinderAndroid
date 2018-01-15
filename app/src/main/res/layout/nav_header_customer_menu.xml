@@ -13,27 +13,14 @@
         android:id="@+id/navHeaderUserImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tvNavHeaderUserName"
-        android:layout_alignStart="@+id/tvNavHeaderUserName"
+        android:layout_above="@+id/tvNavHeaderUserEmail"
+        android:layout_alignStart="@+id/tvNavHeaderUserEmail"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher_round" />
-
-    <TextView
-        android:id="@+id/tvNavHeaderUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tvNavHeaderUserEmail"
-        android:layout_alignStart="@+id/tvNavHeaderUserEmail"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Android Studio"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/navHeaderUserImage" />
 
     <TextView
         android:id="@+id/tvNavHeaderUserEmail"

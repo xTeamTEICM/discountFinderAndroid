@@ -40,12 +40,38 @@ public class FullContentDiscount extends AppCompatActivity {
         discountShopName = findViewById(R.id.discountShopName);
 
         Picasso.with(context).load(getIntent().getStringExtra("discount_image")).noPlaceholder().fit().into(discountImage);
-        discountId.setText("Discount Id : " + getIntent().getStringExtra("discount_id"));
-        discountCategory.setText("Category : " + getIntent().getStringExtra("discount_Category"));
-        discountDescription.setText("Description : " + getIntent().getStringExtra("discount_Description"));
-        discountDistance.setText("Distance : " + getIntent().getStringExtra("discount_Distance") + "m");
-        discountPrice.setText("Price : " + getIntent().getStringExtra("discount_Price") + "€");
-        discountShopName.setText("Shop Name : " + getIntent().getStringExtra("discount_Shop_Name"));
+        String discountid = getIntent().getStringExtra("discount_id");
+        String category = getIntent().getStringExtra("discount_Category");
+        String description = getIntent().getStringExtra("discount_Description");
+        String distance = getIntent().getStringExtra("discount_Distance");
+        String price = getIntent().getStringExtra("discount_Price");
+        String shopName = getIntent().getStringExtra("discount_Shop_Name");
+
+        if(discountid!=null) {
+            discountId.setVisibility(View.VISIBLE);
+            discountId.setText("Discount Id : " + discountid);
+        }
+
+        if(category!=null) {
+            discountCategory.setVisibility(View.VISIBLE);
+            discountCategory.setText("Category : " + category);
+        }
+        if(description!=null) {
+            discountDescription.setVisibility(View.VISIBLE);
+            discountDescription.setText("Description : " + description);
+        }
+        if(distance!=null) {
+            discountDistance.setVisibility(View.VISIBLE);
+            discountDistance.setText("Distance : " + distance);
+        }
+        if(price!=null) {
+            discountPrice.setVisibility(View.VISIBLE);
+            discountPrice.setText("Price : " + price);
+        }
+        if(shopName!=null) {
+            discountShopName.setVisibility(View.VISIBLE);
+            discountShopName.setText("Shop Name : " + shopName);
+        }
 
 
         findDiscountBtn.setOnClickListener(new View.OnClickListener() {

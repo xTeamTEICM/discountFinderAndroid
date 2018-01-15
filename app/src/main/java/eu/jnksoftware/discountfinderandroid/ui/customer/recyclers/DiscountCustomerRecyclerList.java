@@ -35,7 +35,6 @@ public class DiscountCustomerRecyclerList extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private List<Discount> discountProducts = new ArrayList<>();
     private IuserService supportApi;
-    private User user;
     String auth;
 
     @Override
