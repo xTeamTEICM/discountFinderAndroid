@@ -60,10 +60,10 @@ public interface IuserService {
     @GET("category")
     Call<List<Category>> fetchCategories();
 
-    @GET("/api/discount/find/{distance}")
+    @GET("discount/find/{distance}")
     Call<List<Discount>> getDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
-    @GET("/api/discount/top/{distance}")
+    @GET("discount/top/{distance}")
     Call<List<TopDiscount>> getTopDiscounts(@Path("distance") int distance , @Header("Authorization") String auth);
 
     @Headers({("Content-Type:application/json"),("Accept:application/json")})

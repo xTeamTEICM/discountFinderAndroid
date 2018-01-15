@@ -34,7 +34,6 @@ public class CustomerMenu extends AppCompatActivity
     private GeoLocation location;
     private boolean doubleBackPress;
     private TextView navHeaderEmail;
-    private TextView navHeaderName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +84,7 @@ public class CustomerMenu extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.customer_menu, menu);
         navHeaderEmail = findViewById(R.id.tvNavHeaderUserEmail);
-        navHeaderName = findViewById(R.id.tvNavHeaderUserName);
-        setUpNavHeaderInfo(getIntent().getStringExtra("email"),"Kostas");
+        setUpNavHeaderInfo(getIntent().getStringExtra("email"));
 
         return true;
     }
@@ -189,8 +187,7 @@ public class CustomerMenu extends AppCompatActivity
         doubleBackPress = true;
     }
 
-    private void setUpNavHeaderInfo(String email,String name) {
+    private void setUpNavHeaderInfo(String email) {
         this.navHeaderEmail.setText(email);
-        this.navHeaderName.setText(name);
     }
 }

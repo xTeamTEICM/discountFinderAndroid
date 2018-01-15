@@ -80,6 +80,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testCoverageEnabled true
         }
+        debug {
+            testCoverageEnabled true
+        }
     }
 }
 

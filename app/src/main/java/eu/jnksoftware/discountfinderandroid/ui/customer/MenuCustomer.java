@@ -1,7 +1,6 @@
 package eu.jnksoftware.discountfinderandroid.ui.customer;
 
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,13 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.discounts.TopDiscount;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.TopDiscountAdapter;
@@ -29,7 +27,7 @@ public class MenuCustomer extends Fragment {
     private IuserService iuserService;
     private String auth;
     private RecyclerView topDiscountsRecycler;
-    private TopDiscountAdapter topDiscountAdapter;
+
     private List<TopDiscount> topDiscounts;
   
     @Nullable
@@ -44,16 +42,6 @@ public class MenuCustomer extends Fragment {
         auth = getArguments().getString("auth");
         topDiscountsRecycler = view.findViewById(R.id.topDiscountsRecyclerView);
         iuserService= ApiUtils.getUserService();
-
-// SEE WHATS WITH THIS,FROM MERGE
-//         myLocation =ManageSharePrefs.readLocation("");
-//         if (myLocation==null) {
-//             Toast.makeText(getApplicationContext(), "No location ", Toast.LENGTH_LONG).show();
-//             GeoLocation myGeoloc =new GeoLocation();
-//             myLocation.setLogPos(myGeoloc.getLongitude());
-//             myLocation.setLatPos(myGeoloc.getLatitude());
-//         }
-//         ManageSharePrefs.writeLocation(myLocation);
         setUpRecycler();
         topDiscounts = new ArrayList<>();
         getTopDiscounts();
@@ -64,7 +52,6 @@ public class MenuCustomer extends Fragment {
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         topDiscountsRecycler.setLayoutManager(manager);
         topDiscountsRecycler.setItemAnimator(new DefaultItemAnimator());
-//      topDiscountsRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         topDiscountsRecycler.setHasFixedSize(true);
     }
 
@@ -87,5 +74,6 @@ public class MenuCustomer extends Fragment {
             }
         });
     }
+
 
 }
