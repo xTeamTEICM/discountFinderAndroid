@@ -1,6 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.models;
 
-import android.net.Uri;
 
 public class Shop {
 
@@ -17,18 +16,6 @@ public class Shop {
         this.location = location;
     }
 
-    public Uri getMapsUri() {
-
-        Double Latitude = location.getLatPos();
-        Double Longitude = location.getLogPos();
-        String labelLocation = "x-Team Sample : " + ownerId;
-
-        return Uri.parse(
-                "geo:" +
-                        "<" + Latitude + ">,<" + Longitude + ">" +
-                        "?q=<" + Latitude + ">,<" + Longitude + ">(" + labelLocation + ")"
-        );
-    }
 
     public int getId() {
         return id;
@@ -40,10 +27,6 @@ public class Shop {
 
     public void setName(String brandName) {
         this.brandName = brandName;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
     }
 
     public Location getLocation() {

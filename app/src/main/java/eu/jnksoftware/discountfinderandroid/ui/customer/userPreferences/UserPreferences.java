@@ -21,7 +21,6 @@ import eu.jnksoftware.discountfinderandroid.R;
 import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesPostResponse;
-import eu.jnksoftware.discountfinderandroid.models.discountPreferences.DiscountPreferencesRequest;
 import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
@@ -34,6 +33,9 @@ public class UserPreferences extends AppCompatActivity {
     private int seekBarProgress = 0;
     private TextView showSeekProgress;
     private List<Category> categories = new ArrayList<>();
+    private String cat;
+    private String price;
+    private String tag;
     private List<String> catTemp = new ArrayList<>();
     IuserService iuserService;
     String accessToken;
@@ -52,7 +54,7 @@ public class UserPreferences extends AppCompatActivity {
         tags=findViewById(R.id.textTag);
 
 
-        
+
         spinnerCat = findViewById(R.id.spinnerCategory);
         spinContentAdapter = new ArrayAdapter<>(UserPreferences.this,android.R.layout.simple_list_item_1, catTemp);
         spinnerCat.getBackground().setAlpha(130);
@@ -95,20 +97,27 @@ public class UserPreferences extends AppCompatActivity {
     private final View.OnClickListener savePrefClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            DiscountPreferencesRequest discountPreferencesRequest=new DiscountPreferencesRequest();
-            discountPreferencesRequest.setCategory(String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId()));
-            discountPreferencesRequest.setPrice(String.valueOf(seekBarProgress));
-            discountPreferencesRequest.setTags(tags.getText().toString());
+
+            cat=String.valueOf(categories.get((int) spinnerCat.getSelectedItemId()).getId());
+            price=String.valueOf(seekBarProgress);
+            tag=tags.getText().toString();
+
+            if (validate(seekBarProgress)){
+                doUserPreference(cat,price,tag);
+            }
+            else{
+                Toast.makeText(UserPreferences.this, "FAIL", Toast.LENGTH_SHORT).show();
+            }
 
 
-            doUserPreference(discountPreferencesRequest);
-            Toast.makeText(UserPreferences.this, discountPreferencesRequest.getCategory(), Toast.LENGTH_SHORT).show();
+
+
         }
     };
 
-    public void doUserPreference(final DiscountPreferencesRequest discountPreferencesRequest) {
+    private void doUserPreference(String category,String price,String tags) {
         auth="Bearer "+user.getAccessToken();
-        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(discountPreferencesRequest,auth);
+        Call<DiscountPreferencesPostResponse> call = iuserService.postDiscountPreferences(category,price,tags,auth);
             call.enqueue(new Callback<DiscountPreferencesPostResponse>() {
                 @Override
                 public void onResponse(Call<DiscountPreferencesPostResponse> call, Response<DiscountPreferencesPostResponse> response) {
@@ -116,7 +125,7 @@ public class UserPreferences extends AppCompatActivity {
                     int statusCode=response.code();
                     Log.d("UserPreferences","onResponse:"+statusCode);
                     DiscountPreferencesPostResponse discountPreferencesPostResponse=response.body();
-                    Toast.makeText(UserPreferences.this,"Preference add "+discountPreferencesPostResponse,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPreferences.this,"Preference add ",Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -152,6 +161,16 @@ public class UserPreferences extends AppCompatActivity {
 
         });
     }
+    public Boolean validate(int catr){
+
+         if((catr<=0)){
+             return false;
+         }
+         return true;
+
+    }
+
+
 
 
 
