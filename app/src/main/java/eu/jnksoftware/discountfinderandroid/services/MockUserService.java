@@ -1,7 +1,5 @@
 package eu.jnksoftware.discountfinderandroid.services;
 
-import android.support.v7.app.ActionBarDrawerToggle;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

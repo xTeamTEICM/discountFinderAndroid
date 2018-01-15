@@ -12,7 +12,6 @@ import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 
 public class Settings extends AppCompatActivity {
 
-    private Button backButton;
     private Switch isSellerSwitch;
 
     @Override
@@ -20,7 +19,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         super.onCreate(savedInstanceState);
 
-        backButton = findViewById(R.id.settingsBackButton);
+        Button backButton = findViewById(R.id.settingsBackButton);
         backButton.setOnClickListener(backButtonClick);
         isSellerSwitch = findViewById(R.id.switchSettingsIsSeller);
         isSellerSwitch.setChecked(ManageSharePrefs.readUserIsSeller(false));

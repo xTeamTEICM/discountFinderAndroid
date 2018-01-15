@@ -22,11 +22,9 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.Category;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountGet;
 import eu.jnksoftware.discountfinderandroid.models.discounts.DiscountPost;
-import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,16 +33,8 @@ import retrofit2.Response;
 public class SellerAddDiscount extends AppCompatActivity {
     private IuserService apiInterface;
     private String auth;
-    private User user;
     private int shopId;
-    private double startPrice;
-    private double endPrice;
-    private String desc;
-    private int categoryId;
-    private String image;
-    private Button myDiscount;
     private Long   tsLong;
-    private Button choosePhoto;
     private Bitmap discountPhoto;
     private ImageView discountImageView;
     private EditText startingPrice;
@@ -62,14 +52,13 @@ public class SellerAddDiscount extends AppCompatActivity {
         setContentView(R.layout.activity_seller_add_discount);
 
         apiInterface = ApiUtils.getUserService();
-        user = ManageSharePrefs.readUser(null);
         auth = getIntent().getStringExtra("auth");
 
         shopId = getIntent().getIntExtra("shopId",-1);
         tsLong = System.currentTimeMillis()/1000;
-        myDiscount = findViewById(R.id.addMyDiscountButton);
+        Button myDiscount = findViewById(R.id.addMyDiscountButton);
         myDiscount.setOnClickListener(myDiscountClick);
-        choosePhoto = findViewById(R.id.choosePhotoButton);
+        Button choosePhoto = findViewById(R.id.choosePhotoButton);
         choosePhoto.setOnClickListener(choosePhotoClick);
         startingPrice = findViewById(R.id.etStartingPrice);
         finalPrice = findViewById(R.id.etFinalPrice);
@@ -88,7 +77,7 @@ public class SellerAddDiscount extends AppCompatActivity {
         public void onClick(View view) {
 
             DiscountPost discountPost=new DiscountPost();
-            image=imageToString();
+            String image = imageToString();
 
             discountPost.setImageBase(image);
             discountPost.setImageTitle(tsLong.toString());

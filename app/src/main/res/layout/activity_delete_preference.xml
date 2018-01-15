@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="eu.jnksoftware.discountfinderandroid.ui.customer.userPreferences.DeletePreference">
+    android:layout_height="match_parent">
 
     <Button
         android:id="@+id/dltBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="96dp"
-        android:text="Διαγραφη"
+        android:text="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -21,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Βαλε το id της προτιμησης σου παρακάτων"
+        android:text="@string/choosePreferenceId"
         android:textColor="@android:color/holo_orange_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +33,7 @@
         android:layout_marginTop="22dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="id"
+        android:text="@string/id"
         android:textColor="@android:color/holo_orange_dark"
         app:layout_constraintEnd_toEndOf="@+id/delPrefDesc"
         app:layout_constraintTop_toBottomOf="@+id/delPrefDesc" />

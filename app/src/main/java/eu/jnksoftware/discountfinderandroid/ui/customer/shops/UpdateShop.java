@@ -55,7 +55,7 @@ public class UpdateShop extends AppCompatActivity {
         }
     };
 
-    private final void updateShop(String brandName,double lat,double lon){
+    private void updateShop(String brandName,double lat,double lon){
         int id = getIntent().getIntExtra("shopId",-1);
         UpdatePostShop updatePostShop = new UpdatePostShop(id,brandName,lat,lon);
         Call<Void> call = apiService.updateShop(id,updatePostShop,auth);

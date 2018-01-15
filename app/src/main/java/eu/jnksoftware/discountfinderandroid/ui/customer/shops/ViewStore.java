@@ -21,9 +21,7 @@ import java.util.List;
 
 import eu.jnksoftware.discountfinderandroid.Apis.ApiUtils;
 import eu.jnksoftware.discountfinderandroid.R;
-import eu.jnksoftware.discountfinderandroid.Utilities.ManageSharePrefs;
 import eu.jnksoftware.discountfinderandroid.models.SellerDiscount;
-import eu.jnksoftware.discountfinderandroid.models.token.User;
 import eu.jnksoftware.discountfinderandroid.services.IuserService;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountAdapter;
 import eu.jnksoftware.discountfinderandroid.ui.customer.adapters.ShopDiscountItemTouchHelper;
@@ -35,11 +33,9 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
 
     private RecyclerView myDiscountsRecycler;
     private ShopDiscountAdapter myDiscountsAdapter;
-    private String shopName;
     private int shopId;
     private IuserService apiService;
     private String auth;
-    private User user;
     private List<SellerDiscount> discounts = new ArrayList<>();
     private ConstraintLayout layout;
     private TextView errorTextView;
@@ -70,11 +66,10 @@ public class ViewStore extends AppCompatActivity implements ShopDiscountItemTouc
 
 
         apiService = ApiUtils.getUserService();
-        user = ManageSharePrefs.readUser(null);
         auth = getIntent().getStringExtra("auth");
 
 
-        shopName = getIntent().getStringExtra("shop");
+        String shopName = getIntent().getStringExtra("shop");
         shopId = getIntent().getIntExtra("shopId",-1);
         textView.setText(shopName);
 

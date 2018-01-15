@@ -3,9 +3,6 @@ package eu.jnksoftware.discountfinderandroid.Apis;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by dito on 12/5/2017.
- */
 
 public class UpdatePostShop {
 

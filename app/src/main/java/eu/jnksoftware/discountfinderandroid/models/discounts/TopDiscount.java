@@ -8,9 +8,6 @@ public class TopDiscount {
     private double finalPrice;
     private String productImageURL;
     private int discountId;
-    private int distance;
-    private double shopLatPos;
-    private double shopLogPos;
 
     public TopDiscount(String shortDescription, String productImage) {
         this.shortDescription = shortDescription;
